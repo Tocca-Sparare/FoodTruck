@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab9b6fab5b4343968a1c0bcecab058a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicalTablePosition: {fileID: 8221151449791963362}
 --- !u!208 &2271446781110322974
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -324,6 +325,11 @@ PrefabInstance:
 --- !u!4 &7176799658621986803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3870954119313641295, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
+  m_PrefabInstance: {fileID: 6206374805684922556}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8221151449791963362 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2609304573701064798, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
   m_PrefabInstance: {fileID: 6206374805684922556}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8431875053089065612

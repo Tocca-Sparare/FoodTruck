@@ -2,11 +2,17 @@ using UnityEngine;
 
 public class Chair : MonoBehaviour
 {
-    public bool IsEmpty { get; set; }
+    public bool IsEmpty => customerSat != null;
 
-    void Awake()
+    public Customer customerSat;
+
+    public void CustomerSit(Customer customer)
     {
-        IsEmpty = true;
+        customerSat = customer;
     }
 
+    public void CustomerStandUp()
+    {
+        customerSat = null;
+    }
 }

@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class IngredientsManager : MonoBehaviour
+public class FoodManager : MonoBehaviour
 {
-    public List<Ingredient> ingredients = new List<Ingredient>();
+    public List<Food> ingredients = new List<Food>();
 
-    public Ingredient GetRandomIngredient()
+    public Food GetRandomIngredient()
     {
         int toSkip = Random.Range(0, ingredients.Count);
         return ingredients.Skip(toSkip).Take(1).First();

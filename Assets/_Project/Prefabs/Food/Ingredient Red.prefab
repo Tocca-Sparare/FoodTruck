@@ -9,9 +9,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3950753455815229797, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
+      propertyPath: FoodName
+      value: Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950753455815229797, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
       propertyPath: material
       value: 
-      objectReference: {fileID: 2100000, guid: b2a21de1c173c3e4da001b63eef80ba9, type: 2}
+      objectReference: {fileID: 2100000, guid: 388430e90913da64fb6ad5be5849b53a, type: 2}
     - target: {fileID: 5601782707301866134, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920936589805692041, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
       propertyPath: m_Name
-      value: Ingredient Blue
+      value: Ingredient Red
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

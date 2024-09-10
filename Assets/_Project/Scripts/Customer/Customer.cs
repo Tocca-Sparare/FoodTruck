@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class Customer : MonoBehaviour
 {
@@ -16,7 +15,9 @@ public class Customer : MonoBehaviour
     bool isExiting = false;
     AudioSource audioSource;
     Vector3 exitPoint;
-    Ingredient demandingIngredient;
+    Food demandingFood;
+
+    public Food DemandingFood => demandingFood;
 
 
     void Awake()
@@ -39,23 +40,23 @@ public class Customer : MonoBehaviour
         }
     }
 
-    public void Init(Ingredient requestedIngredient, Table targetTable, Vector3 exitPoint)
+    public void Init(Food requestedIngredient, Table targetTable, Vector3 exitPoint)
     {
         SetRequestedIngredient(requestedIngredient);
         SetTargetTable(targetTable);
         this.exitPoint = exitPoint;
     }
 
-    private void SetRequestedIngredient(Ingredient ingredient)
+    private void SetRequestedIngredient(Food ingredient)
     {
-        demandingIngredient = ingredient;
+        demandingFood = ingredient;
         meshRenderer.material = ingredient.material;
     }
 
     private void SetTargetTable(Table table)
     {
         targetChair = table.GetRandomEmptyChair();
-        targetChair.IsEmpty = false;
+        targetChair.CustomerSit(this);
         navMeshAgent.destination = targetChair.transform.position;
     }
 
@@ -65,19 +66,16 @@ public class Customer : MonoBehaviour
         transform.SetPositionAndRotation(targetChair.transform.position, targetChair.transform.rotation);
         navMeshAgent.enabled = false;
         animator.SetBool("IsSitting", true);
-
-        StartCoroutine(Exit());
     }
 
-    public IEnumerator Exit()
+    public void Exit()
     {
-        yield return new WaitForSeconds(2);
         StartCoroutine(DoBurpSound());
         isExiting = true;
         animator.SetBool("IsSitting", false);
         navMeshAgent.enabled = true;
         navMeshAgent.destination = exitPoint;
-        targetChair.IsEmpty = true;
+        targetChair.CustomerStandUp();
     }
 
     private IEnumerator DoAngrySound()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5050942157290773581}
   - component: {fileID: 2606092921410722522}
   m_Layer: 0
-  m_Name: Ingredients Manager
+  m_Name: FoodManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6372249136969562960}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6200c82cb6d8b8847823a8bef269958b, type: 3}
+  m_Script: {fileID: 11500000, guid: fadd2c2c649bdf74f9484af911559750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ingredients:

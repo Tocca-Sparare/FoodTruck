@@ -5,6 +5,7 @@
 public class PlayerStateMachine : BasicStateMachine
 {
     public PlayerNormalState NormalState;
+    public PlayerUsingCannonState UsingCannonState;
 
     private void Start()
     {

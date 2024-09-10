@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3939595043599167271}
   - component: {fileID: 6748874213385429270}
   - component: {fileID: 2724849363099509092}
-  - component: {fileID: 973053215743735160}
   m_Layer: 0
   m_Name: PlayerPawn
   m_TagString: Untagged
@@ -36,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3007186484662410686}
+  - {fileID: 916227116172757033}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &105724878731301218
@@ -62,6 +62,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ffab13b4666d0341bf78fb1c74a8ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UsingCannonState:
+    resetWhenReleaseAnalogInput: 0
+    cannonBlackboard:
+      useBlackboard: 1
+      blackboardName: Cannon Interactable
+      normalVariable: {fileID: 0}
+    useRaycastForMouse: 1
+    raycastLayer:
+      serializedVersion: 2
+      m_Bits: 1
 --- !u!114 &3939595043599167271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,20 +140,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &973053215743735160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 154024957617275107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfb1c7f36753ad3499825138ea11bd8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementComponent: {fileID: 3939595043599167271}
-  objectToRotate: {fileID: 3007186484662410686}
 --- !u!1 &1072876615007765503
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,3 +447,49 @@ Transform:
   - {fileID: 1642007287826249055}
   m_Father: {fileID: 822323056787075004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5210436201779009798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 916227116172757033}
+  - component: {fileID: 5463561839933935460}
+  m_Layer: 0
+  m_Name: Feedbacks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &916227116172757033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5210436201779009798}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 822323056787075004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5463561839933935460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5210436201779009798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb1c7f36753ad3499825138ea11bd8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementComponent: {fileID: 3939595043599167271}
+  objectToRotate: {fileID: 3007186484662410686}

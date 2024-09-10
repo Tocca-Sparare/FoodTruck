@@ -8,12 +8,12 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField] private float maxDelay = 10f;
 
     TablesManager tablesManager;
-    IngredientsManager ingredientsManager;
+    FoodManager ingredientsManager;
 
     void Awake()
     {
         tablesManager = FindObjectOfType<TablesManager>();
-        ingredientsManager = FindObjectOfType<IngredientsManager>();
+        ingredientsManager = FindObjectOfType<FoodManager>();
     }
 
     void Start()

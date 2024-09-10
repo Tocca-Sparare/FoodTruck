@@ -8,9 +8,15 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class InputManager : MonoBehaviour
 {
+    [SerializeField] string mouseSchemeName = "MouseAndKeyboard";
+
     //inputs
     public Vector2 Move { get; set; }
     public bool InteractWasPressedThisFrame {  get; set; }
+    public bool ShootWasPressedThisFrame { get; set; }
+    public Vector2 Aim { get; set; }
+
+    public bool IsUsingMouse => _playerInput.currentControlScheme == mouseSchemeName;
 
     #region playerInput
 
@@ -34,5 +40,7 @@ public class InputManager : MonoBehaviour
         //read inputs
         Move = FindAction("Move").ReadValue<Vector2>();
         InteractWasPressedThisFrame = FindAction("Interact").WasPressedThisFrame();
+        ShootWasPressedThisFrame = FindAction("Shoot").WasPressedThisFrame();
+        Aim = FindAction("Aim").ReadValue<Vector2>();
     }
 }

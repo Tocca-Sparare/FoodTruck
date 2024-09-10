@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
+    [SerializeField] Transform physicalTablePosition;
+    public Vector3 PhysicalTablePosition => physicalTablePosition.position;
+
     private List<Chair> chairs = new();
 
     public bool IsAvaiable => chairs.All(c => c.IsEmpty);
@@ -25,5 +28,19 @@ public class Table : MonoBehaviour
     {
         foreach (var customer in GetComponentsInChildren<Customer>())
             customer.Exit();
+    }
+
+    /// <summary>
+    /// Find a customer with this demanding food and make it stand up
+    /// </summary>
+    /// <param name="food"></param>
+    public void OnHitTable(Food food)
+    {
+        Debug.Log("TODO - find customer with lower timer and same food");
+        Chair chair = chairs.FirstOrDefault(x => x.customerSat && x.customerSat.DemandingFood.FoodName == food.FoodName);
+        if (chair)
+        {
+            chair.customerSat.Exit();
+        }
     }
 }
