@@ -1,11 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class Customer : MonoBehaviour
 {
     [SerializeField] AudioClip angrySound;
     [SerializeField] AudioClip burpSound;
+    [SerializeField] SkinnedMeshRenderer meshRenderer;
 
 
     NavMeshAgent navMeshAgent;
@@ -14,6 +16,7 @@ public class Customer : MonoBehaviour
     bool isExiting = false;
     AudioSource audioSource;
     Vector3 exitPoint;
+    Ingredient demandingIngredient;
 
 
     void Awake()
@@ -36,16 +39,24 @@ public class Customer : MonoBehaviour
         }
     }
 
-    public void SetTargetTable(Table table)
+    public void Init(Ingredient requestedIngredient, Table targetTable, Vector3 exitPoint)
+    {
+        SetRequestedIngredient(requestedIngredient);
+        SetTargetTable(targetTable);
+        this.exitPoint = exitPoint;
+    }
+
+    private void SetRequestedIngredient(Ingredient ingredient)
+    {
+        demandingIngredient = ingredient;
+        meshRenderer.material = ingredient.material;
+    }
+
+    private void SetTargetTable(Table table)
     {
         targetChair = table.GetRandomEmptyChair();
         targetChair.IsEmpty = false;
         navMeshAgent.destination = targetChair.transform.position;
-    }
-    
-    public void SetExitPoint(Vector3 exitPoint)
-    {
-        this.exitPoint = exitPoint;
     }
 
     public void Sit()

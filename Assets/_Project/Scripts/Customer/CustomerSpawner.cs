@@ -8,10 +8,12 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField] private float maxDelay = 10f;
 
     TablesManager tablesManager;
+    IngredientsManager ingredientsManager;
 
     void Awake()
     {
         tablesManager = FindObjectOfType<TablesManager>();
+        ingredientsManager = FindObjectOfType<IngredientsManager>();
     }
 
     void Start()
@@ -34,8 +36,7 @@ public class CustomerSpawner : MonoBehaviour
                     var newCustomer = Instantiate(customerPrefab, transform);
                     newCustomer.transform.localPosition = Vector3.zero;
 
-                    newCustomer.SetTargetTable(targetTable);
-                    newCustomer.SetExitPoint(transform.position);
+                    newCustomer.Init(ingredientsManager.GetRandomIngredient(), targetTable, transform.position);
 
                     yield return new WaitForSecondsRealtime(1f);
                 }

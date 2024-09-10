@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angrySound: {fileID: 0}
   burpSound: {fileID: 0}
+  meshRenderer: {fileID: 7583585954885400678}
 --- !u!195 &9116563319463737380
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -262,7 +263,7 @@ PrefabInstance:
     - target: {fileID: 8743813690021804245, guid: 71d86b5f324261a4b9f5391ec0a86258, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 388430e90913da64fb6ad5be5849b53a, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 8743813690021804245, guid: 71d86b5f324261a4b9f5391ec0a86258, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -312,3 +313,8 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!137 &7583585954885400678 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8743813690021804245, guid: 71d86b5f324261a4b9f5391ec0a86258, type: 3}
+  m_PrefabInstance: {fileID: 1181644074699423923}
+  m_PrefabAsset: {fileID: 0}
