@@ -7,8 +7,9 @@ using UnityEngine;
 public class PlayerNormalState : State
 {
     PlayerPawn player;
-    MovementComponent movementComponent;
     InputManager inputManager;
+    MovementComponent movementComponent;
+    InteractComponent interactComponent;
 
     protected override void OnInit()
     {
@@ -17,10 +18,12 @@ public class PlayerNormalState : State
         //get references
         if (player == null && TryGetStateMachineUnityComponent(out player) == false)
             Debug.LogError($"Missing PlayerPawn on {GetType().Name}", StateMachine);
-        if (movementComponent == null && TryGetStateMachineUnityComponent(out movementComponent) == false)
-            Debug.LogError($"Missing MovementComponent on {GetType().Name}", StateMachine);
         if (player.CurrentController == null || player.CurrentController.TryGetComponent(out inputManager) == false)
             Debug.LogError($"Missing inputManager on {GetType().Name}", StateMachine);
+        if (movementComponent == null && TryGetStateMachineUnityComponent(out movementComponent) == false)
+            Debug.LogError($"Missing MovementComponent on {GetType().Name}", StateMachine);
+        if (interactComponent == null && TryGetStateMachineUnityComponent(out interactComponent) == false)
+            Debug.LogError($"Missing interactComponent on {GetType().Name}", StateMachine);
     }
 
     protected override void OnUpdate()
@@ -31,6 +34,15 @@ public class PlayerNormalState : State
         if (movementComponent && inputManager)
         {
             movementComponent.MoveByInput3D(inputManager.Move);
+        }
+
+        //try interact
+        if (interactComponent)
+        {
+            interactComponent.ScanInteractables();
+
+            if (inputManager.InteractWasPressedThisFrame)
+                interactComponent.TryInteract();
         }
     }
 

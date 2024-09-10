@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
 {
     //inputs
     public Vector2 Move { get; set; }
+    public bool InteractWasPressedThisFrame {  get; set; }
 
     #region playerInput
 
@@ -32,5 +33,6 @@ public class InputManager : MonoBehaviour
     {
         //read inputs
         Move = FindAction("Move").ReadValue<Vector2>();
+        InteractWasPressedThisFrame = FindAction("Interact").WasPressedThisFrame();
     }
 }

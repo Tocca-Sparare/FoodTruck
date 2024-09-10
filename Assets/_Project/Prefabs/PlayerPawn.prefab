@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 105724878731301218}
   - component: {fileID: 5785212130614047666}
   - component: {fileID: 3939595043599167271}
+  - component: {fileID: 6748874213385429270}
   - component: {fileID: 2724849363099509092}
   m_Layer: 0
   m_Name: PlayerPawn
@@ -82,8 +83,24 @@ MonoBehaviour:
   rigidbodyUseGravityAndPreventSlide: 1
   rigidbodyMaxSlopeAngle: 45
   dragBasedOnVelocity: 1
-  rigidbodyUseCustomDrag: 0
   customDrag: 5
+--- !u!114 &6748874213385429270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154024957617275107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b5c796b5701f94780a02f18444ad97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radiusInteract: 2
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  showRadiusDebug: 0
 --- !u!54 &2724849363099509092
 Rigidbody:
   m_ObjectHideFlags: 0

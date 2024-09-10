@@ -16,8 +16,7 @@ public class MovementComponent : MonoBehaviour
 
     [Header("When pushed")]
     [Tooltip("If true use (velocity * drag), false use (normalized velocity * drag)")][SerializeField] protected bool dragBasedOnVelocity = true;
-    [Tooltip("Use rigidbody.drag or custom drag? CharacterController use always custom drag")][SerializeField] protected bool rigidbodyUseCustomDrag = false;
-    [Tooltip("CharacterController use this drag. You can use it also on Rigidbody instead of Rigidbody.drag")][SerializeField] protected float customDrag = 5;
+    [Tooltip("This is used to drag when pushed by call Push functions. This doesn't affect AddForce by unity")][SerializeField] protected float customDrag = 5;
 
     public bool IsMovingRight { get; set; }                     //check if moving right (this is used in 2d games where you can look only left or right)
     public Vector3 MoveDirectionInput { get; set; }             //when moves, set it with only input direction (used to know last movement direction)
@@ -27,22 +26,7 @@ public class MovementComponent : MonoBehaviour
     public float CurrentSpeed => wrap.IsValid() ? wrap.velocity.magnitude : 0;
     public float InputSpeed { get => inputSpeed; set => inputSpeed = value; }
     public float MaxSpeed { get => maxSpeed; set => maxSpeed = value; }
-    /// <summary>
-    /// If using CharacterController or is enabled custom drag, get and set customDrag. Else get and set rigidbody.drag
-    /// </summary>
-    public float Drag
-    {
-        get
-        {
-            return wrap.componentToWrap == FComponentWrapper.EComponentToWrap.CharacterController ? customDrag
-            : (rigidbodyUseCustomDrag ? customDrag : (wrap.IsValid() ? wrap.drag : 1));
-        }
-        set
-        {
-            if (wrap.componentToWrap == FComponentWrapper.EComponentToWrap.CharacterController) { customDrag = value; }
-            else { if (rigidbodyUseCustomDrag) customDrag = value; else if (wrap.IsValid()) wrap.drag = value; }
-        }
-    }
+    public float CustomDrag { get => customDrag; set => customDrag = value; }
     /// <summary>
     /// Return IsMovingRight as a direction. Can also set it passing a Vector3 with X greater or lower than 0
     /// </summary>
@@ -177,10 +161,10 @@ public class MovementComponent : MonoBehaviour
 
     protected virtual void RemovePushForce()
     {
-        //remove push force (direction * drag * deltaTime)
+        //remove push force (direction * customDrag * deltaTime)
         newPushForce = CurrentPushForce - (
             (dragBasedOnVelocity ? CurrentPushForce : CurrentPushForce.normalized) *
-            Drag * wrap.deltaTime);
+            customDrag * wrap.deltaTime);
 
         //clamp it
         if (CurrentPushForce.x >= 0 && newPushForce.x < 0 || CurrentPushForce.x <= 0 && newPushForce.x > 0)
@@ -416,31 +400,6 @@ public struct FComponentWrapper
                 return rb3d.velocity;
             else
                 return rb2d.velocity;
-        }
-    }
-
-    /// <summary>
-    /// The drag of the rigidbody
-    /// </summary>
-    public float drag
-    {
-        get
-        {
-            if (componentToWrap == EComponentToWrap.CharacterController)
-                return default;
-            else if (componentToWrap == EComponentToWrap.Rigidbody3D)
-                return rb3d.drag;
-            else
-                return rb2d.drag;
-        }
-        set
-        {
-            if (componentToWrap == EComponentToWrap.CharacterController)
-                return;
-            else if (componentToWrap == EComponentToWrap.Rigidbody3D)
-                rb3d.drag = value;
-            else
-                rb2d.drag = value;
         }
     }
 
