@@ -137,6 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4224814158584987445}
+  - component: {fileID: 6876753568125975953}
   - component: {fileID: 9116563319463737380}
   m_Layer: 0
   m_Name: Customer
@@ -162,6 +163,20 @@ Transform:
   - {fileID: 8539322681312814904}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6876753568125975953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6408842856947285832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb6aeea803d544e981d48c382d7dc44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angrySound: {fileID: 0}
+  burpSound: {fileID: 0}
 --- !u!195 &9116563319463737380
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -175,7 +190,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 1000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

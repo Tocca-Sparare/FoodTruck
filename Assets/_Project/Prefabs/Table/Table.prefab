@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6997245648509016980
+--- !u!1 &872109926490280162
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,62 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6516730743560198132}
-  - component: {fileID: 4289218075831285383}
+  - component: {fileID: 3870954119313641295}
   m_Layer: 0
-  m_Name: Chair
+  m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6516730743560198132
+--- !u!4 &3870954119313641295
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6997245648509016980}
+  m_GameObject: {fileID: 872109926490280162}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4604030280613367340}
+  - {fileID: 9084518125179829469}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4289218075831285383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6997245648509016980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c532a118fb0017447a12f434862928a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1001 &4066315438586816967
+--- !u!1001 &8761762314065910582
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6516730743560198132}
+    m_TransformParent: {fileID: 3870954119313641295}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.181
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -110,10 +97,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 492ad7a3e7893604c9d86ca0bd9b319f, type: 2}
@@ -123,15 +106,39 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 284d55ef97a570d4db3fb61bad125428, type: 2}
     - target: {fileID: 919132149155446097, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
       propertyPath: m_Name
-      value: Chair
+      value: Table
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3416166998758712546}
   m_SourcePrefab: {fileID: 100100000, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
---- !u!4 &4604030280613367340 stripped
+--- !u!1 &8455897212969330279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
+  m_PrefabInstance: {fileID: 8761762314065910582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &3416166998758712546
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8455897212969330279}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.1, y: 0.1, z: 0.19000001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.177}
+  m_TimeToStationary: 0.5
+--- !u!4 &9084518125179829469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
-  m_PrefabInstance: {fileID: 4066315438586816967}
+  m_PrefabInstance: {fileID: 8761762314065910582}
   m_PrefabAsset: {fileID: 0}
