@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3870954119313641295
 Transform:
@@ -47,7 +47,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2609304573701064798
 Transform:
@@ -144,13 +144,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3416166998758712546}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7661611915897741354}
@@ -160,22 +161,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
   m_PrefabInstance: {fileID: 8761762314065910582}
   m_PrefabAsset: {fileID: 0}
---- !u!208 &3416166998758712546
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8455897212969330279}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.1, y: 0.1, z: 0.19000001}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.177}
-  m_TimeToStationary: 0.5
 --- !u!65 &7661611915897741354
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -191,7 +176,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
