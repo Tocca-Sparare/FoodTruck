@@ -33,7 +33,7 @@ public class Table : MonoBehaviour
     public void OnHitTable(Food food)
     {
         Debug.Log("TODO - find customer with lower timer and same food");
-        Chair chair = chairs.FirstOrDefault(x => x.customerSat && x.customerSat.DemandingFood.FoodName == food.FoodName);
+        Chair chair = chairs.FirstOrDefault(x => x.customerSat && x.customerSat.IsSat && x.customerSat.DemandingFood.FoodName == food.FoodName);
         if (chair)
         {
             chair.customerSat.Exit();

@@ -1,45 +1,30 @@
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Customer : MonoBehaviour
+public class Customer : BasicStateMachine
 {
     [SerializeField] SkinnedMeshRenderer meshRenderer;
+    [SerializeField] CustomerNormalState normalState;
+    [SerializeField] CustomerSatState satState;
+    [SerializeField] CustomerLeavingState leavingState;
+    [SerializeField] string blackboardExitPoint = "exitPoint";
 
-    NavMeshAgent navMeshAgent;
-    Chair targetChair;
-    bool isExiting = false;
-    Vector3 exitPoint;
     Food demandingFood;
+    Chair currentChair;
 
     public Food DemandingFood => demandingFood;
-    
+    public Chair CurrentChair => currentChair;
+    public bool IsSat => CurrentState == satState;
+
     //events
     public System.Action OnSit;
     public System.Action OnStandUp;
-
-
-    void Awake()
-    {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-    }
-
-    void FixedUpdate()
-    {
-        if (!isExiting && targetChair && Vector3.Distance(targetChair.transform.position, transform.position) < 0.3f)
-            Sit();
-
-        if (isExiting && Vector3.Distance(exitPoint, transform.position) < 0.3f)
-        {
-            StopAllCoroutines();
-            Destroy(gameObject);
-        }
-    }
 
     public void Init(Food requestedIngredient, Table targetTable, Vector3 exitPoint)
     {
         SetRequestedIngredient(requestedIngredient);
         SetTargetTable(targetTable);
-        this.exitPoint = exitPoint;
+        SetBlackboardElement(blackboardExitPoint, exitPoint);
+        SetState(normalState);
     }
 
     private void SetRequestedIngredient(Food ingredient)
@@ -50,25 +35,20 @@ public class Customer : MonoBehaviour
 
     private void SetTargetTable(Table table)
     {
-        targetChair = table.GetRandomEmptyChair();
-        targetChair.CustomerSit(this);
-        navMeshAgent.destination = targetChair.transform.position;
+        currentChair = table.GetRandomEmptyChair();
+        currentChair.CustomerSit(this);
     }
 
     public void Sit()
     {
-        transform.SetParent(targetChair.transform);
-        transform.SetPositionAndRotation(targetChair.transform.position, targetChair.transform.rotation);
-        navMeshAgent.enabled = false;
+        SetState(satState);
         OnSit?.Invoke();
     }
 
     public void Exit()
     {
-        isExiting = true;
-        navMeshAgent.enabled = true;
-        navMeshAgent.destination = exitPoint;
-        targetChair.CustomerStandUp();
+        SetState(leavingState);
         OnStandUp?.Invoke();
+        currentChair.CustomerStandUp();
     }
 }
