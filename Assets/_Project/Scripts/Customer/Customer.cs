@@ -1,31 +1,26 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Customer : MonoBehaviour
 {
-    [SerializeField] AudioClip angrySound;
-    [SerializeField] AudioClip burpSound;
     [SerializeField] SkinnedMeshRenderer meshRenderer;
-
 
     NavMeshAgent navMeshAgent;
     Chair targetChair;
-    Animator animator;
     bool isExiting = false;
-    AudioSource audioSource;
     Vector3 exitPoint;
     Food demandingFood;
 
     public Food DemandingFood => demandingFood;
+    
+    //events
+    public System.Action OnSit;
+    public System.Action OnStandUp;
 
 
     void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponentInChildren<Animator>();
-        audioSource = GetComponentInChildren<AudioSource>();
-        StartCoroutine(DoAngrySound());
     }
 
     void FixedUpdate()
@@ -65,39 +60,15 @@ public class Customer : MonoBehaviour
         transform.SetParent(targetChair.transform);
         transform.SetPositionAndRotation(targetChair.transform.position, targetChair.transform.rotation);
         navMeshAgent.enabled = false;
-        animator.SetBool("IsSitting", true);
+        OnSit?.Invoke();
     }
 
     public void Exit()
     {
-        StartCoroutine(DoBurpSound());
         isExiting = true;
-        animator.SetBool("IsSitting", false);
         navMeshAgent.enabled = true;
         navMeshAgent.destination = exitPoint;
         targetChair.CustomerStandUp();
-    }
-
-    private IEnumerator DoAngrySound()
-    {
-        int randomDelay = Random.Range(5, 20);
-        yield return new WaitForSecondsRealtime(randomDelay);
-
-        float randomPitch = Random.Range(0.8f, 1.2f);
-        float randomStereoPan = Random.Range(-1f, 1f);
-
-        audioSource.panStereo = randomStereoPan;
-        audioSource.pitch = randomPitch;
-        audioSource.clip = angrySound;
-        audioSource.Play();
-    }
-
-    private IEnumerator DoBurpSound()
-    {
-        int randomDelay = Random.Range(2, 6);
-        yield return new WaitForSecondsRealtime(randomDelay);
-
-        audioSource.clip = burpSound;
-        audioSource.Play();
+        OnStandUp?.Invoke();
     }
 }
