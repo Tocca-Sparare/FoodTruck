@@ -50,6 +50,7 @@ MonoBehaviour:
   hittableLayers:
     serializedVersion: 2
     m_Bits: 64
+  meshRenderer: {fileID: 9021742348997141254}
   FoodName: Default
   material: {fileID: 0}
 --- !u!54 &3615985147466969430

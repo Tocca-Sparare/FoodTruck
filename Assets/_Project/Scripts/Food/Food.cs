@@ -5,6 +5,8 @@ public class Food : MonoBehaviour
 {
     [SerializeField] float speed = 5;
     [SerializeField] LayerMask hittableLayers = -1;
+    [SerializeField] MeshRenderer meshRenderer;
+
     public string FoodName;
     public Material material;
 
@@ -15,6 +17,8 @@ public class Food : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (rb == null)
             Debug.LogError($"Missing rigidbody on {GetType().Name}", gameObject);
+
+        meshRenderer.material = material;
     }
 
     private void FixedUpdate()
