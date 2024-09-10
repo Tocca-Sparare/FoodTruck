@@ -37,11 +37,11 @@ public class PlayerNormalState : State
         }
 
         //try interact
-        if (interactComponent)
+        if (interactComponent && movementComponent)
         {
-            interactComponent.ScanInteractables();
+            interactComponent.ScanInteractablesInDirection(movementComponent.MoveDirectionInput);
 
-            if (inputManager.InteractWasPressedThisFrame)
+            if (inputManager && inputManager.InteractWasPressedThisFrame)
                 interactComponent.TryInteract();
         }
     }

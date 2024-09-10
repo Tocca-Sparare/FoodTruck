@@ -8,6 +8,7 @@ public class InteractComponent : MonoBehaviour
 {
     [Tooltip("Area to check for interactables")][SerializeField] float radiusInteract = 1f;
     [Tooltip("Hit only interacts with this layer")][SerializeField] LayerMask interactLayer = -1;
+    [Tooltip("This is used if you call ScanInteractablesInDirection")][SerializeField] float maxAngle = 45f;
     [SerializeField] bool showRadiusDebug;
 
     //events
@@ -25,6 +26,13 @@ public class InteractComponent : MonoBehaviour
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(transform.position, radiusInteract);
+
+            //draw max angle
+            Gizmos.color = Color.red;
+            Vector3 dir = transform.forward * radiusInteract;
+            Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(maxAngle, Vector3.up) * dir);
+            Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(-maxAngle, Vector3.up) * dir);
+
             Gizmos.color = Color.white;
         }
     }
@@ -36,6 +44,30 @@ public class InteractComponent : MonoBehaviour
     {
         //find nearest interactable
         var possibleInteractables = GetPossibleInteractables();
+        IInteractable newInteractable = FindNearest(possibleInteractables);
+
+        //if changed interactable, call events
+        CheckChangeInteractable(newInteractable);
+    }
+
+    /// <summary>
+    /// Find interactables in radius, but only if inside max angle
+    /// </summary>
+    /// <param name="direction"></param>
+    public void ScanInteractablesInDirection(Vector3 direction)
+    {
+        var possibleInteractables = GetPossibleInteractables();
+
+        //remove interactables not in angle
+        direction = direction.normalized;
+        foreach (Transform collider in new List<Transform>(possibleInteractables.Keys))
+        {
+            Vector3 dir = (collider.position - transform.position).normalized;
+            if (Vector3.Angle(dir, direction) > maxAngle)
+                possibleInteractables.Remove(collider);
+        }
+
+        //find nearest interactable
         IInteractable newInteractable = FindNearest(possibleInteractables);
 
         //if changed interactable, call events

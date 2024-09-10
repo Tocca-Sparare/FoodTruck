@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3939595043599167271}
   - component: {fileID: 6748874213385429270}
   - component: {fileID: 2724849363099509092}
+  - component: {fileID: 973053215743735160}
   m_Layer: 0
   m_Name: PlayerPawn
   m_TagString: Untagged
@@ -100,6 +101,7 @@ MonoBehaviour:
   interactLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  maxAngle: 45
   showRadiusDebug: 0
 --- !u!54 &2724849363099509092
 Rigidbody:
@@ -128,6 +130,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &973053215743735160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154024957617275107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb1c7f36753ad3499825138ea11bd8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementComponent: {fileID: 3939595043599167271}
+  objectToRotate: {fileID: 3007186484662410686}
 --- !u!1 &1072876615007765503
 GameObject:
   m_ObjectHideFlags: 0
