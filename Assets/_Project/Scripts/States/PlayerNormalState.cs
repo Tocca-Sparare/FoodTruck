@@ -11,6 +11,8 @@ public class PlayerNormalState : State
     MovementComponent movementComponent;
     InteractComponent interactComponent;
 
+    Vector3 movementDirection;
+
     protected override void OnInit()
     {
         base.OnInit();
@@ -30,16 +32,21 @@ public class PlayerNormalState : State
     {
         base.OnUpdate();
 
-        //set move direction
-        if (movementComponent && inputManager)
+        if (movementComponent)
         {
-            movementComponent.MoveByInput3D(inputManager.Move);
+            //set move direction
+            if (inputManager)
+                movementComponent.MoveByInput3D(inputManager.Move);
+
+            //and update direction for interactables (ignore vector3.zero)
+            if (movementComponent.MoveDirectionInput != Vector3.zero)
+                movementDirection = movementComponent.MoveDirectionInput;
         }
 
         //try interact
-        if (interactComponent && movementComponent)
+        if (interactComponent)
         {
-            interactComponent.ScanInteractablesInDirection(movementComponent.MoveDirectionInput);
+            interactComponent.ScanInteractablesInDirection(movementDirection);
 
             if (inputManager && inputManager.InteractWasPressedThisFrame)
                 interactComponent.TryInteract();

@@ -101,7 +101,7 @@ MonoBehaviour:
   interactLayer:
     serializedVersion: 2
     m_Bits: 4294967295
-  maxAngle: 45
+  maxAngle: 50
   showRadiusDebug: 0
 --- !u!54 &2724849363099509092
 Rigidbody:

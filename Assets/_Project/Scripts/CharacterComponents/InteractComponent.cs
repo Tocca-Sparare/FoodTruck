@@ -8,7 +8,7 @@ public class InteractComponent : MonoBehaviour
 {
     [Tooltip("Area to check for interactables")][SerializeField] float radiusInteract = 1f;
     [Tooltip("Hit only interacts with this layer")][SerializeField] LayerMask interactLayer = -1;
-    [Tooltip("This is used if you call ScanInteractablesInDirection")][SerializeField] float maxAngle = 45f;
+    [Tooltip("This is used if you call ScanInteractablesInDirection")][SerializeField] float maxAngle = 50f;
     [SerializeField] bool showRadiusDebug;
 
     //events
