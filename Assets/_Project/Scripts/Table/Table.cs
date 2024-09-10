@@ -9,7 +9,7 @@ public class Table : MonoBehaviour
 
     private List<Chair> chairs = new();
 
-    public bool IsAvaiable => chairs.All(c => c.IsEmpty);
+    public bool IsAvailable => chairs.Any(c => c.IsEmpty);
     public List<Chair> EmptyChairs => chairs.Where(c => c.IsEmpty).ToList();
 
 
@@ -21,6 +21,8 @@ public class Table : MonoBehaviour
     public Chair GetRandomEmptyChair()
     {
         var randomIndex = Random.Range(0, EmptyChairs.Count);
+        if (EmptyChairs.Count() == 0)
+            return null;
         return EmptyChairs[randomIndex];
     }
 

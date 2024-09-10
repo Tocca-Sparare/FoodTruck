@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Chair : MonoBehaviour
 {
-    public bool IsEmpty => customerSat != null;
+    public bool IsEmpty => customerSat == null;
 
     public Customer customerSat;
 

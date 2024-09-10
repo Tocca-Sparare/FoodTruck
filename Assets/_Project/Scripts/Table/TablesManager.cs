@@ -6,7 +6,7 @@ public class TablesManager : MonoBehaviour
 {
     public List<Table> tables = new();
 
-    public bool HasAvaiableTables => tables.Any(t => t.IsAvaiable);
+    public bool HasAvailableTables => tables.Any(t => t.IsAvailable);
 
     void Awake()
     {
@@ -15,7 +15,7 @@ public class TablesManager : MonoBehaviour
 
     public Table GetRandomEmptyTable()
     {
-        var validTables = tables.Where(t => t.IsAvaiable).ToList();
+        var validTables = tables.Where(t => t.IsAvailable).ToList();
         var randomIndex = Random.Range(0, validTables.Count());
 
         return validTables[randomIndex];

@@ -46,8 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerPrefab: {fileID: 6876753568125975953, guid: 19013837ec77f435a84f7bbd1c1e5856, type: 3}
-  minDelay: 5
-  maxDelay: 10
+  minSlowDelay: 2
+  maxSlowDelay: 5
+  spawnFastVelocityFactor: 30
+  currentVelocityFactor: 1
+  slowPhaseTimeLimit: 10
+  totalLevelTime: 100
+  spawnPointTransforms:
+  - {fileID: 8047055125695598952}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &3310208018486476783
 GameObject:
   m_ObjectHideFlags: 0
