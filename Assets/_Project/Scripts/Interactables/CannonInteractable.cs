@@ -84,4 +84,11 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         Quaternion bulletRotation = Quaternion.LookRotation(bulletDirection, Vector3.up);
         InstantiateHelper.Instantiate(foodPrefab, bulletSpawnPosition, bulletRotation);
     }
+
+    public void Dismiss()
+    {
+        PlayerStateMachine playerStateMachine = playerUsingThisCannon.GetComponent<PlayerStateMachine>();
+        playerStateMachine.SetState(playerStateMachine.NormalState);
+        playerUsingThisCannon = null;
+    }
 }
