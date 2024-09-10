@@ -61,6 +61,9 @@ public class PlayerUsingCannonState : State
         //shoot
         if (inputManager.ShootWasPressedThisFrame)
             cannonInteractable.Shoot();
+
+        if (inputManager.InteractWasPressedThisFrame)
+            cannonInteractable.Dismiss();
     }
 
     void CalculateAimPositionWithMouse()

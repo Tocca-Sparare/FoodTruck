@@ -26,12 +26,6 @@ public class Table : MonoBehaviour
         return EmptyChairs[randomIndex];
     }
 
-    public void Free()
-    {
-        foreach (var customer in GetComponentsInChildren<Customer>())
-            customer.Exit();
-    }
-
     /// <summary>
     /// Find a customer with this demanding food and make it stand up
     /// </summary>
