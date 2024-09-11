@@ -1,7 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class Customer : BasicStateMachine
 {
+    [Header("How many seconds the customer is going to wait at the table before leaving")]
+    [SerializeField] float waitingTime = 10;
     [SerializeField] SkinnedMeshRenderer meshRenderer;
     [SerializeField] CustomerNormalState normalState;
     [SerializeField] CustomerSatState satState;
@@ -18,11 +21,12 @@ public class Customer : BasicStateMachine
     //events
     public System.Action OnSit;
     public System.Action OnStandUp;
+    public System.Action OnSatisfied;
 
     public void Init(Food requestedIngredient, Table targetTable, Vector3 exitPoint)
     {
         ExitPoint = exitPoint;
-        
+
         SetRequestedIngredient(requestedIngredient);
         SetTargetTable(targetTable);
         SetState(normalState);
@@ -42,14 +46,25 @@ public class Customer : BasicStateMachine
 
     public void Sit()
     {
+        StartCoroutine(LeaveTableAfterWaitingTime());
         SetState(satState);
         OnSit?.Invoke();
     }
 
-    public void Exit()
+    public void Leave(bool satisfied)
     {
         SetState(leavingState);
-        OnStandUp?.Invoke();
         currentChair.CustomerStandUp();
+
+        if (satisfied)
+            OnSatisfied?.Invoke();
+        OnStandUp?.Invoke();
+    }
+
+    IEnumerator LeaveTableAfterWaitingTime()
+    {
+        yield return new WaitForSeconds(waitingTime);
+        if (IsSat)
+            Leave(false);
     }
 }

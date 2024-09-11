@@ -36,7 +36,7 @@ public class Table : MonoBehaviour
         Chair chair = chairs.FirstOrDefault(x => x.customerSat && x.customerSat.IsSat && x.customerSat.DemandingFood.FoodName == food.FoodName);
         if (chair)
         {
-            chair.customerSat.Exit();
+            chair.customerSat.Leave(true);
         }
     }
 }
