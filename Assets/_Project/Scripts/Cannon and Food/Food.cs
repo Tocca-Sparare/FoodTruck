@@ -15,6 +15,7 @@ public class Food : MonoBehaviour
 
     Rigidbody rb;
     float lifeTimeTimer;
+    bool isDestroyed;
 
     private void Awake()
     {
@@ -23,7 +24,9 @@ public class Food : MonoBehaviour
         if (rb == null)
             Debug.LogError($"Missing rigidbody on {GetType().Name}", gameObject);
 
+        //reset values
         lifeTimeTimer = Time.time + lifeTime;
+        isDestroyed = false;
     }
 
     private void FixedUpdate()
@@ -34,26 +37,36 @@ public class Food : MonoBehaviour
         //destroy after few seconds
         if (Time.time > lifeTimeTimer)
         {
-            InstantiateHelper.Destroy(gameObject);
+            DestroyBullet();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //check if hit table
-        Table table = other.GetComponentInParent<Table>();
-        if (table)
-        {
-            table.OnHitTable(this);
-        }
+        //do nothing if already destroyed
+        if (isDestroyed)
+            return;
 
         //destroy bullet if hit layer
         if (ContainsLayer(hittableLayers.Layer, other.gameObject.layer))
         {
-            InstantiateHelper.Destroy(gameObject);
-
-            if (table == null)
+            //check if hit table
+            Table table = other.GetComponentInParent<Table>();
+            if (table)
+                table.OnHitTable(this);
+            else
                 Debug.Log("If bullet doesn't hit table, set floor dirty?");
+
+            DestroyBullet();
+        }
+    }
+
+    void DestroyBullet()
+    {
+        if (isDestroyed == false)
+        {
+            isDestroyed = true;
+            InstantiateHelper.Destroy(gameObject);
         }
     }
 
