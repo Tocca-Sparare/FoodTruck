@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class AirDropBall : MonoBehaviour
 {
@@ -12,7 +9,6 @@ public class AirDropBall : MonoBehaviour
     [SerializeField] float flightLength = 15;
     [SerializeField] float flightTime = 2;
 
-    float fireRateTimer;
     [SerializeField] Food foodPrefabRed;
     [SerializeField] Food foodPrefabBlue;
     [SerializeField] Food foodPrefabGreen;
@@ -27,12 +23,14 @@ public class AirDropBall : MonoBehaviour
         StartCoroutine(Shoot());
     }
 
-    void Update() { 
+    void Update()
+    {
 
     }
 
 
-    public void StartRed() {
+    public void StartRed()
+    {
         foodPrefabChosen = foodPrefabRed;
         Setup();
     }
@@ -48,12 +46,13 @@ public class AirDropBall : MonoBehaviour
         Setup();
     }
 
-    public void Setup() {
+    public void Setup()
+    {
 
         isMoving = false;
 
         List<Table> table = FindObjectsOfType<Table>().ToList();
-        var randomTableIndex = Random.RandomRange(0, table.Count()-1);
+        var randomTableIndex = Random.Range(0, table.Count() - 1);
         float xpos = Random.Range(-1.0f, 1.0f);
         float zpos = Random.Range(-1.0f, 1.0f);
 
@@ -62,9 +61,9 @@ public class AirDropBall : MonoBehaviour
         Vector3 randomPositionEnd = table[randomTableIndex].transform.position + randomPosition;
         transform.position = new Vector3(randomPositionStart.x, flightHeight, randomPositionStart.z);
         targetPosition = new Vector3(randomPositionEnd.x, flightHeight, randomPositionEnd.z);
-        if (coroutineHandle!=null)
+        if (coroutineHandle != null)
             StopCoroutine(coroutineHandle);
-        
+
         coroutineHandle = StartCoroutine(LerpPosition(targetPosition, flightTime));
     }
 
@@ -87,7 +86,8 @@ public class AirDropBall : MonoBehaviour
 
     public IEnumerator Shoot()
     {
-        while (true) {
+        while (true)
+        {
             if (isMoving)
             {
                 InstantiateHelper.Instantiate(foodPrefabChosen, transform.position + new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f)), Quaternion.Euler(90, 0, 0));
@@ -96,7 +96,5 @@ public class AirDropBall : MonoBehaviour
             yield return null;
 
         }
-
     }
-
 }

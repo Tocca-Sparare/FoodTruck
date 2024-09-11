@@ -46,7 +46,8 @@ public class PlayerNormalState : State
         //try interact
         if (interactComponent)
         {
-            interactComponent.ScanInteractablesInDirection(movementDirection);
+            //interactComponent.ScanInteractablesInDirection(movementDirection);
+            interactComponent.ScanInteractables();
 
             if (inputManager && inputManager.InteractWasPressedThisFrame)
                 interactComponent.TryInteract();

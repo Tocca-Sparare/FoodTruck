@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +13,7 @@ public class CustomerSatState : State
     NavMeshAgent navMeshAgent;
     Customer customer;
     Coroutine leaveTableAfterWaitingTime;
+    List<Coroutine> hungerCoroutines = new List<Coroutine>();
 
     protected override void OnInit()
     {
@@ -37,6 +40,14 @@ public class CustomerSatState : State
 
         //start timer to leave table unsatisfied
         leaveTableAfterWaitingTime = StateMachine.StartCoroutine(LeaveTableAfterWaitingTime());
+
+        //start hunger coroutines
+        foreach (var percentage in customer.HungryChangeSteps)
+        {
+            var delay = percentage * customer.WaitingTime / 100;
+            var cor = StateMachine.StartCoroutine(InvokeHungerChangeAfter(delay));
+            hungerCoroutines.Add(cor);
+        }
     }
 
     protected override void OnExit()
@@ -46,6 +57,9 @@ public class CustomerSatState : State
         //be sure to stop coroutine if leaving this state for other reasons
         if (leaveTableAfterWaitingTime != null)
             StateMachine.StopCoroutine(leaveTableAfterWaitingTime);
+
+        foreach (var cor in hungerCoroutines)
+            StateMachine.StopCoroutine(cor);
     }
 
     private IEnumerator LeaveTableAfterWaitingTime()
@@ -60,5 +74,11 @@ public class CustomerSatState : State
 
         leaveTableAfterWaitingTime = null;
         customer.Leave(ECustomerSatisfaction.Unsatisfied);
+    }
+
+    IEnumerator InvokeHungerChangeAfter(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        customer.OnHungryIncreased?.Invoke();
     }
 }
