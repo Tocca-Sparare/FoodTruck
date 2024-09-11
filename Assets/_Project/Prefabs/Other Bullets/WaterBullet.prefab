@@ -51,6 +51,7 @@ MonoBehaviour:
     data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
     elementName: Food - HittableLayers
   lifeTime: 10
+  icon: {fileID: 21300000, guid: 27a652e44ae784dde98dee48fa54a328, type: 3}
 --- !u!54 &3615985147466969430
 Rigidbody:
   m_ObjectHideFlags: 0
