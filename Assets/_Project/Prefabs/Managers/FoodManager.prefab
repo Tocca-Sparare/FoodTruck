@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fadd2c2c649bdf74f9484af911559750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredients:
+  foods:
   - {fileID: 3611872571509013167, guid: 8b1885640dbe68a4f901ec72010ec53d, type: 3}
   - {fileID: 3611872571509013167, guid: c0b81a868e2bde24f93526751ab1b316, type: 3}
   - {fileID: 3611872571509013167, guid: f78fdab4c01514d47a4d996a9e253640, type: 3}
