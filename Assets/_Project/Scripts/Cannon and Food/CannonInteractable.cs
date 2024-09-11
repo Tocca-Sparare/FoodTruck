@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class CannonInteractable : MonoBehaviour, IInteractable
 {
-    [Tooltip("Where snap the player on interact")][SerializeField] Transform playerPosition;
+    [Tooltip("Where snap the player on interact")][SerializeField] Transform playerTransform;
     [Space]
     [SerializeField] CannonBullet bulletPrefab;
     [Tooltip("Where spawn the bullet")][SerializeField] Transform bulletSpawn;
@@ -23,6 +23,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
 
     public System.Action<Vector3> onUpdateAimDirection;
     public CannonBullet Bullet => bulletPrefab;
+    public Transform PlayerTransform => playerTransform;
 
 #if UNITY_EDITOR
 
@@ -33,8 +34,6 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         Vector3 dir = transform.forward * 2;
         Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(minRotationLimit, Vector3.up) * dir);
         Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(maxRotationLimit, Vector3.up) * dir);
-
-
         Gizmos.color = Color.white;
     }
 
@@ -69,7 +68,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         }
 
         //snap player position and rotation
-        interactor.transform.position = playerPosition.position;
+        interactor.transform.position = playerTransform.position;
         RotateCharacterFeedback rotateCharacter = interactor.GetComponentInChildren<RotateCharacterFeedback>();
         Vector3 rotationDirection = transform.position - rotateCharacter.ObjectToRotate.position;
         rotationDirection.y = 0;
