@@ -9,7 +9,7 @@ public class TablesManager : MonoBehaviour
 {
     public List<Table> tables = new();
 
-    public bool HasAvailableTables => tables.Any(t => t.IsAvailable);
+    public bool HasAvailableTables => tables.Any(t => t.IsAvailable);   //at least one table is available
 
     void Awake()
     {

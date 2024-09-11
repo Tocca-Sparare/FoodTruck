@@ -11,8 +11,12 @@ public class Table : MonoBehaviour
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
 
     private List<Chair> chairs = new();
+    private bool isDirty;
 
-    public bool IsAvailable => chairs.Any(c => c.IsAvailable);
+    public System.Action OnDirtyTable;
+
+    public bool IsAvailable => isDirty == false && chairs.Any(c => c.IsAvailable);  //at least one chair available and table not dirty
+    public bool IsDirty => isDirty;
 
 
     void Awake()
@@ -20,9 +24,13 @@ public class Table : MonoBehaviour
         chairs = GetComponentsInChildren<Chair>().ToList();
     }
 
+    /// <summary>
+    /// Find random available chair at this table
+    /// </summary>
+    /// <returns></returns>
     public Chair GetRandomAvailableChair()
     {
-        //find empty chairs
+        //find available chairs
         var emptyChairs = chairs.Where(c => c.IsAvailable).ToList();
         if (emptyChairs.Count == 0)
         {
@@ -45,13 +53,42 @@ public class Table : MonoBehaviour
         Chair chair = chairs.Where(c => c.IsCustomerSat && c.CustomerSat.DemandingFood.FoodName == food.FoodName)
             .OrderBy(c => c.CustomerSat.RemainingTimeBeforeLeave).FirstOrDefault(); //if there are more customers with same food, return who has lowest timer
 
+        //customer leave satisfied
         if (chair)
         {
-            chair.CustomerSat.Leave(true);
+            chair.CustomerSat.Leave(ECustomerSatisfaction.Satisfied);
         }
+        //else, if there aren't customers with this food, dirty the table
         else
         {
-            Debug.Log("TODO - set table dirty?");
+            DirtyTable();
         }
+    }
+
+    /// <summary>
+    /// set this table dirty
+    /// </summary>
+    public void DirtyTable()
+    {
+        //everyone leave
+        foreach (var c in chairs)
+        {
+            if (c.IsCustomerSat)
+                c.CustomerSat.Leave(ECustomerSatisfaction.Unsatisfied);     //unsatisfied if already sat
+            else if (c.IsAvailable == false)
+                c.CustomerSat.Leave(ECustomerSatisfaction.Indifferent);     //else, indifferent (don't lose points)
+        }
+
+        //isDirty = true;
+
+        OnDirtyTable?.Invoke();
+    }
+
+    /// <summary>
+    /// Set table no more dirty
+    /// </summary>
+    public void CleanTable()
+    {
+        isDirty = false;
     }
 }

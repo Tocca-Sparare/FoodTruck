@@ -59,6 +59,6 @@ public class CustomerSatState : State
         }
 
         leaveTableAfterWaitingTime = null;
-        customer.Leave(false);
+        customer.Leave(ECustomerSatisfaction.Unsatisfied);
     }
 }
