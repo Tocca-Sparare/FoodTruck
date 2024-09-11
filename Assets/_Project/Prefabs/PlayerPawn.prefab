@@ -64,10 +64,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UsingCannonState:
     resetWhenReleaseAnalogInput: 0
-    cannonBlackboard:
-      useBlackboard: 1
-      blackboardName: Cannon Interactable
-      normalVariable: {fileID: 0}
     useRaycastForMouse: 1
     raycastLayer:
       serializedVersion: 2

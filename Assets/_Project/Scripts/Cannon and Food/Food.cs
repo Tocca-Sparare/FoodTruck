@@ -1,4 +1,3 @@
-using redd096;
 using UnityEngine;
 
 /// <summary>
@@ -39,12 +38,21 @@ public class Food : MonoBehaviour
         }
 
         //destroy bullet if hit layer
-        if (hittableLayers.ContainsLayer(other.gameObject.layer))
+        if (ContainsLayer(hittableLayers, other.gameObject.layer))
         {
             InstantiateHelper.Destroy(gameObject);
 
             if (table == null)
                 Debug.Log("If bullet doesn't hit table, set floor dirty?");
         }
+    }
+
+    /// <summary>
+    /// Check if this layer is inside LayerMask
+    /// </summary>
+    bool ContainsLayer(LayerMask layerMask, int layerToCompare)
+    {
+        //if add layer to this layermask, and layermask remain equals, then layermask contains this layer
+        return layerMask == (layerMask | (1 << layerToCompare));
     }
 }
