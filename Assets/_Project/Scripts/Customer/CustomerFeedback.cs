@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CustomerFeedback : MonoBehaviour
 {
+    [SerializeField] Renderer meshRenderer;
     [SerializeField] AudioClip angrySound;
     [SerializeField] AudioClip hungrySound;
     [SerializeField] AudioClip burpSound;
@@ -18,14 +19,26 @@ public class CustomerFeedback : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         audioSource = GetComponentInChildren<AudioSource>();
 
+        customer.OnInit += OnInit;
         customer.OnSit += OnSit;
         customer.OnStandUp += OnStandUp;
         customer.OnSatisfied += OnSatisfied;
     }
 
-    void OnStandUp()
+    void OnDestroy()
     {
-        animator.SetBool("IsSitting", false);
+        if (customer)
+        {
+            customer.OnInit -= OnInit;
+            customer.OnSit -= OnSit;
+            customer.OnStandUp -= OnStandUp;
+            customer.OnSatisfied -= OnSatisfied;
+        }
+    }
+
+    void OnInit()
+    {
+        meshRenderer.sharedMaterial = customer.DemandingFood.material;
     }
 
     void OnSit()
@@ -34,16 +47,14 @@ public class CustomerFeedback : MonoBehaviour
         StartCoroutine(DoHungrySound());
     }
 
+    void OnStandUp()
+    {
+        animator.SetBool("IsSitting", false);
+    }
+
     void OnSatisfied()
     {
         StartCoroutine(DoBurpSound());
-    }
-
-    void OnDestroy()
-    {
-        customer.OnSit -= OnSit;
-        customer.OnStandUp -= OnStandUp;
-        customer.OnSatisfied -= OnSatisfied;
     }
 
     IEnumerator DoHungrySound()

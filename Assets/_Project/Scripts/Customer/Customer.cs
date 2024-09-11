@@ -5,7 +5,6 @@ public class Customer : BasicStateMachine
 {
     [Header("How many seconds the customer is going to wait at the table before leaving")]
     [SerializeField] float waitingTime = 10;
-    [SerializeField] SkinnedMeshRenderer meshRenderer;
     [SerializeField] CustomerNormalState normalState;
     [SerializeField] CustomerSatState satState;
     [SerializeField] CustomerLeavingState leavingState;
@@ -19,6 +18,7 @@ public class Customer : BasicStateMachine
     public Vector3 ExitPoint { get; private set; }
 
     //events
+    public System.Action OnInit;
     public System.Action OnSit;
     public System.Action OnStandUp;
     public System.Action OnSatisfied;
@@ -30,12 +30,13 @@ public class Customer : BasicStateMachine
         SetRequestedIngredient(requestedIngredient);
         SetTargetTable(targetTable);
         SetState(normalState);
+
+        OnInit?.Invoke();
     }
 
     private void SetRequestedIngredient(Food ingredient)
     {
         demandingFood = ingredient;
-        meshRenderer.sharedMaterial = ingredient.material;
     }
 
     private void SetTargetTable(Table table)

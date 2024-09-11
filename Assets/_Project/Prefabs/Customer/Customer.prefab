@@ -209,7 +209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitingTime: 10
-  meshRenderer: {fileID: 7583585954885400678}
   normalState:
     snapChairDistance: 0.3
   leavingState:
@@ -226,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49280669375bd2c4e80e6da4e2bf4483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 7583585954885400678}
   angrySound: {fileID: 8300000, guid: 682522ab0b1ca8e4abe5cbe3c7a0a761, type: 3}
   hungrySound: {fileID: 8300000, guid: 4ff94807ce76a1b4caa9084f7780e9af, type: 3}
   burpSound: {fileID: 8300000, guid: 742c6a6eea85d7b46822b7d44b8922bd, type: 3}
