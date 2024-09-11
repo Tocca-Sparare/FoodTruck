@@ -7,13 +7,13 @@ using UnityEngine;
 public class PlayerUsingCannonState : State
 {
     [SerializeField] bool resetWhenReleaseAnalogInput = false;
-    [SerializeField] VarOrBlackboard<CannonInteractable> cannonBlackboard = new VarOrBlackboard<CannonInteractable>("Cannon Interactable");
     [SerializeField] bool useRaycastForMouse;
     [SerializeField] LayerMask raycastLayer;
 
     Camera cam;
     PlayerPawn player;
     InputManager inputManager;
+    PlayerStateMachine playerStateMachine;
     CannonInteractable cannonInteractable;
     Vector3 lastSavedAnalogDirection;
 
@@ -28,6 +28,8 @@ public class PlayerUsingCannonState : State
             Debug.LogError($"Missing PlayerPawn on {GetType().Name}", StateMachine);
         if (player.CurrentController == null || player.CurrentController.TryGetComponent(out inputManager) == false)
             Debug.LogError($"Missing inputManager on {GetType().Name}", StateMachine);
+        playerStateMachine = GetStateMachine<PlayerStateMachine>();
+        if (playerStateMachine == null) Debug.LogError($"Statemachine isn't PlayerStateMachine on {GetType().Name}", StateMachine);
     }
 
     protected override void OnEnter()
@@ -35,7 +37,7 @@ public class PlayerUsingCannonState : State
         base.OnEnter();
 
         //get cannon reference
-        cannonInteractable = GetValue(cannonBlackboard);
+        cannonInteractable = playerStateMachine.Cannon;
         if (cannonInteractable == null)
             Debug.LogError($"Missing cannonInteractable on {GetType().Name}", StateMachine);
     }

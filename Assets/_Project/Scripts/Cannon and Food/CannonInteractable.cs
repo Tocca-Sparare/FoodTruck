@@ -8,7 +8,6 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     [SerializeField] Food foodPrefab;
     [SerializeField] Transform bulletSpawn;
     [SerializeField] LayerMask hittableLayer = -1;
-    [SerializeField] string blackboardName = "Cannon Interactable";
 
     InteractComponent playerUsingThisCannon;
     Vector3 bulletSpawnOffset;
@@ -34,7 +33,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         PlayerStateMachine playerStateMachine = interactor.GetComponent<PlayerStateMachine>();
         if (playerStateMachine)
         {
-            playerStateMachine.SetBlackboardElement(blackboardName, this);
+            playerStateMachine.SetCannon(this);
             playerStateMachine.SetState(playerStateMachine.UsingCannonState);
         }
     }
