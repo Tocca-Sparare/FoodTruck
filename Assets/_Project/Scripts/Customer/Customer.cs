@@ -18,6 +18,7 @@ public class Customer : BasicStateMachine
     Chair currentChair;
     Vector3 exitPoint;
     float remainingTimeBeforeLeave;
+    int hungerLevel = 0;
 
     public Food DemandingFood => demandingFood;
     public Chair CurrentChair => currentChair;
@@ -25,6 +26,7 @@ public class Customer : BasicStateMachine
     public float WaitingTime => waitingTime;
     public float RemainingTimeBeforeLeave => remainingTimeBeforeLeave;
     public int[] HungryChangeSteps => hungryChangeSteps;
+    public int HungerLevel => hungerLevel;
 
     //events
     public System.Action OnInit;
@@ -97,5 +99,11 @@ public class Customer : BasicStateMachine
     public void SetTimerBeforeLeave(float remainingTime)
     {
         remainingTimeBeforeLeave = remainingTime;
+    }
+
+    public void IncreaseHunger()
+    {
+        hungerLevel++;
+        OnHungryIncreased?.Invoke();
     }
 }

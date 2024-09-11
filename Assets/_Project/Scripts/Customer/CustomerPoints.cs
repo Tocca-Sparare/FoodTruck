@@ -7,7 +7,7 @@ using System.Linq;
 public class CustomerPoints : MonoBehaviour
 {
     [SerializeField] int pointsToRemoveWhenUnsatisfied;
-    [SerializeField] FPoints[] pointsOnSatisfied;
+    [SerializeField] int[] pointsOnSatisfied;
 
     Customer customer;
     PointsManager pointsManager;
@@ -22,6 +22,9 @@ public class CustomerPoints : MonoBehaviour
         //add events
         if (customer)
         {
+            if (customer.HungryChangeSteps.Length + 1 != pointsOnSatisfied.Length)
+                Debug.LogError($"Different count of hanger steps and customer points steps", gameObject);
+
             customer.OnSatisfied += OnSatisfied;
             customer.OnUnsatisfied += OnUnsatisfied;
         }
@@ -39,14 +42,9 @@ public class CustomerPoints : MonoBehaviour
 
     private void OnSatisfied()
     {
-        //find points with this remaining time
-        float percentage = (customer.RemainingTimeBeforeLeave / customer.WaitingTime) * 100;
-        FPoints addPoints = pointsOnSatisfied.Where(x => percentage > x.minimumTimePercentage)
-            .OrderBy(x => x.minimumTimePercentage).LastOrDefault();         //return bigger one
 
-        //and add
         if (pointsManager)
-            pointsManager.AddPoints(addPoints.points);
+            pointsManager.AddPoints(pointsOnSatisfied[customer.HungerLevel]);
     }
 
     private void OnUnsatisfied()
@@ -54,12 +52,5 @@ public class CustomerPoints : MonoBehaviour
         //remove points when leave unsatisfied
         if (pointsManager)
             pointsManager.RemovePoints(pointsToRemoveWhenUnsatisfied);
-    }
-
-    [System.Serializable]
-    public struct FPoints
-    {
-        [Tooltip("Give points if remaining time before leave is still bigger than this (in percentage)")][Range(0, 100)]public int minimumTimePercentage;
-        public int points;  
     }
 }

@@ -607,13 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointsToRemoveWhenUnsatisfied: 50
-  pointsOnSatisfied:
-  - minimumTimePercentage: 60
-    points: 100
-  - minimumTimePercentage: 30
-    points: 60
-  - minimumTimePercentage: 0
-    points: 20
+  pointsOnSatisfied: 640000003c0000001e00000000000000
 --- !u!1001 &311881929338458464
 PrefabInstance:
   m_ObjectHideFlags: 0

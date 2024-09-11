@@ -79,6 +79,6 @@ public class CustomerSatState : State
     IEnumerator InvokeHungerChangeAfter(float delay)
     {
         yield return new WaitForSeconds(delay);
-        customer.OnHungryIncreased?.Invoke();
+        customer.IncreaseHunger();
     }
 }
