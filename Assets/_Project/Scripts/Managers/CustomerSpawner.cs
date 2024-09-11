@@ -34,13 +34,7 @@ public class CustomerSpawner : MonoBehaviour
         ingredientsManager = FindObjectOfType<FoodManager>();
     }
 
-    void Start()
-    {
-        Init();
-        StartCoroutine(SpawnCustomer());
-    }
-
-    private void Init()
+    public void Init()
     {
         currentVelocityFactor = 1.0f;
 
@@ -50,6 +44,8 @@ public class CustomerSpawner : MonoBehaviour
         levelTimer.Elapsed += OnSlowPhaseEnded;
         levelTimer.Enabled = true;
         levelTimer.Start();
+
+        StartCoroutine(SpawnCustomer());
     }
 
     private void OnSlowPhaseEnded(object sender, ElapsedEventArgs e)

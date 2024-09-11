@@ -9,12 +9,6 @@ public class PlayerStateMachine : BasicStateMachine
 
     public CannonInteractable Cannon { get; private set; }
 
-    private void Start()
-    {
-        //set first state
-        SetState(NormalState);
-    }
-
     /// <summary>
     /// Set cannon to use in PlayerUsingCannonState
     /// </summary>

@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class TablesManager : MonoBehaviour
 {
-    public List<Table> tables = new();
+    private List<Table> tables = new();
 
     public bool HasAvailableTables => tables.Any(t => t.IsAvailable);   //at least one table is available
 

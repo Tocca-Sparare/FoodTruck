@@ -15,6 +15,7 @@ public class PlayerUsingCannonState : State
     InputManager inputManager;
     PlayerStateMachine playerStateMachine;
     CannonInteractable cannonInteractable;
+    RotateCharacterFeedback rotateCharacter;
     Vector3 lastSavedAnalogDirection;
 
     protected override void OnInit()
@@ -30,6 +31,8 @@ public class PlayerUsingCannonState : State
             Debug.LogError($"Missing inputManager on {GetType().Name}", StateMachine);
         playerStateMachine = GetStateMachine<PlayerStateMachine>();
         if (playerStateMachine == null) Debug.LogError($"Statemachine isn't PlayerStateMachine on {GetType().Name}", StateMachine);
+        rotateCharacter = player.GetComponentInChildren<RotateCharacterFeedback>();
+        if (rotateCharacter == null) Debug.LogError($"Missing RotateCharacterFeedback on {GetType().Name}", StateMachine);
     }
 
     protected override void OnEnter()
@@ -46,18 +49,11 @@ public class PlayerUsingCannonState : State
     {
         base.OnUpdate();
 
-        RotateCharacterFeedback rotateCharacter = player.GetComponentInChildren<RotateCharacterFeedback>();
-        Vector3 rotateDirection = cannonInteractable.transform.position - rotateCharacter.ObjectToRotate.position;
-        rotateDirection.y = 0;
-
-        if (rotateCharacter)
-            rotateCharacter.ForceDirection(true, rotateDirection);
-
-        player.transform.position = cannonInteractable.PlayerTransform.position;
-
-
         if (inputManager == null || cannonInteractable == null)
             return;
+
+        //follow cannon
+        FollowCannonPositionAndRotation();
 
         //set direction using mouse position
         if (inputManager.IsUsingMouse)
@@ -116,5 +112,15 @@ public class PlayerUsingCannonState : State
         }
 
         cannonInteractable.AimInDirection(lastSavedAnalogDirection);
+    }
+
+    void FollowCannonPositionAndRotation()
+    {
+        //follow cannon position and rotation
+        player.transform.position = cannonInteractable.PlayerTransform.position;
+        Vector3 rotateDirection = cannonInteractable.transform.position - rotateCharacter.ObjectToRotate.position;
+        rotateDirection.y = 0;
+        if (rotateCharacter)
+            rotateCharacter.ForceDirection(true, rotateDirection);
     }
 }
