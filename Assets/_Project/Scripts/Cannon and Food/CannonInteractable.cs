@@ -1,3 +1,4 @@
+using redd096.Attributes;
 using UnityEngine;
 
 /// <summary>
@@ -34,6 +35,16 @@ public class CannonInteractable : MonoBehaviour, IInteractable
 
 
         Gizmos.color = Color.white;
+    }
+
+    [Button]
+    void UpdateMaterials()
+    {
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer rend in renderers)
+        {
+            rend.sharedMaterial = foodPrefab.material;
+        }
     }
 
 #endif
