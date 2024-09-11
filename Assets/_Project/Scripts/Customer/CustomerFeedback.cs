@@ -6,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public class CustomerFeedback : MonoBehaviour
 {
+    [SerializeField] SpriteRenderer requestFoodSpriteRenderer;
+    [SerializeField] GameObject requestFoodHolder;
     [SerializeField] Renderer meshRenderer;
     [Space]
     [SerializeField] AudioClip hungrySound;
@@ -56,12 +58,17 @@ public class CustomerFeedback : MonoBehaviour
         //set sit animation and play sound
         animator.SetBool("IsSitting", true);
         StartCoroutine(DoHungrySound());
+
+        requestFoodHolder.SetActive(true);
+        requestFoodSpriteRenderer.sprite = customer.DemandingFood.icon;
     }
 
     void OnStandUp()
     {
         //set stand up animation
         animator.SetBool("IsSitting", false);
+
+        requestFoodHolder.SetActive(false);
     }
 
     void OnSatisfied()
