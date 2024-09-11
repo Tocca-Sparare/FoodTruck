@@ -46,6 +46,16 @@ public class PlayerUsingCannonState : State
     {
         base.OnUpdate();
 
+        RotateCharacterFeedback rotateCharacter = player.GetComponentInChildren<RotateCharacterFeedback>();
+        Vector3 rotateDirection = cannonInteractable.transform.position - rotateCharacter.ObjectToRotate.position;
+        rotateDirection.y = 0;
+
+        if (rotateCharacter)
+            rotateCharacter.ForceDirection(true, rotateDirection);
+
+        player.transform.position = cannonInteractable.PlayerTransform.position;
+
+
         if (inputManager == null || cannonInteractable == null)
             return;
 
