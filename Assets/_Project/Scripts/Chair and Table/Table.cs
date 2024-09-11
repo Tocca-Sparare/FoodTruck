@@ -25,7 +25,10 @@ public class Table : MonoBehaviour
         //find empty chairs
         var emptyChairs = chairs.Where(c => c.IsAvailable).ToList();
         if (emptyChairs.Count == 0)
+        {
+            Debug.LogError($"There aren't emptyChairs in {name}", gameObject);
             return null;
+        }
 
         //return random one
         int randomIndex = Random.Range(0, emptyChairs.Count);

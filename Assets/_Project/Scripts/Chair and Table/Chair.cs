@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public class Chair : MonoBehaviour
 {
-    public bool IsAvailable { get; private set; }
+    public bool IsAvailable { get; private set; } = true;
     public bool IsCustomerSat {  get; private set; }
     public Customer CustomerSat { get; private set; }
 
