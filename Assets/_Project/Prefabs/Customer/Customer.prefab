@@ -209,10 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb6aeea803d544e981d48c382d7dc44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitingTime: 10
   normalState:
     snapChairDistance: 0.3
-  satState:
-    waitingTime: 10
   leavingState:
     lifeTime: 10
 --- !u!114 &1073270872299582637
@@ -267,11 +266,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsToRemoveWhenUnsatisfied: 50
   pointsOnSatisfied:
-  - minimumTime: 8
+  - minimumTimePercentage: 60
     points: 100
-  - minimumTime: 5
+  - minimumTimePercentage: 30
     points: 60
-  - minimumTime: 0
+  - minimumTimePercentage: 0
     points: 20
 --- !u!1001 &1181644074699423923
 PrefabInstance:

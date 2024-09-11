@@ -40,8 +40,9 @@ public class CustomerPoints : MonoBehaviour
     private void OnSatisfied()
     {
         //find points with this remaining time
-        FPoints addPoints = pointsOnSatisfied.Where(x => customer.RemainingTimeBeforeLeave > x.minimumTime)
-            .OrderBy(x => x.minimumTime).LastOrDefault();       //return bigger one
+        float percentage = (customer.RemainingTimeBeforeLeave / customer.WaitingTime) * 100;
+        FPoints addPoints = pointsOnSatisfied.Where(x => percentage > x.minimumTimePercentage)
+            .OrderBy(x => x.minimumTimePercentage).LastOrDefault();         //return bigger one
 
         //and add
         if (pointsManager)
@@ -58,7 +59,7 @@ public class CustomerPoints : MonoBehaviour
     [System.Serializable]
     public struct FPoints
     {
-        [Tooltip("Give points if remaining time before leave is still bigger than this")]public float minimumTime;
+        [Tooltip("Give points if remaining time before leave is still bigger than this (in percentage)")][Range(0, 100)]public int minimumTimePercentage;
         public int points;
     }
 }

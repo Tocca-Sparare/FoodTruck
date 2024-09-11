@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class Customer : BasicStateMachine
 {
+    [Header("How many seconds the customer is going to wait at the table before leaving")]
+    [SerializeField] float waitingTime = 10;
     [SerializeField] CustomerNormalState normalState;
     [SerializeField] CustomerSatState satState;
     [SerializeField] CustomerLeavingState leavingState;
@@ -17,6 +19,7 @@ public class Customer : BasicStateMachine
     public Food DemandingFood => demandingFood;
     public Chair CurrentChair => currentChair;
     public Vector3 ExitPoint => exitPoint;
+    public float WaitingTime => waitingTime;
     public float RemainingTimeBeforeLeave => remainingTimeBeforeLeave;
 
     //events

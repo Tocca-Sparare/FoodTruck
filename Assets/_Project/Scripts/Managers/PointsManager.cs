@@ -15,7 +15,7 @@ public class PointsManager : MonoBehaviour
     public void AddPoints(int points)
     {
         currentPoints += points;
-        Debug.Log($"<color=green>Add {points} = {currentPoints}</color>");
+        //Debug.Log($"<color=green>Add {points} = {currentPoints}</color>");
     }
 
     /// <summary>
@@ -25,6 +25,6 @@ public class PointsManager : MonoBehaviour
     public void RemovePoints(int points)
     {
         currentPoints -= points;
-        Debug.Log($"<color=red>Remove {points} = {currentPoints}</color>");
+        //Debug.Log($"<color=red>Remove {points} = {currentPoints}</color>");
     }
 }
