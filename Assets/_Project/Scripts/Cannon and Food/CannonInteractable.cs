@@ -9,7 +9,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     [Space]
     [SerializeField] Food foodPrefab;
     [Tooltip("Where spawn the bullet")][SerializeField] Transform bulletSpawn;
-    [Tooltip("Used to check if hit table")][SerializeField] LayerMask hittableLayer = -1;
+    [Tooltip("Used to check if hit table")][SerializeField] LayerMaskClass hittableLayer;
     [Space]
     [Tooltip("Limit horizontal rotation when look left")][Range(-0f, -180f)][SerializeField] float minRotationLimit = -70f;
     [Tooltip("Limit horizontal rotation when look right")][Range(0f, 180f)][SerializeField] float maxRotationLimit = 70f;
@@ -126,7 +126,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         pos.y = 0;
 
         //check if hit table, set Y direction to table position
-        if (Physics.Raycast(transform.position, aimDirection, out RaycastHit hit, 100, hittableLayer))
+        if (Physics.Raycast(transform.position, aimDirection, out RaycastHit hit, 100, hittableLayer.Layer))
         {
             Table table = hit.transform.GetComponentInParent<Table>();
             if (table)

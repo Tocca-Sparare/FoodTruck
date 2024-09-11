@@ -85,8 +85,8 @@ MonoBehaviour:
   foodPrefab: {fileID: 3611872571509013167, guid: c0b81a868e2bde24f93526751ab1b316, type: 3}
   bulletSpawn: {fileID: 2685239954524149895}
   hittableLayer:
-    serializedVersion: 2
-    m_Bits: 64
+    data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
+    elementName: CannonInteractable - HittableLayer
   minRotationLimit: -70
   maxRotationLimit: 70
   fireRate: 0.2

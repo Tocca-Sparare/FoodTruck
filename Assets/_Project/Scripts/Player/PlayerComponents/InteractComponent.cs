@@ -7,7 +7,7 @@ using UnityEngine;
 public class InteractComponent : MonoBehaviour
 {
     [Tooltip("Area to check for interactables")][SerializeField] float radiusInteract = 1f;
-    [Tooltip("Hit only interacts with this layer")][SerializeField] LayerMask interactLayer = -1;
+    [Tooltip("Hit only interacts with this layer")][SerializeField] LayerMaskClass interactLayer;
     [Tooltip("This is used if you call ScanInteractablesInDirection")][SerializeField] float maxAngle = 50f;
     [SerializeField] bool showRadiusDebug;
 
@@ -111,7 +111,7 @@ public class InteractComponent : MonoBehaviour
     {
         //find interactables in area
         Dictionary<Transform, IInteractable> possibleInteractables = new Dictionary<Transform, IInteractable>();
-        foreach (Collider col in Physics.OverlapSphere(transform.position, radiusInteract, interactLayer))
+        foreach (Collider col in Physics.OverlapSphere(transform.position, radiusInteract, interactLayer.Layer))
         {
             //add to dictionary if CanInteract is true
             IInteractable interactable = col.GetComponentInParent<IInteractable>();

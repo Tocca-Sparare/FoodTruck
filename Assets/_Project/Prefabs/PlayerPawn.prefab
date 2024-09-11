@@ -66,8 +66,8 @@ MonoBehaviour:
     resetWhenReleaseAnalogInput: 0
     useRaycastForMouse: 1
     raycastLayer:
-      serializedVersion: 2
-      m_Bits: 1
+      data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
+      elementName: PlayerUsingCannonState - MouseRaycast
 --- !u!114 &3939595043599167271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,8 +105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radiusInteract: 2
   interactLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
+    data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
+    elementName: InteractComponent - Interactables Layer
   maxAngle: 50
   showRadiusDebug: 0
 --- !u!54 &2724849363099509092

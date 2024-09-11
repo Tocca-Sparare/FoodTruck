@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf6b69bf8bdd5b84d909b4b30c53a254, type: 3}
+  m_Name: LayerMaskData
+  m_EditorClassIdentifier: 
+  Elements:
+  - Name: CannonInteractable - HittableLayer
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 64
+  - Name: Food - HittableLayers
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 64
+  - Name: InteractComponent - Interactables Layer
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+  - Name: PlayerUsingCannonState - MouseRaycast
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 1

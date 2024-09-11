@@ -47,13 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b766b633c07ba9468f4998bf08dd60d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  hittableLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  meshRenderer: {fileID: 9021742348997141254}
   FoodName: Default
   material: {fileID: 0}
+  speed: 15
+  hittableLayers:
+    data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
+    elementName: Food - HittableLayers
 --- !u!54 &3615985147466969430
 Rigidbody:
   m_ObjectHideFlags: 0

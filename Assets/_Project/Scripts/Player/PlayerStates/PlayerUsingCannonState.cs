@@ -8,7 +8,7 @@ public class PlayerUsingCannonState : State
 {
     [SerializeField] bool resetWhenReleaseAnalogInput = false;
     [SerializeField] bool useRaycastForMouse;
-    [SerializeField] LayerMask raycastLayer;
+    [SerializeField] LayerMaskClass raycastLayer;
 
     Camera cam;
     PlayerPawn player;
@@ -78,7 +78,7 @@ public class PlayerUsingCannonState : State
         if (useRaycastForMouse)
         {
             Ray ray = cam.ScreenPointToRay(inputManager.Aim);
-            if (Physics.Raycast(ray, out RaycastHit hit, 1000, raycastLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000, raycastLayer.Layer))
             {
                 cannonInteractable.AimAtPosition(hit.point);
                 return;

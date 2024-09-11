@@ -10,7 +10,7 @@ public class Food : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] float speed = 5;
-    [SerializeField] LayerMask hittableLayers = -1;
+    [SerializeField] LayerMaskClass hittableLayers;
 
     Rigidbody rb;
 
@@ -38,7 +38,7 @@ public class Food : MonoBehaviour
         }
 
         //destroy bullet if hit layer
-        if (ContainsLayer(hittableLayers, other.gameObject.layer))
+        if (ContainsLayer(hittableLayers.Layer, other.gameObject.layer))
         {
             InstantiateHelper.Destroy(gameObject);
 
