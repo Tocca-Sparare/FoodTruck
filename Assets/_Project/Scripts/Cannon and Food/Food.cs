@@ -11,8 +11,10 @@ public class Food : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float speed = 5;
     [SerializeField] LayerMaskClass hittableLayers;
+    [SerializeField] float lifeTime = 10;
 
     Rigidbody rb;
+    float lifeTimeTimer;
 
     private void Awake()
     {
@@ -20,12 +22,20 @@ public class Food : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (rb == null)
             Debug.LogError($"Missing rigidbody on {GetType().Name}", gameObject);
+
+        lifeTimeTimer = Time.time + lifeTime;
     }
 
     private void FixedUpdate()
     {
         //move
         rb.velocity = transform.forward * speed;
+
+        //destroy after few seconds
+        if (Time.time > lifeTimeTimer)
+        {
+            InstantiateHelper.Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
