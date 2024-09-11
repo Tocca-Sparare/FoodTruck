@@ -94,6 +94,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     /// <param name="direction"></param>
     public void AimInDirection(Vector3 direction)
     {
+        direction.y = 0;
         direction = direction.normalized;
 
         //clamp angle
