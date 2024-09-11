@@ -18,7 +18,7 @@ public class Food : MonoBehaviour
         if (rb == null)
             Debug.LogError($"Missing rigidbody on {GetType().Name}", gameObject);
 
-        meshRenderer.material = material;
+        meshRenderer.sharedMaterial = material;
     }
 
     private void FixedUpdate()

@@ -35,7 +35,7 @@ public class Customer : BasicStateMachine
     private void SetRequestedIngredient(Food ingredient)
     {
         demandingFood = ingredient;
-        meshRenderer.material = ingredient.material;
+        meshRenderer.sharedMaterial = ingredient.material;
     }
 
     private void SetTargetTable(Table table)
