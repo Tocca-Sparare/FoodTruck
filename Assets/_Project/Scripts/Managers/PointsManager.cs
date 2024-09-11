@@ -8,6 +8,9 @@ public class PointsManager : MonoBehaviour
     private int currentPoints;
     public int CurrentPoints => currentPoints;
 
+    public System.Action<int> OnAddPoints;
+    public System.Action<int> OnRemovePoints;
+
     /// <summary>
     /// Add to current points
     /// </summary>
@@ -15,7 +18,7 @@ public class PointsManager : MonoBehaviour
     public void AddPoints(int points)
     {
         currentPoints += points;
-        //Debug.Log($"<color=green>Add {points} = {currentPoints}</color>");
+        OnAddPoints?.Invoke(currentPoints);
     }
 
     /// <summary>
@@ -25,6 +28,6 @@ public class PointsManager : MonoBehaviour
     public void RemovePoints(int points)
     {
         currentPoints -= points;
-        //Debug.Log($"<color=red>Remove {points} = {currentPoints}</color>");
+        OnRemovePoints?.Invoke(currentPoints);
     }
 }

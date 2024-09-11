@@ -13,14 +13,107 @@ public class UIManager : MonoBehaviour
     [Header("Game timer")]
     [SerializeField] TMP_Text gameTimerText;
 
+    [Header("Points")]
+    [SerializeField] TMP_Text pointsText;
+
     [Header("End Menu")]
     [SerializeField] GameObject endMenu;
+
+    LevelManager levelManager;
+    PointsManager pointsManager;
+
+    private void Awake()
+    {
+        levelManager = FindObjectOfType<LevelManager>();
+        if (levelManager == null) Debug.LogError($"Missing LevelManager on {name}", gameObject);
+        pointsManager = FindObjectOfType<PointsManager>();
+        if (pointsManager == null) Debug.LogError($"Missing PointsManager on {name}", gameObject);
+
+        //add events
+        if (levelManager)
+        {
+            levelManager.OnChangeLevelState += OnChangeLevelState;
+            levelManager.OnUpdateInitialCountdown += OnUpdateInitialCountdown;
+            levelManager.OnUpdateGameTimer += OnUpdateGameTimer;
+        }
+        if (pointsManager)
+        {
+            pointsManager.OnAddPoints += OnAddPoints;
+            pointsManager.OnRemovePoints += OnRemovePoints;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        //remove events
+        if (levelManager)
+        {
+            levelManager.OnChangeLevelState -= OnChangeLevelState;
+            levelManager.OnUpdateInitialCountdown -= OnUpdateInitialCountdown;
+            levelManager.OnUpdateGameTimer -= OnUpdateGameTimer;
+        }
+        if (pointsManager)
+        {
+            pointsManager.OnAddPoints -= OnAddPoints;
+            pointsManager.OnRemovePoints -= OnRemovePoints;
+        }
+    }
+
+    #region level manager events
+
+    private void OnChangeLevelState(LevelManager.ELevelState state)
+    {
+        //on start countdown, show timers with correct value
+        if (state == LevelManager.ELevelState.InitialCountdown)
+        {
+            SetInitialCountdownText(Mathf.CeilToInt(levelManager.InitialCountdown));
+            SetGameTimerText(Mathf.CeilToInt(levelManager.LevelDuration));
+        }
+        //on start playing, hide countdown
+        else if (state == LevelManager.ELevelState.Playing)
+        {
+            StopInitialCountdown();
+        }
+        //on end game, show end menu
+        else
+        {
+            ShowEndMenu();
+        }
+    }
+
+    private void OnUpdateInitialCountdown(float remainingTime)
+    {
+        SetInitialCountdownText(Mathf.CeilToInt(remainingTime));
+    }
+
+    private void OnUpdateGameTimer(float remainingTime)
+    {
+        SetGameTimerText(Mathf.CeilToInt(remainingTime));
+    }
+
+    #endregion
+
+    #region points manager events
+
+    private void OnAddPoints(int currentPoints)
+    {
+        SetPointsText(currentPoints);
+    }
+
+    private void OnRemovePoints(int currentPoints)
+    {
+        SetPointsText(currentPoints);
+    }
+
+    #endregion
+
+    #region ui
 
     /// <summary>
     /// Update initial countdown text
     /// </summary>
     /// <param name="remainingTime"></param>
-    public void UpdateInitialCountdown(int remainingTime)
+    public void SetInitialCountdownText(int remainingTime)
     {
         initialCountdownText.text = remainingTime.ToString();
         initialCountdownContainer.SetActive(true);
@@ -38,7 +131,7 @@ public class UIManager : MonoBehaviour
     /// Update timer during playing game
     /// </summary>
     /// <param name="remainigTime"></param>
-    public void UpdateGameTimer(int remainigTime)
+    public void SetGameTimerText(int remainigTime)
     {
         //set timer minutes:seconds
         int minutes = remainigTime / 60;
@@ -46,8 +139,22 @@ public class UIManager : MonoBehaviour
         gameTimerText.text = $"{minutes:00}:{seconds:00}";
     }
 
+    /// <summary>
+    /// Active end menu
+    /// </summary>
     public void ShowEndMenu()
     {
         endMenu.SetActive(true);
     }
+
+    /// <summary>
+    /// Update points text
+    /// </summary>
+    /// <param name="currentPoints"></param>
+    public void SetPointsText(int currentPoints)
+    {
+        pointsText.text = currentPoints.ToString();
+    }
+
+    #endregion
 }

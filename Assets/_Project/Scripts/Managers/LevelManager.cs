@@ -8,21 +8,20 @@ public class LevelManager : MonoBehaviour
     [SerializeField] int initialCountdown;
     [SerializeField] float levelDuration;
 
-    CustomerSpawner customerSpawner;
-    UIManager uiManager;
+    public enum ELevelState { InitialCountdown, Playing, Finish }
+
+    ELevelState levelState;
     float stateTimer;
 
-    public enum ELevelState { InitialCountdown, Playing, Finish }
-    private ELevelState levelState;
+    public int InitialCountdown => initialCountdown;
+    public float LevelDuration => levelDuration;
 
-    private void Awake()
+    public System.Action<ELevelState> OnChangeLevelState;
+    public System.Action<float> OnUpdateInitialCountdown;
+    public System.Action<float> OnUpdateGameTimer;
+
+    private void Start()
     {
-        //get refs
-        customerSpawner = FindObjectOfType<CustomerSpawner>();
-        if (customerSpawner == null) Debug.LogError($"Missing customerSpawner on {name}", gameObject);
-        uiManager = FindObjectOfType<UIManager>();
-        if (uiManager == null) Debug.LogError($"Missing uiManager on {name}", gameObject);
-
         OnStartCountdown();
     }
 
@@ -31,12 +30,12 @@ public class LevelManager : MonoBehaviour
         //update initial countdown
         if (levelState == ELevelState.InitialCountdown)
         {
-            uiManager.UpdateInitialCountdown(Mathf.CeilToInt(stateTimer - Time.time));
+            OnUpdateInitialCountdown?.Invoke(stateTimer - Time.time);
         }
         //or game timer
         else if (levelState == ELevelState.Playing)
         {
-            uiManager.UpdateGameTimer(Mathf.CeilToInt(stateTimer - Time.time));
+            OnUpdateGameTimer?.Invoke(stateTimer - Time.time);
         }
 
         //check when finish state
@@ -55,9 +54,7 @@ public class LevelManager : MonoBehaviour
         levelState = ELevelState.InitialCountdown;
         stateTimer = Time.time + initialCountdown;
 
-        //show timers with correct value
-        uiManager.UpdateInitialCountdown(Mathf.CeilToInt(initialCountdown));
-        uiManager.UpdateGameTimer(Mathf.CeilToInt(levelDuration));
+        OnChangeLevelState(levelState);
     }
 
     void OnStartPlaying()
@@ -66,15 +63,16 @@ public class LevelManager : MonoBehaviour
         levelState = ELevelState.Playing;
         stateTimer = Time.time + levelDuration;
 
+        OnChangeLevelState(levelState);
+
         //set every player in normal state
         PlayerStateMachine[] playerStateMachines = FindObjectsOfType<PlayerStateMachine>();
         foreach (var playerSM in playerStateMachines)
             playerSM.SetState(playerSM.NormalState);
 
-        //hide countdown
-        uiManager.StopInitialCountdown();
-
         //start spawner
+        CustomerSpawner customerSpawner = FindObjectOfType<CustomerSpawner>();
+        if (customerSpawner == null) Debug.LogError($"Missing customerSpawner on {name}", gameObject);
         customerSpawner.Init();
     }
 
@@ -83,12 +81,11 @@ public class LevelManager : MonoBehaviour
         //set state
         levelState = ELevelState.Finish;
 
+        OnChangeLevelState(levelState);
+
         //stop every player
         PlayerStateMachine[] playerStateMachines = FindObjectsOfType<PlayerStateMachine>();
         foreach (var playerSM in playerStateMachines)
             playerSM.SetNullState();
-
-        //show end menu
-        uiManager.ShowEndMenu();
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Linq;
 
 /// <summary>
 /// Give or Remove points when customer is satisfied or unsatisfied
