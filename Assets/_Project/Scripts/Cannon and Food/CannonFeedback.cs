@@ -34,8 +34,7 @@ public class CannonFeedback : MonoBehaviour
         if (direction != Vector3.zero)
         {
             Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-            rotation.eulerAngles = new Vector3(0, rotation.eulerAngles.y, 0);
-            objectToRotate.rotation = rotation;
+            objectToRotate.rotation = Quaternion.AngleAxis(rotation.eulerAngles.y, Vector3.up);
         }
     }
 }

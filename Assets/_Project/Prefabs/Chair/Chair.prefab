@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c532a118fb0017447a12f434862928a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customerSat: {fileID: 0}
 --- !u!1001 &4066315438586816967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,6 +125,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
       propertyPath: m_Name
       value: Chair
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a90da61da3f356c4a99dbd7426101dfb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -97,12 +97,8 @@ public class PlayerUsingCannonState : State
         if (inputManager.Aim != Vector2.zero || resetWhenReleaseAnalogInput)
         {
             lastSavedAnalogDirection = new Vector3(inputManager.Aim.x, 0, inputManager.Aim.y);  //save input
-            cannonInteractable.AimInDirection(lastSavedAnalogDirection);
         }
-        //else show last saved input
-        else
-        {
-            cannonInteractable.AimInDirection(lastSavedAnalogDirection);
-        }
+
+        cannonInteractable.AimInDirection(lastSavedAnalogDirection);
     }
 }
