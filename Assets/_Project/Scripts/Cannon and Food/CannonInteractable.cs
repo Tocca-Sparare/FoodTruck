@@ -5,9 +5,12 @@ using UnityEngine;
 /// </summary>
 public class CannonInteractable : MonoBehaviour, IInteractable
 {
+    [Tooltip("Where snap the player on interact")][SerializeField] Transform playerPosition;
+    [Space]
     [SerializeField] Food foodPrefab;
     [Tooltip("Where spawn the bullet")][SerializeField] Transform bulletSpawn;
     [Tooltip("Used to check if hit table")][SerializeField] LayerMask hittableLayer = -1;
+    [Space]
     [Tooltip("Limit horizontal rotation when look left")][Range(-0f, -180f)][SerializeField] float minRotationLimit = -70f;
     [Tooltip("Limit horizontal rotation when look right")][Range(0f, 180f)][SerializeField] float maxRotationLimit = 70f;
     [Tooltip("Can shoot every X seconds")][SerializeField] float fireRate = 0.2f;
@@ -56,6 +59,14 @@ public class CannonInteractable : MonoBehaviour, IInteractable
             playerStateMachine.SetCannon(this);
             playerStateMachine.SetState(playerStateMachine.UsingCannonState);
         }
+
+        //snap player position and rotation
+        interactor.transform.position = playerPosition.position;
+        RotateCharacterFeedback rotateCharacter = interactor.GetComponentInChildren<RotateCharacterFeedback>();
+        Vector3 rotationDirection = transform.position - rotateCharacter.ObjectToRotate.position;
+        rotationDirection.y = 0;
+        if (rotateCharacter)
+            rotateCharacter.ForceDirection(true, rotationDirection);
     }
 
     /// <summary>
@@ -133,8 +144,16 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     /// </summary>
     public void Dismiss()
     {
+        //reset player state
         PlayerStateMachine playerStateMachine = playerUsingThisCannon.GetComponent<PlayerStateMachine>();
-        playerStateMachine.SetState(playerStateMachine.NormalState);
+        if (playerStateMachine)
+            playerStateMachine.SetState(playerStateMachine.NormalState);
+
+        //reset rotation
+        RotateCharacterFeedback rotateCharacter = playerUsingThisCannon.GetComponentInChildren<RotateCharacterFeedback>();
+        if (rotateCharacter)
+            rotateCharacter.ForceDirection(false);
+
         playerUsingThisCannon = null;
     }
 }
