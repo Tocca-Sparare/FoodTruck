@@ -12,6 +12,7 @@ public class Customer : BasicStateMachine
     [SerializeField] CustomerNormalState normalState;
     [SerializeField] CustomerSatState satState;
     [SerializeField] CustomerLeavingState leavingState;
+    [SerializeField][Range(0, 100)] public int[] hungryChangeSteps;
 
     Food demandingFood;
     Chair currentChair;
@@ -23,6 +24,7 @@ public class Customer : BasicStateMachine
     public Vector3 ExitPoint => exitPoint;
     public float WaitingTime => waitingTime;
     public float RemainingTimeBeforeLeave => remainingTimeBeforeLeave;
+    public int[] HungryChangeSteps => hungryChangeSteps;
 
     //events
     public System.Action OnInit;
@@ -30,6 +32,7 @@ public class Customer : BasicStateMachine
     public System.Action OnStandUp;
     public System.Action OnSatisfied;
     public System.Action OnUnsatisfied;
+    public System.Action OnHungryIncreased;
 
     public void Init(Food requestedFood, Table targetTable, Vector3 exitPoint)
     {

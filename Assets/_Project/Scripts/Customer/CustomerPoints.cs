@@ -60,6 +60,6 @@ public class CustomerPoints : MonoBehaviour
     public struct FPoints
     {
         [Tooltip("Give points if remaining time before leave is still bigger than this (in percentage)")][Range(0, 100)]public int minimumTimePercentage;
-        public int points;
+        public int points;  
     }
 }

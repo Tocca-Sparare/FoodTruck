@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -37,6 +38,13 @@ public class CustomerSatState : State
 
         //start timer to leave table unsatisfied
         leaveTableAfterWaitingTime = StateMachine.StartCoroutine(LeaveTableAfterWaitingTime());
+
+        //start hunger coroutines
+        foreach (var percentage in customer.HungryChangeSteps)
+        {
+            var delay = percentage * customer.WaitingTime / 100;
+            StateMachine.StartCoroutine(InvokeHungerChangeAfter(delay));
+        }
     }
 
     protected override void OnExit()
@@ -60,5 +68,11 @@ public class CustomerSatState : State
 
         leaveTableAfterWaitingTime = null;
         customer.Leave(ECustomerSatisfaction.Unsatisfied);
+    }
+
+    IEnumerator InvokeHungerChangeAfter(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        customer.OnHungryIncreased?.Invoke();
     }
 }

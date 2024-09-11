@@ -9,6 +9,7 @@ public class CustomerFeedback : MonoBehaviour
     [SerializeField] SpriteRenderer requestFoodSpriteRenderer;
     [SerializeField] GameObject requestFoodHolder;
     [SerializeField] Renderer meshRenderer;
+    [SerializeField] GameObject hungryIcon;
     [Space]
     [SerializeField] AudioClip hungrySound;
     [SerializeField] AudioClip burpSound;
@@ -32,6 +33,7 @@ public class CustomerFeedback : MonoBehaviour
         customer.OnStandUp += OnStandUp;
         customer.OnSatisfied += OnSatisfied;
         customer.OnUnsatisfied += OnUnsatisfied;
+        customer.OnHungryIncreased += OnHungryIncreased;
     }
 
     void OnDestroy()
@@ -44,6 +46,7 @@ public class CustomerFeedback : MonoBehaviour
             customer.OnStandUp -= OnStandUp;
             customer.OnSatisfied -= OnSatisfied;
             customer.OnUnsatisfied -= OnUnsatisfied;
+            customer.OnHungryIncreased -= OnHungryIncreased;
         }
     }
 
@@ -81,6 +84,18 @@ public class CustomerFeedback : MonoBehaviour
     {
         //play sound
         StartCoroutine(DoAngrySound());
+    }
+
+    void OnHungryIncreased()
+    {
+        StartCoroutine(DoShowHungryIcon());
+    }
+
+    IEnumerator DoShowHungryIcon()
+    {
+        hungryIcon.SetActive(true);
+        yield return new WaitForSeconds(1);
+        hungryIcon.SetActive(false);
     }
 
     IEnumerator DoHungrySound()
