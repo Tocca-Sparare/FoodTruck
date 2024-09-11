@@ -538,6 +538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Customer Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 7168260922030640043, guid: 143a998b26dfb754985918cb81948681, type: 3}
+      propertyPath: totalLevelTime
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 8047055125695598952, guid: 143a998b26dfb754985918cb81948681, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -994,6 +998,10 @@ PrefabInstance:
     - target: {fileID: 3472927249025154095, guid: 0e0acceeb4b47b44091bfebf0bca6e7a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6576056816877891941, guid: 0e0acceeb4b47b44091bfebf0bca6e7a, type: 3}
+      propertyPath: levelDuration
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
