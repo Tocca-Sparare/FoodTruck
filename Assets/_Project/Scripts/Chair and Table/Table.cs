@@ -79,7 +79,7 @@ public class Table : MonoBehaviour
                 c.CustomerSat.Leave(ECustomerSatisfaction.Indifferent);     //else, indifferent (don't lose points)
         }
 
-        //isDirty = true;
+        isDirty = true;
 
         OnDirtyTable?.Invoke();
     }

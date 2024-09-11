@@ -8,7 +8,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
 {
     [Tooltip("Where snap the player on interact")][SerializeField] Transform playerPosition;
     [Space]
-    [SerializeField] Food foodPrefab;
+    [SerializeField] CannonBullet bulletPrefab;
     [Tooltip("Where spawn the bullet")][SerializeField] Transform bulletSpawn;
     [Tooltip("Used to check if hit table")][SerializeField] LayerMaskClass hittableLayer;
     [Space]
@@ -40,10 +40,19 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     [Button]
     void UpdateMaterials()
     {
-        Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        foreach (Renderer rend in renderers)
+        //set cannon with food material
+        if (bulletPrefab is Food food)
         {
-            rend.sharedMaterial = foodPrefab.material;
+            Material mat = food.material;
+            Renderer[] renderers = GetComponentsInChildren<Renderer>();
+            foreach (Renderer rend in renderers)
+            {
+                rend.sharedMaterial = mat;
+            }
+        }
+        else
+        {
+            Debug.Log("Can set material only if using Food as bullet");
         }
     }
 
@@ -148,7 +157,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         //instantiate bullet
         Vector3 bulletDirection = (pos - bulletSpawnPosition).normalized;
         Quaternion bulletRotation = Quaternion.LookRotation(bulletDirection, Vector3.up);
-        InstantiateHelper.Instantiate(foodPrefab, bulletSpawnPosition, bulletRotation);
+        InstantiateHelper.Instantiate(bulletPrefab, bulletSpawnPosition, bulletRotation);
     }
 
     /// <summary>
