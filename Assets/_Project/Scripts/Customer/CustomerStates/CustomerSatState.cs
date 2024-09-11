@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +13,7 @@ public class CustomerSatState : State
     NavMeshAgent navMeshAgent;
     Customer customer;
     Coroutine leaveTableAfterWaitingTime;
+    List<Coroutine> hungerCoroutines = new List<Coroutine>();
 
     protected override void OnInit()
     {
@@ -43,7 +45,8 @@ public class CustomerSatState : State
         foreach (var percentage in customer.HungryChangeSteps)
         {
             var delay = percentage * customer.WaitingTime / 100;
-            StateMachine.StartCoroutine(InvokeHungerChangeAfter(delay));
+            var cor = StateMachine.StartCoroutine(InvokeHungerChangeAfter(delay));
+            hungerCoroutines.Add(cor);
         }
     }
 
@@ -54,6 +57,9 @@ public class CustomerSatState : State
         //be sure to stop coroutine if leaving this state for other reasons
         if (leaveTableAfterWaitingTime != null)
             StateMachine.StopCoroutine(leaveTableAfterWaitingTime);
+
+        foreach (var cor in hungerCoroutines)
+            StateMachine.StopCoroutine(cor);
     }
 
     private IEnumerator LeaveTableAfterWaitingTime()

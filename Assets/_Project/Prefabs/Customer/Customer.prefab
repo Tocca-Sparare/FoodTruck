@@ -546,7 +546,7 @@ MonoBehaviour:
     snapChairDistance: 0.3
   leavingState:
     lifeTime: 10
-  hungryChangeSteps: 3c0000001e00000000000000
+  hungryChangeSteps: 1e0000003c0000005a000000
 --- !u!114 &1073270872299582637
 MonoBehaviour:
   m_ObjectHideFlags: 0
