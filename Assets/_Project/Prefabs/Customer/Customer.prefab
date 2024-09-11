@@ -563,9 +563,9 @@ MonoBehaviour:
   requestFoodHolder: {fileID: 4064919587253453623}
   meshRenderer: {fileID: 7583585954885400678}
   hungryIcon: {fileID: 1215328060860573262}
-  hungrySound: {fileID: 8300000, guid: 4ff94807ce76a1b4caa9084f7780e9af, type: 3}
-  burpSound: {fileID: 8300000, guid: 742c6a6eea85d7b46822b7d44b8922bd, type: 3}
-  angrySound: {fileID: 8300000, guid: 682522ab0b1ca8e4abe5cbe3c7a0a761, type: 3}
+  hungrySound: {fileID: 0}
+  burpSound: {fileID: 0}
+  angrySound: {fileID: 8300000, guid: 488e5ba7ae6f8374a9dc6f352d2f516b, type: 3}
   prefabHats:
   - {fileID: 1579610314815940931, guid: b35e1ea45b4704b42a14f1ac05fbbdc1, type: 3}
   - {fileID: 1784063807015901215, guid: 20dbcb7e9fb98864cb705bd7a4ba6d21, type: 3}

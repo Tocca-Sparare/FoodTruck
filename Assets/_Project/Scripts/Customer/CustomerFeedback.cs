@@ -96,6 +96,7 @@ public class CustomerFeedback : MonoBehaviour
     void OnHungryIncreased()
     {
         StartCoroutine(DoShowHungryIcon());
+        StartCoroutine(DoAngrySound());
     }
 
     IEnumerator DoShowHungryIcon()
@@ -107,6 +108,9 @@ public class CustomerFeedback : MonoBehaviour
 
     IEnumerator DoHungrySound()
     {
+        if (hungrySound == null)
+            yield break;
+
         float randomDelay = Random.Range(2, 4);
         yield return new WaitForSecondsRealtime(randomDelay);
 
@@ -121,6 +125,9 @@ public class CustomerFeedback : MonoBehaviour
 
     IEnumerator DoAngrySound()
     {
+        if (angrySound == null)
+            yield break;
+
         float randomDelay = Random.Range(1, 2);
         yield return new WaitForSecondsRealtime(randomDelay);
 
@@ -136,6 +143,9 @@ public class CustomerFeedback : MonoBehaviour
 
     IEnumerator DoBurpSound()
     {
+        if (burpSound == null)
+            yield break;
+
         float randomDelay = Random.Range(0.1f, 1);
         yield return new WaitForSecondsRealtime(randomDelay);
 

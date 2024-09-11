@@ -21,7 +21,9 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     Vector3 aimDirection;
     float fireRateTimer;
 
-    public System.Action<Vector3> onUpdateAimDirection;
+    public System.Action<Vector3> OnUpdateAimDirection;
+    public System.Action OnShoot;
+
     public CannonBullet Bullet => bulletPrefab;
     public Transform PlayerTransform => playerTransform;
 
@@ -111,7 +113,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         //rotate aim direction
         aimDirection = Quaternion.AngleAxis(angle, Vector3.down) * transform.forward;
 
-        onUpdateAimDirection?.Invoke(aimDirection);
+        OnUpdateAimDirection?.Invoke(aimDirection);
     }
 
     /// <summary>
@@ -145,6 +147,8 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         Vector3 bulletDirection = (pos - bulletSpawnPosition).normalized;
         Quaternion bulletRotation = Quaternion.LookRotation(bulletDirection, Vector3.up);
         InstantiateHelper.Instantiate(bulletPrefab, bulletSpawnPosition, bulletRotation);
+
+        OnShoot?.Invoke();
     }
 
     /// <summary>
@@ -153,7 +157,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     public void Dismiss()
     {
         aimDirection = transform.forward;
-        onUpdateAimDirection?.Invoke(aimDirection);
+        OnUpdateAimDirection?.Invoke(aimDirection);
 
         //reset player state
         PlayerStateMachine playerStateMachine = playerUsingThisCannon.GetComponent<PlayerStateMachine>();
