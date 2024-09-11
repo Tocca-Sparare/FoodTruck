@@ -1,6 +1,8 @@
-using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Customer in scene. This is a statemachine with states to move to the chair, eat and leave
+/// </summary>
 public class Customer : BasicStateMachine
 {
     [Header("How many seconds the customer is going to wait at the table before leaving")]
@@ -11,43 +13,49 @@ public class Customer : BasicStateMachine
 
     Food demandingFood;
     Chair currentChair;
+    Vector3 exitPoint;
 
     public Food DemandingFood => demandingFood;
     public Chair CurrentChair => currentChair;
-    public bool IsSat => CurrentState == satState;
-    public Vector3 ExitPoint { get; private set; }
+    public Vector3 ExitPoint => exitPoint;
+    public float WaitingTime => waitingTime;
 
     //events
     public System.Action OnInit;
     public System.Action OnSit;
     public System.Action OnStandUp;
     public System.Action OnSatisfied;
+    public System.Action OnUnsatisfied;
 
-    public void Init(Food requestedIngredient, Table targetTable, Vector3 exitPoint)
+    public void Init(Food requestedFood, Table targetTable, Vector3 exitPoint)
     {
-        ExitPoint = exitPoint;
-
-        SetRequestedIngredient(requestedIngredient);
+        //set vars
+        SetRequestedFood(requestedFood);
         SetTargetTable(targetTable);
+        this.exitPoint = exitPoint;
+
+        //set state to move to the chair
         SetState(normalState);
 
         OnInit?.Invoke();
     }
 
-    private void SetRequestedIngredient(Food ingredient)
+    private void SetRequestedFood(Food ingredient)
     {
+        //set food
         demandingFood = ingredient;
     }
 
     private void SetTargetTable(Table table)
     {
-        currentChair = table.GetRandomEmptyChair();
+        //find random available chair and select as target chair
+        currentChair = table.GetRandomAvailableChair();
         currentChair.CustomerSelectTargetChair(this);
     }
 
     public void Sit()
     {
-        StartCoroutine(LeaveTableAfterWaitingTime());
+        //sat at chair and set state
         currentChair.CustomerSit();
         SetState(satState);
 
@@ -56,18 +64,15 @@ public class Customer : BasicStateMachine
 
     public void Leave(bool satisfied)
     {
+        //stand up and set state
         SetState(leavingState);
         currentChair.CustomerStandUp();
 
         if (satisfied)
             OnSatisfied?.Invoke();
-        OnStandUp?.Invoke();
-    }
+        else
+            OnUnsatisfied?.Invoke();
 
-    IEnumerator LeaveTableAfterWaitingTime()
-    {
-        yield return new WaitForSeconds(waitingTime);
-        if (IsSat)
-            Leave(false);
+        OnStandUp?.Invoke();
     }
 }

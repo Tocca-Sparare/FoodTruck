@@ -19,7 +19,7 @@ public class RotateCharacterFeedback : MonoBehaviour
 
     private void Update()
     {
-        //rotate in direction
+        //rotate in movement direction
         if (movementComponent && objectToRotate)
         {
             if (movementComponent.MoveDirectionInput != Vector3.zero)

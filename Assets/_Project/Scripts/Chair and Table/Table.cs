@@ -20,7 +20,7 @@ public class Table : MonoBehaviour
         chairs = GetComponentsInChildren<Chair>().ToList();
     }
 
-    public Chair GetRandomEmptyChair()
+    public Chair GetRandomAvailableChair()
     {
         //find empty chairs
         var emptyChairs = chairs.Where(c => c.IsAvailable).ToList();
@@ -46,7 +46,7 @@ public class Table : MonoBehaviour
         }
         else
         {
-            Debug.Log("TODO - sporcare il tavolo?");
+            Debug.Log("TODO - set table dirty?");
         }
     }
 }

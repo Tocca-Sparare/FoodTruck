@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Timers;
 using UnityEngine;
 
+/// <summary>
+/// Every few time, spawn customer in random spawn point
+/// </summary>
 public class CustomerSpawner : MonoBehaviour
 {
     [SerializeField] private Customer customerPrefab;
@@ -71,6 +74,7 @@ public class CustomerSpawner : MonoBehaviour
         {
             foreach(var spawnPointTransform in spawnPointTransforms) {
 
+                //spawn only if there are available tables
                 if (tablesManager.HasAvailableTables)
                 {
                     Table targetTable = tablesManager.GetRandomEmptyTable();

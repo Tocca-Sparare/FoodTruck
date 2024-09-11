@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Every graphic or sound feedback for CannonInteractable
+/// </summary>
 public class CannonFeedback : MonoBehaviour
 {
     [SerializeField] Transform objectToRotate;
@@ -31,6 +34,7 @@ public class CannonFeedback : MonoBehaviour
 
     void OnUpdateAimDirection(Vector3 direction)
     {
+        //set rotate direction to look where player is aiming
         if (direction != Vector3.zero)
         {
             Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);

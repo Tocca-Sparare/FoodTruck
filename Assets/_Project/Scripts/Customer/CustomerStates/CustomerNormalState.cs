@@ -1,26 +1,35 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// State when customer is spawned and move to the chair
+/// </summary>
 [System.Serializable]
 public class CustomerNormalState : State
 {
     [SerializeField] float snapChairDistance = 0.3f;
 
     NavMeshAgent navMeshAgent;
+    Customer customer;
     Chair currentChair;
 
     protected override void OnInit()
     {
         base.OnInit();
 
-        navMeshAgent = GetStateMachineUnityComponent<NavMeshAgent>();
+        //get references
+        if (navMeshAgent == null && TryGetStateMachineUnityComponent(out navMeshAgent) == false)
+            Debug.LogError($"Missing navMeshAgent on {GetType().Name}", StateMachine);
+        customer = GetStateMachine<Customer>();
+        if (customer == null) Debug.LogError($"Statemachine isn't Customer on {GetType().Name}", StateMachine);
     }
 
     protected override void OnEnter()
     {
         base.OnEnter();
 
-        currentChair = GetStateMachine<Customer>().CurrentChair;
+        //set navmesh destination to chair position
+        currentChair = customer.CurrentChair;
         navMeshAgent.destination = currentChair.transform.position;
     }
 
@@ -28,7 +37,8 @@ public class CustomerNormalState : State
     {
         base.OnFixedUpdate();
 
+        //when reach chair, sit
         if (currentChair && Vector3.Distance(currentChair.transform.position, transformState.position) < snapChairDistance)
-            GetStateMachine<Customer>().Sit();
+            customer.Sit();
     }
 }

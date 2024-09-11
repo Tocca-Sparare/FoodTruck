@@ -1,18 +1,23 @@
 using redd096;
 using UnityEngine;
 
+/// <summary>
+/// Food demanded by Customer and shooted by Cannon
+/// </summary>
 public class Food : MonoBehaviour
 {
-    [SerializeField] float speed = 5;
-    [SerializeField] LayerMask hittableLayers = -1;
-
     public string FoodName;
     public Material material;
+
+    [Header("Movement")]
+    [SerializeField] float speed = 5;
+    [SerializeField] LayerMask hittableLayers = -1;
 
     Rigidbody rb;
 
     private void Awake()
     {
+        //get components
         rb = GetComponent<Rigidbody>();
         if (rb == null)
             Debug.LogError($"Missing rigidbody on {GetType().Name}", gameObject);
@@ -20,6 +25,7 @@ public class Food : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //move
         rb.velocity = transform.forward * speed;
     }
 
@@ -36,6 +42,9 @@ public class Food : MonoBehaviour
         if (hittableLayers.ContainsLayer(other.gameObject.layer))
         {
             InstantiateHelper.Destroy(gameObject);
+
+            if (table == null)
+                Debug.Log("If bullet doesn't hit table, set floor dirty?");
         }
     }
 }

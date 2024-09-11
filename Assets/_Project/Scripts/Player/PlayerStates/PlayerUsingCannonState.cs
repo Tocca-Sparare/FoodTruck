@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// This is the state for the player when interact with a Cannon. Use this to rotate and shoot, or leave the cannon
+/// </summary>
 [System.Serializable]
 public class PlayerUsingCannonState : State
 {
@@ -62,6 +65,7 @@ public class PlayerUsingCannonState : State
         if (inputManager.ShootWasPressedThisFrame)
             cannonInteractable.Shoot();
 
+        //leave cannon
         if (inputManager.InteractWasPressedThisFrame)
             cannonInteractable.Dismiss();
     }

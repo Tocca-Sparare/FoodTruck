@@ -11,8 +11,10 @@ public class FoodFeedback : MonoBehaviour
 
     private void Awake()
     {
+        //get refs
         food = GetComponent<Food>();
 
+        //set color
         SetColor();
     }
 

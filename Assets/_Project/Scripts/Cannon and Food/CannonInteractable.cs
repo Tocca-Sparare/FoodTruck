@@ -49,18 +49,29 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         return playerUsingThisCannon == null;
     }
 
+    /// <summary>
+    /// Set aim direction to position
+    /// </summary>
+    /// <param name="position"></param>
     public void AimAtPosition(Vector3 position)
     {
         aimDirection = (position - transform.position).normalized;
         onUpdateAimDirection?.Invoke(aimDirection);
     }
 
+    /// <summary>
+    /// Set aim direction
+    /// </summary>
+    /// <param name="direction"></param>
     public void AimInDirection(Vector3 direction)
     {
-        aimDirection = direction;
+        aimDirection = direction.normalized;
         onUpdateAimDirection?.Invoke(aimDirection);
     }
 
+    /// <summary>
+    /// Shoot a bullet in aim direction
+    /// </summary>
     public void Shoot()
     {
         //rotate offset
@@ -71,7 +82,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         Vector3 pos = transform.position + aimDirection * 70;
         pos.y = 0;
 
-        //check if hit table, spawn bullet to table position
+        //check if hit table, set Y direction to table position
         if (Physics.Raycast(transform.position, aimDirection, out RaycastHit hit, 100, hittableLayer))
         {
             Table table = hit.transform.GetComponentInParent<Table>();
@@ -85,6 +96,9 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         InstantiateHelper.Instantiate(foodPrefab, bulletSpawnPosition, bulletRotation);
     }
 
+    /// <summary>
+    /// Set player NOT using this cannon
+    /// </summary>
     public void Dismiss()
     {
         PlayerStateMachine playerStateMachine = playerUsingThisCannon.GetComponent<PlayerStateMachine>();

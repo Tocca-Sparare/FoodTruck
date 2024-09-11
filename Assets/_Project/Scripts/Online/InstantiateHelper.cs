@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Use this class to instantiate in local or online
+/// Use this class to instantiate and Destroy both in local or online
 /// </summary>
 public static class InstantiateHelper
 {
