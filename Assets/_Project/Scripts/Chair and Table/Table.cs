@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// A table in scene, with a list of chairs. Every customer can sit on a chair if available
+/// </summary>
 public class Table : MonoBehaviour
 {
     [SerializeField] Transform physicalTablePosition;
@@ -9,8 +12,7 @@ public class Table : MonoBehaviour
 
     private List<Chair> chairs = new();
 
-    public bool IsAvailable => chairs.Any(c => c.IsEmpty);
-    public List<Chair> EmptyChairs => chairs.Where(c => c.IsEmpty).ToList();
+    public bool IsAvailable => chairs.Any(c => c.IsAvailable);
 
 
     void Awake()
@@ -20,10 +22,14 @@ public class Table : MonoBehaviour
 
     public Chair GetRandomEmptyChair()
     {
-        var randomIndex = Random.Range(0, EmptyChairs.Count);
-        if (EmptyChairs.Count() == 0)
+        //find empty chairs
+        var emptyChairs = chairs.Where(c => c.IsAvailable).ToList();
+        if (emptyChairs.Count == 0)
             return null;
-        return EmptyChairs[randomIndex];
+
+        //return random one
+        int randomIndex = Random.Range(0, emptyChairs.Count);
+        return emptyChairs[randomIndex];
     }
 
     /// <summary>
@@ -33,10 +39,14 @@ public class Table : MonoBehaviour
     public void OnHitTable(Food food)
     {
         Debug.Log("TODO - find customer with lower timer and same food");
-        Chair chair = chairs.FirstOrDefault(x => x.customerSat && x.customerSat.IsSat && x.customerSat.DemandingFood.FoodName == food.FoodName);
+        Chair chair = chairs.FirstOrDefault(x => x.IsCustomerSat && x.CustomerSat.DemandingFood.FoodName == food.FoodName);
         if (chair)
         {
-            chair.customerSat.Leave(true);
+            chair.CustomerSat.Leave(true);
+        }
+        else
+        {
+            Debug.Log("TODO - sporcare il tavolo?");
         }
     }
 }

@@ -42,13 +42,15 @@ public class Customer : BasicStateMachine
     private void SetTargetTable(Table table)
     {
         currentChair = table.GetRandomEmptyChair();
-        currentChair.CustomerSit(this);
+        currentChair.CustomerSelectTargetChair(this);
     }
 
     public void Sit()
     {
         StartCoroutine(LeaveTableAfterWaitingTime());
+        currentChair.CustomerSit();
         SetState(satState);
+
         OnSit?.Invoke();
     }
 
