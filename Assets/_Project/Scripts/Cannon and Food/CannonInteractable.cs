@@ -22,6 +22,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     float fireRateTimer;
 
     public System.Action<Vector3> onUpdateAimDirection;
+    public CannonBullet Bullet => bulletPrefab;
 
 #if UNITY_EDITOR
 
@@ -40,20 +41,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     [Button]
     void UpdateMaterials()
     {
-        //set cannon with food material
-        if (bulletPrefab is Food food)
-        {
-            Material mat = food.material;
-            Renderer[] renderers = GetComponentsInChildren<Renderer>();
-            foreach (Renderer rend in renderers)
-            {
-                rend.sharedMaterial = mat;
-            }
-        }
-        else
-        {
-            Debug.Log("Can set material only if using Food as bullet");
-        }
+        GetComponent<CannonFeedback>().SetBulletIcon();
     }
 
 #endif

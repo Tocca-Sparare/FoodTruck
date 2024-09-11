@@ -9,6 +9,7 @@ public abstract class CannonBullet : MonoBehaviour
     [SerializeField] float speed = 5;
     [SerializeField] LayerMaskClass hittableLayers;
     [SerializeField] float lifeTime = 10;
+    public Sprite icon;
 
     Rigidbody rb;
     float lifeTimeTimer;

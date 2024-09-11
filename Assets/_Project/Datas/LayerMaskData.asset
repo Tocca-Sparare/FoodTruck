@@ -24,7 +24,7 @@ MonoBehaviour:
   - Name: InteractComponent - Interactables Layer
     LayerMask:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 512
   - Name: PlayerUsingCannonState - MouseRaycast
     LayerMask:
       serializedVersion: 2

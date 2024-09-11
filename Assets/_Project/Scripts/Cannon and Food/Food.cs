@@ -8,7 +8,6 @@ public class Food : CannonBullet
     [Space]
     public string FoodName;
     public Material material;
-    public Sprite icon;
 
     protected override void OnHitCorrectLayer(Collider other)
     {

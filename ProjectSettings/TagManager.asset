@@ -14,7 +14,7 @@ TagManager:
   - HittableByBullet
   - Floor
   - ObstacleNavmesh
-  - 
+  - Interactable
   - 
   - 
   - 
