@@ -85,7 +85,9 @@ MonoBehaviour:
   hittableLayer:
     serializedVersion: 2
     m_Bits: 64
-  blackboardName: Cannon Interactable
+  minRotationLimit: -70
+  maxRotationLimit: 70
+  fireRate: 0.2
 --- !u!114 &2558202983194141355
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,14 +6,34 @@ using UnityEngine;
 public class CannonInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] Food foodPrefab;
-    [SerializeField] Transform bulletSpawn;
-    [SerializeField] LayerMask hittableLayer = -1;
+    [Tooltip("Where spawn the bullet")][SerializeField] Transform bulletSpawn;
+    [Tooltip("Used to check if hit table")][SerializeField] LayerMask hittableLayer = -1;
+    [Tooltip("Limit horizontal rotation when look left")][Range(-0f, -180f)][SerializeField] float minRotationLimit = -70f;
+    [Tooltip("Limit horizontal rotation when look right")][Range(0f, 180f)][SerializeField] float maxRotationLimit = 70f;
+    [Tooltip("Can shoot every X seconds")][SerializeField] float fireRate = 0.2f;
 
     InteractComponent playerUsingThisCannon;
     Vector3 bulletSpawnOffset;
     Vector3 aimDirection;
+    float fireRateTimer;
 
     public System.Action<Vector3> onUpdateAimDirection;
+
+#if UNITY_EDITOR
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+
+        Vector3 dir = transform.forward * 2;
+        Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(minRotationLimit, Vector3.up) * dir);
+        Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(maxRotationLimit, Vector3.up) * dir);
+
+
+        Gizmos.color = Color.white;
+    }
+
+#endif
 
     void Awake()
     {
@@ -54,8 +74,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     /// <param name="position"></param>
     public void AimAtPosition(Vector3 position)
     {
-        aimDirection = (position - transform.position).normalized;
-        onUpdateAimDirection?.Invoke(aimDirection);
+        AimInDirection(position - transform.position);
     }
 
     /// <summary>
@@ -64,7 +83,15 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     /// <param name="direction"></param>
     public void AimInDirection(Vector3 direction)
     {
-        aimDirection = direction.normalized;
+        direction = direction.normalized;
+
+        //clamp angle
+        float angle = Vector3.SignedAngle(direction, transform.forward, Vector3.up);
+        angle = Mathf.Clamp(angle, minRotationLimit, maxRotationLimit);
+
+        //rotate aim direction
+        aimDirection = Quaternion.AngleAxis(angle, Vector3.down) * transform.forward;
+
         onUpdateAimDirection?.Invoke(aimDirection);
     }
 
@@ -73,6 +100,12 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     /// </summary>
     public void Shoot()
     {
+        //can shoot only if fire rate timer is finished
+        if (Time.time < fireRateTimer)
+            return;
+
+        fireRateTimer = Time.time + fireRate;
+
         //rotate offset
         Quaternion rotation = Quaternion.LookRotation(aimDirection, Vector3.up);
         Vector3 rotatedOffset = rotation * bulletSpawnOffset;

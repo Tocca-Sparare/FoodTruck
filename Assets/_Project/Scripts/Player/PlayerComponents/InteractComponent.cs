@@ -19,6 +19,7 @@ public class InteractComponent : MonoBehaviour
 
     public IInteractable CurrentInteractable;
 
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         //draw area interactable
@@ -36,6 +37,7 @@ public class InteractComponent : MonoBehaviour
             Gizmos.color = Color.white;
         }
     }
+#endif
 
     /// <summary>
     /// Find interactables in radius and set Current Interactable
