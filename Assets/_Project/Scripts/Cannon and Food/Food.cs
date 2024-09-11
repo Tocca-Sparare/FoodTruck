@@ -7,6 +7,8 @@ public class Food : MonoBehaviour
 {
     public string FoodName;
     public Material material;
+    public Sprite icon;
+
 
     [Header("Movement")]
     [SerializeField] float speed = 5;
