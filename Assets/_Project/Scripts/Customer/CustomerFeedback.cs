@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -14,6 +15,10 @@ public class CustomerFeedback : MonoBehaviour
     [SerializeField] AudioClip burpSound;
     [SerializeField] AudioClip angrySound;
 
+    [SerializeField] List<GameObject> prefabHats;
+    [SerializeField] Transform hatTransform;
+
+
     Customer customer;
     Animator animator;
     AudioSource audioSource;
@@ -25,6 +30,8 @@ public class CustomerFeedback : MonoBehaviour
         customer = GetComponent<Customer>();
         animator = GetComponentInChildren<Animator>();
         audioSource = GetComponentInChildren<AudioSource>();
+
+        InstantiateHelper.Instantiate(prefabHats[Random.Range(0, prefabHats.Count)], hatTransform);
 
         //add events
         customer.OnInit += OnInit;
