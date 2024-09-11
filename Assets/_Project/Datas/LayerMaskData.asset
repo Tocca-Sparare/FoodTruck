@@ -28,4 +28,8 @@ MonoBehaviour:
   - Name: PlayerUsingCannonState - MouseRaycast
     LayerMask:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 128
+  - Name: "PathFinding \xE8 settato nel NavMeshSurface"
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 448
