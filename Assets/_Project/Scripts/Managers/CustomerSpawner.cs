@@ -75,7 +75,7 @@ public class CustomerSpawner : MonoBehaviour
                 {
                     Table targetTable = tablesManager.GetRandomEmptyTable();
 
-                    var newCustomer = Instantiate(customerPrefab, spawnPointTransform);
+                    var newCustomer = InstantiateHelper.Instantiate(customerPrefab, spawnPointTransform);
                     newCustomer.transform.position = spawnPointTransform.position;
 
                     newCustomer.Init(ingredientsManager.GetRandomIngredient(), targetTable, spawnPointTransform.position);

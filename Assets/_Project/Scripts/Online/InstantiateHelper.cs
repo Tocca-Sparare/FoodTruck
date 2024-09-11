@@ -10,6 +10,11 @@ public static class InstantiateHelper
         return Object.Instantiate(go, position, rotation);
     }
 
+    public static T Instantiate<T>(T go, Transform parent) where T : Object
+    {
+        return Object.Instantiate(go, parent);
+    }
+
     public static void Destroy(GameObject go)
     {
         Object.Destroy(go);
