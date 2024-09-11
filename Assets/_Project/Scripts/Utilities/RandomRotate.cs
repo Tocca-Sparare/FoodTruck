@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RandomRotate : MonoBehaviour
@@ -9,7 +8,7 @@ public class RandomRotate : MonoBehaviour
     void Awake()
     {
         rotationSpeed = Random.Range(500, 1000);
-        rotationAxis = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1));
+        rotationAxis = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
     }
 
     void Update()

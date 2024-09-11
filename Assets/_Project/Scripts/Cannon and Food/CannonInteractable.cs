@@ -152,6 +152,9 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     /// </summary>
     public void Dismiss()
     {
+        aimDirection = transform.forward;
+        onUpdateAimDirection?.Invoke(aimDirection);
+
         //reset player state
         PlayerStateMachine playerStateMachine = playerUsingThisCannon.GetComponent<PlayerStateMachine>();
         if (playerStateMachine)
