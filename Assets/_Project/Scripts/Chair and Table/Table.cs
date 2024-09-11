@@ -41,8 +41,10 @@ public class Table : MonoBehaviour
     /// <param name="food"></param>
     public void OnHitTable(Food food)
     {
-        Debug.Log("TODO - find customer with lower timer and same food");
-        Chair chair = chairs.FirstOrDefault(x => x.IsCustomerSat && x.CustomerSat.DemandingFood.FoodName == food.FoodName);
+        //find customers with this food sat at table
+        Chair chair = chairs.Where(c => c.IsCustomerSat && c.CustomerSat.DemandingFood.FoodName == food.FoodName)
+            .OrderBy(c => c.CustomerSat.RemainingTimeBeforeLeave).FirstOrDefault(); //if there are more customers with same food, return who has lowest timer
+
         if (chair)
         {
             chair.CustomerSat.Leave(true);

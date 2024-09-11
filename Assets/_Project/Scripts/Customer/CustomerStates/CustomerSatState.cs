@@ -8,6 +8,9 @@ using UnityEngine.AI;
 [System.Serializable]
 public class CustomerSatState : State
 {
+    [Header("How many seconds the customer is going to wait at the table before leaving")]
+    [SerializeField] float waitingTime = 10;
+
     NavMeshAgent navMeshAgent;
     Customer customer;
     Coroutine leaveTableAfterWaitingTime;
@@ -51,7 +54,12 @@ public class CustomerSatState : State
     private IEnumerator LeaveTableAfterWaitingTime()
     {
         //after few seconds, leave table unsatisfied
-        yield return new WaitForSeconds(customer.WaitingTime);
+        float timer = Time.time + waitingTime;
+        while (Time.time < timer)
+        {
+            customer.SetTimerBeforeLeave(timer - Time.time);
+            yield return null;
+        }
 
         leaveTableAfterWaitingTime = null;
         customer.Leave(false);
