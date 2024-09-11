@@ -6,7 +6,6 @@ public class Customer : BasicStateMachine
     [SerializeField] CustomerNormalState normalState;
     [SerializeField] CustomerSatState satState;
     [SerializeField] CustomerLeavingState leavingState;
-    [SerializeField] string blackboardExitPoint = "exitPoint";
 
     Food demandingFood;
     Chair currentChair;
@@ -14,6 +13,7 @@ public class Customer : BasicStateMachine
     public Food DemandingFood => demandingFood;
     public Chair CurrentChair => currentChair;
     public bool IsSat => CurrentState == satState;
+    public Vector3 ExitPoint { get; private set; }
 
     //events
     public System.Action OnSit;
@@ -21,9 +21,10 @@ public class Customer : BasicStateMachine
 
     public void Init(Food requestedIngredient, Table targetTable, Vector3 exitPoint)
     {
+        ExitPoint = exitPoint;
+        
         SetRequestedIngredient(requestedIngredient);
         SetTargetTable(targetTable);
-        SetBlackboardElement(blackboardExitPoint, exitPoint);
         SetState(normalState);
     }
 

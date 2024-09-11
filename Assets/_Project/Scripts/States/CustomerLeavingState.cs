@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class CustomerLeavingState : State
 {
     [SerializeField] float lifeTime = 10;
-    [SerializeField] VarOrBlackboard<Vector3> blackboardExitPoint = new VarOrBlackboard<Vector3>("exitPoint");
 
     NavMeshAgent navMeshAgent;
 
@@ -21,9 +20,8 @@ public class CustomerLeavingState : State
     {
         base.OnEnter();
 
-        Vector3 exitPoint = GetValue(blackboardExitPoint);
         navMeshAgent.enabled = true;
-        navMeshAgent.destination = exitPoint;
+        navMeshAgent.destination = GetStateMachine<Customer>().ExitPoint;
         StateMachine.StartCoroutine(LifeTimeCoroutine());
     }
 
