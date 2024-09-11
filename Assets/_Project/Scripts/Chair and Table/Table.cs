@@ -8,19 +8,21 @@ using UnityEngine;
 public class Table : MonoBehaviour
 {
     [SerializeField] Transform physicalTablePosition;
-    public Vector3 PhysicalTablePosition => physicalTablePosition.position;
 
     private List<Chair> chairs = new();
     private bool isDirty;
 
-    public System.Action OnDirtyTable;
+    public System.Action<Food> OnDirtyTable;
+    public System.Action OnCleanTable;
 
+    public Vector3 PhysicalTablePosition => physicalTablePosition.position;
     public bool IsAvailable => isDirty == false && chairs.Any(c => c.IsAvailable);  //at least one chair available and table not dirty
     public bool IsDirty => isDirty;
 
 
     void Awake()
     {
+        //get refs
         chairs = GetComponentsInChildren<Chair>().ToList();
     }
 
@@ -61,14 +63,14 @@ public class Table : MonoBehaviour
         //else, if there aren't customers with this food, dirty the table
         else
         {
-            DirtyTable();
+            DirtyTable(food);
         }
     }
 
     /// <summary>
     /// set this table dirty
     /// </summary>
-    public void DirtyTable()
+    public void DirtyTable(Food food)
     {
         //everyone leave
         foreach (var c in chairs)
@@ -80,8 +82,7 @@ public class Table : MonoBehaviour
         }
 
         isDirty = true;
-
-        OnDirtyTable?.Invoke();
+        OnDirtyTable?.Invoke(food);
     }
 
     /// <summary>
@@ -90,5 +91,6 @@ public class Table : MonoBehaviour
     public void CleanTable()
     {
         isDirty = false;
+        OnCleanTable?.Invoke();
     }
 }
