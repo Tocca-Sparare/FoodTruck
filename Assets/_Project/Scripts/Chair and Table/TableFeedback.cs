@@ -7,6 +7,7 @@ public class TableFeedback : MonoBehaviour
 {
     [SerializeField] GameObject dirtyStainsContainer;
     [SerializeField] SpriteRenderer[] dirtyStainSprites;
+    [SerializeField] Material defaultDirtMaterial;
 
     Table table;
 
@@ -36,9 +37,11 @@ public class TableFeedback : MonoBehaviour
 
     void OnDirtyTable(Food food)
     {
+        var material = food == null ? defaultDirtMaterial : food.material;
+
         //show dirty with food color
         foreach (var stain in dirtyStainSprites)
-            stain.color = food.material.color;
+            stain.color = material.color;
 
         dirtyStainsContainer.SetActive(true);
     }

@@ -168,6 +168,7 @@ public class Table : MonoBehaviour
 
     void Free(EOrderSatisfaction satisfaction)
     {
+        DirtyTable(null);
         hungerLevel = 0;
         chairs.ForEach(c => c.CustomerSat?.Leave(satisfaction));
     }

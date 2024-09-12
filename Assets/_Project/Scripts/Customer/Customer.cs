@@ -14,7 +14,7 @@ public class Customer : BasicStateMachine
     Chair currentChair;
     Vector3 exitPoint;
     int hungerLevel = 0;
-    private Table table;
+    Table table;
 
 
     public Food RequestedFood => requestedFood;
