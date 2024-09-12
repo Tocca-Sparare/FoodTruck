@@ -9,14 +9,13 @@ using UnityEngine;
 public class CustomerSpawner : MonoBehaviour
 {
     [SerializeField] private Customer customerPrefab;
-    
+
     //Time delay range between two consecutive spawn
     [SerializeField] private float minSlowDelay = 5f;
     [SerializeField] private float maxSlowDelay = 10f;
 
     [SerializeField] private float spawnFastVelocityFactor = 10f;
     [SerializeField] private float currentVelocityFactor = 1f;
-
 
     [SerializeField] private float slowPhaseTimeLimit = 10f;
     [SerializeField] private float totalLevelTime = 100f;
@@ -68,17 +67,23 @@ public class CustomerSpawner : MonoBehaviour
     {
         while (true)
         {
-            foreach(var spawnPointTransform in spawnPointTransforms) {
+            foreach (var spawnPointTransform in spawnPointTransforms)
+            {
 
                 //spawn only if there are available tables
                 if (tablesManager.HasAvailableTables)
                 {
                     Table targetTable = tablesManager.GetRandomEmptyTable();
+                    int randomCustomerCount = Random.Range(1, 5);
 
-                    var newCustomer = InstantiateHelper.Instantiate(customerPrefab, spawnPointTransform);
-                    newCustomer.transform.position = spawnPointTransform.position;
+                    for (int i = 0; i < randomCustomerCount; i++)
+                    {
+                        var newCustomer = InstantiateHelper.Instantiate(customerPrefab, spawnPointTransform);
+                        newCustomer.transform.position = spawnPointTransform.position;
+                        newCustomer.Init(ingredientsManager.GetRandomIngredient(), targetTable, spawnPointTransform.position);
+                        yield return new WaitForSecondsRealtime(.5f);
+                    }
 
-                    newCustomer.Init(ingredientsManager.GetRandomIngredient(), targetTable, spawnPointTransform.position);
                     float randomDelay = currentVelocityFactor * Random.Range(minSlowDelay, maxSlowDelay);
                     yield return new WaitForSecondsRealtime(randomDelay);
                 }

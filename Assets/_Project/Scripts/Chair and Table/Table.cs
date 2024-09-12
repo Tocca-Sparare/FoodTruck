@@ -16,7 +16,7 @@ public class Table : MonoBehaviour
     public System.Action OnCleanTable;
 
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
-    public bool IsAvailable => isDirty == false && chairs.Any(c => c.IsAvailable);  //at least one chair available and table not dirty
+    public bool IsAvailable => !isDirty && chairs.All(c => c.IsAvailable);
     public bool IsDirty => isDirty;
 
 
