@@ -15,7 +15,6 @@ public class CustomerFeedback : MonoBehaviour
     [SerializeField] AudioClip hungrySound;
     [SerializeField] AudioClip burpSound;
     [SerializeField] AudioClip angrySound;
-
     [SerializeField] List<GameObject> prefabHats;
     [SerializeField] Transform hatTransform;
 
@@ -110,7 +109,6 @@ public class CustomerFeedback : MonoBehaviour
         StartCoroutine(DoShowHungryIcon(currentLevel));
     }
 
-
     IEnumerator DoShowHungryIcon(int count)
     {
         for (int i = 0; i < count; i++)
@@ -158,7 +156,6 @@ public class CustomerFeedback : MonoBehaviour
         audioSource.clip = angrySound;
         audioSource.Play();
     }
-
 
     IEnumerator DoBurpSound()
     {

@@ -162,7 +162,9 @@ public class Table : MonoBehaviour
 
     void Free(EOrderSatisfaction satisfaction)
     {
-        DirtyTable(null);
+        remaningCleaningTime = cleaningTime;
+        OnDirtyTable?.Invoke(null);
+
         hungerLevel = 0;
         chairs.ForEach(c => c.CustomerSat?.Leave(satisfaction));
     }
