@@ -9,9 +9,11 @@ public class CannonFeedback : MonoBehaviour
     [SerializeField] Transform objectToRotate;
     [Space]
     [SerializeField] AudioClip shootSound;
+    [SerializeField] AudioClip shootWhenNoAmmo;
 
     CannonInteractable cannon;
     AudioSource audioSource;
+    GameObject bulletToShow;
 
     private void Awake()
     {
@@ -24,13 +26,14 @@ public class CannonFeedback : MonoBehaviour
         if (audioSource == null)
             Debug.LogError($"Missing audioSource on {name}", gameObject);
 
-        SetBulletIcon();
-
         //add events
         if (cannon)
         {
             cannon.OnUpdateAimDirection += OnUpdateAimDirection;
             cannon.OnShoot += OnShoot;
+            cannon.OnShootButNoAmmo += OnShootButNoAmmo;
+            cannon.OnInsertBullet += OnInsertBullet;
+            cannon.OnRemoveBullet += OnRemoveBullet;
         }
     }
 
@@ -41,12 +44,10 @@ public class CannonFeedback : MonoBehaviour
         {
             cannon.OnUpdateAimDirection -= OnUpdateAimDirection;
             cannon.OnShoot -= OnShoot;
+            cannon.OnShootButNoAmmo -= OnShootButNoAmmo;
+            cannon.OnInsertBullet -= OnInsertBullet;
+            cannon.OnRemoveBullet -= OnRemoveBullet;
         }
-    }
-
-    public void SetBulletIcon()
-    {
-        bulletSpriteRenderer.sprite = GetComponent<CannonInteractable>().Bullet.icon;
     }
 
     void OnUpdateAimDirection(Vector3 direction)
@@ -70,5 +71,31 @@ public class CannonFeedback : MonoBehaviour
         //play sound
         audioSource.clip = shootSound;
         audioSource.Play();
+    }
+
+    void OnShootButNoAmmo(Vector3 bulletDirection, Quaternion bulletRotation)
+    {
+        //randomize
+        float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
+        float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
+        audioSource.panStereo = randomStereoPan;
+        audioSource.pitch = randomPitch;
+
+        //play sound
+        audioSource.clip = shootWhenNoAmmo;
+        audioSource.Play();
+    }
+
+    private void OnInsertBullet(CannonBullet bullet)
+    {
+        //show bullet to understand what is going to shoot
+        bulletToShow = InstantiateHelper.Instantiate(bullet.bulletPrefabToShowInCannon, cannon.BulletContainer);
+    }
+
+    private void OnRemoveBullet()
+    {
+        //remove bullet
+        if (bulletToShow)
+            InstantiateHelper.Destroy(bulletToShow.gameObject);
     }
 }

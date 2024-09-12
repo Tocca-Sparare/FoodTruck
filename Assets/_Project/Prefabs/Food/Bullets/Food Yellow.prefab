@@ -20,6 +20,14 @@ PrefabInstance:
       propertyPath: material
       value: 
       objectReference: {fileID: 2100000, guid: 0829ecd8d3818a644b5de7d0cf82e087, type: 2}
+    - target: {fileID: 3950753455815229797, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
+      propertyPath: bulletPrefabToShowInCanno
+      value: 
+      objectReference: {fileID: 3253903182408848020, guid: 0bda54b467d7cb341850c7d99a6e5c29, type: 3}
+    - target: {fileID: 3950753455815229797, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
+      propertyPath: bulletPrefabToShowInCannon
+      value: 
+      objectReference: {fileID: 3253903182408848020, guid: 0bda54b467d7cb341850c7d99a6e5c29, type: 3}
     - target: {fileID: 5601782707301866134, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

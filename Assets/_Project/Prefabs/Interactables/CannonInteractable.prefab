@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 7946202871749470918}
-  bulletPrefab: {fileID: 0}
+  bulletContainer: {fileID: 4146779378696460423}
   bulletSpawn: {fileID: 2685239954524149895}
   hittableLayer:
     data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
@@ -325,7 +325,6 @@ MonoBehaviour:
   minRotationLimit: -45
   maxRotationLimit: 45
   fireRate: 0.2
-  forwardDirection: {x: -1, y: 0, z: 0}
 --- !u!114 &2558202983194141355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +455,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6043401410775304883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7691969814711969591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4146779378696460423}
+  m_Layer: 0
+  m_Name: BulletContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4146779378696460423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691969814711969591}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.08715574, y: -0, z: -0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 0.0013333331, z: 0.0060000005}
+  m_LocalScale: {x: 0.006666666, y: 0.006666666, z: 0.006666666}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6043401410775304883}
+  m_LocalEulerAnglesHint: {x: -10, y: 0, z: 0}
 --- !u!1 &8598440628865509933
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,6 +606,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2685239954524149895}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4146779378696460423}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
 --- !u!4 &6043401410775304883 stripped
