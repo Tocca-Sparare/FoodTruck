@@ -9,6 +9,8 @@ public class Chair : MonoBehaviour
     public bool IsCustomerSat {  get; private set; }
     public Customer CustomerSat { get; private set; }
 
+    public System.Action OnCustomerSat;
+
     /// <summary>
     /// Set this chair NOT available
     /// </summary>
@@ -25,6 +27,7 @@ public class Chair : MonoBehaviour
     public void CustomerSit()
     {
         IsCustomerSat = true;
+        OnCustomerSat?.Invoke();
     }
 
     /// <summary>

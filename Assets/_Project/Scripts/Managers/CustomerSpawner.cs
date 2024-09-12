@@ -69,18 +69,17 @@ public class CustomerSpawner : MonoBehaviour
         {
             foreach (var spawnPointTransform in spawnPointTransforms)
             {
-
-                //spawn only if there are available tables
-                if (tablesManager.HasAvailableTables)
+                Table table = tablesManager.GetRandomEmptyTable();
+                if (table != null)
                 {
-                    Table targetTable = tablesManager.GetRandomEmptyTable();
                     int randomCustomerCount = Random.Range(1, 5);
+                    table.SetApproachingCustomersCount(randomCustomerCount);
 
                     for (int i = 0; i < randomCustomerCount; i++)
                     {
                         var newCustomer = InstantiateHelper.Instantiate(customerPrefab, spawnPointTransform);
                         newCustomer.transform.position = spawnPointTransform.position;
-                        newCustomer.Init(ingredientsManager.GetRandomIngredient(), targetTable, spawnPointTransform.position);
+                        newCustomer.Init(ingredientsManager.GetRandomIngredient(), table, spawnPointTransform.position);
                         yield return new WaitForSecondsRealtime(.5f);
                     }
 

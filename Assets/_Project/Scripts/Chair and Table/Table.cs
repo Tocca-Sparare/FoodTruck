@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 /// <summary>
@@ -11,10 +12,13 @@ public class Table : MonoBehaviour
 
     private List<Chair> chairs = new();
     private bool isDirty;
+    private int approachingCustomersCount;
+    private int satCustomersCount;
 
     //events
     public System.Action<Food> OnDirtyTable;
     public System.Action OnCleanTable;
+    public System.Action OnOrderReady;
 
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
     public bool IsAvailable => !isDirty && chairs.All(c => c.IsAvailable);
@@ -23,10 +27,12 @@ public class Table : MonoBehaviour
         => chairs.All(c => c.CustomerSat == null || c.CustomerSat.IsSatisfied);
 
 
+
     void Awake()
     {
         //get refs
         chairs = GetComponentsInChildren<Chair>().ToList();
+        chairs.ForEach(c => c.OnCustomerSat += OnCustomerSat);
     }
 
     /// <summary>
@@ -61,19 +67,10 @@ public class Table : MonoBehaviour
             && c.CustomerSat.RequestedFood.FoodName == food.FoodName)
             .FirstOrDefault();
 
-        //customer leave satisfied
         if (chair)
-        {
-            chair.CustomerSat.SatisfyRequest();
-            if (IsAllCustomersSatisfied())
-                foreach (var c in chairs)
-                    c.CustomerSat?.Leave(ECustomerSatisfaction.Satisfied);
-        }
-        //else, if there aren't customers with this food, dirty the table
+            SetCustomerSatisfy(chair.CustomerSat);
         else
-        {
             DirtyTable(food);
-        }
     }
 
     /// <summary>
@@ -103,4 +100,24 @@ public class Table : MonoBehaviour
         OnCleanTable?.Invoke();
     }
 
+    public void SetApproachingCustomersCount(int count)
+    {
+        approachingCustomersCount = count;
+        satCustomersCount = 0;
+    }
+
+    void SetCustomerSatisfy(Customer customer)
+    {
+        customer.SatisfyRequest();
+        if (IsAllCustomersSatisfied())
+            chairs.ForEach(c => c.CustomerSat?.Leave(ECustomerSatisfaction.Satisfied));
+    }
+
+    void OnCustomerSat()
+    {
+        satCustomersCount++;
+
+        if (satCustomersCount == approachingCustomersCount) // table is complete
+            OnOrderReady?.Invoke();
+    }
 }

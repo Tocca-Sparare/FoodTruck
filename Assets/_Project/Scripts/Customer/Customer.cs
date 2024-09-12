@@ -17,7 +17,8 @@ public class Customer : BasicStateMachine
     Vector3 exitPoint;
     float remainingTimeBeforeLeave;
     int hungerLevel = 0;
-    
+    private Table table;
+
 
     public Food RequestedFood => requestedFood;
     public Chair CurrentChair => currentChair;
@@ -27,6 +28,7 @@ public class Customer : BasicStateMachine
     public int[] HungryChangeSteps => hungryChangeSteps;
     public int HungerLevel => hungerLevel;
     public bool IsSatisfied => RequestedFood == null;
+    public Table Table => table;
 
     //events
     public System.Action OnInit;
@@ -43,6 +45,7 @@ public class Customer : BasicStateMachine
         SetRequestedFood(requestedFood);
         SetTargetTable(targetTable);
         this.exitPoint = exitPoint;
+        this.table = targetTable;
 
         //set state to move to the chair
         SetState(normalState);

@@ -63,6 +63,7 @@ public class CustomerFeedback : MonoBehaviour
     {
         //set color
         meshRenderer.sharedMaterial = customer.RequestedFood.material;
+        customer.Table.OnOrderReady += OnOrderReady;
     }
 
     void OnSit()
@@ -70,13 +71,11 @@ public class CustomerFeedback : MonoBehaviour
         //set sit animation and play sound
         animator.SetBool("IsSitting", true);
         StartCoroutine(DoHungrySound());
-
-        requestFoodHolder.SetActive(true);
-        requestFoodSpriteRenderer.sprite = customer.RequestedFood.icon;
     }
 
     void OnStandUp()
     {
+        customer.Table.OnOrderReady -= OnOrderReady;
         //set stand up animation
         animator.SetBool("IsSitting", false);
 
@@ -104,6 +103,12 @@ public class CustomerFeedback : MonoBehaviour
     void OnSatistyRequest()
     {
         requestFoodHolder.SetActive(false);
+    }
+
+    void OnOrderReady()
+    {
+        requestFoodHolder.SetActive(true);
+        requestFoodSpriteRenderer.sprite = customer.RequestedFood.icon;
     }
 
 
