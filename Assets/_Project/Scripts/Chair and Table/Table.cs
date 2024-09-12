@@ -131,16 +131,16 @@ public class Table : MonoBehaviour
         {
             OnOrderReady?.Invoke();
             freeTableCoroutine = StartCoroutine(FreeTableAfterWaitingTime());
-            StartWarningsCoroutines();
+            StartHungerIncreaseCoroutines();
         }
     }
 
-    private void StartWarningsCoroutines()
+    private void StartHungerIncreaseCoroutines()
     {
         foreach (var delay in warningDelays)
         {
             var delayInSeconds = waitingTime * delay / 100;
-            StartCoroutine(IncreaseHungerLevelAfter(delayInSeconds));
+            StartCoroutine(IncreaseHungerAfter(delayInSeconds));
         }
     }
 
@@ -150,7 +150,7 @@ public class Table : MonoBehaviour
         Free(ECustomerSatisfaction.Unsatisfied);
     }
 
-    IEnumerator IncreaseHungerLevelAfter(float delay)
+    IEnumerator IncreaseHungerAfter(float delay)
     {
         yield return new WaitForSeconds(delay);
         hungerLevel++;
