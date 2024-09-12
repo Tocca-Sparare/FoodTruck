@@ -26,6 +26,7 @@ public class Table : MonoBehaviour
     //events
     public System.Action<Food> OnDirtyTable;
     public System.Action OnCleanTable;
+    public System.Action<float> OnCleaningTable;
     public System.Action OnOrderReady;
     public System.Action<int> OnHungerLevelIncreased;
     public System.Action OnOrderSatisfied;
@@ -169,6 +170,11 @@ public class Table : MonoBehaviour
     public void DoCleaning(float deltaTime)
     {
         remaningCleaningTime -= deltaTime;
+
+        // totalTime : 100 = remaningCleaningTime : x
+
+        // x = remaningCleaningTime* 100 /waitingTime;
+        OnCleaningTable?.Invoke(remaningCleaningTime * 100 / cleaningTime);
 
         if (remaningCleaningTime < 0)
             CleanTable();

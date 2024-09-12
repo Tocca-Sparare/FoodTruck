@@ -27,7 +27,6 @@ public class PlayerCleaningState : State
         base.OnUpdate();
 
         tableInteractable = playerStateMachine.Table;
-        Debug.Log($"inputManager= {inputManager == null} tableInteractable = { tableInteractable == null}");
         if (inputManager == null || tableInteractable == null)
             return;
 

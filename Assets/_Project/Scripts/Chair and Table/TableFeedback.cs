@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 /// <summary>
@@ -8,6 +9,7 @@ public class TableFeedback : MonoBehaviour
     [SerializeField] GameObject dirtyStainsContainer;
     [SerializeField] SpriteRenderer[] dirtyStainSprites;
     [SerializeField] Material defaultDirtMaterial;
+    [SerializeField] LoadingBar loadingBar;
 
     Table table;
 
@@ -22,6 +24,7 @@ public class TableFeedback : MonoBehaviour
         {
             table.OnDirtyTable += OnDirtyTable;
             table.OnCleanTable += OnCleanTable;
+            table.OnCleaningTable += OnCleaningTable;
         }
     }
 
@@ -32,6 +35,7 @@ public class TableFeedback : MonoBehaviour
         {
             table.OnDirtyTable -= OnDirtyTable;
             table.OnCleanTable -= OnCleanTable;
+            table.OnCleaningTable -= OnCleaningTable;
         }
     }
 
@@ -50,5 +54,10 @@ public class TableFeedback : MonoBehaviour
     {
         //hide dirty
         dirtyStainsContainer.SetActive(false);
+    }
+
+    void OnCleaningTable(float percentage)
+    {
+        loadingBar.Updatebar(percentage);
     }
 }
