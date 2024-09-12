@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
 
     //inputs
     public Vector2 Move { get; set; }
+    public bool InteractIsPressed {  get; set; }
     public bool InteractWasPressedThisFrame {  get; set; }
     public bool ShootWasPressedThisFrame { get; set; }
     public Vector2 Aim { get; set; }
@@ -40,6 +41,7 @@ public class InputManager : MonoBehaviour
         //read inputs
         Move = FindAction("Move").ReadValue<Vector2>();
         InteractWasPressedThisFrame = FindAction("Interact").WasPressedThisFrame();
+        InteractIsPressed = FindAction("Interact").IsPressed();
         ShootWasPressedThisFrame = FindAction("Shoot").WasPressedThisFrame();
         Aim = FindAction("Aim").ReadValue<Vector2>();
     }

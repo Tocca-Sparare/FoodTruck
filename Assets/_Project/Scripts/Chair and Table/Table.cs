@@ -10,17 +10,18 @@ public class Table : MonoBehaviour
 {
     [SerializeField] Transform physicalTablePosition;
     [SerializeField] int waitingTime;
+    [SerializeField] int cleaningTime;
     [SerializeField]
     [Range(0, 100)]
     int[] warningDelays;
 
     private List<Chair> chairs = new();
-    private bool isDirty;
     private int approachingCustomersCount;
     private int satCustomersCount;
     private Coroutine freeTableCoroutine;
     private List<Coroutine> hungerIncreseCoroutines = new List<Coroutine>();
     private int hungerLevel;
+    private float remaningCleaningTime = 0;
 
     //events
     public System.Action<Food> OnDirtyTable;
@@ -31,9 +32,10 @@ public class Table : MonoBehaviour
     public System.Action OnOrderNotSatisfied;
 
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
-    public bool IsAvailable => !isDirty && chairs.All(c => c.IsAvailable);
-    public bool IsDirty => isDirty;
+    public bool IsAvailable => !IsDirty && chairs.All(c => c.IsAvailable);
+    public bool IsDirty => remaningCleaningTime > 0;
     public int HungerLevel => hungerLevel;
+    public float RemaningCleaningTime => remaningCleaningTime;
     private bool IsAllCustomersSatisfied()
         => chairs.All(c => c.CustomerSat == null || c.CustomerSat.IsSatisfied);
 
@@ -98,17 +100,8 @@ public class Table : MonoBehaviour
                 c.CustomerSat.Leave(EOrderSatisfaction.Indifferent);     //else, indifferent (don't lose points)
         }
 
-        isDirty = true;
+        remaningCleaningTime = cleaningTime;
         OnDirtyTable?.Invoke(food);
-    }
-
-    /// <summary>
-    /// Set table no more dirty
-    /// </summary>
-    public void CleanTable()
-    {
-        isDirty = false;
-        OnCleanTable?.Invoke();
     }
 
     public void SetApproachingCustomersCount(int count)
@@ -171,5 +164,19 @@ public class Table : MonoBehaviour
         DirtyTable(null);
         hungerLevel = 0;
         chairs.ForEach(c => c.CustomerSat?.Leave(satisfaction));
+    }
+
+    public void DoCleaning(float deltaTime)
+    {
+        remaningCleaningTime -= deltaTime;
+
+        if (remaningCleaningTime < 0)
+            CleanTable();
+    }
+
+    public void CleanTable()
+    {
+        remaningCleaningTime = 0;
+        OnCleanTable?.Invoke();
     }
 }
