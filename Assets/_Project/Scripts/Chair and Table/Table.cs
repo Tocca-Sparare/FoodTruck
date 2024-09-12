@@ -172,10 +172,6 @@ public class Table : MonoBehaviour
     public void DoCleaning(float deltaTime)
     {
         remaningCleaningTime -= deltaTime;
-
-        // totalTime : 100 = remaningCleaningTime : x
-
-        // x = remaningCleaningTime* 100 /waitingTime;
         OnCleaningTable?.Invoke(remaningCleaningTime * 100 / cleaningTime);
 
         if (remaningCleaningTime < 0)
