@@ -10,17 +10,22 @@ public class Table : MonoBehaviour
 {
     [SerializeField] Transform physicalTablePosition;
     [SerializeField] int waitingTime;
+    [SerializeField]
+    [Range(0, 100)]
+    int[] warningDelays;
 
     private List<Chair> chairs = new();
     private bool isDirty;
     private int approachingCustomersCount;
     private int satCustomersCount;
     private Coroutine freeTableCoroutine;
+    private int hungerLevel;
 
     //events
     public System.Action<Food> OnDirtyTable;
     public System.Action OnCleanTable;
     public System.Action OnOrderReady;
+    public System.Action OnHungerLevelIncreased;
 
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
     public bool IsAvailable => !isDirty && chairs.All(c => c.IsAvailable);
@@ -126,6 +131,16 @@ public class Table : MonoBehaviour
         {
             OnOrderReady?.Invoke();
             freeTableCoroutine = StartCoroutine(FreeTableAfterWaitingTime());
+            StartWarningsCoroutines();
+        }
+    }
+
+    private void StartWarningsCoroutines()
+    {
+        foreach (var delay in warningDelays)
+        {
+            var delayInSeconds = waitingTime * delay / 100;
+            StartCoroutine(IncreaseHungerLevelAfter(delayInSeconds));
         }
     }
 
@@ -133,6 +148,13 @@ public class Table : MonoBehaviour
     {
         yield return new WaitForSeconds(waitingTime);
         Free(ECustomerSatisfaction.Unsatisfied);
+    }
+
+    IEnumerator IncreaseHungerLevelAfter(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        hungerLevel++;
+        OnHungerLevelIncreased?.Invoke();
     }
 
     void Free(ECustomerSatisfaction satisfaction)

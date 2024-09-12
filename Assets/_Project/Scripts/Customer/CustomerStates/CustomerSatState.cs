@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,8 +9,6 @@ public class CustomerSatState : State
 {
     NavMeshAgent navMeshAgent;
     Customer customer;
-    Coroutine leaveTableAfterWaitingTime;
-    List<Coroutine> hungerCoroutines = new List<Coroutine>();
 
     protected override void OnInit()
     {
@@ -36,23 +32,5 @@ public class CustomerSatState : State
         Chair targetChair = customer.CurrentChair;
         transformState.SetParent(targetChair.transform);
         transformState.SetPositionAndRotation(targetChair.transform.position, targetChair.transform.rotation);
-    }
-
-    protected override void OnExit()
-    {
-        base.OnExit();
-
-        //be sure to stop coroutine if leaving this state for other reasons
-        if (leaveTableAfterWaitingTime != null)
-            StateMachine.StopCoroutine(leaveTableAfterWaitingTime);
-
-        foreach (var cor in hungerCoroutines)
-            StateMachine.StopCoroutine(cor);
-    }
-
-    IEnumerator InvokeHungerChangeAfter(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        customer.IncreaseHunger();
     }
 }

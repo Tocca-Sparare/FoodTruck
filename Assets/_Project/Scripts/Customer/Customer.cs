@@ -97,7 +97,7 @@ public class Customer : BasicStateMachine
         OnSatisfyRequest?.Invoke();
     }
 
-    public void IncreaseHunger()
+    public void IncreaseHungerLevel()
     {
         hungerLevel++;
         OnHungryIncreased?.Invoke();

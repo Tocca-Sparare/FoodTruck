@@ -122,6 +122,22 @@ PrefabInstance:
       propertyPath: waitingTime
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7872489531853874794, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
+      propertyPath: warningDelays.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872489531853874794, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
+      propertyPath: warningDelays.Array.data[0]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872489531853874794, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
+      propertyPath: warningDelays.Array.data[1]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872489531853874794, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
+      propertyPath: warningDelays.Array.data[2]
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

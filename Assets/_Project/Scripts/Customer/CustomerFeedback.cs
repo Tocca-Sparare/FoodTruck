@@ -64,6 +64,7 @@ public class CustomerFeedback : MonoBehaviour
         //set color
         // meshRenderer.sharedMaterial = customer.RequestedFood.material;
         customer.Table.OnOrderReady += OnOrderReady;
+        customer.Table.OnHungerLevelIncreased += OnHungerLevelIncreased;
     }
 
     void OnSit()
@@ -76,6 +77,7 @@ public class CustomerFeedback : MonoBehaviour
     void OnStandUp()
     {
         customer.Table.OnOrderReady -= OnOrderReady;
+        customer.Table.OnHungerLevelIncreased -= OnHungerLevelIncreased;
         //set stand up animation
         animator.SetBool("IsSitting", false);
 
@@ -109,6 +111,11 @@ public class CustomerFeedback : MonoBehaviour
     {
         requestFoodHolder.SetActive(true);
         requestFoodSpriteRenderer.sprite = customer.RequestedFood.icon;
+    }
+
+    private void OnHungerLevelIncreased()
+    {
+        StartCoroutine(DoShowHungryIcon());
     }
 
 
