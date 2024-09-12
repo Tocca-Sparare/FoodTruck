@@ -24,7 +24,7 @@ public class TableFeedback : MonoBehaviour
         {
             table.OnDirtyTable += OnDirtyTable;
             table.OnCleanTable += OnCleanTable;
-            table.OnCleaningTable += OnCleaningTable;
+            table.OnCleaning += OnCleaningTable;
         }
     }
 
@@ -35,7 +35,7 @@ public class TableFeedback : MonoBehaviour
         {
             table.OnDirtyTable -= OnDirtyTable;
             table.OnCleanTable -= OnCleanTable;
-            table.OnCleaningTable -= OnCleaningTable;
+            table.OnCleaning -= OnCleaningTable;
         }
     }
 

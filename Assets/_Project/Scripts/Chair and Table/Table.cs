@@ -6,57 +6,43 @@ using UnityEngine;
 /// <summary>
 /// A table in scene, with a list of chairs. Every customer can sit on a chair if available
 /// </summary>
-public class Table : MonoBehaviour
+public class Table : BasicStateMachine
 {
-    [SerializeField] Transform physicalTablePosition;
-    [SerializeField] int waitingTime;
-    [SerializeField] int cleaningTime;
-    [SerializeField]
-    [Range(0, 100)]
-    int[] warningDelays;
+    public TableNormalState NormalState;
+    public TableOrderReadyState OrderReadyState;
+    public TableDirtyState DirtyState;
 
-    private List<Chair> chairs = new();
-    private int approachingCustomersCount;
-    private int satCustomersCount;
-    private Coroutine freeTableCoroutine;
-    private List<Coroutine> hungerIncreseCoroutines = new List<Coroutine>();
-    private int hungerLevel;
-    private float remaningCleaningTime = 0;
+
+    [SerializeField] Transform physicalTablePosition;
+    public  List<Chair> Chairs {get; set;}
+    public int IncomingCustomersCount { get; set; }
+    public int CustomersOnTableCount { get; set; }
+    public int HungerLevel { get; set; }
 
     //events
     public System.Action<Food> OnDirtyTable;
     public System.Action OnCleanTable;
-    public System.Action<float> OnCleaningTable;
+    public System.Action<float> OnCleaning;
     public System.Action OnOrderReady;
     public System.Action<int> OnHungerLevelIncreased;
     public System.Action OnOrderSatisfied;
     public System.Action OnOrderNotSatisfied;
+    public System.Action<Food> OnHit;
 
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
-    public bool IsAvailable => !IsDirty && chairs.All(c => c.IsAvailable);
-    public bool IsDirty => remaningCleaningTime > 0;
-    public int HungerLevel => hungerLevel;
-    public float RemaningCleaningTime => remaningCleaningTime;
-    private bool IsAllCustomersSatisfied()
-        => chairs.All(c => c.CustomerSat == null || c.CustomerSat.IsSatisfied);
-
+    public bool IsAvailable => !IsDirty && Chairs.All(c => c.IsAvailable);
+    public bool IsDirty => CurrentState == DirtyState;
 
 
     void Awake()
     {
-        //get refs
-        chairs = GetComponentsInChildren<Chair>().ToList();
-        chairs.ForEach(c => c.OnCustomerSat += OnCustomerSat);
+       SetState(NormalState);
     }
 
-    /// <summary>
-    /// Find random available chair at this table
-    /// </summary>
-    /// <returns></returns>
     public Chair GetRandomAvailableChair()
     {
         //find available chairs
-        var emptyChairs = chairs.Where(c => c.IsAvailable).ToList();
+        var emptyChairs = Chairs.Where(c => c.IsAvailable).ToList();
         if (emptyChairs.Count == 0)
         {
             Debug.LogError($"There aren't emptyChairs in {name}", gameObject);
@@ -68,119 +54,19 @@ public class Table : MonoBehaviour
         return emptyChairs[randomIndex];
     }
 
-    /// <summary>
-    /// Find a customer with this demanding food and make it stand up
-    /// </summary>
-    /// <param name="food"></param>
     public void OnHitTable(Food food)
     {
-        //find customers with this food sat at table
-        Chair chair = chairs.Where(
-            c => c.IsCustomerSat
-            && !c.CustomerSat.IsSatisfied
-            && c.CustomerSat.RequestedFood.FoodName == food.FoodName)
-            .FirstOrDefault();
-
-        if (chair)
-            SetCustomerSatisfy(chair.CustomerSat);
-        else
-            DirtyTable(food);
+        OnHit?.Invoke(food);
     }
 
-    /// <summary>
-    /// set this table dirty
-    /// </summary>
-    public void DirtyTable(Food food)
+    public void DoClean(float deltaTime)
     {
-        //everyone leave
-        foreach (var c in chairs)
-        {
-            if (c.IsCustomerSat)
-                c.CustomerSat.Leave(EOrderSatisfaction.Unsatisfied);     //unsatisfied if already sat
-            else if (c.IsAvailable == false)
-                c.CustomerSat.Leave(EOrderSatisfaction.Indifferent);     //else, indifferent (don't lose points)
-        }
-
-        remaningCleaningTime = cleaningTime;
-        OnDirtyTable?.Invoke(food);
+        OnCleaning?.Invoke(deltaTime);
     }
 
     public void SetApproachingCustomersCount(int count)
     {
-        approachingCustomersCount = count;
-        satCustomersCount = 0;
-    }
-
-    void SetCustomerSatisfy(Customer customer)
-    {
-        customer.SatisfyRequest();
-        if (IsAllCustomersSatisfied())
-        {
-            OnOrderSatisfied?.Invoke();
-
-            Free(EOrderSatisfaction.Satisfied);
-            StopCoroutine(freeTableCoroutine);
-            foreach (var c in hungerIncreseCoroutines)
-                StopCoroutine(c);
-        }
-    }
-
-    void OnCustomerSat()
-    {
-        satCustomersCount++;
-
-        if (satCustomersCount == approachingCustomersCount) // table is complete
-        {
-            OnOrderReady?.Invoke();
-            freeTableCoroutine = StartCoroutine(FreeTableAfterWaitingTime());
-            StartHungerIncreaseCoroutines();
-        }
-    }
-
-    private void StartHungerIncreaseCoroutines()
-    {
-        foreach (var delay in warningDelays)
-        {
-            var delayInSeconds = waitingTime * delay / 100;
-            hungerIncreseCoroutines.Add(StartCoroutine(IncreaseHungerAfter(delayInSeconds)));
-        }
-    }
-
-    IEnumerator FreeTableAfterWaitingTime()
-    {
-        yield return new WaitForSeconds(waitingTime);
-        OnOrderNotSatisfied?.Invoke();
-        Free(EOrderSatisfaction.Unsatisfied);
-    }
-
-    IEnumerator IncreaseHungerAfter(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        hungerLevel++;
-        OnHungerLevelIncreased?.Invoke(hungerLevel);
-    }
-
-    void Free(EOrderSatisfaction satisfaction)
-    {
-        remaningCleaningTime = cleaningTime;
-        OnDirtyTable?.Invoke(null);
-
-        hungerLevel = 0;
-        chairs.ForEach(c => c.CustomerSat?.Leave(satisfaction));
-    }
-
-    public void DoCleaning(float deltaTime)
-    {
-        remaningCleaningTime -= deltaTime;
-        OnCleaningTable?.Invoke(remaningCleaningTime * 100 / cleaningTime);
-
-        if (remaningCleaningTime < 0)
-            CleanTable();
-    }
-
-    public void CleanTable()
-    {
-        remaningCleaningTime = 0;
-        OnCleanTable?.Invoke();
+        IncomingCustomersCount = count;
+        CustomersOnTableCount = 0;
     }
 }

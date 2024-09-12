@@ -13,7 +13,7 @@ public class WaterBullet : CannonBullet
         Table table = other.GetComponentInParent<Table>();
         if (table)
         {
-            table.CleanTable();
+            // table.CleanTable();
             OnCleanTable?.Invoke();
         }
     }

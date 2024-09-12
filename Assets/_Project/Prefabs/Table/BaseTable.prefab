@@ -53,10 +53,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab9b6fab5b4343968a1c0bcecab058a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OrderReadyState:
+    waitingTime: 15
+    warningDelays: 1e0000003c0000005a000000
+  DirtyState:
+    cleaningTime: 2
   physicalTablePosition: {fileID: 2609304573701064798}
-  waitingTime: 16
-  cleaningTime: 2
-  warningDelays: 
 --- !u!114 &5779733995559557743
 MonoBehaviour:
   m_ObjectHideFlags: 0
