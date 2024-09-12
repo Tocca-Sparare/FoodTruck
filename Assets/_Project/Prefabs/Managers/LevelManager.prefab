@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42066b1997c98f41af0cb7526c0ef66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialCountdown: 5
+  initialCountdown: 3
   levelDuration: 90

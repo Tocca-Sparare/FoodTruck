@@ -5,8 +5,8 @@ using UnityEngine;
 /// </summary>
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] int initialCountdown;
-    [SerializeField] float levelDuration;
+    [SerializeField] int initialCountdown = 3;
+    [SerializeField] float levelDuration = 90;
 
     public enum ELevelState { InitialCountdown, Playing, Finish }
 
