@@ -12,12 +12,15 @@ public class Table : MonoBehaviour
     private List<Chair> chairs = new();
     private bool isDirty;
 
+    //events
     public System.Action<Food> OnDirtyTable;
     public System.Action OnCleanTable;
 
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
     public bool IsAvailable => !isDirty && chairs.All(c => c.IsAvailable);
     public bool IsDirty => isDirty;
+    private bool IsAllCustomersSatisfied()
+        => chairs.All(c => c.CustomerSat == null || c.CustomerSat.IsSatisfied);
 
 
     void Awake()
@@ -52,16 +55,19 @@ public class Table : MonoBehaviour
     public void OnHitTable(Food food)
     {
         //find customers with this food sat at table
-        Chair chair = chairs.Where(c => c.IsCustomerSat && !c.CustomerSat.IsSatisfied && c.CustomerSat.RequestedFood.FoodName == food.FoodName)
-            .OrderBy(c => c.CustomerSat.RemainingTimeBeforeLeave).FirstOrDefault(); //if there are more customers with same food, return who has lowest timer
+        Chair chair = chairs.Where(
+            c => c.IsCustomerSat
+            && !c.CustomerSat.IsSatisfied
+            && c.CustomerSat.RequestedFood.FoodName == food.FoodName)
+            .FirstOrDefault();
 
         //customer leave satisfied
         if (chair)
         {
-            Debug.Log("customer satisfied");
             chair.CustomerSat.SatisfyRequest();
             if (IsAllCustomersSatisfied())
-                Free();
+                foreach (var c in chairs)
+                    c.CustomerSat?.Leave(ECustomerSatisfaction.Satisfied);
         }
         //else, if there aren't customers with this food, dirty the table
         else
@@ -97,12 +103,4 @@ public class Table : MonoBehaviour
         OnCleanTable?.Invoke();
     }
 
-    private bool IsAllCustomersSatisfied()
-        => chairs.All(c => c.CustomerSat == null || c.CustomerSat.IsSatisfied);
-
-    public void Free()
-    {
-        foreach (var c in chairs)
-            c.CustomerSat?.Leave(ECustomerSatisfaction.Unsatisfied);
-    }
 }
