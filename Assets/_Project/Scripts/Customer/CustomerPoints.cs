@@ -41,7 +41,6 @@ public class CustomerPoints : MonoBehaviour
 
     private void OnSatisfied()
     {
-
         if (pointsManager)
             pointsManager.AddPoints(pointsOnSatisfied[customer.HungerLevel]);
     }

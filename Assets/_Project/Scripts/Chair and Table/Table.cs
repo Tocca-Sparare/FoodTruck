@@ -52,13 +52,16 @@ public class Table : MonoBehaviour
     public void OnHitTable(Food food)
     {
         //find customers with this food sat at table
-        Chair chair = chairs.Where(c => c.IsCustomerSat && c.CustomerSat.DemandingFood.FoodName == food.FoodName)
+        Chair chair = chairs.Where(c => c.IsCustomerSat && !c.CustomerSat.IsSatisfied && c.CustomerSat.RequestedFood.FoodName == food.FoodName)
             .OrderBy(c => c.CustomerSat.RemainingTimeBeforeLeave).FirstOrDefault(); //if there are more customers with same food, return who has lowest timer
 
         //customer leave satisfied
         if (chair)
         {
-            chair.CustomerSat.Leave(ECustomerSatisfaction.Satisfied);
+            Debug.Log("customer satisfied");
+            chair.CustomerSat.SatisfyRequest();
+            if (IsAllCustomersSatisfied())
+                Free();
         }
         //else, if there aren't customers with this food, dirty the table
         else
@@ -92,5 +95,14 @@ public class Table : MonoBehaviour
     {
         isDirty = false;
         OnCleanTable?.Invoke();
+    }
+
+    private bool IsAllCustomersSatisfied()
+        => chairs.All(c => c.CustomerSat == null || c.CustomerSat.IsSatisfied);
+
+    public void Free()
+    {
+        foreach (var c in chairs)
+            c.CustomerSat?.Leave(ECustomerSatisfaction.Unsatisfied);
     }
 }

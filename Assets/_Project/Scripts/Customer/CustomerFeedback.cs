@@ -41,6 +41,7 @@ public class CustomerFeedback : MonoBehaviour
         customer.OnSatisfied += OnSatisfied;
         customer.OnUnsatisfied += OnUnsatisfied;
         customer.OnHungryIncreased += OnHungryIncreased;
+        customer.OnSatisfyRequest += OnSatistyRequest;
     }
 
     void OnDestroy()
@@ -54,13 +55,14 @@ public class CustomerFeedback : MonoBehaviour
             customer.OnSatisfied -= OnSatisfied;
             customer.OnUnsatisfied -= OnUnsatisfied;
             customer.OnHungryIncreased -= OnHungryIncreased;
+            customer.OnSatisfyRequest -= OnSatistyRequest;
         }
     }
 
     void OnInit()
     {
         //set color
-        meshRenderer.sharedMaterial = customer.DemandingFood.material;
+        meshRenderer.sharedMaterial = customer.RequestedFood.material;
     }
 
     void OnSit()
@@ -70,7 +72,7 @@ public class CustomerFeedback : MonoBehaviour
         StartCoroutine(DoHungrySound());
 
         requestFoodHolder.SetActive(true);
-        requestFoodSpriteRenderer.sprite = customer.DemandingFood.icon;
+        requestFoodSpriteRenderer.sprite = customer.RequestedFood.icon;
     }
 
     void OnStandUp()
@@ -98,6 +100,12 @@ public class CustomerFeedback : MonoBehaviour
         StartCoroutine(DoShowHungryIcon());
         StartCoroutine(DoAngrySound());
     }
+
+    void OnSatistyRequest()
+    {
+        requestFoodHolder.SetActive(false);
+    }
+
 
     IEnumerator DoShowHungryIcon()
     {
