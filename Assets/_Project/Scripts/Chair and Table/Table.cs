@@ -26,7 +26,7 @@ public class Table : MonoBehaviour
     public System.Action<Food> OnDirtyTable;
     public System.Action OnCleanTable;
     public System.Action OnOrderReady;
-    public System.Action OnHungerLevelIncreased;
+    public System.Action<int> OnHungerLevelIncreased;
 
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
     public bool IsAvailable => !isDirty && chairs.All(c => c.IsAvailable);
@@ -157,9 +157,12 @@ public class Table : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         hungerLevel++;
-        OnHungerLevelIncreased?.Invoke();
+        OnHungerLevelIncreased?.Invoke(hungerLevel);
     }
 
     void Free(ECustomerSatisfaction satisfaction)
-        => chairs.ForEach(c => c.CustomerSat?.Leave(satisfaction));
+    {
+        hungerLevel = 0;
+        chairs.ForEach(c => c.CustomerSat?.Leave(satisfaction));
+    }
 }

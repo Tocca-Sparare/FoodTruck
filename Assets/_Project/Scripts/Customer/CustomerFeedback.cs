@@ -10,7 +10,7 @@ public class CustomerFeedback : MonoBehaviour
     [SerializeField] SpriteRenderer requestFoodSpriteRenderer;
     [SerializeField] GameObject requestFoodHolder;
     [SerializeField] Renderer meshRenderer;
-    [SerializeField] GameObject hungryIcon;
+    [SerializeField] GameObject[] hungryIcons;
     [Space]
     [SerializeField] AudioClip hungrySound;
     [SerializeField] AudioClip burpSound;
@@ -40,7 +40,6 @@ public class CustomerFeedback : MonoBehaviour
         customer.OnStandUp += OnStandUp;
         customer.OnSatisfied += OnSatisfied;
         customer.OnUnsatisfied += OnUnsatisfied;
-        customer.OnHungryIncreased += OnHungryIncreased;
         customer.OnSatisfyRequest += OnSatistyRequest;
     }
 
@@ -54,7 +53,6 @@ public class CustomerFeedback : MonoBehaviour
             customer.OnStandUp -= OnStandUp;
             customer.OnSatisfied -= OnSatisfied;
             customer.OnUnsatisfied -= OnUnsatisfied;
-            customer.OnHungryIncreased -= OnHungryIncreased;
             customer.OnSatisfyRequest -= OnSatistyRequest;
         }
     }
@@ -96,12 +94,6 @@ public class CustomerFeedback : MonoBehaviour
         StartCoroutine(DoAngrySound());
     }
 
-    void OnHungryIncreased()
-    {
-        StartCoroutine(DoShowHungryIcon());
-        StartCoroutine(DoAngrySound());
-    }
-
     void OnSatistyRequest()
     {
         requestFoodHolder.SetActive(false);
@@ -113,17 +105,24 @@ public class CustomerFeedback : MonoBehaviour
         requestFoodSpriteRenderer.sprite = customer.RequestedFood.icon;
     }
 
-    private void OnHungerLevelIncreased()
+    private void OnHungerLevelIncreased(int currentLevel)
     {
-        StartCoroutine(DoShowHungryIcon());
+        StartCoroutine(DoShowHungryIcon(currentLevel));
     }
 
 
-    IEnumerator DoShowHungryIcon()
+    IEnumerator DoShowHungryIcon(int count)
     {
-        hungryIcon.SetActive(true);
+        for (int i = 0; i < count; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+            hungryIcons[i].SetActive(true);
+        }
+
         yield return new WaitForSeconds(1);
-        hungryIcon.SetActive(false);
+
+        for (int i = 0; i < hungryIcons.Length; i++)
+            hungryIcons[i].SetActive(false);
     }
 
     IEnumerator DoHungrySound()
