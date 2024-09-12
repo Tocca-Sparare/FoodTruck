@@ -15,7 +15,6 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     [Tooltip("Limit horizontal rotation when look left")][Range(-0f, -180f)][SerializeField] float minRotationLimit = -70f;
     [Tooltip("Limit horizontal rotation when look right")][Range(0f, 180f)][SerializeField] float maxRotationLimit = 70f;
     [Tooltip("Can shoot every X seconds")][SerializeField] float fireRate = 0.2f;
-    [SerializeField] Vector3 forwardDirection;
 
     InteractComponent playerUsingThisCannon;
     Vector3 bulletSpawnOffset;
@@ -34,7 +33,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     {
         Gizmos.color = Color.cyan;
 
-        Vector3 dir = forwardDirection * 2;
+        Vector3 dir = transform.forward * 2;
         Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(minRotationLimit, Vector3.up) * dir);
         Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(maxRotationLimit, Vector3.up) * dir);
         Gizmos.color = Color.white;
@@ -108,11 +107,11 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         direction = direction.normalized;
 
         //clamp angle
-        float angle = Vector3.SignedAngle(direction, forwardDirection, Vector3.up);
+        float angle = Vector3.SignedAngle(direction, transform.forward, Vector3.up);
         angle = Mathf.Clamp(angle, minRotationLimit, maxRotationLimit);
 
         //rotate aim direction
-        aimDirection = Quaternion.AngleAxis(angle, Vector3.down) * forwardDirection;
+        aimDirection = Quaternion.AngleAxis(angle, Vector3.down) * transform.forward;
 
         OnUpdateAimDirection?.Invoke(aimDirection);
     }
@@ -157,7 +156,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     /// </summary>
     public void Dismiss()
     {
-        aimDirection = forwardDirection;
+        aimDirection = transform.forward;
         OnUpdateAimDirection?.Invoke(aimDirection);
 
         //reset player state
