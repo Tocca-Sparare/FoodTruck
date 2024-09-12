@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &132531351709250082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5109533633380121025}
+  - component: {fileID: 4105766775793243425}
+  m_Layer: 0
+  m_Name: Object Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5109533633380121025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132531351709250082}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.074}
+  m_LocalScale: {x: 1, y: 1, z: 1.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2306592341687821132}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4105766775793243425
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132531351709250082}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &258861956153985037
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +192,7 @@ GameObject:
   - component: {fileID: 887738734012260601}
   - component: {fileID: 4174927309332544768}
   m_Layer: 9
-  m_Name: Collider
+  m_Name: Interactable Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,6 +266,7 @@ Transform:
   - {fileID: 6043401410775304883}
   - {fileID: 8872925282279648653}
   - {fileID: 887738734012260601}
+  - {fileID: 5109533633380121025}
   m_Father: {fileID: 3891975280187624829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3122850214938259601
@@ -269,9 +323,10 @@ MonoBehaviour:
   hittableLayer:
     data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
     elementName: CannonInteractable - HittableLayer
-  minRotationLimit: -70
-  maxRotationLimit: 70
+  minRotationLimit: -45
+  maxRotationLimit: 45
   fireRate: 0.2
+  forwardDirection: {x: 0, y: 0, z: -1}
 --- !u!114 &2558202983194141355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,42 +574,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7946202871749470918}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7247414960499760918}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
 --- !u!4 &6043401410775304883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
   m_PrefabInstance: {fileID: 6076693922089151832}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6383194125502189577 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
-  m_PrefabInstance: {fileID: 6076693922089151832}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &7247414960499760918
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6383194125502189577}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0066129235, y: 0.008069883, z: 0.014826775}
-  m_Center: {x: -0.0000000013969838, y: 0.00072247226, z: 0.0012519875}
 --- !u!1001 &8982517374475373158
 PrefabInstance:
   m_ObjectHideFlags: 0
