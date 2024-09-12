@@ -27,10 +27,13 @@ public class Table : MonoBehaviour
     public System.Action OnCleanTable;
     public System.Action OnOrderReady;
     public System.Action<int> OnHungerLevelIncreased;
+    public System.Action OnOrderSatisfied;
+    public System.Action OnOrderNotSatisfied;
 
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
     public bool IsAvailable => !isDirty && chairs.All(c => c.IsAvailable);
     public bool IsDirty => isDirty;
+    public int HungerLevel => hungerLevel;
     private bool IsAllCustomersSatisfied()
         => chairs.All(c => c.CustomerSat == null || c.CustomerSat.IsSatisfied);
 
@@ -90,9 +93,9 @@ public class Table : MonoBehaviour
         foreach (var c in chairs)
         {
             if (c.IsCustomerSat)
-                c.CustomerSat.Leave(ECustomerSatisfaction.Unsatisfied);     //unsatisfied if already sat
+                c.CustomerSat.Leave(EOrderSatisfaction.Unsatisfied);     //unsatisfied if already sat
             else if (c.IsAvailable == false)
-                c.CustomerSat.Leave(ECustomerSatisfaction.Indifferent);     //else, indifferent (don't lose points)
+                c.CustomerSat.Leave(EOrderSatisfaction.Indifferent);     //else, indifferent (don't lose points)
         }
 
         isDirty = true;
@@ -119,7 +122,9 @@ public class Table : MonoBehaviour
         customer.SatisfyRequest();
         if (IsAllCustomersSatisfied())
         {
-            Free(ECustomerSatisfaction.Satisfied);
+            OnOrderSatisfied?.Invoke();
+
+            Free(EOrderSatisfaction.Satisfied);
             StopCoroutine(freeTableCoroutine);
             foreach (var c in hungerIncreseCoroutines)
                 StopCoroutine(c);
@@ -150,7 +155,8 @@ public class Table : MonoBehaviour
     IEnumerator FreeTableAfterWaitingTime()
     {
         yield return new WaitForSeconds(waitingTime);
-        Free(ECustomerSatisfaction.Unsatisfied);
+        OnOrderNotSatisfied?.Invoke();
+        Free(EOrderSatisfaction.Unsatisfied);
     }
 
     IEnumerator IncreaseHungerAfter(float delay)
@@ -160,7 +166,7 @@ public class Table : MonoBehaviour
         OnHungerLevelIncreased?.Invoke(hungerLevel);
     }
 
-    void Free(ECustomerSatisfaction satisfaction)
+    void Free(EOrderSatisfaction satisfaction)
     {
         hungerLevel = 0;
         chairs.ForEach(c => c.CustomerSat?.Leave(satisfaction));

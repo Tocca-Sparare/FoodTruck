@@ -77,15 +77,15 @@ public class Customer : BasicStateMachine
     /// Leave table
     /// </summary>
     /// <param name="satisfied"></param>
-    public void Leave(ECustomerSatisfaction satisfied)
+    public void Leave(EOrderSatisfaction satisfied)
     {
         //stand up and set state
         SetState(leavingState);
         currentChair.CustomerStandUp();
 
-        if (satisfied == ECustomerSatisfaction.Satisfied)
+        if (satisfied == EOrderSatisfaction.Satisfied)
             OnSatisfied?.Invoke();
-        else if (satisfied == ECustomerSatisfaction.Unsatisfied)
+        else if (satisfied == EOrderSatisfaction.Unsatisfied)
             OnUnsatisfied?.Invoke();
 
         OnStandUp?.Invoke();

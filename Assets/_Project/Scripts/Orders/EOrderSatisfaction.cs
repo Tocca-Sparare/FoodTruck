@@ -1,5 +1,5 @@
 
-public enum ECustomerSatisfaction
+public enum EOrderSatisfaction
 {
     Satisfied, Unsatisfied, Indifferent
 }

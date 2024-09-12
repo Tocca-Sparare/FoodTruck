@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3870954119313641295}
   - component: {fileID: 7872489531853874794}
   - component: {fileID: 5779733995559557743}
+  - component: {fileID: 357739838664324781}
   m_Layer: 6
   m_Name: BaseTable
   m_TagString: Untagged
@@ -49,6 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physicalTablePosition: {fileID: 2609304573701064798}
+  waitingTime: 0
+  warningDelays: 
 --- !u!114 &5779733995559557743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +67,20 @@ MonoBehaviour:
   dirtyStainsContainer: {fileID: 2732361672312558112}
   dirtyStainSprites:
   - {fileID: 9122803948629676711}
+--- !u!114 &357739838664324781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872109926490280162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b6684ac322b3f40b853e693ade3fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsToRemoveWhenUnsatisfied: 50
+  pointsOnSatisfied: 640000003c0000001e00000000000000
 --- !u!1 &2732361672312558112
 GameObject:
   m_ObjectHideFlags: 0
