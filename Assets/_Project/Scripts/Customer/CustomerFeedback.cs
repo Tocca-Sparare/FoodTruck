@@ -62,7 +62,7 @@ public class CustomerFeedback : MonoBehaviour
     void OnInit()
     {
         //set color
-        meshRenderer.sharedMaterial = customer.RequestedFood.material;
+        // meshRenderer.sharedMaterial = customer.RequestedFood.material;
         customer.Table.OnOrderReady += OnOrderReady;
     }
 

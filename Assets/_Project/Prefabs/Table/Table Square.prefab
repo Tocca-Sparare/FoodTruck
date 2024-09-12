@@ -76,7 +76,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 872109926490280162, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
       propertyPath: m_Name
-      value: Table Square Variant
+      value: Table Square
       objectReference: {fileID: 0}
     - target: {fileID: 3870954119313641295, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -117,6 +117,10 @@ PrefabInstance:
     - target: {fileID: 3870954119313641295, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872489531853874794, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
+      propertyPath: waitingTime
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

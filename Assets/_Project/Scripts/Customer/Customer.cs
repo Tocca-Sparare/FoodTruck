@@ -5,8 +5,6 @@ using UnityEngine;
 /// </summary>
 public class Customer : BasicStateMachine
 {
-    [Header("How many seconds the customer is going to wait at the table before leaving")]
-    [SerializeField] float waitingTime = 10;
     [SerializeField] CustomerNormalState normalState;
     [SerializeField] CustomerSatState satState;
     [SerializeField] CustomerLeavingState leavingState;
@@ -15,7 +13,6 @@ public class Customer : BasicStateMachine
     Food requestedFood;
     Chair currentChair;
     Vector3 exitPoint;
-    float remainingTimeBeforeLeave;
     int hungerLevel = 0;
     private Table table;
 
@@ -23,8 +20,6 @@ public class Customer : BasicStateMachine
     public Food RequestedFood => requestedFood;
     public Chair CurrentChair => currentChair;
     public Vector3 ExitPoint => exitPoint;
-    public float WaitingTime => waitingTime;
-    public float RemainingTimeBeforeLeave => remainingTimeBeforeLeave;
     public int[] HungryChangeSteps => hungryChangeSteps;
     public int HungerLevel => hungerLevel;
     public bool IsSatisfied => RequestedFood == null;
@@ -100,15 +95,6 @@ public class Customer : BasicStateMachine
     {
         requestedFood = null;
         OnSatisfyRequest?.Invoke();
-    }
-
-    /// <summary>
-    /// Set remaining time. At the end, the customer will leave unsatisfied, without give points
-    /// </summary>
-    /// <param name="remainingTime"></param>
-    public void SetTimerBeforeLeave(float remainingTime)
-    {
-        remainingTimeBeforeLeave = remainingTime;
     }
 
     public void IncreaseHunger()

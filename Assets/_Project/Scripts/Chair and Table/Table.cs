@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 /// <summary>
@@ -9,11 +9,13 @@ using UnityEngine;
 public class Table : MonoBehaviour
 {
     [SerializeField] Transform physicalTablePosition;
+    [SerializeField] int waitingTime;
 
     private List<Chair> chairs = new();
     private bool isDirty;
     private int approachingCustomersCount;
     private int satCustomersCount;
+    private Coroutine freeTableCoroutine;
 
     //events
     public System.Action<Food> OnDirtyTable;
@@ -110,7 +112,10 @@ public class Table : MonoBehaviour
     {
         customer.SatisfyRequest();
         if (IsAllCustomersSatisfied())
-            chairs.ForEach(c => c.CustomerSat?.Leave(ECustomerSatisfaction.Satisfied));
+        {
+            Free(ECustomerSatisfaction.Satisfied);
+            StopCoroutine(freeTableCoroutine);
+        }
     }
 
     void OnCustomerSat()
@@ -118,6 +123,18 @@ public class Table : MonoBehaviour
         satCustomersCount++;
 
         if (satCustomersCount == approachingCustomersCount) // table is complete
+        {
             OnOrderReady?.Invoke();
+            freeTableCoroutine = StartCoroutine(FreeTableAfterWaitingTime());
+        }
     }
+
+    IEnumerator FreeTableAfterWaitingTime()
+    {
+        yield return new WaitForSeconds(waitingTime);
+        Free(ECustomerSatisfaction.Unsatisfied);
+    }
+
+    void Free(ECustomerSatisfaction satisfaction)
+        => chairs.ForEach(c => c.CustomerSat?.Leave(satisfaction));
 }

@@ -36,17 +36,6 @@ public class CustomerSatState : State
         Chair targetChair = customer.CurrentChair;
         transformState.SetParent(targetChair.transform);
         transformState.SetPositionAndRotation(targetChair.transform.position, targetChair.transform.rotation);
-
-        //start timer to leave table unsatisfied
-        leaveTableAfterWaitingTime = StateMachine.StartCoroutine(LeaveTableAfterWaitingTime());
-
-        //start hunger coroutines
-        foreach (var percentage in customer.HungryChangeSteps)
-        {
-            var delay = percentage * customer.WaitingTime / 100;
-            var cor = StateMachine.StartCoroutine(InvokeHungerChangeAfter(delay));
-            hungerCoroutines.Add(cor);
-        }
     }
 
     protected override void OnExit()
@@ -59,20 +48,6 @@ public class CustomerSatState : State
 
         foreach (var cor in hungerCoroutines)
             StateMachine.StopCoroutine(cor);
-    }
-
-    private IEnumerator LeaveTableAfterWaitingTime()
-    {
-        //after few seconds, leave table unsatisfied
-        float timer = Time.time + customer.WaitingTime;
-        while (Time.time < timer)
-        {
-            customer.SetTimerBeforeLeave(timer - Time.time);
-            yield return null;
-        }
-
-        leaveTableAfterWaitingTime = null;
-        customer.Leave(ECustomerSatisfaction.Unsatisfied);
     }
 
     IEnumerator InvokeHungerChangeAfter(float delay)
