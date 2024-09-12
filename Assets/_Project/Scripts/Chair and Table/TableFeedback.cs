@@ -12,6 +12,7 @@ public class TableFeedback : MonoBehaviour
     [SerializeField] LoadingBar loadingBar;
 
     Table table;
+    TableInteractable tableInteractable;
 
     private void Awake()
     {
@@ -26,6 +27,10 @@ public class TableFeedback : MonoBehaviour
             table.OnCleanTable += OnCleanTable;
             table.OnCleaningTable += OnCleaningTable;
         }
+        if (tableInteractable)
+        {
+            tableInteractable.OnDismiss += OnDismiss;
+        }
     }
 
     private void OnDestroy()
@@ -36,6 +41,10 @@ public class TableFeedback : MonoBehaviour
             table.OnDirtyTable -= OnDirtyTable;
             table.OnCleanTable -= OnCleanTable;
             table.OnCleaningTable -= OnCleaningTable;
+        }
+        if (tableInteractable)
+        {
+            tableInteractable.OnDismiss -= OnDismiss;
         }
     }
 
@@ -59,5 +68,11 @@ public class TableFeedback : MonoBehaviour
     void OnCleaningTable(float percentage)
     {
         loadingBar.Updatebar(percentage);
+    }
+
+    void OnDismiss()
+    {
+        //hide dirty
+        dirtyStainsContainer.SetActive(false);
     }
 }

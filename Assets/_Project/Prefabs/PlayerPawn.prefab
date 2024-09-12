@@ -69,6 +69,8 @@ MonoBehaviour:
     raycastLayer:
       data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
       elementName: PlayerUsingCannonState - MouseRaycast
+  PlayerCleaningState:
+    stopCleaningDistance: 2
   TrasnportingObjectsState:
     throwForce: 10
     verticalThrow: 0.5
@@ -111,7 +113,7 @@ MonoBehaviour:
   interactLayer:
     data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
     elementName: InteractComponent - Interactables Layer
-  maxAngle: 50
+  maxAngle: 100
   showRadiusDebug: 0
 --- !u!54 &2724849363099509092
 Rigidbody:
