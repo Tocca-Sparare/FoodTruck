@@ -19,6 +19,7 @@ public class Table : MonoBehaviour
     private int approachingCustomersCount;
     private int satCustomersCount;
     private Coroutine freeTableCoroutine;
+    private List<Coroutine> hungerIncreseCoroutines = new List<Coroutine>();
     private int hungerLevel;
 
     //events
@@ -120,6 +121,8 @@ public class Table : MonoBehaviour
         {
             Free(ECustomerSatisfaction.Satisfied);
             StopCoroutine(freeTableCoroutine);
+            foreach (var c in hungerIncreseCoroutines)
+                StopCoroutine(c);
         }
     }
 
@@ -140,7 +143,7 @@ public class Table : MonoBehaviour
         foreach (var delay in warningDelays)
         {
             var delayInSeconds = waitingTime * delay / 100;
-            StartCoroutine(IncreaseHungerAfter(delayInSeconds));
+            hungerIncreseCoroutines.Add(StartCoroutine(IncreaseHungerAfter(delayInSeconds)));
         }
     }
 
