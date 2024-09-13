@@ -2060,8 +2060,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   singlePlayer: SampleScene
-  localMultiplayer: LocalMultiplayer
-  onlineMultiplayer: OnlineMultiplayer
+  localMultiplayer: 
+  onlineMultiplayer: 
   eventSystemController: {fileID: 1556989559}
   mainMenu: {fileID: 1420597926}
   optionsMenu: {fileID: 660437868}
