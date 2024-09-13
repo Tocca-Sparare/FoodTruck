@@ -12,10 +12,10 @@ public class LobbyOnlineUI : MonoBehaviour
     [SceneInstance][SerializeField] string backButtonScene;
     [SceneInstance][SerializeField] string selectLevelScene;
     [Space]
-    [SerializeField] TMP_Text roomCodeText;
-    [SerializeField] Button[] buttonsToDisableIfNotServer;
     [SerializeField] GameObject joinedPlayerPrefab;
     [SerializeField] Transform joinedPlayersContainer;
+    [SerializeField] TMP_Text roomCodeText;
+    [SerializeField] Button[] buttonsToDisableIfNotServer;
 
     [Header("Auto register to events")]
     [SerializeField] Button startGameButton;
@@ -90,12 +90,13 @@ public class LobbyOnlineUI : MonoBehaviour
     {
         string onlineID = user.Object.Id.ToString();
 
+        //instantiate object in UI
         if (joinedPlayers.ContainsKey(onlineID) == false)
         {
-            //instantiate object in UI
             GameObject go = Instantiate(joinedPlayerPrefab, joinedPlayersContainer);
             go.GetComponentInChildren<TMP_Text>().text = user.PlayerName;
             go.GetComponentInChildren<Image>().color = NetworkManager.instance.ColorsForPlayers[user.PlayerIndex];
+            go.SetActive(true);
 
             //and add to dictionary
             joinedPlayers.Add(onlineID, go);
