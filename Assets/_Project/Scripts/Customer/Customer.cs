@@ -77,16 +77,20 @@ public class Customer : BasicStateMachine
     /// Leave table
     /// </summary>
     /// <param name="satisfied"></param>
-    public void Leave(EOrderSatisfaction satisfied)
+    public void Leave(EOrderSatisfaction satisfied) // TODO da rimuovere lo stato qui
     {
         //stand up and set state
         SetState(leavingState);
         currentChair.CustomerStandUp();
 
         if (satisfied == EOrderSatisfaction.Satisfied)
+        {
             OnSatisfied?.Invoke();
+        }
         else if (satisfied == EOrderSatisfaction.Unsatisfied)
+        {
             OnUnsatisfied?.Invoke();
+        }
 
         OnStandUp?.Invoke();
     }

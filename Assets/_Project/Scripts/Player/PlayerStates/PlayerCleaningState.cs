@@ -3,7 +3,6 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerCleaningState : State
 {
-
     PlayerPawn player;
     InputManager inputManager;
     PlayerStateMachine playerStateMachine;
@@ -19,7 +18,8 @@ public class PlayerCleaningState : State
         if (player.CurrentController == null || player.CurrentController.TryGetComponent(out inputManager) == false)
             Debug.LogError($"Missing inputManager on {GetType().Name}", StateMachine);
         playerStateMachine = GetStateMachine<PlayerStateMachine>();
-        if (playerStateMachine == null) Debug.LogError($"Statemachine isn't PlayerStateMachine on {GetType().Name}", StateMachine);
+        if (playerStateMachine == null)
+            Debug.LogError($"Statemachine isn't PlayerStateMachine on {GetType().Name}", StateMachine);
     }
 
     protected override void OnUpdate()
@@ -31,7 +31,9 @@ public class PlayerCleaningState : State
             return;
 
         if (inputManager.InteractIsPressed)
+        {
             tableInteractable.Clean(Time.deltaTime);
+        }
         else
         {
             playerStateMachine.SetState(playerStateMachine.NormalState);

@@ -1,3 +1,4 @@
+using System;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
@@ -23,8 +24,8 @@ public class TableFeedback : MonoBehaviour
         if (table)
         {
             table.OnDirtyTable += OnDirtyTable;
-            table.OnCleanTable += OnCleanTable;
-            table.OnCleaning += OnCleaningTable;
+            table.OnUpdateClean += OnUpdateClean;
+            table.OnTableClean += OnTableClean;
         }
     }
 
@@ -34,8 +35,8 @@ public class TableFeedback : MonoBehaviour
         if (table)
         {
             table.OnDirtyTable -= OnDirtyTable;
-            table.OnCleanTable -= OnCleanTable;
-            table.OnCleaning -= OnCleaningTable;
+            table.OnUpdateClean -= OnUpdateClean;
+            table.OnTableClean -= OnTableClean;
         }
     }
 
@@ -50,14 +51,13 @@ public class TableFeedback : MonoBehaviour
         dirtyStainsContainer.SetActive(true);
     }
 
-    void OnCleanTable()
-    {
-        //hide dirty
-        dirtyStainsContainer.SetActive(false);
-    }
-
-    void OnCleaningTable(float percentage)
+    void OnUpdateClean(float percentage)
     {
         loadingBar.Updatebar(percentage);
+    }
+
+    private void OnTableClean()
+    {
+        dirtyStainsContainer.SetActive(false);
     }
 }

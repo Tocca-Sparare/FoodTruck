@@ -15,44 +15,45 @@ public class TableDirtyState : State
         table = GetStateMachine<Table>();
         if (table == null && TryGetStateMachineUnityComponent(out table) == false)
             Debug.LogError($"Missing Table on {GetType().Name}", StateMachine);
-
     }
 
     protected override void OnEnter()
     {
         base.OnEnter();
 
-        table.OnCleaning += DoCleaning;
-
-        remaningCleaningTime = cleaningTime;
         table.OnDirtyTable?.Invoke(null);
 
-        foreach (var c in table.Chairs)
-        {
-            if (c.IsCustomerSat)
-                c.CustomerSat.Leave(EOrderSatisfaction.Unsatisfied);     //unsatisfied if already sat
-            else if (c.IsAvailable == false)
-                c.CustomerSat.Leave(EOrderSatisfaction.Indifferent);     //else, indifferent (don't lose points)
-        }
+        remaningCleaningTime = cleaningTime;
+
+        table.OnCleaning += OnCleaning;
+        table.Chairs.ForEach(c => c.OnCustomerSat += table.OnCustomerSat);
     }
 
     protected override void OnExit()
     {
         base.OnExit();
 
-        table.OnCleaning -= DoCleaning;
+        table.OnCleaning -= OnCleaning;
+        table.Chairs.ForEach(c => c.OnCustomerSat -= table.OnCustomerSat);
     }
 
-    public void DoCleaning(float deltaTime)
+    private void OnCleaning(float deltaTime)
     {
         remaningCleaningTime -= deltaTime;
-        // table.OnCleaning?.Invoke(remaningCleaningTime * 100 / cleaningTime); // TODO non si aggiorna il loading bar
+        table.OnUpdateClean?.Invoke(remaningCleaningTime * 100 / cleaningTime);
 
-        if (remaningCleaningTime < 0)
+        if (remaningCleaningTime <= 0)
         {
             remaningCleaningTime = 0;
-            table.OnCleanTable?.Invoke();
-            StateMachine.SetState(table.NormalState);
+            table.OnTableClean?.Invoke();
+            if (table.CustomersOnTableCount > 0)
+            {
+                StateMachine.SetState(table.OrderReadyState);
+            }
+            else
+            {
+                StateMachine.SetState(table.NormalState);
+            }
         }
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,20 +13,21 @@ public class Table : BasicStateMachine
 
 
     [SerializeField] Transform physicalTablePosition;
-    public  List<Chair> Chairs {get; set;}
+    public List<Chair> Chairs { get; set; }
     public int IncomingCustomersCount { get; set; }
     public int CustomersOnTableCount { get; set; }
     public int HungerLevel { get; set; }
 
     //events
     public System.Action<Food> OnDirtyTable;
-    public System.Action OnCleanTable;
-    public System.Action<float> OnCleaning;
     public System.Action OnOrderReady;
     public System.Action<int> OnHungerLevelIncreased;
     public System.Action OnOrderSatisfied;
     public System.Action OnOrderNotSatisfied;
     public System.Action<Food> OnHit;
+    public System.Action<float> OnCleaning;
+    public System.Action<float> OnUpdateClean;
+    public System.Action OnTableClean;
 
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
     public bool IsAvailable => !IsDirty && Chairs.All(c => c.IsAvailable);
@@ -36,7 +36,7 @@ public class Table : BasicStateMachine
 
     void Awake()
     {
-       SetState(NormalState);
+        SetState(NormalState);
     }
 
     public Chair GetRandomAvailableChair()
@@ -59,14 +59,28 @@ public class Table : BasicStateMachine
         OnHit?.Invoke(food);
     }
 
-    public void DoClean(float deltaTime)
+    public void SetApproachingCustomersCount(int count)
+    {
+        SetState(NormalState);
+        IncomingCustomersCount = count;
+        CustomersOnTableCount = 0;
+    }
+
+    public void Clean(float deltaTime)
     {
         OnCleaning?.Invoke(deltaTime);
     }
-
-    public void SetApproachingCustomersCount(int count)
+    
+    public void OnCustomerSat()
     {
-        IncomingCustomersCount = count;
-        CustomersOnTableCount = 0;
+        CustomersOnTableCount++;
+
+        if (CustomersOnTableCount == IncomingCustomersCount)
+        {
+            if (!IsDirty)
+            {
+                SetState(OrderReadyState);
+            }
+        }
     }
 }

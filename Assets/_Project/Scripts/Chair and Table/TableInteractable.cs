@@ -35,6 +35,6 @@ public class TableInteractable : MonoBehaviour, IInteractable
 
     public void Clean(float deltaTime)
     {
-       table.DoClean(deltaTime);
+        table.Clean(deltaTime);
     }
 }

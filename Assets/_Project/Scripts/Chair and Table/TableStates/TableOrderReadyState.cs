@@ -30,13 +30,15 @@ public class TableOrderReadyState : State
     {
         base.OnEnter();
 
-        satisfiedCustomersCount = 0;
         table.OnOrderReady?.Invoke();
+
+        table.OnHit += OnTableHit;
+
+        table.HungerLevel = 0;
+        satisfiedCustomersCount = 0;
 
         freeTableCoroutine = StateMachine.StartCoroutine(FreeTableAfterWaitingTime());
         StartHungerIncreaseCoroutines();
-
-        table.OnHit += OnTableHit;
     }
 
     protected override void OnExit()
@@ -63,7 +65,6 @@ public class TableOrderReadyState : State
     IEnumerator FreeTableAfterWaitingTime()
     {
         yield return new WaitForSeconds(waitingTime);
-        table.OnOrderNotSatisfied?.Invoke();
         Free(EOrderSatisfaction.Unsatisfied);
     }
 
@@ -76,13 +77,18 @@ public class TableOrderReadyState : State
 
     void Free(EOrderSatisfaction satisfaction)
     {
-        table.HungerLevel = 0;
         table.Chairs.ForEach(c => c.CustomerSat?.Leave(satisfaction));
 
         if (satisfaction == EOrderSatisfaction.Satisfied)
+        {
+            table.OnOrderSatisfied?.Invoke();
             StateMachine.SetState(table.DirtyState);
+        }
         else
+        {
+            table.OnOrderNotSatisfied?.Invoke();
             StateMachine.SetState(table.NormalState);
+        }
     }
 
     void OnTableHit(Food food)
@@ -96,7 +102,11 @@ public class TableOrderReadyState : State
         if (chair)
             SetCustomerSatisfy(chair.CustomerSat);
         else
+        {
+            table.Chairs.ForEach(c => c.CustomerSat?.Leave(EOrderSatisfaction.Unsatisfied));
+            table.OnOrderNotSatisfied?.Invoke();
             StateMachine.SetState(table.DirtyState);
+        }
     }
 
     void SetCustomerSatisfy(Customer customer)
@@ -105,7 +115,6 @@ public class TableOrderReadyState : State
         satisfiedCustomersCount++;
         if (satisfiedCustomersCount == table.CustomersOnTableCount)
         {
-            table.OnOrderSatisfied?.Invoke();
             Free(EOrderSatisfaction.Satisfied);
         }
     }

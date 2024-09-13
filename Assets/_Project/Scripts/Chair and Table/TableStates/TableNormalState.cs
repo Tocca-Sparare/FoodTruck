@@ -16,14 +16,17 @@ public class TableNormalState : State
             Debug.LogError($"Missing Table on {GetType().Name}", StateMachine);
 
         table.Chairs = table.GetComponentsInChildren<Chair>().ToList();
-        table.Chairs.ForEach(c => c.OnCustomerSat += OnCustomerSat);
     }
 
     protected override void OnEnter()
     {
         base.OnEnter();
 
+        table.IncomingCustomersCount = 0;
+        table.CustomersOnTableCount = 0;
+        
         table.OnHit += OnTableHit;
+        table.Chairs.ForEach(c => c.OnCustomerSat += table.OnCustomerSat);
     }
 
     protected override void OnExit()
@@ -31,23 +34,7 @@ public class TableNormalState : State
         base.OnExit();
         
         table.OnHit -= OnTableHit;
-    }
-
-    public void OnCustomerSat()
-    {
-        table.CustomersOnTableCount++;
-
-        if (table.CustomersOnTableCount == table.IncomingCustomersCount)
-        {
-            if (table.IsDirty)
-            {
-                StateMachine.SetState(GetStateMachine<Table>().DirtyState);
-            }
-            else
-            {
-                StateMachine.SetState(GetStateMachine<Table>().OrderReadyState);
-            }
-        }
+        table.Chairs.ForEach(c => c.OnCustomerSat -= table.OnCustomerSat);
     }
 
     void OnTableHit(Food food)
