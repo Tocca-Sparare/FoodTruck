@@ -1,7 +1,6 @@
 using redd096.Attributes;
 using redd096.UIControl;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -17,7 +16,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject optionsMenu;
 
-    [Header("Auto set events")]
+    [Header("Auto register to events")]
     [SerializeField] Button localButton;
     [SerializeField] Button onlineButton;
     [SerializeField] Button optionsButton;
@@ -26,6 +25,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
+        //Auto register to events
         if (localButton) localButton.onClick.AddListener(OnClickSinglePlayer);
         if (onlineButton) onlineButton.onClick.AddListener(OnClickMultiplayerOnline);
         if (optionsButton) optionsButton.onClick.AddListener(OnClickOptions);
@@ -35,6 +35,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnDestroy()
     {
+        //unregister events
         if (localButton) localButton.onClick.RemoveListener(OnClickSinglePlayer);
         if (onlineButton) onlineButton.onClick.RemoveListener(OnClickMultiplayerOnline);
         if (optionsButton) optionsButton.onClick.RemoveListener(OnClickOptions);
@@ -44,12 +45,12 @@ public class MainMenuUI : MonoBehaviour
 
     public void OnClickSinglePlayer()
     {
-        SceneManager.LoadScene(local);
+        SceneLoader.LoadScene(local);
     }
 
     public void OnClickMultiplayerOnline()
     {
-        SceneManager.LoadScene(online);
+        SceneLoader.LoadScene(online);
     }
 
     public void OnClickOptions()
@@ -76,10 +77,6 @@ public class MainMenuUI : MonoBehaviour
 
     public void OnClickConfirmOnPopup()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        SceneLoader.ExitGame();
     }
 }

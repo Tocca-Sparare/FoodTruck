@@ -22,8 +22,9 @@ public class OptionsUI : MonoBehaviour
     [Space]
     [SerializeField] TMP_Text fullScreenText;
     [SerializeField] SwitchToggle fullScreenToggle;
-    [SerializeField] string fullScreenOn = "On";
-    [SerializeField] string fullScreenOff = "Off";
+
+    const string fullScreenOn = "On";
+    const string fullScreenOff = "Off";
 
     //update ui in Start, so if we want to load values in GameManager Awake we have time
     private void Start()
@@ -40,6 +41,19 @@ public class OptionsUI : MonoBehaviour
 
         //update ui
         UpdateUI();
+    }
+
+    private void OnDestroy()
+    {
+        //unregister events
+        if (autoRegisterEvents)
+        {
+            masterVolumeSlider.onValueChanged.RemoveListener(OnSetMasterVolume);
+            musicVolumeSlider.onValueChanged.RemoveListener(OnSetMusicVolume);
+            sfxVolumeSlider.onValueChanged.RemoveListener(OnSetSfxVolume);
+            uiVolumeSlider.onValueChanged.RemoveListener(OnSetUIVolume);
+            fullScreenToggle.onValueChanged.RemoveListener(OnSetFullScreen);
+        }
     }
 
     #region public API
