@@ -93,6 +93,8 @@ public class TableOrderReadyState : State
 
     void OnTableHit(Food food)
     {
+        table.LastFood = food;
+
         Chair chair = table.Chairs.Where(
             c => c.IsCustomerSat
             && !c.CustomerSat.IsSatisfied

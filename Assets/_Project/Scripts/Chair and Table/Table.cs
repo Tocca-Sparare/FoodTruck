@@ -17,6 +17,7 @@ public class Table : BasicStateMachine
     public int IncomingCustomersCount { get; set; }
     public int CustomersOnTableCount { get; set; }
     public int HungerLevel { get; set; }
+    public Food LastFood { get; set; }
 
     //events
     public System.Action<Food> OnDirtyTable;
@@ -36,6 +37,7 @@ public class Table : BasicStateMachine
 
     void Awake()
     {
+        Chairs = GetComponentsInChildren<Chair>().ToList();
         SetState(NormalState);
     }
 

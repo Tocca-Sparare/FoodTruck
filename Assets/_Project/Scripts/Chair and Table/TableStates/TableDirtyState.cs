@@ -21,7 +21,7 @@ public class TableDirtyState : State
     {
         base.OnEnter();
 
-        table.OnDirtyTable?.Invoke(null);
+        table.OnDirtyTable?.Invoke(table.LastFood);
 
         remaningCleaningTime = cleaningTime;
 
@@ -45,6 +45,7 @@ public class TableDirtyState : State
         if (remaningCleaningTime <= 0)
         {
             remaningCleaningTime = 0;
+            table.LastFood = null;
             table.OnTableClean?.Invoke();
             if (table.CustomersOnTableCount > 0)
             {

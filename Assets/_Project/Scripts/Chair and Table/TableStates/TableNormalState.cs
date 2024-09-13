@@ -14,8 +14,6 @@ public class TableNormalState : State
         table = GetStateMachine<Table>();
         if (table == null && TryGetStateMachineUnityComponent(out table) == false)
             Debug.LogError($"Missing Table on {GetType().Name}", StateMachine);
-
-        table.Chairs = table.GetComponentsInChildren<Chair>().ToList();
     }
 
     protected override void OnEnter()
@@ -39,7 +37,7 @@ public class TableNormalState : State
 
     void OnTableHit(Food food)
     {
-        //TODO food non viene usato per colorare le macchie 
+        table.LastFood = food;
         StateMachine.SetState(table.DirtyState);
     }
 }
