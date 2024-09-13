@@ -11,6 +11,8 @@ public class UsePlayerInputManagerInEditor : MonoBehaviour
     PlayerInputManager playerInputManager;
     LevelManager levelManager;
 
+    bool isCorrectInstance;
+
     private void Awake()
     {
         //get refs
@@ -30,8 +32,9 @@ public class UsePlayerInputManagerInEditor : MonoBehaviour
             return;
         }
 
-        //if this isn't the correct input manager, destroy 
-        if (IsCorrectPlayerInputManager() == false)
+        //if this isn't the correct input manager, destroy
+        isCorrectInstance = IsCorrectPlayerInputManager();
+        if (isCorrectInstance == false)
         {
             playerInputManager = null;  //remove to avoid unregister from events in OnDestroy event
             Destroy(gameObject);
@@ -62,20 +65,20 @@ public class UsePlayerInputManagerInEditor : MonoBehaviour
     private void OnPlayerJoined(PlayerInput input)
     {
         //add player controller, and tell to LevelManager
-        if (IsCorrectPlayerInputManager())
+        if (isCorrectInstance)
             levelManager.AddPlayerInEditorForTestLocalMultiplayer(input);
     }
 
     private void OnPlayerLeft(PlayerInput input)
     {
         //remove player controller
-        if (IsCorrectPlayerInputManager())
+        if (isCorrectInstance)
             Destroy(input.gameObject);
     }
 
     /// <summary>
     /// The PlayerInputManager in the lobby doesn't have this script.
-    /// So, if this is the PlayerInputManager instance, then we started the game from the gameplay scene (so we are in editor)
+    /// So, if this is the PlayerInputManager instance and there aren't players in scene, then we started the game from the gameplay scene (so we are in editor)
     /// </summary>
     /// <returns></returns>
     bool IsCorrectPlayerInputManager()
@@ -83,7 +86,9 @@ public class UsePlayerInputManagerInEditor : MonoBehaviour
         //return true if this is the correct instance
         if (PlayerInputManager.instance != null && PlayerInputManager.instance == playerInputManager)
         {
-            return true;
+            //and there aren't players in scene
+            if (FindObjectsOfType<PlayerController>().Length <= 0)
+                return true;
         }
 
         return false;

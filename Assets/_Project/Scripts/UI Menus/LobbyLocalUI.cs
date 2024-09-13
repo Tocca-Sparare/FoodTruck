@@ -85,10 +85,10 @@ public class LobbyLocalUI : MonoBehaviour
         //instantiate object in UI
         if (joinedPlayers.ContainsKey(input) == false)
         {
+            User user = input.GetComponent<User>();
             GameObject go = Instantiate(joinedPlayerPrefab, joinedPlayersContainer);
-            User user = go.GetComponent<User>();
-            go.GetComponentInChildren<TMP_Text>().text = "Player " + (user.PlayerIndex + 1);    //+1 to show "Player 1" instead of "Player 0"
-            go.GetComponentInChildren<Image>().color = NetworkManager.instance.ColorsForPlayers[user.PlayerIndex];
+            go.GetComponentInChildren<TMP_Text>(true).text = "Player " + (user.PlayerIndex + 1);    //+1 to show "Player 1" instead of "Player 0"
+            go.GetComponentInChildren<Image>(true).color = NetworkManager.instance.ColorsForPlayers[user.PlayerIndex];
             go.SetActive(true);
 
             //and add to dictionary

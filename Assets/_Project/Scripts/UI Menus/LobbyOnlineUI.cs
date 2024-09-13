@@ -94,8 +94,8 @@ public class LobbyOnlineUI : MonoBehaviour
         if (joinedPlayers.ContainsKey(onlineID) == false)
         {
             GameObject go = Instantiate(joinedPlayerPrefab, joinedPlayersContainer);
-            go.GetComponentInChildren<TMP_Text>().text = user.PlayerName;
-            go.GetComponentInChildren<Image>().color = NetworkManager.instance.ColorsForPlayers[user.PlayerIndex];
+            go.GetComponentInChildren<TMP_Text>(true).text = user.PlayerName;
+            go.GetComponentInChildren<Image>(true).color = NetworkManager.instance.ColorsForPlayers[user.PlayerIndex];
             go.SetActive(true);
 
             //and add to dictionary
@@ -124,7 +124,7 @@ public class LobbyOnlineUI : MonoBehaviour
         {
             //update player username in UI
             GameObject go = joinedPlayers[onlineID];
-            go.GetComponentInChildren<TMP_Text>().text = user.PlayerName;
+            go.GetComponentInChildren<TMP_Text>(true).text = user.PlayerName;
         }
     }
 
