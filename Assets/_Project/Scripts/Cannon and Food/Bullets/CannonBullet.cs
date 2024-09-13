@@ -16,6 +16,8 @@ public abstract class CannonBullet : MonoBehaviour
     float lifeTimeTimer;
     bool isDestroyed;
 
+    public float Speed => speed;
+
     protected abstract void OnHitCorrectLayer(Collider other);
 
     private void Awake()
@@ -32,9 +34,6 @@ public abstract class CannonBullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //move
-        rb.velocity = transform.forward * speed;
-
         //destroy after few seconds
         if (Time.time > lifeTimeTimer)
         {

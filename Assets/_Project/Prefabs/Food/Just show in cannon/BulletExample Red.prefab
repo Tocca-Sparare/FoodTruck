@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletExample Red
       objectReference: {fileID: 0}
+    - target: {fileID: 2166551290999426805, guid: 8966048d8b61a884cbeb9e9e8299c131, type: 3}
+      propertyPath: SortKey
+      value: 23404700
+      objectReference: {fileID: 0}
     - target: {fileID: 7943690935492548638, guid: 8966048d8b61a884cbeb9e9e8299c131, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

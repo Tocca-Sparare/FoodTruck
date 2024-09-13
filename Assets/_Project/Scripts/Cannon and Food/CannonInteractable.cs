@@ -146,7 +146,8 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         //instantiate bullet
         if (bulletPrefab)
         {
-            InstantiateHelper.Instantiate(bulletPrefab, bulletSpawnPosition, bulletRotation);
+            var bullet = InstantiateHelper.Instantiate(bulletPrefab, bulletSpawnPosition, bulletRotation);
+            bullet.GetComponent<Rigidbody>().velocity = bulletDirection * bullet.Speed; //set movement
             OnShoot?.Invoke();
             RemoveBullet();
         }

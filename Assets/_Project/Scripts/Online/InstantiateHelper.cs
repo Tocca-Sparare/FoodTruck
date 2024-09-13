@@ -26,8 +26,33 @@ public static class InstantiateHelper
         return Object.Instantiate(prefab, position, rotation);
     }
 
-    public static T Instantiate<T>(T prefab, Transform parent) where T : Object
+    /// <summary>
+    /// Instantiate and set parent
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="prefab"></param>
+    /// <param name="parent"></param>
+    /// <param name="onlyLocal">Also if we are online, instantiate only in local</param>
+    /// <returns></returns>
+    public static T Instantiate<T>(T prefab, Transform parent, bool onlyLocal = false) where T : Object
     {
+        //online
+        if (onlyLocal == false && NetworkManager.IsOnline)
+        {
+            if (NetworkManager.instance.Runner.IsServer && GetGameObject(prefab).TryGetComponent(out NetworkObject networkObj))
+            {
+                var spawned = NetworkManager.instance.Runner.Spawn(networkObj, parent.position, parent.rotation).GetComponent<T>();
+                GetGameObject(spawned).transform.SetParent(parent);
+                return spawned;
+            }
+            else
+            {
+                Debug.LogError($"Error to spawn online {prefab}. This isn't the server or this isn't a NetworkObject!");
+                return null;
+            }
+        }
+
+        //local
         return Object.Instantiate(prefab, parent);
     }
 

@@ -77,8 +77,7 @@ public class CustomerSpawner : MonoBehaviour
 
                     for (int i = 0; i < randomCustomerCount; i++)
                     {
-                        var newCustomer = InstantiateHelper.Instantiate(customerPrefab, spawnPointTransform);
-                        newCustomer.transform.position = spawnPointTransform.position;
+                        var newCustomer = InstantiateHelper.Instantiate(customerPrefab, spawnPointTransform.position, spawnPointTransform.rotation);
                         newCustomer.Init(ingredientsManager.GetRandomIngredient(), table, spawnPointTransform.position);
                         yield return new WaitForSecondsRealtime(.5f);
                     }

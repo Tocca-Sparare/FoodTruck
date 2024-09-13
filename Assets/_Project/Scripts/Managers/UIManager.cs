@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
         {
             pointsManager.OnAddPoints += OnAddPoints;
             pointsManager.OnRemovePoints += OnRemovePoints;
+            pointsManager.OnSetPoints += OnSetPoints;
         }
     }
 
@@ -56,6 +57,7 @@ public class UIManager : MonoBehaviour
         {
             pointsManager.OnAddPoints -= OnAddPoints;
             pointsManager.OnRemovePoints -= OnRemovePoints;
+            pointsManager.OnSetPoints -= OnSetPoints;
         }
     }
 
@@ -101,6 +103,11 @@ public class UIManager : MonoBehaviour
     }
 
     private void OnRemovePoints(int currentPoints)
+    {
+        SetPointsText(currentPoints);
+    }
+
+    private void OnSetPoints(int currentPoints)
     {
         SetPointsText(currentPoints);
     }

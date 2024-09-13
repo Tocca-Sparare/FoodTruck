@@ -31,7 +31,7 @@ public class CustomerFeedback : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         audioSource = GetComponentInChildren<AudioSource>();
 
-        InstantiateHelper.Instantiate(prefabHats[Random.Range(0, prefabHats.Count)], hatTransform);
+        InstantiateHelper.Instantiate(prefabHats[Random.Range(0, prefabHats.Count)], hatTransform, onlyLocal: true);
 
         //add events
         customer.OnInit += OnInit;

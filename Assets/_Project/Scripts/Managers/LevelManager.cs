@@ -73,8 +73,10 @@ public class LevelManager : MonoBehaviour
 
         //start spawner
         CustomerSpawner customerSpawner = FindObjectOfType<CustomerSpawner>();
-        if (customerSpawner == null) Debug.LogError($"Missing customerSpawner on {name}", gameObject);
-        customerSpawner.Init();
+        if (customerSpawner) 
+            customerSpawner.Init();
+        else 
+            Debug.LogError($"Missing customerSpawner on {name}", gameObject);        
     }
 
     void OnFinishLevel()

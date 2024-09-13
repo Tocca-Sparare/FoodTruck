@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: material
       value: 
       objectReference: {fileID: 2100000, guid: e4651f367c1af274bb42d2ed425e5d67, type: 2}
+    - target: {fileID: 4664884340538664104, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
+      propertyPath: SortKey
+      value: 789708642
+      objectReference: {fileID: 0}
     - target: {fileID: 5601782707301866134, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
