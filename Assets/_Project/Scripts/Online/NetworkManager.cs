@@ -20,7 +20,7 @@ public class NetworkManager : Singleton<NetworkManager>, INetworkRunnerCallbacks
     public Color[] ColorsForPlayers => colorsForPlayers;
 
     //events
-    public System.Action<User> OnPlayerEnter, OnPlayerRefreshName, OnPlayerExit;
+    public System.Action<UserOnline> OnPlayerEnter, OnPlayerRefreshName, OnPlayerExit;
     public System.Action<NetworkInput> OnInputCallback;
     public System.Action OnFailJoinRoom;
     public System.Action<string> OnFailStartGame;

@@ -8,10 +8,7 @@ using UnityEngine;
 public class User : MonoBehaviour
 {
     InputManager inputManager;
-
-    public InputManager InputManager => inputManager;
-    public int PlayerIndex => inputManager.PlayerInput.playerIndex;
-    public string PlayerName { get; set; }
+    public int PlayerIndex { get { if (inputManager == null) inputManager = GetComponent<InputManager>(); return inputManager.PlayerInput.playerIndex; } }
 
     private void Awake()
     {

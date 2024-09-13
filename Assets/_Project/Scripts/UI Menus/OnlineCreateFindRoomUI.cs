@@ -43,6 +43,7 @@ public class OnlineCreateFindRoomUI : MonoBehaviour
         if (NetworkManager.instance == null)
         {
             Debug.LogError($"Missing network manager on {name}", gameObject);
+            return;
         }
 
         //register to events

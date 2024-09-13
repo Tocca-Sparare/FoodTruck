@@ -2059,7 +2059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9be1c6426ba5d84c92e17fe447dc7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  local: LocalLobby
+  local: 
   online: OnlineCreateFindRoom
   eventSystemController: {fileID: 1556989559}
   mainMenu: {fileID: 1420597926}
@@ -2316,8 +2316,6 @@ MonoBehaviour:
   uiVolumeSlider: {fileID: 1417397989}
   fullScreenText: {fileID: 901956651}
   fullScreenToggle: {fileID: 6118653907867762070}
-  fullScreenOn: On
-  fullScreenOff: Off
 --- !u!224 &1417397988 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4363798342723610785, guid: eb2bfa0563f8c84489aa2da7c676d8c8, type: 3}

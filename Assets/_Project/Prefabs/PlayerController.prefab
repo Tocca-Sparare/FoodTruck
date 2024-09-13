@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 5030101667149936619}
   - component: {fileID: 4150827097238909672}
   - component: {fileID: 8268587319425427991}
+  - component: {fileID: 2891989784611934123}
+  - component: {fileID: 1204249920939800867}
+  - component: {fileID: 2688286104056221245}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -100,5 +103,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91b0da7c2e5407145b50444ecc7f7e8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MouseSchemeName: MouseAndKeyboard
+--- !u!114 &2891989784611934123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8072690345919354595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffadefc5f6b653c4ab579b06c570242a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _PlayerName: 
+--- !u!114 &1204249920939800867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8072690345919354595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1646038386
+  ObjectInterest: 1
+  Flags: 786433
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 2891989784611934123}
+  - {fileID: 2688286104056221245}
+--- !u!114 &2688286104056221245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8072690345919354595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a658c55e098ddd4d8b220b104b436da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
