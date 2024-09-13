@@ -5,6 +5,8 @@ public class TableInteractable : MonoBehaviour, IInteractable
     InteractComponent interactingPlayer;
     Table table;
 
+    public System.Action OnDismiss;
+
     void Awake()
     {
         table = GetComponent<Table>();
@@ -30,7 +32,15 @@ public class TableInteractable : MonoBehaviour, IInteractable
 
     public void Dismiss()
     {
+        PlayerStateMachine playerStateMachine = interactingPlayer.GetComponent<PlayerStateMachine>();
+        if (playerStateMachine)
+        {
+            playerStateMachine.SetState(playerStateMachine.NormalState);
+        }
+
         interactingPlayer = null;
+
+        OnDismiss?.Invoke();
     }
 
     public void Clean(float deltaTime)

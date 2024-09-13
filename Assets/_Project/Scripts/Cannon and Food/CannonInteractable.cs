@@ -1,4 +1,3 @@
-using redd096.Attributes;
 using UnityEngine;
 
 /// <summary>
@@ -7,8 +6,8 @@ using UnityEngine;
 public class CannonInteractable : MonoBehaviour, IInteractable
 {
     [Tooltip("Where snap the player on interact")][SerializeField] Transform playerTransform;
+    [Tooltip("When insert a bullet, show it here")][SerializeField] Transform bulletContainer;
     [Space]
-    [SerializeField] CannonBullet bulletPrefab;
     [Tooltip("Where spawn the bullet")][SerializeField] Transform bulletSpawn;
     [Tooltip("Used to check if hit table")][SerializeField] LayerMaskClass hittableLayer;
     [Space]
@@ -16,6 +15,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     [Tooltip("Limit horizontal rotation when look right")][Range(0f, 180f)][SerializeField] float maxRotationLimit = 70f;
     [Tooltip("Can shoot every X seconds")][SerializeField] float fireRate = 0.2f;
 
+    CannonBullet bulletPrefab;
     InteractComponent playerUsingThisCannon;
     Vector3 bulletSpawnOffset;
     Vector3 aimDirection;
@@ -23,9 +23,12 @@ public class CannonInteractable : MonoBehaviour, IInteractable
 
     public System.Action<Vector3> OnUpdateAimDirection;
     public System.Action OnShoot;
+    public System.Action<Vector3, Quaternion> OnShootButNoAmmo;
+    public System.Action<CannonBullet> OnInsertBullet;
+    public System.Action OnRemoveBullet;
 
-    public CannonBullet Bullet => bulletPrefab;
     public Transform PlayerTransform => playerTransform;
+    public Transform BulletContainer => bulletContainer;
 
 #if UNITY_EDITOR
 
@@ -37,12 +40,6 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(minRotationLimit, Vector3.up) * dir);
         Gizmos.DrawLine(transform.position, transform.position + Quaternion.AngleAxis(maxRotationLimit, Vector3.up) * dir);
         Gizmos.color = Color.white;
-    }
-
-    [Button]
-    void UpdateMaterials()
-    {
-        GetComponent<CannonFeedback>().SetBulletIcon();
     }
 
 #endif
@@ -143,12 +140,20 @@ public class CannonInteractable : MonoBehaviour, IInteractable
                 pos = new Vector3(hit.point.x, table.PhysicalTablePosition.y, hit.point.z);
         }
 
-        //instantiate bullet
         Vector3 bulletDirection = (pos - bulletSpawnPosition).normalized;
         Quaternion bulletRotation = Quaternion.LookRotation(bulletDirection, Vector3.up);
-        InstantiateHelper.Instantiate(bulletPrefab, bulletSpawnPosition, bulletRotation);
 
-        OnShoot?.Invoke();
+        //instantiate bullet
+        if (bulletPrefab)
+        {
+            InstantiateHelper.Instantiate(bulletPrefab, bulletSpawnPosition, bulletRotation);
+            OnShoot?.Invoke();
+            RemoveBullet();
+        }
+        else
+        {
+            OnShootButNoAmmo?.Invoke(bulletSpawnPosition, bulletRotation);
+        }
     }
 
     /// <summary>
@@ -170,5 +175,28 @@ public class CannonInteractable : MonoBehaviour, IInteractable
             rotateCharacter.ForceDirection(false);
 
         playerUsingThisCannon = null;
+    }
+
+    /// <summary>
+    /// Set bullet prefab to use when shoot with this cannon
+    /// </summary>
+    /// <param name="bulletPrefab"></param>
+    public void InsertBullet(CannonBullet bulletPrefab)
+    {
+        //remove previous bullet
+        if (this.bulletPrefab)
+            RemoveBullet();
+
+        this.bulletPrefab = bulletPrefab;
+        OnInsertBullet?.Invoke(bulletPrefab);
+    }
+
+    /// <summary>
+    /// Set bullet prefab as null
+    /// </summary>
+    public void RemoveBullet()
+    {
+        bulletPrefab = null;
+        OnRemoveBullet?.Invoke();
     }
 }

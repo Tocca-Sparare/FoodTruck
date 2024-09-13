@@ -10,6 +10,7 @@ public abstract class CannonBullet : MonoBehaviour
     [SerializeField] LayerMaskClass hittableLayers;
     [SerializeField] float lifeTime = 10;
     public Sprite icon;
+    public GameObject bulletPrefabToShowInCannon;
 
     Rigidbody rb;
     float lifeTimeTimer;

@@ -13,6 +13,7 @@ public class TableFeedback : MonoBehaviour
     [SerializeField] LoadingBar loadingBar;
 
     Table table;
+    TableInteractable tableInteractable;
 
     private void Awake()
     {
@@ -27,6 +28,10 @@ public class TableFeedback : MonoBehaviour
             table.OnUpdateClean += OnUpdateClean;
             table.OnTableClean += OnTableClean;
         }
+        if (tableInteractable)
+        {
+            tableInteractable.OnDismiss += OnDismiss;
+        }
     }
 
     private void OnDestroy()
@@ -37,6 +42,10 @@ public class TableFeedback : MonoBehaviour
             table.OnDirtyTable -= OnDirtyTable;
             table.OnUpdateClean -= OnUpdateClean;
             table.OnTableClean -= OnTableClean;
+        }
+        if (tableInteractable)
+        {
+            tableInteractable.OnDismiss -= OnDismiss;
         }
     }
 

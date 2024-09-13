@@ -16,4 +16,7 @@ MonoBehaviour:
     mouse quando si mira\n\nTruck -> ObstacleNavmesh cos\xEC da non farci andare
     i Customer avendo i collider\n\nTable Prefab -> HittableByBullet per poter essere
     colpito dal bullet e dal raycast del cannone (per settare la traiettoria quando
-    colpisce un tavolo), e anche per non farci andare i Customer avendo un collider\n"
+    colpisce un tavolo), e anche per non farci andare i Customer avendo un collider\n\nCannonInteractable
+    child e i vari interagibili -> Interactable cos\xEC da poter scegliere quali
+    collider usare per l'interact component (ad esempio sul cannone il collider \xE8
+    solo dietro per non poterci interagire se non ci troviamo dietro)"
