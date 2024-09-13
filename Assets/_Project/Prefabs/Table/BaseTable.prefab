@@ -58,6 +58,7 @@ MonoBehaviour:
     warningDelays: 1e0000003c0000005a000000
   DirtyState:
     cleaningTime: 2
+    waitingTime: 10
   physicalTablePosition: {fileID: 2609304573701064798}
 --- !u!114 &5779733995559557743
 MonoBehaviour:

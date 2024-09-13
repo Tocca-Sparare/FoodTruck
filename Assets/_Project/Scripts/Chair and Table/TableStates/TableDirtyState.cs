@@ -1,12 +1,15 @@
+using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
 public class TableDirtyState : State
 {
     [SerializeField] float cleaningTime;
+    [SerializeField] float waitingTime;
 
     Table table;
     float remaningCleaningTime;
+    Coroutine waitingCoroutine;
 
     protected override void OnInit()
     {
@@ -35,6 +38,9 @@ public class TableDirtyState : State
 
         table.OnCleaning -= OnCleaning;
         table.Chairs.ForEach(c => c.OnCustomerSat -= OnCustomerSat);
+
+        if (waitingCoroutine != null)
+            StateMachine.StopCoroutine(waitingCoroutine);
     }
 
     private void OnCleaning(float deltaTime)
@@ -57,8 +63,21 @@ public class TableDirtyState : State
             }
         }
     }
+
     void OnCustomerSat()
     {
         table.CustomersOnTableCount++;
+
+        if (table.CustomersOnTableCount == table.IncomingCustomersCount)
+        {
+            waitingCoroutine = StateMachine.StartCoroutine(LeaveAfterWaitingTime());
+        }
+    }
+
+    IEnumerator LeaveAfterWaitingTime()
+    {
+        yield return new WaitForSeconds(waitingTime);
+        table.Chairs.ForEach(c => c.CustomerSat?.Leave(EOrderSatisfaction.Unsatisfied));
+        table.OnOrderNotSatisfied?.Invoke();
     }
 }
