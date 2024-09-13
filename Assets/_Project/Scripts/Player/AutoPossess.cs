@@ -11,6 +11,11 @@ public class AutoPossess : MonoBehaviour
 
     private void Awake()
     {
+        //deactive every pawn by default
+        if (pawnsInOrderByPlayerIndex != null)
+            foreach (var pawn in pawnsInOrderByPlayerIndex)
+                pawn.gameObject.SetActive(false);
+
         Init();
     }
 

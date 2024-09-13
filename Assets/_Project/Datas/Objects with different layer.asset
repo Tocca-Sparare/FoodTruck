@@ -19,4 +19,5 @@ MonoBehaviour:
     colpisce un tavolo), e anche per non farci andare i Customer avendo un collider\n\nCannonInteractable
     child e i vari interagibili -> Interactable cos\xEC da poter scegliere quali
     collider usare per l'interact component (ad esempio sul cannone il collider \xE8
-    solo dietro per non poterci interagire se non ci troviamo dietro)"
+    solo dietro per non poterci interagire se non ci troviamo dietro)\n\nLimitsColliders
+    -> BlockPlayer to block only the players and not npcs"

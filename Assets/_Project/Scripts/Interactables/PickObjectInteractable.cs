@@ -11,20 +11,7 @@ public class PickObjectInteractable : MonoBehaviour, IInteractable
     [Button]
     void ShowObject()
     {
-        //show object 
-        var instancedObj = Instantiate(transportableObject, transform.position + Vector3.up * 0.5f, Quaternion.identity);
-        GameObject go = instancedObj.gameObject;
-        go.transform.SetParent(transform);
-
-        //but remove scripts
-        var scripts = go.GetComponents<MonoBehaviour>();
-        foreach (var script in scripts)
-            DestroyImmediate(script);
-
-        //and colliders
-        var colliders = go.GetComponentsInChildren<Collider>();
-        foreach (var col in colliders)
-            DestroyImmediate(col);
+        GetComponentInChildren<SpriteRenderer>().sprite = transportableObject.BulletPrefab.icon;
     }
 
     public void Interact(InteractComponent interactor)
