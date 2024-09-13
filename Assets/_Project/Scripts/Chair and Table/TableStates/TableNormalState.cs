@@ -21,20 +21,30 @@ public class TableNormalState : State
         base.OnEnter();
 
         table.OnHit += OnTableHit;
-        table.Chairs.ForEach(c => c.OnCustomerSat += table.OnCustomerSat);
+        table.Chairs.ForEach(c => c.OnCustomerSat += OnCustomerSat);
     }
 
     protected override void OnExit()
     {
         base.OnExit();
-        
+
         table.OnHit -= OnTableHit;
-        table.Chairs.ForEach(c => c.OnCustomerSat -= table.OnCustomerSat);
+        table.Chairs.ForEach(c => c.OnCustomerSat -= OnCustomerSat);
     }
 
     void OnTableHit(Food food)
     {
         table.LastFood = food;
         StateMachine.SetState(table.DirtyState);
+    }
+
+    void OnCustomerSat()
+    {
+        table.CustomersOnTableCount++;
+
+        if (table.CustomersOnTableCount == table.IncomingCustomersCount)
+        {
+            StateMachine.SetState(table.OrderReadyState);
+        }
     }
 }

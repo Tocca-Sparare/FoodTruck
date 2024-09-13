@@ -71,17 +71,4 @@ public class Table : BasicStateMachine
     {
         OnCleaning?.Invoke(deltaTime);
     }
-    
-    public void OnCustomerSat()
-    {
-        CustomersOnTableCount++;
-
-        if (CustomersOnTableCount == IncomingCustomersCount)
-        {
-            if (!IsDirty)
-            {
-                SetState(OrderReadyState);
-            }
-        }
-    }
 }

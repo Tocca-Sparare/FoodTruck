@@ -26,7 +26,7 @@ public class TableDirtyState : State
         remaningCleaningTime = cleaningTime;
 
         table.OnCleaning += OnCleaning;
-        table.Chairs.ForEach(c => c.OnCustomerSat += table.OnCustomerSat);
+        table.Chairs.ForEach(c => c.OnCustomerSat += OnCustomerSat);
     }
 
     protected override void OnExit()
@@ -34,7 +34,7 @@ public class TableDirtyState : State
         base.OnExit();
 
         table.OnCleaning -= OnCleaning;
-        table.Chairs.ForEach(c => c.OnCustomerSat -= table.OnCustomerSat);
+        table.Chairs.ForEach(c => c.OnCustomerSat -= OnCustomerSat);
     }
 
     private void OnCleaning(float deltaTime)
@@ -56,5 +56,9 @@ public class TableDirtyState : State
                 StateMachine.SetState(table.NormalState);
             }
         }
+    }
+    void OnCustomerSat()
+    {
+        table.CustomersOnTableCount++;
     }
 }
