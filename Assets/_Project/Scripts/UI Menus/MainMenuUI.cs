@@ -9,9 +9,8 @@ using UnityEngine.UI;
 /// </summary>
 public class MainMenuUI : MonoBehaviour
 {
-    [SceneInstance][SerializeField] string singlePlayer;
-    [SceneInstance][SerializeField] string localMultiplayer;
-    [SceneInstance][SerializeField] string onlineMultiplayer;
+    [SceneInstance][SerializeField] string local;
+    [SceneInstance][SerializeField] string online;
     //[SerializeField] ModalWindowManager popupOnQuitGame;
     [Space]
     [SerializeField] OptimizeEventSystem eventSystemController;
@@ -19,18 +18,16 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] GameObject optionsMenu;
 
     [Header("Auto set events")]
-    [SerializeField] Button singlePlayerButton;
-    [SerializeField] Button localMultiplayerButton;
-    [SerializeField] Button onlineMultiplayerButton;
+    [SerializeField] Button localButton;
+    [SerializeField] Button onlineButton;
     [SerializeField] Button optionsButton;
     [SerializeField] Button backFromOptionsButton;
     [SerializeField] Button quitButton;
 
     private void Awake()
     {
-        if (singlePlayerButton) singlePlayerButton.onClick.AddListener(OnClickSinglePlayer);
-        if (localMultiplayerButton) localMultiplayerButton.onClick.AddListener(OnClickMultiplayerLocal);
-        if (onlineMultiplayerButton) onlineMultiplayerButton.onClick.AddListener(OnClickMultiplayerOnline);
+        if (localButton) localButton.onClick.AddListener(OnClickSinglePlayer);
+        if (onlineButton) onlineButton.onClick.AddListener(OnClickMultiplayerOnline);
         if (optionsButton) optionsButton.onClick.AddListener(OnClickOptions);
         if (backFromOptionsButton) backFromOptionsButton.onClick.AddListener(OnClickBackToMainMenu);
         if (quitButton) quitButton.onClick.AddListener(OnClickQuit);
@@ -38,9 +35,8 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (singlePlayerButton) singlePlayerButton.onClick.RemoveListener(OnClickSinglePlayer);
-        if (localMultiplayerButton) localMultiplayerButton.onClick.RemoveListener(OnClickMultiplayerLocal);
-        if (onlineMultiplayerButton) onlineMultiplayerButton.onClick.RemoveListener(OnClickMultiplayerOnline);
+        if (localButton) localButton.onClick.RemoveListener(OnClickSinglePlayer);
+        if (onlineButton) onlineButton.onClick.RemoveListener(OnClickMultiplayerOnline);
         if (optionsButton) optionsButton.onClick.RemoveListener(OnClickOptions);
         if (backFromOptionsButton) backFromOptionsButton.onClick.RemoveListener(OnClickBackToMainMenu);
         if (quitButton) quitButton.onClick.RemoveListener(OnClickQuit);
@@ -48,17 +44,12 @@ public class MainMenuUI : MonoBehaviour
 
     public void OnClickSinglePlayer()
     {
-        SceneManager.LoadScene(singlePlayer);
-    }
-
-    public void OnClickMultiplayerLocal()
-    {
-        SceneManager.LoadScene(localMultiplayer);
+        SceneManager.LoadScene(local);
     }
 
     public void OnClickMultiplayerOnline()
     {
-        SceneManager.LoadScene(onlineMultiplayer);
+        SceneManager.LoadScene(online);
     }
 
     public void OnClickOptions()
