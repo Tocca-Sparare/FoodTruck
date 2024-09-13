@@ -234,6 +234,10 @@ PrefabInstance:
       propertyPath: SortKey
       value: 3778542916
       objectReference: {fileID: 0}
+    - target: {fileID: 8170810741416837284, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: cd67244db9468d7448db1b57b3f8e902, type: 2}
     - target: {fileID: 9218920634398347104, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.89
