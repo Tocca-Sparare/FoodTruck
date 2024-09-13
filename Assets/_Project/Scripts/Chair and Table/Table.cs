@@ -31,7 +31,7 @@ public class Table : BasicStateMachine
     public System.Action OnTableClean;
 
     public Vector3 PhysicalTablePosition => physicalTablePosition.position;
-    public bool IsAvailable => !IsDirty && Chairs.All(c => c.IsAvailable);
+    public bool IsAvailable => Chairs.All(c => c.IsAvailable);
     public bool IsDirty => CurrentState == DirtyState;
 
 
@@ -63,7 +63,6 @@ public class Table : BasicStateMachine
 
     public void SetApproachingCustomersCount(int count)
     {
-        SetState(NormalState);
         IncomingCustomersCount = count;
         CustomersOnTableCount = 0;
     }

@@ -47,6 +47,9 @@ public class TableOrderReadyState : State
 
         table.OnHit -= OnTableHit;
 
+        table.IncomingCustomersCount = 0;
+        table.CustomersOnTableCount = 0;
+
         if (freeTableCoroutine != null)
             StateMachine.StopCoroutine(freeTableCoroutine);
         foreach (var coroutine in hungerIncreseCoroutines)

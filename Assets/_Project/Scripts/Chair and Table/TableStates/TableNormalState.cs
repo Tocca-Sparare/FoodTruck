@@ -20,9 +20,6 @@ public class TableNormalState : State
     {
         base.OnEnter();
 
-        table.IncomingCustomersCount = 0;
-        table.CustomersOnTableCount = 0;
-        
         table.OnHit += OnTableHit;
         table.Chairs.ForEach(c => c.OnCustomerSat += table.OnCustomerSat);
     }
