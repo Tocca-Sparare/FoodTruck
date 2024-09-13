@@ -1,3 +1,4 @@
+using Fusion;
 using UnityEngine;
 
 /// <summary>
@@ -5,18 +6,41 @@ using UnityEngine;
 /// </summary>
 public static class InstantiateHelper
 {
-    public static T Instantiate<T>(T go, Vector3 position, Quaternion rotation) where T : Object
+    public static T Instantiate<T>(T prefab, Vector3 position, Quaternion rotation) where T : Object
     {
-        return Object.Instantiate(go, position, rotation);
+        //online
+        if (NetworkManager.IsOnline)
+        {
+            if (NetworkManager.instance.Runner.IsServer && GetGameObject(prefab).TryGetComponent(out NetworkObject networkObj))
+            {
+                return NetworkManager.instance.Runner.Spawn(networkObj, position, rotation).GetComponent<T>();
+            }
+            else
+            {
+                Debug.LogError($"Error to spawn online {prefab}. This isn't the server or this isn't a NetworkObject!");
+                return null;
+            }
+        }
+
+        //local
+        return Object.Instantiate(prefab, position, rotation);
     }
 
-    public static T Instantiate<T>(T go, Transform parent) where T : Object
+    public static T Instantiate<T>(T prefab, Transform parent) where T : Object
     {
-        return Object.Instantiate(go, parent);
+        return Object.Instantiate(prefab, parent);
     }
 
-    public static void Destroy(GameObject go)
+    public static void Destroy(GameObject objectInScene)
     {
-        Object.Destroy(go);
+        Object.Destroy(objectInScene);
+    }
+
+    private static GameObject GetGameObject(Object obj)
+    {
+        if (obj is GameObject go)
+            return go;
+        else
+            return (obj as Component).gameObject;
     }
 }

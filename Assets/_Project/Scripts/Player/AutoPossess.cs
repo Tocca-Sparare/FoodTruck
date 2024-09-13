@@ -5,10 +5,16 @@ using UnityEngine;
 /// </summary>
 public class AutoPossess : MonoBehaviour
 {
-    [SerializeField] PlayerController playerControllerPrefabForEditorTest;
-    [SerializeField] PlayerPawn[] pawnsInOrderByPlayerIndex;
+    [Tooltip("When there aren't players in scene (we started from gameplay scene in editor), instantiate a prefab")][SerializeField] bool autoInstantiateIfThereArentPlayers;
+    [Tooltip("Prefab to instantiate when there aren't players in scene")][SerializeField] PlayerController playerControllerPrefabForEditorTest;
+    [Tooltip("Set pawns in order to possess correct pawn by every player controller")][SerializeField] PlayerPawn[] pawnsInOrderByPlayerIndex;
 
     private void Awake()
+    {
+        Init();
+    }
+
+    public void Init()
     {
         PlayerController[] controllers = GetPlayerControllers();
         PossessPawns(controllers);
@@ -21,7 +27,7 @@ public class AutoPossess : MonoBehaviour
 
         //if there aren't, instantiate prefab
         //(started directly from this scene in editor, or single player without a transition scene where instantiate player controller)
-        if (controllers.Length == 0)
+        if (controllers.Length == 0 && autoInstantiateIfThereArentPlayers)
         {
             PlayerController controller = Instantiate(playerControllerPrefabForEditorTest);
             controllers = new PlayerController[] { controller };
@@ -32,6 +38,9 @@ public class AutoPossess : MonoBehaviour
 
     void PossessPawns(PlayerController[] controllers)
     {
+        if (controllers == null || controllers.Length == 0)
+            return;
+
         //be sure there are pawns to possess
         if (pawnsInOrderByPlayerIndex == null || pawnsInOrderByPlayerIndex.Length == 0)
         {

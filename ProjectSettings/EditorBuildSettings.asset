@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Project/Scenes/Menus/MainMenu.unity
+    guid: 33a820829b008ff4b833090e62ffbe41
+  - enabled: 1
+    path: Assets/_Project/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/_Project/Scenes/Menus/LobbyLocal.unity
+    guid: d01f2ca48079fc24a9da24523f6527de
+  - enabled: 1
+    path: Assets/_Project/Scenes/Menus/OnlineCreateFindRoom.unity
+    guid: aa9e3b09face20a4ab3c68379d8b1f5f
+  - enabled: 1
+    path: Assets/_Project/Scenes/Menus/LobbyOnline.unity
+    guid: 26fdd1672385c154c9519c64acc4ca30
   m_configObjects: {}

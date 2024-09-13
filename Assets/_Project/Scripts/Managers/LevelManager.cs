@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Manager to know when the level finish
@@ -87,5 +88,33 @@ public class LevelManager : MonoBehaviour
         PlayerStateMachine[] playerStateMachines = FindObjectsOfType<PlayerStateMachine>();
         foreach (var playerSM in playerStateMachines)
             playerSM.SetNullState();
+    }
+
+    /// <summary>
+    /// This is called by UsePlayerInputManagerInEditor, to instantiate player controllers to test rapidly the scene with more players
+    /// </summary>
+    public void AddPlayerInEditorForTestLocalMultiplayer(PlayerInput input)
+    {
+        //unpossess every pawn and deactive
+        var pawns = FindObjectsByType<PlayerPawn>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
+        foreach (var pawn in pawns)
+        {
+            pawn.Unpossess();
+            pawn.gameObject.SetActive(false);
+        }
+
+        //and possess again (to add player controller instantiated by PlayerInputManager)
+        FindObjectOfType<AutoPossess>().Init();
+
+        //if game is already going, be sure to set state for every statemachine still null
+        if (levelState == ELevelState.Playing)
+        {
+            PlayerStateMachine[] playerStateMachines = FindObjectsOfType<PlayerStateMachine>();
+            foreach (var playerSM in playerStateMachines)
+            {
+                if (playerSM.CurrentState == null)
+                    playerSM.SetState(playerSM.NormalState);
+            }
+        }
     }
 }
