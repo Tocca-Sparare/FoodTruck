@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backButtonScene: MainMenu
-  lobbyOnlineScene: 4
+  lobbyOnlineScene: 3
   usernameInputField: {fileID: 976112732}
   roomCodeInputField: {fileID: 526664233}
   errorText: {fileID: 550031038}

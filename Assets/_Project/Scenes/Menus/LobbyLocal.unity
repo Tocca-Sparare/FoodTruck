@@ -802,7 +802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backButtonScene: MainMenu
-  selectLevelScene: SampleScene
+  selectLevelScene: TestSelectLevel
   joinedPlayerPrefab: {fileID: 1847829883}
   joinedPlayersContainer: {fileID: 1889141216}
   objectWhenNoPlayersInScene: {fileID: 459103892}
