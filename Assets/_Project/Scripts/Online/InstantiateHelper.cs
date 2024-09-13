@@ -33,6 +33,18 @@ public static class InstantiateHelper
 
     public static void Destroy(GameObject objectInScene)
     {
+        //online
+        if (NetworkManager.IsOnline)
+        {
+            if (NetworkManager.instance.Runner.IsServer && objectInScene.TryGetComponent(out NetworkObject networkObj))
+                NetworkManager.instance.Runner.Despawn(networkObj);
+            else
+                Debug.LogError($"Error to despawn online {objectInScene}. This isn't the server or this isn't a NetworkObject!");
+
+            return;
+        }
+
+        //local
         Object.Destroy(objectInScene);
     }
 
