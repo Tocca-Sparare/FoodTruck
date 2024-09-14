@@ -24,4 +24,21 @@ public class FoodManager : MonoBehaviour
         return foods[randomIndex];
         //return foods.Skip(randomIndex).Take(1).First();
     }
+
+    /// <summary>
+    /// In foods list, find food by name
+    /// </summary>
+    /// <param name="foodName"></param>
+    /// <returns></returns>
+    public Food GetFoodByName(string foodName)
+    {
+        foreach (var food in foods)
+        {
+            if (food.FoodName == foodName) 
+                return food;
+        }
+
+        Debug.LogError($"Impossible to find food with name: {foodName}", gameObject);
+        return null;
+    }
 }

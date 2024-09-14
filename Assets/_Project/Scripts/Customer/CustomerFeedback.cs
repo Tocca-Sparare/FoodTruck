@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,15 +19,15 @@ public class CustomerFeedback : MonoBehaviour
     [SerializeField] List<GameObject> prefabHats;
     [SerializeField] Transform hatTransform;
 
-
+    FoodManager foodManager;
     Customer customer;
     Animator animator;
     AudioSource audioSource;
 
-
     void Awake()
     {
         //get refs
+        foodManager = FindObjectOfType<FoodManager>();
         customer = GetComponent<Customer>();
         animator = GetComponentInChildren<Animator>();
         audioSource = GetComponentInChildren<AudioSource>();
@@ -64,47 +65,40 @@ public class CustomerFeedback : MonoBehaviour
 
     void OnSit()
     {
-        //set sit animation and play sound
-        animator.SetBool("IsSitting", true);
-        StartCoroutine(DoHungrySound());
+        RPC_OnSit();
     }
 
     void OnStandUp()
     {
         customer.Table.OnOrderReady -= OnOrderReady;
         customer.Table.OnHungerLevelIncreased -= OnHungerLevelIncreased;
-        //set stand up animation
-        animator.SetBool("IsSitting", false);
 
-        requestFoodHolder.SetActive(false);
+        RPC_OnStandUp();
     }
 
     void OnSatisfied()
     {
-        //play sound
-        StartCoroutine(DoBurpSound());
+        RPC_OnSatisfied();
     }
 
     void OnUnsatisfied()
     {
-        //play sound
-        StartCoroutine(DoAngrySound());
+        RPC_OnUnsatisfied();
     }
 
     void OnSatistyRequest()
     {
-        requestFoodHolder.SetActive(false);
+        RPC_OnSatistyRequest();
     }
 
     void OnOrderReady()
     {
-        requestFoodHolder.SetActive(true);
-        requestFoodSpriteRenderer.sprite = customer.RequestedFood.icon;
+        RPC_OnOrderReady(customer.RequestedFood.FoodName);
     }
 
     private void OnHungerLevelIncreased(int currentLevel)
     {
-        StartCoroutine(DoShowHungryIcon(currentLevel));
+        RPC_OnHungerLevelIncreased(currentLevel);
     }
 
     IEnumerator DoShowHungryIcon(int count)
@@ -166,4 +160,58 @@ public class CustomerFeedback : MonoBehaviour
         audioSource.clip = burpSound;
         audioSource.Play();
     }
+
+    #region online
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnSit()
+    {
+        //set sit animation and play sound
+        animator.SetBool("IsSitting", true);
+        StartCoroutine(DoHungrySound());
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnStandUp()
+    {
+        //set stand up animation
+        animator.SetBool("IsSitting", false);
+
+        requestFoodHolder.SetActive(false);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnSatisfied()
+    {
+        //play sound
+        StartCoroutine(DoBurpSound());
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnUnsatisfied()
+    {
+        //play sound
+        StartCoroutine(DoAngrySound());
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_OnSatistyRequest()
+    {
+        requestFoodHolder.SetActive(false);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_OnOrderReady(string foodName)
+    {
+        requestFoodHolder.SetActive(true);
+        requestFoodSpriteRenderer.sprite = foodManager.GetFoodByName(foodName).icon;
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnHungerLevelIncreased(int currentLevel)
+    {
+        StartCoroutine(DoShowHungryIcon(currentLevel));
+    }
+
+    #endregion
 }

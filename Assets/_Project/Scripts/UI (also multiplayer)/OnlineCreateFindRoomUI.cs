@@ -38,6 +38,8 @@ public class OnlineCreateFindRoomUI : MonoBehaviour
                       "Daedalus", "Lyris", "Vesper", "Aeloria", "Cassius",
                       "Xanthe", "Thetis", "Zarek", "Niamh", "Elwyn" };
 
+    const string possibleCharsRoomCode = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";  //removed O and 0
+
     private void Awake()
     {
         if (NetworkManager.instance == null)
@@ -175,9 +177,8 @@ public class OnlineCreateFindRoomUI : MonoBehaviour
     private string RandomString(int length)
     {
         System.Random rand = new System.Random();
-        const string possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-        return new string(Enumerable.Repeat(possibleChars, length)
+        return new string(Enumerable.Repeat(possibleCharsRoomCode, length)
             .Select(s => s[rand.Next(s.Length)]).ToArray());
     }
 
