@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// Customer in scene. This is a statemachine with states to move to the chair, eat and leave
@@ -34,6 +36,19 @@ public class Customer : BasicStateMachine
     public System.Action OnHungryIncreased;
     public System.Action OnSatisfyRequest;
 
+    private void Awake()
+    {
+        //disable navmesh and auto set position, to avoid problems online (navmesh set position break network transform)
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent)
+        {
+            agent.enabled = false;
+            agent.updatePosition = false;
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+        }
+    }
+
     public void Init(Food requestedFood, Table targetTable, Vector3 exitPoint)
     {
         //set vars
@@ -43,9 +58,23 @@ public class Customer : BasicStateMachine
         this.table = targetTable;
 
         //set state to move to the chair
-        SetState(normalState);
+        StartCoroutine(SetStateAfterSecond());
 
         OnInit?.Invoke();
+    }
+
+    IEnumerator SetStateAfterSecond()
+    {
+        //wait few seconds to avoid problems online (nav mesh break spawn position if enabled in first frame)
+        yield return new WaitForSeconds(0.1f);
+
+        //re-enable navmesh
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent) 
+            agent.enabled = true;
+
+        //and set state
+        SetState(new PlayerTransitionState(normalState));
     }
 
     private void SetRequestedFood(Food food)

@@ -33,6 +33,15 @@ public class CustomerLeavingState : State
         StateMachine.StartCoroutine(LifeTimeCoroutine());
     }
 
+    protected override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+
+        //update position and rotation
+        transformState.rotation = Quaternion.LookRotation(navMeshAgent.nextPosition - transformState.position, Vector3.up);
+        transformState.position = navMeshAgent.nextPosition;
+    }
+
     private IEnumerator LifeTimeCoroutine()
     {
         //after few seconds, destroy

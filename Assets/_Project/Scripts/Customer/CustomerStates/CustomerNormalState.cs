@@ -33,12 +33,21 @@ public class CustomerNormalState : State
         navMeshAgent.destination = currentChair.transform.position;
     }
 
-    protected override void OnFixedUpdate()
+    /// <summary>
+    /// Move in late update to not lag online (Update for some reason doesn't work and FixedUpdate lag)
+    /// </summary>
+    protected override void OnLateUpdate()
     {
-        base.OnFixedUpdate();
+        base.OnLateUpdate();
+
+        //update position and rotation
+        transformState.rotation = Quaternion.LookRotation(navMeshAgent.nextPosition - transformState.position, Vector3.up);
+        transformState.position = navMeshAgent.nextPosition;
 
         //when reach chair, sit
         if (currentChair && Vector3.Distance(currentChair.transform.position, transformState.position) < snapChairDistance)
+        {
             customer.Sit();
+        }
     }
 }

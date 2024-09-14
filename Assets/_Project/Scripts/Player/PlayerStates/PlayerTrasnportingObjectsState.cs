@@ -88,6 +88,14 @@ public class PlayerTrasnportingObjectsState : State
         //move
         if (movementComponent != null)
             movementComponent.UpdatePosition();
+    }
+
+    /// <summary>
+    /// Move in late update to not lag online (Update for some reason doesn't work and FixedUpdate lag)
+    /// </summary>
+    protected override void OnLateUpdate()
+    {
+        base.OnLateUpdate();
 
         //move transported object
         if (playerStateMachine.TransportedObject)

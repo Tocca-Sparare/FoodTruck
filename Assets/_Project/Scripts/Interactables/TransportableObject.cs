@@ -4,6 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Every object a player can pick and transport in scene
 /// </summary>
+[RequireComponent(typeof(Rigidbody))]
 public class TransportableObject : MonoBehaviour, IInteractable
 {
     [SerializeField] Food bulletPrefab;
@@ -14,6 +15,12 @@ public class TransportableObject : MonoBehaviour, IInteractable
     bool wasThrowed;
 
     public Food BulletPrefab => bulletPrefab;
+
+    void Awake()
+    {
+        if (rb == null && TryGetComponent(out rb) == false)
+            Debug.LogError($"Missing rigidbody on {name}", gameObject);
+    }
 
     [Button]
     void SetMaterials()
@@ -37,10 +44,11 @@ public class TransportableObject : MonoBehaviour, IInteractable
 
         playerTransportingThisObject = interactor;
 
-        //be sure to NOT have rigidbody
-        rb = GetComponent<Rigidbody>();
+        //be sure to disable rigidbody
         if (rb)
-            Destroy(rb);
+        {
+            rb.useGravity = false;
+        }
 
         //and deactive colliders
         GetColliders();
@@ -61,11 +69,10 @@ public class TransportableObject : MonoBehaviour, IInteractable
     /// </summary>
     public void Drop()
     {
-        //be sure to have rigidbody
-        rb = GetComponent<Rigidbody>();
-        if (rb == null)
+        //be sure to enable rigidbody
+        if (rb)
         {
-            rb = gameObject.AddComponent<Rigidbody>();
+            rb.useGravity = true;
             rb.drag = 0.1f;
         }
 

@@ -77,13 +77,19 @@ public class CustomerSpawner : MonoBehaviour
 
                     for (int i = 0; i < randomCustomerCount; i++)
                     {
+                        if (NetworkManager.IsOnline && NetworkManager.instance.Runner.IsServer == false)
+                        {
+                            Debug.LogError("Non deve spawnare niente sui client!", gameObject);
+                            yield break;
+                        }
+
                         var newCustomer = InstantiateHelper.Instantiate(customerPrefab, spawnPointTransform.position, spawnPointTransform.rotation);
                         newCustomer.Init(ingredientsManager.GetRandomIngredient(), table, spawnPointTransform.position);
-                        yield return new WaitForSecondsRealtime(.5f);
+                        yield return new WaitForSeconds(.5f);
                     }
 
                     float randomDelay = currentVelocityFactor * Random.Range(minSlowDelay, maxSlowDelay);
-                    yield return new WaitForSecondsRealtime(randomDelay);
+                    yield return new WaitForSeconds(randomDelay);
                 }
                 yield return new WaitForEndOfFrame();
             }

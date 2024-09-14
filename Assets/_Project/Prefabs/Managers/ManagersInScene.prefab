@@ -1832,6 +1832,7 @@ MonoBehaviour:
   totalLevelTime: 80
   spawnPointTransforms:
   - {fileID: 4846101428292683381}
+  - {fileID: 749568750471825832}
   - {fileID: 2257290148205961770}
   - {fileID: 25205250345383920}
 --- !u!1 &8419985885176633278
@@ -1967,7 +1968,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 960
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -1978,7 +1979,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 7d2d9deff37c82c4ea3a060a7fae94a4, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: b3d8c2e9d04ac6341aea5cccb50782fd, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &8981354073073519154
 GameObject:
