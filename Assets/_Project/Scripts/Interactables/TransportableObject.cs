@@ -60,7 +60,7 @@ public class TransportableObject : MonoBehaviour, IInteractable
         if (playerStateMachine)
         {
             playerStateMachine.SetTrasportingObject(this);
-            playerStateMachine.SetState(new PlayerTransitionState(playerStateMachine.TrasnportingObjectsState));
+            playerStateMachine.SetState(new PlayerTransitionState(playerStateMachine.TransportingObjectsState));
         }
     }
 
