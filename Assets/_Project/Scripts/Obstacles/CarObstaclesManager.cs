@@ -6,12 +6,16 @@ using UnityEngine;
 
 public class CarObstaclesManager : MonoBehaviour
 {
-    [SerializeField] PathCreator path;
-    [SerializeField] List<ObstacleCar> cars = new List<ObstacleCar>();
     [SerializeField] float spawnDelay;
+    [Space]
+    [SerializeField] PathCreator path;
+    [SerializeField] GameObject carsContainer;
+
+    ObstacleCar[] cars;
 
     private void Start()
     {
+        cars = carsContainer.GetComponentsInChildren<ObstacleCar>();
         StartCoroutine(ActivateCar());
     }
 
