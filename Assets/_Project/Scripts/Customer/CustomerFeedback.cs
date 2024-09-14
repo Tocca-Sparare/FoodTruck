@@ -65,7 +65,16 @@ public class CustomerFeedback : NetworkBehaviour
 
     void OnSit()
     {
-        RPC_OnSit();
+        //online do on every client
+        if (NetworkManager.IsOnline)
+        {
+            RPC_OnSit();
+            return;
+        }
+
+        //set sit animation and play sound
+        animator.SetBool("IsSitting", true);
+        StartCoroutine(DoHungrySound());
     }
 
     void OnStandUp()
@@ -73,32 +82,79 @@ public class CustomerFeedback : NetworkBehaviour
         customer.Table.OnOrderReady -= OnOrderReady;
         customer.Table.OnHungerLevelIncreased -= OnHungerLevelIncreased;
 
-        RPC_OnStandUp();
+        //online do on every client
+        if (NetworkManager.IsOnline)
+        {
+            RPC_OnStandUp();
+            return;
+        }
+
+        //set stand up animation
+        animator.SetBool("IsSitting", false);
+        requestFoodHolder.SetActive(false);
     }
 
     void OnSatisfied()
     {
-        RPC_OnSatisfied();
+        //online do on every client
+        if (NetworkManager.IsOnline)
+        {
+            RPC_OnSatisfied();
+            return;
+        }
+
+        //play sound
+        StartCoroutine(DoBurpSound());
     }
 
     void OnUnsatisfied()
     {
-        RPC_OnUnsatisfied();
+        //online do on every client
+        if (NetworkManager.IsOnline)
+        {
+            RPC_OnUnsatisfied();
+            return;
+        }
+
+        //play sound
+        StartCoroutine(DoAngrySound());
     }
 
     void OnSatistyRequest()
     {
-        RPC_OnSatistyRequest();
+        //online do on every client
+        if (NetworkManager.IsOnline)
+        {
+            RPC_OnSatistyRequest();
+            return;
+        }
+
+        requestFoodHolder.SetActive(false);
     }
 
     void OnOrderReady()
     {
-        RPC_OnOrderReady(customer.RequestedFood.FoodName);
+        //online do on every client
+        if (NetworkManager.IsOnline)
+        {
+            RPC_OnOrderReady(customer.RequestedFood.FoodName);
+            return;
+        }
+
+        requestFoodHolder.SetActive(true);
+        requestFoodSpriteRenderer.sprite = customer.RequestedFood.icon;
     }
 
     private void OnHungerLevelIncreased(int currentLevel)
     {
-        RPC_OnHungerLevelIncreased(currentLevel);
+        //online do on every client
+        if (NetworkManager.IsOnline)
+        {
+            RPC_OnHungerLevelIncreased(currentLevel);
+            return;
+        }
+
+        StartCoroutine(DoShowHungryIcon(currentLevel));
     }
 
     IEnumerator DoShowHungryIcon(int count)
@@ -176,7 +232,6 @@ public class CustomerFeedback : NetworkBehaviour
     {
         //set stand up animation
         animator.SetBool("IsSitting", false);
-
         requestFoodHolder.SetActive(false);
     }
 

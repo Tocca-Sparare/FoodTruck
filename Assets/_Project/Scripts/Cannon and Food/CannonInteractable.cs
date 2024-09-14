@@ -1,3 +1,4 @@
+using Fusion;
 using UnityEngine;
 
 /// <summary>
@@ -200,4 +201,21 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         bulletPrefab = null;
         OnRemoveBullet?.Invoke();
     }
+
+    #region online
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnInteract(RpcInfo info = default)
+    {
+
+
+        //GetComponent<FixCannonOnline>().SetWhoIsUsingCannon(playerUsingThisCannon.GetComponent<PlayerPawn>().CurrentController.GetComponent<UserOnline>().Id)
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnDismiss(RpcInfo info = default)
+    {
+    }
+
+    #endregion
 }

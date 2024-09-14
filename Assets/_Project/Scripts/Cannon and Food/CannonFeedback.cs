@@ -62,18 +62,48 @@ public class CannonFeedback : NetworkBehaviour
 
     void OnShoot()
     {
-        RPC_OnShoot();
+        //online do on every client
+        if (NetworkManager.IsOnline)
+        {
+            RPC_OnShoot();
+            return;
+        }
+
+        //randomize
+        float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
+        float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
+        audioSource.panStereo = randomStereoPan;
+        audioSource.pitch = randomPitch;
+
+        //play sound
+        audioSource.clip = shootSound;
+        audioSource.Play();
     }
 
     void OnShootButNoAmmo(Vector3 bulletDirection, Quaternion bulletRotation)
     {
-        RPC_OnShootButNoAmmo();
+        //online do on every client
+        if (NetworkManager.IsOnline)
+        {
+            RPC_OnShootButNoAmmo();
+            return;
+        }
+
+        //randomize
+        float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
+        float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
+        audioSource.panStereo = randomStereoPan;
+        audioSource.pitch = randomPitch;
+
+        //play sound
+        audioSource.clip = shootWhenNoAmmo;
+        audioSource.Play();
     }
 
     private void OnInsertBullet(CannonBullet bullet)
     {
         //show bullet to understand what is going to shoot
-        bulletToShow = InstantiateHelper.Instantiate(bullet.bulletPrefabToShowInCannon, cannon.BulletContainer);
+        bulletToShow = InstantiateHelper.Instantiate(bullet.bulletPrefabToShowInCannon, cannon.BulletContainer.position, cannon.BulletContainer.rotation);
     }
 
     private void OnRemoveBullet()
