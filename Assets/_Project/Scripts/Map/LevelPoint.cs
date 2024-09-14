@@ -26,7 +26,7 @@ public class LevelPoint : MonoBehaviour, IInteractable
     {
         //only offline or server can call this button
         if (NetworkManager.IsOnline == false || NetworkManager.instance.Runner.IsServer)
-            SceneManager.LoadScene(levelScene);
+            SceneLoader.LoadScene(levelScene);
     }
 
     public void SetFullStars(int count)
