@@ -30,7 +30,7 @@ public class CustomerSatState : State
 
         //and snap to the chair
         Chair targetChair = customer.CurrentChair;
-        transformState.SetParent(targetChair.transform);
+        //transformState.SetParent(targetChair.transform);
         transformState.SetPositionAndRotation(targetChair.transform.position, targetChair.transform.rotation);
     }
 }

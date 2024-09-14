@@ -37,6 +37,10 @@ public class CustomerNormalState : State
     {
         base.OnFixedUpdate();
 
+        //update position and rotation
+        transformState.rotation = Quaternion.LookRotation(navMeshAgent.nextPosition - transformState.position, Vector3.up);
+        transformState.position = navMeshAgent.nextPosition;
+
         //when reach chair, sit
         if (currentChair && Vector3.Distance(currentChair.transform.position, transformState.position) < snapChairDistance)
             customer.Sit();

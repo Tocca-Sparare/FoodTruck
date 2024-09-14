@@ -1832,6 +1832,7 @@ MonoBehaviour:
   totalLevelTime: 80
   spawnPointTransforms:
   - {fileID: 4846101428292683381}
+  - {fileID: 749568750471825832}
   - {fileID: 2257290148205961770}
   - {fileID: 25205250345383920}
 --- !u!1 &8419985885176633278
