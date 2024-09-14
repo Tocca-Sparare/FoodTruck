@@ -91,6 +91,7 @@ public class CustomerSpawner : MonoBehaviour
                     float randomDelay = currentVelocityFactor * Random.Range(minSlowDelay, maxSlowDelay);
                     yield return new WaitForSeconds(randomDelay);
                 }
+                yield return new WaitForEndOfFrame();
             }
         }
     }
