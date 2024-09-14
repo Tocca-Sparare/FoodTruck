@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Every graphic or sound feedback for CannonInteractable
 /// </summary>
-public class CannonFeedback : MonoBehaviour
+public class CannonFeedback : NetworkBehaviour
 {
     [SerializeField] SpriteRenderer bulletSpriteRenderer;
     [SerializeField] Transform objectToRotate;

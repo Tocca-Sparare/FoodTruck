@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Every graphic and sound feedback for the Customer
 /// </summary>
-public class CustomerFeedback : MonoBehaviour
+public class CustomerFeedback : NetworkBehaviour
 {
     [SerializeField] SpriteRenderer requestFoodSpriteRenderer;
     [SerializeField] GameObject requestFoodHolder;
