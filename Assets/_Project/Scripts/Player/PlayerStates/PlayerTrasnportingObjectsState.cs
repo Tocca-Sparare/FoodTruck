@@ -38,13 +38,6 @@ public class PlayerTrasnportingObjectsState : State
     {
         base.OnUpdate();
 
-        //move transported object
-        if (playerStateMachine.TransportedObject)
-        {
-            playerStateMachine.TransportedObject.transform.position = playerStateMachine.TransportedObjectContainer.position;
-            playerStateMachine.TransportedObject.transform.rotation = playerStateMachine.TransportedObjectContainer.rotation;
-        }
-
         if (inputManager == null)
             return;
 
@@ -95,5 +88,20 @@ public class PlayerTrasnportingObjectsState : State
         //move
         if (movementComponent != null)
             movementComponent.UpdatePosition();
+    }
+
+    /// <summary>
+    /// Move in late update to not lag online (Update for some reason doesn't work and FixedUpdate lag)
+    /// </summary>
+    protected override void OnLateUpdate()
+    {
+        base.OnLateUpdate();
+
+        //move transported object
+        if (playerStateMachine.TransportedObject)
+        {
+            playerStateMachine.TransportedObject.transform.position = playerStateMachine.TransportedObjectContainer.position;
+            playerStateMachine.TransportedObject.transform.rotation = playerStateMachine.TransportedObjectContainer.rotation;
+        }
     }
 }
