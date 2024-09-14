@@ -54,7 +54,7 @@ public class PlayerTransportingObjectsState : State
         //when press interact, release object
         if (inputManager.InteractWasPressedThisFrame)
         {
-            //if should interact with cannon, put bullet inside it
+            //if should interact with cannon, put bullet inside it and interact with cannon
             if (interactComponent)
             {
                 //interactComponent.ScanInteractablesInDirection(movementDirection);
@@ -64,9 +64,12 @@ public class PlayerTransportingObjectsState : State
                 {
                     cannon.InsertBullet(playerStateMachine.TransportedObject.BulletPrefab);
                     InstantiateHelper.Destroy(playerStateMachine.TransportedObject.gameObject);
+                    interactComponent.TryInteract();
+                    return;
                 }
             }
 
+            //drop here because if we drop first, we could scan it instead of Cannon, and if we drop after Interact with Cannon we come back to normal state
             if (playerStateMachine.TransportedObject)
                 playerStateMachine.TransportedObject.Drop();
 
