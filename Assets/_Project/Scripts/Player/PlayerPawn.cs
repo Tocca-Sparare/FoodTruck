@@ -1,10 +1,9 @@
-using System;
-using UnityEngine;
+using Fusion;
 
 /// <summary>
 /// This is used just to have a reference to the PlayerController
 /// </summary>
-public class PlayerPawn : MonoBehaviour
+public class PlayerPawn : NetworkBehaviour
 {
     //controller
     private PlayerController _currentController;
