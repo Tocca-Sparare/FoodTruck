@@ -1,3 +1,4 @@
+using Fusion;
 using UnityEngine;
 
 /// <summary>
@@ -52,12 +53,10 @@ public class CannonFeedback : MonoBehaviour
 
     void OnUpdateAimDirection(Vector3 direction)
     {
-        //set rotate direction to look where player is aiming
-        if (direction != Vector3.zero)
-        {
-            Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-            objectToRotate.rotation = Quaternion.AngleAxis(rotation.eulerAngles.y, Vector3.up);
-        }
+        //set AimDirection, is syncronized on every other player online
+        //+ call AimDirectionChanged to change rotation also in local
+        AimDirection = direction;
+        AimDirectionChanged();
     }
 
     void OnShoot()
@@ -98,4 +97,21 @@ public class CannonFeedback : MonoBehaviour
         if (bulletToShow)
             InstantiateHelper.Destroy(bulletToShow.gameObject);
     }
+
+    #region online
+
+    [Networked, OnChangedRender(nameof(AimDirectionChanged))] 
+    public Vector3 AimDirection { get; set; }
+
+    private void AimDirectionChanged()
+    {
+        //set rotate direction to look where player is aiming
+        if (AimDirection != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(AimDirection, Vector3.up);
+            objectToRotate.rotation = Quaternion.AngleAxis(rotation.eulerAngles.y, Vector3.up);
+        }
+    }
+
+    #endregion
 }
