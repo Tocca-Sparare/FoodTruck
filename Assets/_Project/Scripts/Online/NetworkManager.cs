@@ -26,7 +26,7 @@ public class NetworkManager : Singleton<NetworkManager>, INetworkRunnerCallbacks
     public System.Action<string> OnFailStartGame;
 
     //private
-    private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
+    private Dictionary<PlayerRef, NetworkObject> spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
 
     #region custom
 
@@ -83,13 +83,17 @@ public class NetworkManager : Singleton<NetworkManager>, INetworkRunnerCallbacks
 
     public void LeaveGame()
     {
+        Runner.Disconnect(Runner.LocalPlayer);
+
         //destroy instantiated scripts
         foreach (MonoBehaviour script in GetComponents<MonoBehaviour>())
         {
             if (script != this)
                 Destroy(script);
         }
-        //Runner.Disconnect(Runner.LocalPlayer);
+
+        //clear vars
+        spawnedCharacters.Clear();
     }
 
     #endregion
@@ -145,17 +149,17 @@ public class NetworkManager : Singleton<NetworkManager>, INetworkRunnerCallbacks
             Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 3, 1, 0);
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             // Keep track of the player avatars so we can remove it when they disconnect
-            _spawnedCharacters.Add(player, networkPlayerObject);
+            spawnedCharacters.Add(player, networkPlayerObject);
         }
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         // Find and remove the players avatar
-        if (_spawnedCharacters.TryGetValue(player, out NetworkObject networkObject))
+        if (spawnedCharacters.TryGetValue(player, out NetworkObject networkObject))
         {
             runner.Despawn(networkObject);
-            _spawnedCharacters.Remove(player);
+            spawnedCharacters.Remove(player);
         }
     }
 
