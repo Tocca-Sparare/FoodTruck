@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 4778235605163930757}
   - component: {fileID: 707301616376272599}
   - component: {fileID: 4878262239679068256}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LevelPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelBanner: {fileID: 5185927307418545323}
+  levelScene: 
 --- !u!135 &4878262239679068256
 SphereCollider:
   m_ObjectHideFlags: 0

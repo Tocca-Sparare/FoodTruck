@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Levels/Livello 3.unity
     guid: 8d4ccf9513694cd47970aa4d3d536afb
+  - enabled: 1
+    path: Assets/_Project/Scenes/Level Selection.unity
+    guid: f6337d34fc498824c9ccdb60f7b88c42
   m_configObjects: {}

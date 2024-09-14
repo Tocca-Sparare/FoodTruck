@@ -1870,6 +1870,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7407408011178616605}
     m_Modifications:
+    - target: {fileID: 707301616376272599, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
+      propertyPath: levelScene
+      value: Livello 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2778096161947737928, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Name
       value: LevelPoint - Liguria
@@ -3720,6 +3724,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7407408011178616605}
     m_Modifications:
+    - target: {fileID: 707301616376272599, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
+      propertyPath: levelScene
+      value: Livello 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1264035001752744212, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -4420,6 +4428,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7407408011178616605}
     m_Modifications:
+    - target: {fileID: 707301616376272599, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
+      propertyPath: levelScene
+      value: Livello 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1264035001752744212, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Sprite
       value: 

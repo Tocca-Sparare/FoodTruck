@@ -1,14 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using redd096.Attributes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class LevelPoint : MonoBehaviour
+public class LevelPoint :  MonoBehaviour, IInteractable
 {
     [SerializeField] GameObject levelBanner;
+    [SceneInstance][SerializeField] string levelScene;
+
+    public void Interact(InteractComponent interactor)
+    {
+        SceneManager.LoadScene(levelScene);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"trigger with {other.gameObject.name}", other.gameObject);
         var mapPlayer = other.GetComponentInParent<MapPlayer>();
 
         if (mapPlayer != null)
