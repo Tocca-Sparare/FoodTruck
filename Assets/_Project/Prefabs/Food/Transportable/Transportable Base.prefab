@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3872329518839196407}
   - component: {fileID: 3581413794298398557}
   - component: {fileID: 4827092771953843481}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Transportable Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 6295081334049895108}
   - component: {fileID: 9021742348997141254}
   - component: {fileID: 5513944804696823443}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
