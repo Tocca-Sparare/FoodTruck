@@ -337,11 +337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a4f845aae8c7c48b9693e6fecf8004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpriteRenderer: {fileID: 0}
   objectToRotate: {fileID: 6043401410775304883}
   shootSound: {fileID: 8300000, guid: 572e8c1fa4e54cf4d92e5da197655495, type: 3}
   shootWhenNoAmmo: {fileID: 0}
-  _AimDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &6220821089048065153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +358,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 2558202983194141355}
+  - {fileID: 3145659889834489619}
 --- !u!1 &6991967764626580299
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,10 +544,34 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4146779378696460423}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3145659889834489619}
   m_SourcePrefab: {fileID: 100100000, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
 --- !u!4 &6043401410775304883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
   m_PrefabInstance: {fileID: 6076693922089151832}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6383194125502189577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 04282f8e5857445d5958883b1c5da47f, type: 3}
+  m_PrefabInstance: {fileID: 6076693922089151832}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3145659889834489619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6383194125502189577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0

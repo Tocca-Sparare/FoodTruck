@@ -6,7 +6,6 @@ using UnityEngine;
 /// </summary>
 public class CannonFeedback : NetworkBehaviour
 {
-    [SerializeField] SpriteRenderer bulletSpriteRenderer;
     [SerializeField] Transform objectToRotate;
     [Space]
     [SerializeField] AudioClip shootSound;
@@ -53,10 +52,12 @@ public class CannonFeedback : NetworkBehaviour
 
     void OnUpdateAimDirection(Vector3 direction)
     {
-        //set AimDirection, is syncronized on every other player online
-        //+ call AimDirectionChanged to change rotation also in local
-        AimDirection = direction;
-        AimDirectionChanged();
+        //set rotate direction to look where player is aiming
+        if (direction != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+            objectToRotate.rotation = Quaternion.AngleAxis(rotation.eulerAngles.y, Vector3.up);
+        }
     }
 
     void OnShoot()
@@ -83,19 +84,6 @@ public class CannonFeedback : NetworkBehaviour
     }
 
     #region online
-
-    [Networked, OnChangedRender(nameof(AimDirectionChanged))] 
-    public Vector3 AimDirection { get; set; }
-
-    private void AimDirectionChanged()
-    {
-        //set rotate direction to look where player is aiming
-        if (AimDirection != Vector3.zero)
-        {
-            Quaternion rotation = Quaternion.LookRotation(AimDirection, Vector3.up);
-            objectToRotate.rotation = Quaternion.AngleAxis(rotation.eulerAngles.y, Vector3.up);
-        }
-    }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
     public void RPC_OnShoot(RpcInfo info = default)
