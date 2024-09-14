@@ -19,6 +19,9 @@ public class PauseMenuManager : MonoBehaviour
     {
         foreach (var playerController in autoPosses.playerControllers)
         {
+            if (playerController == null)
+                continue;
+
             var manager = playerController.GetComponent<InputManager>();
 
             if (manager.PauseWasPressedThisFrame)
