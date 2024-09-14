@@ -20,4 +20,5 @@ MonoBehaviour:
     child e i vari interagibili -> Interactable cos\xEC da poter scegliere quali
     collider usare per l'interact component (ad esempio sul cannone il collider \xE8
     solo dietro per non poterci interagire se non ci troviamo dietro)\n\nLimitsColliders
-    -> BlockPlayer to block only the players and not npcs"
+    -> BlockPlayer to block only the players and not npcs\n\nCars in Level2 -> both
+    BlockPlayer and HittableByBullet to hit both player and bullets"
