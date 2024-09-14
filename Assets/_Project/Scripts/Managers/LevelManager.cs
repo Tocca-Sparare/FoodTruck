@@ -93,21 +93,10 @@ public class LevelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// This is called by UsePlayerInputManagerInEditor, to instantiate player controllers to test rapidly the scene with more players
+    /// This is called by UsePlayerInputManagerInEditor, to test rapidly the scene with more players
     /// </summary>
-    public void AddPlayerInEditorForTestLocalMultiplayer(PlayerInput input)
+    public void AddPlayerInEditorForTestLocalMultiplayer()
     {
-        //unpossess every pawn and deactive
-        var pawns = FindObjectsByType<PlayerPawn>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
-        foreach (var pawn in pawns)
-        {
-            pawn.Unpossess();
-            pawn.gameObject.SetActive(false);
-        }
-
-        //and possess again (to add player controller instantiated by PlayerInputManager)
-        FindObjectOfType<AutoPossess>().Init();
-
         //if game is already going, be sure to set state for every statemachine still null
         if (levelState == ELevelState.Playing)
         {

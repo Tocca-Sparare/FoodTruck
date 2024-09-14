@@ -64,9 +64,33 @@ public class UsePlayerInputManagerInEditor : MonoBehaviour
 
     private void OnPlayerJoined(PlayerInput input)
     {
-        //add player controller, and tell to LevelManager
         if (isCorrectInstance)
-            levelManager.AddPlayerInEditorForTestLocalMultiplayer(input);
+        {
+            //unpossess every pawn and deactive
+            var pawns = FindObjectsByType<PlayerPawn>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
+            foreach (var pawn in pawns)
+            {
+                pawn.Unpossess();
+                pawn.gameObject.SetActive(false);
+            }
+
+            //and possess again (to add player controller instantiated by PlayerInputManager)
+            FindObjectOfType<AutoPossess>().Init();
+
+            //check if LevelManager
+            LevelManager levelManager = FindObjectOfType<LevelManager>();
+            if (levelManager)
+            {
+                levelManager.AddPlayerInEditorForTestLocalMultiplayer();
+            }
+            //or LevelSelectionManager
+            else
+            {
+                LevelSelectionManager levelSelectionManager = FindObjectOfType<LevelSelectionManager>();
+                if (levelSelectionManager)
+                    levelSelectionManager.AddPlayerInEditorForTestLocalMultiplayer();
+            }
+        }
     }
 
     private void OnPlayerLeft(PlayerInput input)

@@ -22,7 +22,9 @@ public class LevelPoint : MonoBehaviour, IInteractable
 
     public void Interact(InteractComponent interactor)
     {
-        SceneManager.LoadScene(levelScene);
+        //only offline or server can call this button
+        if (NetworkManager.IsOnline == false || NetworkManager.instance.Runner.IsServer)
+            SceneManager.LoadScene(levelScene);
     }
 
     public void SetFullStars(int count)
