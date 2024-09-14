@@ -1014,7 +1014,7 @@ MonoBehaviour:
   deselectWhenUseMouse: 1
   waitFirstEventToSelect: 1
   firstSelectedGameObjects:
-  - {fileID: 976112730}
+  - {fileID: 8852187062116780760}
   overrideObjects: []
   notNavigables: []
   notDeselectObjects:
@@ -2040,12 +2040,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6147411418203032924, guid: 94aff294a8bd50a40aed8187b7031c11, type: 3}
   m_PrefabInstance: {fileID: 8852187062116780758}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8852187062116780760}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecd5ae7936925fe449b88984f6902f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8852187062116780760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1806063200578842206, guid: 94aff294a8bd50a40aed8187b7031c11, type: 3}
+  m_PrefabInstance: {fileID: 8852187062116780758}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

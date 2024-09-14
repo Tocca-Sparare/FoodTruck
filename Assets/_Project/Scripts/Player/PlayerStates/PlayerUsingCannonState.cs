@@ -52,9 +52,6 @@ public class PlayerUsingCannonState : State
         if (inputManager == null || cannonInteractable == null)
             return;
 
-        //follow cannon
-        FollowCannonPositionAndRotation();
-
         //set direction using mouse position
         if (inputManager.IsUsingMouse)
         {
@@ -76,6 +73,14 @@ public class PlayerUsingCannonState : State
         //leave cannon
         if (inputManager.InteractWasPressedThisFrame)
             cannonInteractable.Dismiss();
+    }
+
+    protected override void OnFixedUpdate()
+    {
+        base.OnFixedUpdate();
+
+        //follow cannon
+        FollowCannonPositionAndRotation();
     }
 
     void CalculateAimPositionWithMouse()
@@ -116,6 +121,9 @@ public class PlayerUsingCannonState : State
 
     void FollowCannonPositionAndRotation()
     {
+        if (cannonInteractable == null)
+            return;
+
         //follow cannon position and rotation
         player.transform.position = cannonInteractable.PlayerTransform.position;
         Vector3 rotateDirection = cannonInteractable.transform.position - rotateCharacter.ObjectToRotate.position;

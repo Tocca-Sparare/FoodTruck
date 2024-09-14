@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 154024957617275107, guid: 4ea4e39163785d9459ba0a11b761d5c1, type: 3}
       propertyPath: m_Name
-      value: PlayerPawn (1) Variant
+      value: PlayerPawn 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 161182851517374303, guid: 4ea4e39163785d9459ba0a11b761d5c1, type: 3}
+      propertyPath: SortKey
+      value: 4050879446
       objectReference: {fileID: 0}
     - target: {fileID: 822323056787075004, guid: 4ea4e39163785d9459ba0a11b761d5c1, type: 3}
       propertyPath: m_LocalPosition.x
