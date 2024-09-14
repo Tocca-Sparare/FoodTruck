@@ -42,8 +42,8 @@ public static class InstantiateHelper
         {
             if (NetworkManager.instance.Runner.IsServer && GetGameObject(prefab).TryGetComponent(out NetworkObject networkObj))
             {
-                NetworkObject spawned = NetworkManager.instance.Runner.Spawn(networkObj, parent.position, parent.rotation);
-                GetGameObject(spawned).transform.SetParent(parent);
+                NetworkObject spawned = NetworkManager.instance.Runner.Spawn(networkObj, parent.position, parent.rotation, onBeforeSpawned: (networkRunner, obj) =>
+                { GetGameObject(obj).transform.SetParent(parent); });
                 return GetElement<T>(spawned);
             }
             else
