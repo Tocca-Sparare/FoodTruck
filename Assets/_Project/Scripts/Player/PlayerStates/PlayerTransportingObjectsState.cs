@@ -34,6 +34,15 @@ public class PlayerTransportingObjectsState : State
         if (playerStateMachine == null) Debug.LogError($"Missing PlayerStateMachine on {GetType().Name}", StateMachine);
     }
 
+    protected override void OnExit()
+    {
+        base.OnExit();
+
+        //drop here because if we drop first, we could scan it instead of Cannon, and if we drop after Interact with Cannon we come back to normal state
+        if (playerStateMachine.TransportedObject)
+            playerStateMachine.TransportedObject.Drop();
+    }
+
     protected override void OnUpdate()
     {
         base.OnUpdate();
@@ -73,6 +82,9 @@ public class PlayerTransportingObjectsState : State
             if (playerStateMachine.TransportedObject)
                 playerStateMachine.TransportedObject.Drop();
 
+            //reset player state
+            StateMachine.SetState(playerStateMachine.NormalState);
+
             return;
         }
 
@@ -81,6 +93,9 @@ public class PlayerTransportingObjectsState : State
         {
             if (playerStateMachine.TransportedObject)
                 playerStateMachine.TransportedObject.Throw(new Vector3(moveDirection.x, verticalThrow, moveDirection.z), throwForce);
+
+            //reset player state
+            StateMachine.SetState(playerStateMachine.NormalState);
         }
     }
 
