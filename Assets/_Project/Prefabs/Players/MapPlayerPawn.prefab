@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8475008391266876826}
   - component: {fileID: -5159236675478085632}
   - component: {fileID: 3968475509625293863}
+  - component: {fileID: 833226318440019982}
   m_Layer: 0
   m_Name: MapPlayerPawn
   m_TagString: Untagged
@@ -181,7 +182,7 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 8232641973378411006}
+  - {fileID: 833226318440019982}
 --- !u!114 &3968475509625293863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +195,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68cb5e4ee284b14db21cecaf41311c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &833226318440019982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3690176846452286603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a591d221a634417e9827eb58e17de84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _interpolationTarget: {fileID: 3360365401547158668}
+  UsePreciseRotation: 0
+  UseRenderSleepThresholds: 1
+  RenderThresholds:
+    UseEnergy: 1
+    Position: 0.01
+    Rotation: 0.01
+    Scale: 0.01
 --- !u!1 &4023775796412890564
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +424,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3360365401547158668}
-  - component: {fileID: 8232641973378411006}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -426,22 +448,6 @@ Transform:
   - {fileID: 3016694528258950469}
   m_Father: {fileID: 4282667411950625557}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8232641973378411006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5689171256440960561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncScale: 0
-  SyncParent: 0
-  _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 0
 --- !u!1 &6086562677495401433
 GameObject:
   m_ObjectHideFlags: 0
