@@ -71,10 +71,10 @@ public class LevelManager : MonoBehaviour
             playerSM.SetState(playerSM.NormalState);
 
         //start spawner
-        CustomerSpawner customerSpawner = FindObjectOfType<CustomerSpawner>(true);
+        CustomerSpawner customerSpawner = FindObjectOfType<CustomerSpawner>();
         if (customerSpawner) 
             customerSpawner.Init();
-        else 
+        else if (NetworkManager.IsOnline == false || NetworkManager.instance.Runner.IsServer)
             Debug.LogError($"Missing customerSpawner on {name}", gameObject);        
     }
 
