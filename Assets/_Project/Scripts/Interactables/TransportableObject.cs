@@ -81,6 +81,11 @@ public class TransportableObject : MonoBehaviour, IInteractable
         foreach (var col in colliders)
             col.enabled = true;
 
+        //reset player state
+        PlayerStateMachine playerStateMachine = playerTransportingThisObject.GetComponent<PlayerStateMachine>();
+        if (playerStateMachine)
+            playerStateMachine.SetState(playerStateMachine.NormalState);
+
         playerTransportingThisObject = null;
     }
 
