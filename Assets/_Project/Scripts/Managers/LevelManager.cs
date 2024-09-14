@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
             playerSM.SetState(playerSM.NormalState);
 
         //start spawner
-        CustomerSpawner customerSpawner = FindObjectOfType<CustomerSpawner>();
+        CustomerSpawner customerSpawner = FindObjectOfType<CustomerSpawner>(true);
         if (customerSpawner) 
             customerSpawner.Init();
         else 
@@ -88,7 +88,12 @@ public class LevelManager : MonoBehaviour
         //stop every player
         PlayerStateMachine[] playerStateMachines = FindObjectsOfType<PlayerStateMachine>();
         foreach (var playerSM in playerStateMachines)
+        {
             playerSM.SetNullState();
+            Rigidbody rb = playerSM.GetComponent<Rigidbody>();
+            if (rb)
+                rb.velocity = Vector3.zero;
+        }
     }
 
     /// <summary>

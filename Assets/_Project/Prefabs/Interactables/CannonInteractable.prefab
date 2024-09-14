@@ -243,6 +243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2306592341687821132}
+  - component: {fileID: 6225050843157587986}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -268,6 +269,22 @@ Transform:
   - {fileID: 5109533633380121025}
   m_Father: {fileID: 3891975280187624829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6225050843157587986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907779719103064348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &3122850214938259601
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +296,6 @@ GameObject:
   - component: {fileID: 3891975280187624829}
   - component: {fileID: 998651081993184204}
   - component: {fileID: 2558202983194141355}
-  - component: {fileID: 7008777857263396273}
   - component: {fileID: 6668053059903458066}
   m_Layer: 0
   m_Name: CannonInteractable
@@ -342,22 +358,6 @@ MonoBehaviour:
   objectToRotate: {fileID: 6043401410775304883}
   shootSound: {fileID: 8300000, guid: 572e8c1fa4e54cf4d92e5da197655495, type: 3}
   shootWhenNoAmmo: {fileID: 0}
---- !u!114 &7008777857263396273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3122850214938259601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncScale: 0
-  SyncParent: 0
-  _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 0
 --- !u!114 &6668053059903458066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 7008777857263396273}
+  - {fileID: 6225050843157587986}
 --- !u!1 &6991967764626580299
 GameObject:
   m_ObjectHideFlags: 0

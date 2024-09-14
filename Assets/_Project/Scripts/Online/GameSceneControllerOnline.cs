@@ -20,7 +20,7 @@ public class GameSceneControllerOnline : MonoBehaviour
             //deactive spawn manager
             var spawnManager = FindObjectOfType<CustomerSpawner>();
             if (spawnManager)
-                spawnManager.enabled = false;
+                spawnManager.gameObject.SetActive(false);
         }
     }
 }
