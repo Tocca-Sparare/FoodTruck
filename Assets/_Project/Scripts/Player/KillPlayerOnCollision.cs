@@ -8,6 +8,9 @@ public class KillPlayerOnCollision : MonoBehaviour
 
         if (player != null)
         {
+            if (player.CurrentState == player.TransportingObjectsState)
+                player.Drop();
+
             player.SetState(player.DeadState);
         }
     }
