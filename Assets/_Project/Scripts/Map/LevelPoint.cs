@@ -1,4 +1,5 @@
 using redd096.Attributes;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,8 @@ public class LevelPoint : MonoBehaviour, IInteractable
 {
     [SceneInstance][SerializeField] string levelScene;
     [SerializeField] Sprite locandinaSprite;
+    [SerializeField] List<GameObject> emptyStars;
+    [SerializeField] List<GameObject> fullStars;
 
     [Space]
     [SerializeField] GameObject levelBanner;
@@ -14,11 +17,29 @@ public class LevelPoint : MonoBehaviour, IInteractable
     private void Awake()
     {
         locandinaSpriteRenderer.sprite = locandinaSprite;
+        SetFullStars(1);
     }
 
     public void Interact(InteractComponent interactor)
     {
         SceneManager.LoadScene(levelScene);
+    }
+
+    public void SetFullStars(int count)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (i < count)
+            {
+                emptyStars[i].SetActive(false);
+                fullStars[i].SetActive(true);
+            }
+            else
+            {
+                emptyStars[i].SetActive(true);
+                fullStars[i].SetActive(false);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
