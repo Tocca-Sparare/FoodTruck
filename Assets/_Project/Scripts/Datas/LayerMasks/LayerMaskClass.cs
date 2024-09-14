@@ -67,7 +67,6 @@ public class LayerMaskClass
 
     #region editor
 
-#if UNITY_EDITOR
     string[] GetNames()
     {
         if (data == null)
@@ -79,7 +78,6 @@ public class LayerMaskClass
 
         return s;
     }
-#endif
 
     #endregion
 }
