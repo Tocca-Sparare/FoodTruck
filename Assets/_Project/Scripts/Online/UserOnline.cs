@@ -7,24 +7,39 @@ using UnityEngine;
 [RequireComponent(typeof(User))]
 public class UserOnline : NetworkBehaviour
 {
-    User user;
-
     [Networked, OnChangedRender(nameof(UsernameChanged))]
     public string PlayerName { get; set; }
 
-    public int PlayerIndex { get { if (user == null) user = GetComponent<User>(); return user.PlayerIndex; } }
+    [Networked, OnChangedRender(nameof(IndexChanged))]
+    public int PlayerIndex { get; set; }
 
     /// <summary>
-    /// When spawned, get player name and send to server
+    /// When spawned, get player name and send to server + get index from server
     /// </summary>
     public override void Spawned()
     {
         NetworkManager.instance.OnPlayerEnter?.Invoke(this);
 
+        //client send name to server
         if (Object.HasInputAuthority)
         {
             RPC_SendName(NetworkManager.instance.LocalPlayerName);
         }
+        //server set index and inform clients
+        if (Object.HasStateAuthority)
+        {
+            PlayerIndex = GetComponent<User>().PlayerIndex;
+        }
+    }
+
+    /// <summary>
+    /// Call player despawned
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="hasState"></param>
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        NetworkManager.instance.OnPlayerExit?.Invoke(this);
     }
 
     /// <summary>
@@ -47,12 +62,10 @@ public class UserOnline : NetworkBehaviour
     }
 
     /// <summary>
-    /// Call player despawned
+    /// When server change index, everyone receive it because it's syncronized
     /// </summary>
-    /// <param name="runner"></param>
-    /// <param name="hasState"></param>
-    public override void Despawned(NetworkRunner runner, bool hasState)
+    private void IndexChanged()
     {
-        NetworkManager.instance.OnPlayerExit?.Invoke(this);
+        NetworkManager.instance.OnPlayerRefreshIndex?.Invoke(this);
     }
 }

@@ -43,6 +43,7 @@ public class LobbyOnlineUI : MonoBehaviour
         {
             NetworkManager.instance.OnPlayerEnter += AddPlayer;
             NetworkManager.instance.OnPlayerRefreshName += RefreshPlayer;
+            NetworkManager.instance.OnPlayerRefreshIndex += RefreshPlayer;
             NetworkManager.instance.OnPlayerExit += RemovePlayer;
         }
 
@@ -62,6 +63,7 @@ public class LobbyOnlineUI : MonoBehaviour
         {
             NetworkManager.instance.OnPlayerEnter -= AddPlayer;
             NetworkManager.instance.OnPlayerRefreshName -= RefreshPlayer;
+            NetworkManager.instance.OnPlayerRefreshIndex -= RefreshPlayer;
             NetworkManager.instance.OnPlayerExit -= RemovePlayer;
         }
 
@@ -125,6 +127,7 @@ public class LobbyOnlineUI : MonoBehaviour
             //update player username in UI
             GameObject go = joinedPlayers[onlineID];
             go.GetComponentInChildren<TMP_Text>(true).text = user.PlayerName;
+            go.GetComponentInChildren<Image>(true).color = NetworkManager.instance.ColorsForPlayers[user.PlayerIndex];
         }
     }
 
