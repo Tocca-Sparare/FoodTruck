@@ -36,6 +36,8 @@ public class PlayerDeadState : State
         base.OnEnter();
 
         player.Kill();
+
+        StateMachine.StartCoroutine(RespawnPlayer());
     }
 
     IEnumerator RespawnPlayer()

@@ -78,9 +78,11 @@ MonoBehaviour:
     layerTables:
       data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
       elementName: PlayerCleaningState - Tables Layer
-  TrasnportingObjectsState:
+  TransportingObjectsState:
     throwForce: 10
     verticalThrow: 0.5
+  DeadState:
+    deadDuration: 0
 --- !u!114 &3939595043599167271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,7 +100,7 @@ MonoBehaviour:
     ch: {fileID: 0}
     rb3d: {fileID: 2724849363099509092}
     rb2d: {fileID: 0}
-  inputSpeed: 5
+  inputSpeed: 7
   maxSpeed: 50
   rigidbodyUseGravityAndPreventSlide: 1
   rigidbodyMaxSlopeAngle: 45
