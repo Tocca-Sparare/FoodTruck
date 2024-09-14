@@ -1,32 +1,34 @@
 using PathCreation;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CarObstaclesManager : MonoBehaviour
 {
-    [SerializeField] List<PathCreator> paths = new List<PathCreator>();
-
-    [SerializeField] List<ObstacleCar> carPrefabs = new List<ObstacleCar>();
+    [SerializeField] PathCreator path;
+    [SerializeField] List<ObstacleCar> cars = new List<ObstacleCar>();
     [SerializeField] float spawnDelay;
 
     private void Start()
     {
-        StartCoroutine(Spawn());
+        StartCoroutine(ActivateCar());
     }
 
-    IEnumerator Spawn()
+    IEnumerator ActivateCar()
     {
         while (true)
         {
             yield return new WaitForSeconds(spawnDelay);
 
-            int randomPrefabIndex = Random.Range(0, carPrefabs.Count);
-            var obstaclePrefab = carPrefabs[randomPrefabIndex];
+            var selectableCars = cars.Where(c => c.IsAvailable).ToArray();
 
-            foreach (var path in paths)
+            if (selectableCars.Length > 0)
             {
-                InstantiateHelper.Instantiate(obstaclePrefab, path.gameObject.transform);
+                int randomPrefabIndex = Random.Range(0, selectableCars.Length);
+                var selectedCar = selectableCars[randomPrefabIndex];
+                selectedCar.SetPath(path);
+                selectedCar.gameObject.SetActive(true);
             }
         }
     }
