@@ -17,7 +17,7 @@ public class LevelPoint : MonoBehaviour, IInteractable
     private void Awake()
     {
         locandinaSpriteRenderer.sprite = locandinaSprite;
-        SetFullStars(1);
+        SetFullStars(0);
     }
 
     public void Interact(InteractComponent interactor)
