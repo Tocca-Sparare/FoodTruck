@@ -130,10 +130,13 @@ public class LobbyOnlineUI : MonoBehaviour
         //re-instantiate all
         foreach (var onlineID in ids)
         {
-            //update player username in UI
-            GameObject go = joinedPlayers[onlineID];
+            GameObject go = Instantiate(joinedPlayerPrefab, joinedPlayersContainer);
             go.GetComponentInChildren<TMP_Text>(true).text = user.PlayerName;
             go.GetComponentInChildren<Image>(true).color = NetworkManager.instance.ColorsForPlayers[user.PlayerIndex];
+            go.SetActive(true);
+
+            //and add to dictionary
+            joinedPlayers.Add(onlineID, go);
         }
     }
 
