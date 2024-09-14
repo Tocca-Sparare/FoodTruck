@@ -33,12 +33,9 @@ public class CustomerNormalState : State
         navMeshAgent.destination = currentChair.transform.position;
     }
 
-    /// <summary>
-    /// Move in late update to not lag online (Update for some reason doesn't work and FixedUpdate lag)
-    /// </summary>
-    protected override void OnLateUpdate()
+    protected override void OnUpdate()
     {
-        base.OnLateUpdate();
+        base.OnUpdate();
 
         //update position and rotation
         transformState.rotation = Quaternion.LookRotation(navMeshAgent.nextPosition - transformState.position, Vector3.up);

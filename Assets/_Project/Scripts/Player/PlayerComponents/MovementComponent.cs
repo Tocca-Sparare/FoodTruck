@@ -55,11 +55,6 @@ public class MovementComponent : MonoBehaviour
             Debug.LogError("Miss CharacterController or Rigidbody on " + GetType().Name, gameObject);
     }
 
-    private void LateUpdate()
-    {
-        CalculateFloorMovement();
-    }
-
     /// <summary>
     /// If you are using a CharacterController, call this in Update(). 
     /// If you are using a Rigidbody, call this in FixedUpdate()
@@ -67,6 +62,7 @@ public class MovementComponent : MonoBehaviour
     public virtual void UpdatePosition()
     {
         //set velocity (input + push)
+        CalculateFloorMovement();
         CalculateVelocity();
         CheckIsMovingRight();
         DoMovement();

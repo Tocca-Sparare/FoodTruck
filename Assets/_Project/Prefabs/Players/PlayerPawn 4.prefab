@@ -36,6 +36,10 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[2]
       value: 
       objectReference: {fileID: 2017945122805889481}
+    - target: {fileID: 161182851517374303, guid: 4ea4e39163785d9459ba0a11b761d5c1, type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[3]
+      value: 
+      objectReference: {fileID: 2017945122805889481}
     - target: {fileID: 822323056787075004, guid: 4ea4e39163785d9459ba0a11b761d5c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.22

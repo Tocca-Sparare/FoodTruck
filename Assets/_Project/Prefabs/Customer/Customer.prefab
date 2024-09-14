@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 9116563319463737380}
   - component: {fileID: 1811233357818392245}
   - component: {fileID: 266572507665845490}
-  - component: {fileID: -7004041323770309397}
+  - component: {fileID: 2777168321402083674}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Untagged
@@ -787,7 +787,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 1073270872299582637}
   - {fileID: 266572507665845490}
-  - {fileID: -7004041323770309397}
+  - {fileID: 2777168321402083674}
 --- !u!114 &266572507665845490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +804,7 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
---- !u!114 &-7004041323770309397
+--- !u!114 &2777168321402083674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -813,7 +813,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6408842856947285832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 844b659e659cc724380d07d08efbfbd9, type: 3}
+  m_Script: {fileID: 11500000, guid: 17cc015e30d854441aac6bd9718c7265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &311881929338458464
