@@ -41,6 +41,9 @@ public class PlayerTransportingObjectsState : State
         if (inputManager == null)
             return;
 
+        //move transported object
+        MoveTransportedObject();
+
         //set move direction
         if (movementComponent)
         {            
@@ -93,13 +96,8 @@ public class PlayerTransportingObjectsState : State
             movementComponent.UpdatePosition();
     }
 
-    /// <summary>
-    /// Move in late update to not lag online (Update for some reason doesn't work and FixedUpdate lag)
-    /// </summary>
-    protected override void OnLateUpdate()
+    void MoveTransportedObject()
     {
-        base.OnLateUpdate();
-
         //move transported object
         if (playerStateMachine.TransportedObject)
         {
