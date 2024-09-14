@@ -133,8 +133,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  offsetText: {fileID: 2366248685629927384}
+  offsetPercentage: 0
   offsetAngle: {x: 0, y: 0, z: 90}
+  currentPath: {fileID: 0}
+  offsetText: {fileID: 2366248685629927384}
 --- !u!1 &7822526798015477966
 GameObject:
   m_ObjectHideFlags: 0

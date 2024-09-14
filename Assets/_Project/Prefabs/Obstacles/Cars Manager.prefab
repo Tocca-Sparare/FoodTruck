@@ -47,8 +47,8 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: 0, y: 0, z: 40}
-      - {x: 0.05417061, y: 0, z: 44.45752}
+      - {x: 0, y: 0, z: 1000}
+      - {x: 0.05417061, y: 0, z: 1004.4575}
       - {x: 0.14318275, y: 0, z: -47.53484}
       - {x: 0, y: 0, z: -40}
       isClosed: 0
@@ -94,7 +94,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8412072024701642551}
-  - component: {fileID: 7915211185390667151}
   m_Layer: 8
   m_Name: Cars Manager
   m_TagString: Untagged
@@ -119,21 +118,6 @@ Transform:
   - {fileID: 4434794425471113949}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7915211185390667151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4022956804924955802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e88cf06037006604dbd4a5f290b3534e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnDelay: 3
-  path: {fileID: 5781784820413687241}
-  carsContainer: {fileID: 5256561156708620376}
 --- !u!1 &5256561156708620376
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 5256561156708620376}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.02, y: 0, z: 49.12}
+  m_LocalPosition: {x: -44.9, y: 0, z: 43.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -178,7 +162,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1454878332286512607, guid: 8afdcd2ce56148143a31995504f06abb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 8.6
       objectReference: {fileID: 0}
     - target: {fileID: 1454878332286512607, guid: 8afdcd2ce56148143a31995504f06abb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -186,7 +170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1454878332286512607, guid: 8afdcd2ce56148143a31995504f06abb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.9
       objectReference: {fileID: 0}
     - target: {fileID: 1454878332286512607, guid: 8afdcd2ce56148143a31995504f06abb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -224,6 +208,14 @@ PrefabInstance:
       propertyPath: SortKey
       value: 3651213783
       objectReference: {fileID: 0}
+    - target: {fileID: 6930981259591324808, guid: 8afdcd2ce56148143a31995504f06abb, type: 3}
+      propertyPath: currentPath
+      value: 
+      objectReference: {fileID: 5781784820413687241}
+    - target: {fileID: 6930981259591324808, guid: 8afdcd2ce56148143a31995504f06abb, type: 3}
+      propertyPath: offsetPercentage
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -246,9 +238,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle Police
       objectReference: {fileID: 0}
+    - target: {fileID: 3913278210250278585, guid: 29ec0ffe2e6063141a0b0c92fbb63d87, type: 3}
+      propertyPath: currentPath
+      value: 
+      objectReference: {fileID: 5781784820413687241}
+    - target: {fileID: 3913278210250278585, guid: 29ec0ffe2e6063141a0b0c92fbb63d87, type: 3}
+      propertyPath: offsetPercentage
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4778828644211736558, guid: 29ec0ffe2e6063141a0b0c92fbb63d87, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 16.5
       objectReference: {fileID: 0}
     - target: {fileID: 4778828644211736558, guid: 29ec0ffe2e6063141a0b0c92fbb63d87, type: 3}
       propertyPath: m_LocalPosition.y
@@ -256,7 +256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4778828644211736558, guid: 29ec0ffe2e6063141a0b0c92fbb63d87, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4778828644211736558, guid: 29ec0ffe2e6063141a0b0c92fbb63d87, type: 3}
       propertyPath: m_LocalRotation.w
@@ -343,6 +343,14 @@ PrefabInstance:
     - target: {fileID: 4380950892611044393, guid: d579ac79672e0bb4284a186640e2a78b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247622900123319678, guid: d579ac79672e0bb4284a186640e2a78b, type: 3}
+      propertyPath: currentPath
+      value: 
+      objectReference: {fileID: 5781784820413687241}
+    - target: {fileID: 5247622900123319678, guid: d579ac79672e0bb4284a186640e2a78b, type: 3}
+      propertyPath: offsetPercentage
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7892229754414402672, guid: d579ac79672e0bb4284a186640e2a78b, type: 3}
       propertyPath: m_Name
