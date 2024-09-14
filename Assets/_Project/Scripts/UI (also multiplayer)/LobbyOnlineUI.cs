@@ -120,9 +120,15 @@ public class LobbyOnlineUI : MonoBehaviour
 
     private void RefreshPlayer(UserOnline user)
     {
-        string onlineID = user.Object.Id.ToString();
+        IEnumerable<string> ids = joinedPlayers.Keys;
 
-        if (joinedPlayers.ContainsKey(onlineID))
+        //remove previous
+        foreach (var v in joinedPlayers.Keys)
+            Destroy(joinedPlayers[v]);
+        joinedPlayers.Clear();
+
+        //re-instantiate all
+        foreach (var onlineID in ids)
         {
             //update player username in UI
             GameObject go = joinedPlayers[onlineID];
