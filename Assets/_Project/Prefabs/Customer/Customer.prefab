@@ -308,6 +308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6186360425270550522}
+  - component: {fileID: 6098912690869394999}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -333,6 +334,22 @@ Transform:
   - {fileID: 3088211763767545882}
   m_Father: {fileID: 4224814158584987445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6098912690869394999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2295068782837723343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &4064919587253453623
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,7 +692,6 @@ GameObject:
   - component: {fileID: 1073270872299582637}
   - component: {fileID: 9116563319463737380}
   - component: {fileID: 1811233357818392245}
-  - component: {fileID: 1816939486100748939}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Untagged
@@ -784,24 +800,8 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 1816939486100748939}
+  - {fileID: 6098912690869394999}
   - {fileID: 8221360436884846684}
---- !u!114 &1816939486100748939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6408842856947285832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncScale: 0
-  SyncParent: 0
-  _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 0
 --- !u!1001 &311881929338458464
 PrefabInstance:
   m_ObjectHideFlags: 0
