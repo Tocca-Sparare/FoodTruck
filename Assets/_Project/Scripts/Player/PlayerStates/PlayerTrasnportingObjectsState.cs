@@ -38,6 +38,13 @@ public class PlayerTrasnportingObjectsState : State
     {
         base.OnUpdate();
 
+        //move transported object
+        if (playerStateMachine.TransportedObject)
+        {
+            playerStateMachine.TransportedObject.transform.position = playerStateMachine.TransportedObjectContainer.position;
+            playerStateMachine.TransportedObject.transform.rotation = playerStateMachine.TransportedObjectContainer.rotation;
+        }
+
         if (inputManager == null)
             return;
 
@@ -88,12 +95,5 @@ public class PlayerTrasnportingObjectsState : State
         //move
         if (movementComponent != null)
             movementComponent.UpdatePosition();
-
-        //move transported object
-        if (playerStateMachine.TransportedObject)
-        {
-            playerStateMachine.TransportedObject.transform.position = playerStateMachine.TransportedObjectContainer.position;
-            playerStateMachine.TransportedObject.transform.rotation = playerStateMachine.TransportedObjectContainer.rotation;
-        }
     }
 }
