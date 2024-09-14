@@ -188,6 +188,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7189434915524935985, guid: 119ccf605c616274892e3c72bc37c5a7, type: 3}
   m_PrefabInstance: {fileID: 41687345}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &41687347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7627099646522621935, guid: 119ccf605c616274892e3c72bc37c5a7, type: 3}
+  m_PrefabInstance: {fileID: 41687345}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d458d2f602be32a4c849196d32166e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &56256515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1910,6 +1921,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7189434915524935985, guid: 2405f931a933c5d4e95155b329020ea8, type: 3}
   m_PrefabInstance: {fileID: 648254884}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &648254886 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7627099646522621935, guid: 2405f931a933c5d4e95155b329020ea8, type: 3}
+  m_PrefabInstance: {fileID: 648254884}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d458d2f602be32a4c849196d32166e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &652789542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5017,6 +5039,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3878108550136526474, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: pawnsInOrderByPlayerIndex.Array.data[1]
+      value: 
+      objectReference: {fileID: 41687347}
+    - target: {fileID: 3878108550136526474, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: pawnsInOrderByPlayerIndex.Array.data[2]
+      value: 
+      objectReference: {fileID: 1978458259}
+    - target: {fileID: 3878108550136526474, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: pawnsInOrderByPlayerIndex.Array.data[3]
+      value: 
+      objectReference: {fileID: 648254886}
     - target: {fileID: 4100559083333475564, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -6242,6 +6276,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7189434915524935985, guid: e43eb0233ebca76498d6cbe998936d26, type: 3}
   m_PrefabInstance: {fileID: 1978458257}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1978458259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7627099646522621935, guid: e43eb0233ebca76498d6cbe998936d26, type: 3}
+  m_PrefabInstance: {fileID: 1978458257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d458d2f602be32a4c849196d32166e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2021104558
 GameObject:
   m_ObjectHideFlags: 0
