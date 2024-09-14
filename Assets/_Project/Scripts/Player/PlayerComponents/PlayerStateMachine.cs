@@ -38,4 +38,10 @@ public class PlayerStateMachine : BasicStateMachine
     {
         Table = table;
     }
+
+    public void Drop()
+    {
+        if (TransportedObject)
+            TransportedObject.Drop();
+    }
 }
