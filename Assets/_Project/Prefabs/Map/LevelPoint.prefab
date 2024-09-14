@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3039758589350851989
 Transform:
   m_ObjectHideFlags: 0
@@ -459,6 +459,7 @@ MonoBehaviour:
   - {fileID: 2102410833976645370}
   - {fileID: 5151249992274554174}
   - {fileID: 5562621955586982949}
+  virtualCamera: {fileID: 6437074149339542239}
   levelBanner: {fileID: 5185927307418545323}
   locandinaSpriteRenderer: {fileID: 4642661424689637675}
 --- !u!135 &4878262239679068256

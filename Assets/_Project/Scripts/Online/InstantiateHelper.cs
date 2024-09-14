@@ -13,7 +13,8 @@ public static class InstantiateHelper
         {
             if (NetworkManager.instance.Runner.IsServer && GetGameObject(prefab).TryGetComponent(out NetworkObject networkObj))
             {
-                return NetworkManager.instance.Runner.Spawn(networkObj, position, rotation).GetComponent<T>();
+                NetworkObject spawned = NetworkManager.instance.Runner.Spawn(networkObj, position, rotation);
+                return GetElement<T>(spawned);
             }
             else
             {
@@ -41,9 +42,9 @@ public static class InstantiateHelper
         {
             if (NetworkManager.instance.Runner.IsServer && GetGameObject(prefab).TryGetComponent(out NetworkObject networkObj))
             {
-                var spawned = NetworkManager.instance.Runner.Spawn(networkObj, parent.position, parent.rotation).GetComponent<T>();
+                NetworkObject spawned = NetworkManager.instance.Runner.Spawn(networkObj, parent.position, parent.rotation);
                 GetGameObject(spawned).transform.SetParent(parent);
-                return spawned;
+                return GetElement<T>(spawned);
             }
             else
             {
@@ -79,5 +80,13 @@ public static class InstantiateHelper
             return go;
         else
             return (obj as Component).gameObject;
+    }
+
+    private static T GetElement<T>(NetworkObject networkObj) where T : Object
+    {
+        if (typeof(T) == typeof(GameObject))
+            return networkObj.gameObject as T;
+        else
+            return networkObj.GetComponent<T>();
     }
 }

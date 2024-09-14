@@ -1,3 +1,4 @@
+using Cinemachine;
 using redd096.Attributes;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class LevelPoint : MonoBehaviour, IInteractable
     [SerializeField] List<GameObject> fullStars;
 
     [Space]
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
     [SerializeField] GameObject levelBanner;
     [SerializeField] SpriteRenderer locandinaSpriteRenderer;
 
@@ -50,6 +52,7 @@ public class LevelPoint : MonoBehaviour, IInteractable
 
         if (mapPlayer != null)
         {
+            virtualCamera.gameObject.SetActive(true);
             levelBanner.SetActive(true);
         }
     }
@@ -60,6 +63,7 @@ public class LevelPoint : MonoBehaviour, IInteractable
 
         if (mapPlayer != null)
         {
+            virtualCamera.gameObject.SetActive(false);
             levelBanner.SetActive(false);
         }
     }

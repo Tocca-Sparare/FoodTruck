@@ -33,3 +33,7 @@ MonoBehaviour:
     LayerMask:
       serializedVersion: 2
       m_Bits: 448
+  - Name: PlayerCleaningState - Tables Layer
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 64

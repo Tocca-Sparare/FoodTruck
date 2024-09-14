@@ -5,6 +5,7 @@ public class PlayerCleaningState : State
 {
     [Header("Stop cleaning if move away")]
     [SerializeField] float stopCleaningDistance = 3;
+    [SerializeField] LayerMaskClass layerTables;
 
     PlayerPawn player;
     InputManager inputManager;
@@ -79,8 +80,7 @@ public class PlayerCleaningState : State
             return true;    //if move direction is always 0, then player is still in front of the table from when he pressed interact
 
         //check in front of player (with max distance)
-        var hits = Physics.RaycastAll(transformState.position, movementDirection, stopCleaningDistance);
-        foreach (var hit in hits)
+        if (PhysicsHelper.Raycast(transformState.position, movementDirection, out RaycastHit hit, stopCleaningDistance, layerTables.Layer))
         {
             //if there is still our table
             TableInteractable test = hit.collider.GetComponentInParent<TableInteractable>();

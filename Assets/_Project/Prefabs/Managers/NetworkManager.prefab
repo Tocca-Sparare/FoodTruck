@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7148398549420045028}
   - component: {fileID: 4564837649983676509}
+  - component: {fileID: 8940645166161051220}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -51,3 +52,20 @@ MonoBehaviour:
   - {r: 0.25490198, g: 0.5803922, b: 0.8392157, a: 1}
   - {r: 0.36078432, g: 0.8392157, b: 0.25490198, a: 1}
   - {r: 0.7058824, g: 0.42745098, b: 1, a: 1}
+--- !u!114 &8940645166161051220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075662534269138291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b5a1ff9dee264bfd829a39e6542dcbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _physicsAuthority: 2
+  _physicsTiming: 3
+  ClientPhysicsSimulation: 0
+  DeltaTimeMultiplier: 1
+  SetUnityFixedTimestep: 0

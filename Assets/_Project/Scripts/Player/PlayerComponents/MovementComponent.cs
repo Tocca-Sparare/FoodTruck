@@ -145,7 +145,7 @@ public class MovementComponent : MonoBehaviour
     protected virtual void PreventSliding()
     {
         //prevent sliding when on a slope
-        if (Physics.Raycast(wrap.position, Vector3.down, out RaycastHit hit, 3f))
+        if (PhysicsHelper.Raycast(wrap.position, Vector3.down, out RaycastHit hit, 3f))
         {
             Vector3 surfaceNormal = hit.normal;
             float slopeAngle = Vector3.Angle(surfaceNormal, Vector3.up);

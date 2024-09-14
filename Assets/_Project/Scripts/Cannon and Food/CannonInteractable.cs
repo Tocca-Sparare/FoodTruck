@@ -133,7 +133,7 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         pos.y = 0;
 
         //check if hit table, set Y direction to table position
-        if (Physics.Raycast(transform.position, aimDirection, out RaycastHit hit, 100, hittableLayer.Layer))
+        if (PhysicsHelper.Raycast(transform.position, aimDirection, out RaycastHit hit, 100, hittableLayer.Layer))
         {
             Table table = hit.transform.GetComponentInParent<Table>();
             if (table)

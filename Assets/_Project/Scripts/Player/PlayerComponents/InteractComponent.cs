@@ -111,8 +111,11 @@ public class InteractComponent : MonoBehaviour
     {
         //find interactables in area
         Dictionary<Transform, IInteractable> possibleInteractables = new Dictionary<Transform, IInteractable>();
-        foreach (Collider col in Physics.OverlapSphere(transform.position, radiusInteract, interactLayer.Layer))
+        Collider[] cols = new Collider[30];
+        for (int i = 0; i < PhysicsHelper.OverlapSphere(transform.position, radiusInteract, cols, interactLayer.Layer); i++)
         {
+            Collider col = cols[i];
+
             //add to dictionary if CanInteract is true
             IInteractable interactable = col.GetComponentInParent<IInteractable>();
             if (interactable != null && interactable.CanInteract(this))
