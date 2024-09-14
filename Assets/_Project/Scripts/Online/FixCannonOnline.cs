@@ -6,17 +6,26 @@ using UnityEngine;
 public class FixCannonOnline : MonoBehaviour
 {
     private Transform someoneUsingCannon;
+    private CannonInteractable cannon;
 
     private void Awake()
     {
         //disable on local and server
         if (NetworkManager.IsOnline == false || NetworkManager.instance.Runner.IsServer)
             enabled = false;
+
+        //get refs
+        if (cannon == null && TryGetComponent(out cannon))
+            Debug.LogError($"Missing CannonInteractable on {name}", gameObject);
     }
 
     private void Update()
     {
-        
+        //rotate cannon in local to forward 
+        if (someoneUsingCannon && cannon)
+        {
+            cannon.AimInDirection(someoneUsingCannon.forward);
+        }
     }
 
     /// <summary>

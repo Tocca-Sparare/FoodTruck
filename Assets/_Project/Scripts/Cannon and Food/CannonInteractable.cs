@@ -74,6 +74,8 @@ public class CannonInteractable : MonoBehaviour, IInteractable
         rotationDirection.y = 0;
         if (rotateCharacter)
             rotateCharacter.ForceDirection(true, rotationDirection);
+
+        OnInteractOnline();
     }
 
     /// <summary>
@@ -163,6 +165,8 @@ public class CannonInteractable : MonoBehaviour, IInteractable
     /// </summary>
     public void Dismiss()
     {
+        OnDismissOnline();
+
         aimDirection = transform.forward;
         OnUpdateAimDirection?.Invoke(aimDirection);
 
@@ -204,17 +208,57 @@ public class CannonInteractable : MonoBehaviour, IInteractable
 
     #region online
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
-    public void RPC_OnInteract(RpcInfo info = default)
+    void OnInteractOnline()
     {
+        if (NetworkManager.IsOnline == false)
+            return;
 
-
-        //GetComponent<FixCannonOnline>().SetWhoIsUsingCannon(playerUsingThisCannon.GetComponent<PlayerPawn>().CurrentController.GetComponent<UserOnline>().Id)
+        //set player interact on correct pawn
+        if (playerUsingThisCannon.TryGetComponent(out PlayerPawn pawn))
+        {
+            //PlayerRef playerRef = userOnline.Object.InputAuthority;
+            RPC_SetPlayerInteract(pawn.Object.Id);
+        }
     }
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
-    public void RPC_OnDismiss(RpcInfo info = default)
+    void OnDismissOnline()
     {
+        if (NetworkManager.IsOnline == false)
+            return;
+
+        //remove player interact on correct pawn
+        RPC_RemovePlayerInteract();
+    }
+
+    //[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    //public void RPC_SetPlayerInteract([RpcTarget] PlayerRef player, NetworkId id, RpcInfo info = default) 
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_SetPlayerInteract(NetworkId id, RpcInfo info = default)
+    {
+        //find correct pawn and set it's interacting with this
+        PlayerPawn[] pawns = FindObjectsOfType<PlayerPawn>();
+        foreach (var pawn in pawns)
+        {
+            if (pawn.Object.Id == id)
+            {
+                RotateCharacterFeedback rotateCharacter = pawn.GetComponentInChildren<RotateCharacterFeedback>();
+                if (rotateCharacter && TryGetComponent(out FixCannonOnline cannonOnline))
+                {
+                    cannonOnline.SetWhoIsUsingCannon(rotateCharacter.ObjectToRotate);
+                }
+                break;
+            }
+        }
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_RemovePlayerInteract(RpcInfo info = default)
+    {
+        //set nobody is interacting with this
+        if (TryGetComponent(out FixCannonOnline cannonOnline))
+        {
+            cannonOnline.SetWhoIsUsingCannon(null);
+        }
     }
 
     #endregion
