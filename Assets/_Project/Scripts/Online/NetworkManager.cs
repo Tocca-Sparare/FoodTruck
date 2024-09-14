@@ -1,6 +1,7 @@
 using Fusion;
 using Fusion.Sockets;
 using redd096;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -48,7 +49,7 @@ public class NetworkManager : Singleton<NetworkManager>, INetworkRunnerCallbacks
         {
             if (Sessions.Find((room) => room.Name == sessionName) == false)
             {
-                LeaveGame();
+                LeaveGame(null);
                 OnFailJoinRoom?.Invoke();
                 return;
             }
@@ -76,12 +77,12 @@ public class NetworkManager : Singleton<NetworkManager>, INetworkRunnerCallbacks
         }
         catch (System.Exception e)
         {
-            LeaveGame();
+            LeaveGame(null);
             OnFailStartGame?.Invoke(e.Message);
         }
     }
 
-    public void LeaveGame()
+    public void LeaveGame(System.Action funcAfterLeave = null)
     {
         //Runner.Disconnect(Runner.LocalPlayer);
 
@@ -94,6 +95,16 @@ public class NetworkManager : Singleton<NetworkManager>, INetworkRunnerCallbacks
 
         //clear vars
         spawnedCharacters.Clear();
+
+        //call function after little delay (this is a fix if you want to change scene)
+        if (funcAfterLeave != null)
+            StartCoroutine(CallFunctionWithDelay(funcAfterLeave));
+    }
+
+    IEnumerator CallFunctionWithDelay(System.Action funcAfterLeave)
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        funcAfterLeave?.Invoke();
     }
 
     #endregion

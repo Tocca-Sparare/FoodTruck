@@ -58,8 +58,7 @@ public class TestSelectLevelUI : MonoBehaviour
             //client exit from lobby and move back to Create or Join room
             else
             {
-                NetworkManager.instance.LeaveGame();
-                SceneLoader.LoadScene(backSceneClient);
+                NetworkManager.instance.LeaveGame(() => SceneLoader.LoadScene(backSceneClient));
             }
         }
         else
