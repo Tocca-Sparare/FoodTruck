@@ -519,6 +519,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8408041488734157948}
+  - component: {fileID: 8561756559494264241}
   m_Layer: 0
   m_Name: Dead Graphics
   m_TagString: Untagged
@@ -543,6 +544,18 @@ Transform:
   - {fileID: 6758662974392161260}
   m_Father: {fileID: 3007186484662410686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8561756559494264241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512812697204408286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b8dc8a484376d4ab895b1e410b7e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2374409833526038904
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,7 +835,6 @@ GameObject:
   - component: {fileID: 6703212760983662605}
   - component: {fileID: 4937329545157403804}
   - component: {fileID: 507020364907093793}
-  - component: {fileID: 6925697471863789537}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -913,18 +925,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6925697471863789537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7187167781265886083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b8dc8a484376d4ab895b1e410b7e09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6503515998464226311
 PrefabInstance:
   m_ObjectHideFlags: 0
