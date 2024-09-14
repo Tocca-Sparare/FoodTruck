@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6748874213385429270}
   - component: {fileID: 2724849363099509092}
   - component: {fileID: 161182851517374303}
-  - component: {fileID: 7713659037742928625}
+  - component: {fileID: 5910020647756816600}
   - component: {fileID: 3402377392899231905}
   m_Layer: 0
   m_Name: PlayerPawn 1
@@ -162,9 +162,8 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 7713659037742928625}
-  - {fileID: 3402377392899231905}
---- !u!114 &7713659037742928625
+  - {fileID: 5910020647756816600}
+--- !u!114 &5910020647756816600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

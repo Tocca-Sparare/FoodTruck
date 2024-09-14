@@ -12,6 +12,9 @@ public class InputManagerOnline : NetworkBehaviour
 
     NetworkInputData myInputs = new NetworkInputData();
 
+    PlayerController _playerController;
+    PlayerController playerController { get { if (_playerController == null) _playerController = GetComponent<PlayerController>(); return _playerController; } }
+
     private void Awake()
     {
         //disable input manager online, now we use this to get inputs
@@ -80,6 +83,14 @@ public class InputManagerOnline : NetworkBehaviour
             inputManager.ShootWasPressedThisFrame = input.Buttons.IsSet(MyButtons.Shoot);
             inputManager.Aim = input.Aim;
             inputManager.IsUsingMouse = input.IsUsingMouse;
+        }
+
+        //call FixedUpdateNetwork also on pawn
+        if (playerController && playerController.CurrentPawn)
+        {
+            IFixedUpdateNetworkHandler[] handlers = playerController.CurrentPawn.GetComponentsInChildren<IFixedUpdateNetworkHandler>();
+            foreach (var handler in handlers)
+                handler.FixedUpdateNetwork();
         }
     }
 }

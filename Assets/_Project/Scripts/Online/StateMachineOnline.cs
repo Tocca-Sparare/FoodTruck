@@ -1,17 +1,14 @@
-using Fusion;
 using UnityEngine;
 
 /// <summary>
 /// This is attached to player prefab. Disable its statemachine to avoid call Update to read inputs, and use photon update instead.
 /// </summary>
-public class StateMachineOnline : NetworkBehaviour
+public class StateMachineOnline : MonoBehaviour, IFixedUpdateNetworkHandler
 {
     BasicStateMachine stateMachine;
 
-    public override void Spawned()
+    private void Awake()
     {
-        base.Spawned();
-
         //get refs
         stateMachine = GetComponent<BasicStateMachine>();
         if (stateMachine == null)
@@ -25,9 +22,11 @@ public class StateMachineOnline : NetworkBehaviour
         {
             stateMachine.enabled = false;
 
-            //but disable also this one if this isn't the server
+            //if client, disable also this script, everything works only on server
             if (NetworkManager.instance.Runner.IsServer == false)
+            {
                 enabled = false;
+            }
         }
         //viceversa in local, disable this and keep local statemachine
         else
@@ -36,9 +35,13 @@ public class StateMachineOnline : NetworkBehaviour
         }
     }
 
-    public override void FixedUpdateNetwork()
+    /// <summary>
+    /// With new Photon Fusion, this is called only on PlayerController, so we tell PlayerInputManagerOnline to call this also on pawn
+    /// </summary>
+    public void FixedUpdateNetwork()
     {
-        base.FixedUpdateNetwork();
+        if (enabled == false)
+            return;
 
         //call update state in this function (because in Update is where we check inputs, but now we receive input from photon functions)
         if (stateMachine && stateMachine.CurrentState != null)
