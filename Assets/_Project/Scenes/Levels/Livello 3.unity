@@ -5616,14 +5616,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2668152346377804303, guid: 1941186eecb474eb481dcfd007ecf3ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3337188540390765627, guid: 1941186eecb474eb481dcfd007ecf3ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8101864924159642984, guid: 1941186eecb474eb481dcfd007ecf3ce, type: 3}
       propertyPath: m_Name
       value: Truck
