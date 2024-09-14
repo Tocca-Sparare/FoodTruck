@@ -21,7 +21,7 @@ public class RotateCharacterFeedback : MonoBehaviour
             Debug.LogError($"Missing objectToRotate on {name}", gameObject);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         //do nothing if forced to look in direction
         if (isForcedDirection)
