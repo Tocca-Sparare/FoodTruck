@@ -679,6 +679,7 @@ MonoBehaviour:
   foods:
   - {fileID: 3611872571509013167, guid: f78fdab4c01514d47a4d996a9e253640, type: 3}
   - {fileID: 3611872571509013167, guid: cfc1a0600c2b4984aac91ce65e020594, type: 3}
+  - {fileID: 3611872571509013167, guid: c0b81a868e2bde24f93526751ab1b316, type: 3}
 --- !u!1 &3299537756392491157
 GameObject:
   m_ObjectHideFlags: 0

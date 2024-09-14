@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 3950753455815229797, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
       propertyPath: icon
       value: 
-      objectReference: {fileID: 21300000, guid: 3f8dad5e09d3b4d5f899d20ebdf12b6f, type: 3}
+      objectReference: {fileID: 21300000, guid: 1115bc667363e2b40b751ef7a741a274, type: 3}
     - target: {fileID: 3950753455815229797, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
       propertyPath: FoodName
       value: Green
@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 6358334533658202542, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
       propertyPath: meshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4803721599731048352}
     - target: {fileID: 9021742348997141254, guid: ccc1cba4389e69a4bb0bec0496bf18d2, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -172,6 +172,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05a87177cb105ad41bdafe05ee70b247, type: 3}
+--- !u!23 &4803721599731048352 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 05a87177cb105ad41bdafe05ee70b247, type: 3}
+  m_PrefabInstance: {fileID: 6155201290033267492}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5972076069997044943 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 05a87177cb105ad41bdafe05ee70b247, type: 3}

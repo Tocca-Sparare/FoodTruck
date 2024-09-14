@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3581413794298398557}
   - component: {fileID: 4827092771953843481}
   m_Layer: 0
-  m_Name: TransportableFood Base
+  m_Name: Transportable Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
