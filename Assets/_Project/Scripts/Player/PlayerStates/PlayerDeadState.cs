@@ -1,16 +1,21 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 [System.Serializable]
 public class PlayerDeadState : State
 {
     [SerializeField] int deadDuration;
+    [SerializeField] Material playerMat;
+    [SerializeField] GameObject playerModel;
+    [SerializeField] MeshRenderer deadModel;
+    [SerializeField] GameObject deadGraphics;
+    [SerializeField] TMP_Text countdownText;
 
-    PlayerPawn player;
-    InputManager inputManager;
-    MovementComponent movementComponent;
-    InteractComponent interactComponent;
-    PlayerStateMachine playerStateMachine;
+    PlayerStateMachine player;
+    float timer;
+    Rigidbody rb;
+    Collider[] colliders;
 
     Vector3 moveDirection;
 
@@ -20,31 +25,57 @@ public class PlayerDeadState : State
 
         //get references
         if (player == null && TryGetStateMachineUnityComponent(out player) == false)
-            Debug.LogError($"Missing PlayerPawn on {GetType().Name}", StateMachine);
-        if (player.CurrentController == null || player.CurrentController.TryGetComponent(out inputManager) == false)
-            Debug.LogError($"Missing inputManager on {GetType().Name}", StateMachine);
-        if (movementComponent == null && TryGetStateMachineUnityComponent(out movementComponent) == false)
-            Debug.LogError($"Missing MovementComponent on {GetType().Name}", StateMachine);
-        if (interactComponent == null && TryGetStateMachineUnityComponent(out interactComponent) == false)
-            Debug.LogError($"Missing interactComponent on {GetType().Name}", StateMachine);
-        playerStateMachine = GetStateMachine<PlayerStateMachine>();
-        if (playerStateMachine == null) Debug.LogError($"Missing PlayerStateMachine on {GetType().Name}", StateMachine);
+            Debug.LogError($"Missing PlayerStateMachine on {GetType().Name}", StateMachine);
+
+        if (rb == null && TryGetStateMachineUnityComponent(out rb) == false)
+            Debug.LogError($"Missing RigidBody on {GetType().Name}", StateMachine);
+
+        colliders = transformState.GetComponentsInChildren<Collider>();
+        deadModel.sharedMaterial = playerMat;
     }
 
     protected override void OnEnter()
     {
         base.OnEnter();
 
-        player.Kill();
+        playerModel.SetActive(false); 
+        deadGraphics.SetActive(true);
+        countdownText.text = deadDuration.ToString();
+        countdownText.gameObject.SetActive(true);
+        rb.useGravity = false;
+
+        foreach (var collider in colliders)
+        {
+            collider.enabled = false;
+        }
+
+        timer = Time.time + deadDuration;
 
         StateMachine.StartCoroutine(RespawnPlayer());
     }
 
     IEnumerator RespawnPlayer()
     {
-        yield return new WaitForSeconds(deadDuration);
+        while (timer > Time.time)
+        {
+            rb.velocity = Vector3.zero;
+            yield return null;
+            countdownText.text = Mathf.CeilToInt(timer - Time.time).ToString();
+        }
 
-        player.Respawn();
+        foreach (var collider in colliders)
+        {
+            collider.enabled = true;
+        }
+
+        rb.useGravity = true;
+
+        transformState.position = player.SpawnPosition;
+
+        playerModel.SetActive(true);
+        deadGraphics.SetActive(false);
+        countdownText.gameObject.SetActive(false);
+        StateMachine.SetState(player.NormalState);
     }
 
 }

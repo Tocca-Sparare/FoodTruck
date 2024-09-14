@@ -8,12 +8,12 @@ public class AlwaysLookAtCameraForward : MonoBehaviour
     void Awake()
     {
         mainCamera = Camera.main;
-        startRotation = transform.rotation;
+        startRotation = transform.localRotation;
     }
 
     void FixedUpdate()
     {
-        Vector3 dir = -mainCamera.transform.forward;
+        Vector3 dir = mainCamera.transform.forward;
         Quaternion rotation = Quaternion.LookRotation(dir, Vector3.up);
         Quaternion finalRotation = Quaternion.AngleAxis(rotation.eulerAngles.y, Vector3.up) * startRotation;
         transform.rotation = finalRotation;

@@ -60,14 +60,4 @@ public class PlayerPawn : MonoBehaviour
     {
 
     }
-
-    internal void Kill()
-    {
-        Debug.Log("KILL");
-    }
-
-    internal void Respawn()
-    {
-        Debug.Log("RESPAWN");
-    }
 }

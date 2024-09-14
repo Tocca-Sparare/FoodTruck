@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5785212130614047666, guid: 4ea4e39163785d9459ba0a11b761d5c1, type: 3}
+      propertyPath: DeadState.playerMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 0daeed2e0b54e3a4580290f0f4b16e0e, type: 2}
     - target: {fileID: 6011152629157788431, guid: 4ea4e39163785d9459ba0a11b761d5c1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
