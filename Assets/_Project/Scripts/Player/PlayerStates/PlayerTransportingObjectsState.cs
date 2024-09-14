@@ -4,7 +4,7 @@ using UnityEngine;
 /// State when transport objects. Can't interact with other objects, only release the transported one
 /// </summary>
 [System.Serializable]
-public class PlayerTrasnportingObjectsState : State
+public class PlayerTransportingObjectsState : State
 {
     [SerializeField] float throwForce = 10f;
     [SerializeField] float verticalThrow = 0.5f;
