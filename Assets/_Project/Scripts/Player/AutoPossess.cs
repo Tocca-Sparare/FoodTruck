@@ -8,6 +8,7 @@ public class AutoPossess : MonoBehaviour
     [Tooltip("When there aren't players in scene (we started from gameplay scene in editor), instantiate a prefab")][SerializeField] bool autoInstantiateIfThereArentPlayers;
     [Tooltip("Prefab to instantiate when there aren't players in scene")][SerializeField] PlayerController playerControllerPrefabForEditorTest;
     [Tooltip("Set pawns in order to possess correct pawn by every player controller")][SerializeField] PlayerPawn[] pawnsInOrderByPlayerIndex;
+    public PlayerController[] playerControllers;
 
     private void Awake()
     {
@@ -21,8 +22,8 @@ public class AutoPossess : MonoBehaviour
 
     public void Init()
     {
-        PlayerController[] controllers = GetPlayerControllers();
-        PossessPawns(controllers);
+        playerControllers = GetPlayerControllers();
+        PossessPawns(playerControllers);
     }
 
     PlayerController[] GetPlayerControllers()
