@@ -116,8 +116,8 @@ MonoBehaviour:
   interactLayer:
     data: {fileID: 11400000, guid: 6ed98a83f4fc2654aac60f33d76b62fa, type: 2}
     elementName: InteractComponent - Interactables Layer
-  maxAngle: 100
-  showRadiusDebug: 0
+  maxAngle: 360
+  showRadiusDebug: 1
 --- !u!54 &363295966232215273
 Rigidbody:
   m_ObjectHideFlags: 0

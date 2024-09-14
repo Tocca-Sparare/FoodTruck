@@ -2,10 +2,19 @@ using redd096.Attributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelPoint :  MonoBehaviour, IInteractable
+public class LevelPoint : MonoBehaviour, IInteractable
 {
-    [SerializeField] GameObject levelBanner;
     [SceneInstance][SerializeField] string levelScene;
+    [SerializeField] Sprite locandinaSprite;
+
+    [Space]
+    [SerializeField] GameObject levelBanner;
+    [SerializeField] SpriteRenderer locandinaSpriteRenderer;
+
+    private void Awake()
+    {
+        locandinaSpriteRenderer.sprite = locandinaSprite;
+    }
 
     public void Interact(InteractComponent interactor)
     {

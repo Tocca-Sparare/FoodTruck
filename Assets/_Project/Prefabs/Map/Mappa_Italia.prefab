@@ -218,6 +218,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7407408011178616605}
     m_Modifications:
+    - target: {fileID: 707301616376272599, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
+      propertyPath: locandinaSprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1264035001752744212, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -228,7 +232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2778096161947737928, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3644507530421523023, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Sprite
@@ -1874,6 +1878,10 @@ PrefabInstance:
       propertyPath: levelScene
       value: Livello 2
       objectReference: {fileID: 0}
+    - target: {fileID: 707301616376272599, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
+      propertyPath: locandinaSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 08f3c39ebb4824e099a69de9ad086fa3, type: 3}
     - target: {fileID: 2778096161947737928, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Name
       value: LevelPoint - Liguria
@@ -3098,6 +3106,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7407408011178616605}
     m_Modifications:
+    - target: {fileID: 707301616376272599, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
+      propertyPath: levelScene
+      value: Livello 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 707301616376272599, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
+      propertyPath: locandinaSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2a93a965e4c8f49b0be861a170513bfc, type: 3}
     - target: {fileID: 1264035001752744212, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -3660,7 +3676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2778096161947737928, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3644507530421523023, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Sprite
@@ -3726,7 +3742,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 707301616376272599, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: levelScene
-      value: Livello 3
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 707301616376272599, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
+      propertyPath: locandinaSprite
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1264035001752744212, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Sprite
@@ -3738,7 +3758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2778096161947737928, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3644507530421523023, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Sprite
@@ -3878,7 +3898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2778096161947737928, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3644507530421523023, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Sprite
@@ -4432,6 +4452,10 @@ PrefabInstance:
       propertyPath: levelScene
       value: Livello 1
       objectReference: {fileID: 0}
+    - target: {fileID: 707301616376272599, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
+      propertyPath: locandinaSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a3c6128e1482a72408d07c466b6001b9, type: 3}
     - target: {fileID: 1264035001752744212, guid: fdbdd28c22fb13647aa5c9c902445008, type: 3}
       propertyPath: m_Sprite
       value: 

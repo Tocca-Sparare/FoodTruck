@@ -330,8 +330,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1e4f79ba7dec7b439eaf91910f75e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelBanner: {fileID: 5185927307418545323}
   levelScene: 
+  locandinaSprite: {fileID: 0}
+  levelBanner: {fileID: 5185927307418545323}
+  locandinaSpriteRenderer: {fileID: 4642661424689637675}
 --- !u!135 &4878262239679068256
 SphereCollider:
   m_ObjectHideFlags: 0
