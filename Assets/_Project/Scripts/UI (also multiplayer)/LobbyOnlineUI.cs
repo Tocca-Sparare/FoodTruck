@@ -11,6 +11,7 @@ public class LobbyOnlineUI : MonoBehaviour
 {
     [SceneInstance][SerializeField] string backButtonScene;
     [SceneInstance][SerializeField] string selectLevelScene;
+    [SerializeField] GameObject[] playerImages;
     [Space]
     [SerializeField] GameObject joinedPlayerPrefab;
     [SerializeField] Transform joinedPlayersContainer;
@@ -95,6 +96,7 @@ public class LobbyOnlineUI : MonoBehaviour
         //instantiate object in UI
         if (joinedPlayers.ContainsKey(onlineID) == false)
         {
+            playerImages[joinedPlayers.Count].SetActive(true);
             GameObject go = Instantiate(joinedPlayerPrefab, joinedPlayersContainer);
             go.GetComponentInChildren<TMP_Text>(true).text = user.PlayerName;
             go.GetComponentInChildren<Image>(true).color = NetworkManager.instance.ColorsForPlayers[user.PlayerIndex];
@@ -115,28 +117,20 @@ public class LobbyOnlineUI : MonoBehaviour
             GameObject go = joinedPlayers[onlineID];
             joinedPlayers.Remove(onlineID);
             Destroy(go);
+            playerImages[joinedPlayers.Count].SetActive(false);
         }
     }
 
     private void RefreshPlayer(UserOnline user)
     {
-        IEnumerable<string> ids = joinedPlayers.Keys;
+        string onlineID = user.Object.Id.ToString();
 
-        //remove previous
-        foreach (var v in joinedPlayers.Keys)
-            Destroy(joinedPlayers[v]);
-        joinedPlayers.Clear();
-
-        //re-instantiate all
-        foreach (var onlineID in ids)
+        if (joinedPlayers.ContainsKey(onlineID))
         {
-            GameObject go = Instantiate(joinedPlayerPrefab, joinedPlayersContainer);
+            //update player username in UI
+            GameObject go = joinedPlayers[onlineID];
             go.GetComponentInChildren<TMP_Text>(true).text = user.PlayerName;
             go.GetComponentInChildren<Image>(true).color = NetworkManager.instance.ColorsForPlayers[user.PlayerIndex];
-            go.SetActive(true);
-
-            //and add to dictionary
-            joinedPlayers.Add(onlineID, go);
         }
     }
 
