@@ -1,3 +1,4 @@
+using redd096.Attributes;
 using UnityEngine;
 
 /// <summary>
@@ -21,6 +22,15 @@ public class FoodFeedback : MonoBehaviour
     void SetColor()
     {
         //change material to show food color
-        meshRenderer.sharedMaterial = food.material;
+        if (meshRenderer)
+            meshRenderer.sharedMaterial = food.material;
+    }
+
+    [Button("SetColor")]
+    void SetColorInEditor()
+    {
+        //change material to show food color
+        if (meshRenderer)
+            meshRenderer.sharedMaterial = GetComponent<Food>().material;
     }
 }
