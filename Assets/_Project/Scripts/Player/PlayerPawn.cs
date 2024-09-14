@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -58,5 +59,15 @@ public class PlayerPawn : MonoBehaviour
     public virtual void OnUnpossess(PlayerController previousController)
     {
 
+    }
+
+    internal void Kill()
+    {
+        Debug.Log("KILL");
+    }
+
+    internal void Respawn()
+    {
+        Debug.Log("RESPAWN");
     }
 }

@@ -9,7 +9,8 @@ public class PlayerStateMachine : BasicStateMachine
     public PlayerNormalState NormalState;
     public PlayerUsingCannonState UsingCannonState;
     public PlayerCleaningState PlayerCleaningState;
-    public PlayerTrasnportingObjectsState TrasnportingObjectsState;
+    public PlayerTransportingObjectsState TransportingObjectsState;
+    public PlayerDeadState DeadState;
 
     public TransportableObject TransportedObject { get; private set; }
     public CannonInteractable Cannon { get; private set; }
