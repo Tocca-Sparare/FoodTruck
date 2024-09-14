@@ -61,8 +61,7 @@ public class PauseMenuManager : MonoBehaviour
         CloseMenu();
         if (NetworkManager.IsOnline && !NetworkManager.instance.Runner.IsServer)
         {
-            NetworkManager.instance.LeaveGame();
-            SceneLoader.LoadScene(onClientExitScene);
+            NetworkManager.instance.LeaveGame(() => SceneLoader.LoadScene(onClientExitScene));
         }
         else
         {

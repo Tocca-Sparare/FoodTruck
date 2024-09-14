@@ -339,8 +339,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToRotate: {fileID: 6043401410775304883}
-  shootSound: {fileID: 8300000, guid: 572e8c1fa4e54cf4d92e5da197655495, type: 3}
-  shootWhenNoAmmo: {fileID: 0}
+  shootSound:
+    data: {fileID: 11400000, guid: 3c54cb56bd3736941b27d6d26f25bf96, type: 2}
+    elementName: Shoot
+  shootWhenNoAmmo:
+    data: {fileID: 11400000, guid: 3c54cb56bd3736941b27d6d26f25bf96, type: 2}
+    elementName: Shoot without ammo
 --- !u!114 &6220821089048065153
 MonoBehaviour:
   m_ObjectHideFlags: 0

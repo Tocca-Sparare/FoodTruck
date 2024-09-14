@@ -77,6 +77,12 @@ MonoBehaviour:
   - {fileID: 9122803948629676711}
   defaultDirtMaterial: {fileID: 2100000, guid: a27c431a784cf4642ba7c53ba6edf356, type: 2}
   loadingBar: {fileID: 2453120741728334540}
+  cleaningAudio:
+    data: {fileID: 11400000, guid: e9681f2180492404fa5fc69c5219c96f, type: 2}
+    elementName: Cleaning
+  completeCleanAudio:
+    data: {fileID: 11400000, guid: e9681f2180492404fa5fc69c5219c96f, type: 2}
+    elementName: CompleteClean
 --- !u!114 &357739838664324781
 MonoBehaviour:
   m_ObjectHideFlags: 0

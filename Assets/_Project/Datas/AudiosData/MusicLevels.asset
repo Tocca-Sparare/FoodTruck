@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bdb8bea7f83bf541b33180fa89b78e1, type: 3}
+  m_Name: MusicLevels
+  m_EditorClassIdentifier: 
+  Elements:
+  - Name: Piemonte
+    Volume: 1
+    Preset:
+      AudioType: 2
+      Loop: 1
+      Fade: 1
+      ForceReplay: 0
+      AudioMixer: {fileID: 0}
+      SoundSettings3D:
+        Enable3D: 0
+        DopplerLevel: 0
+        Spread: 0
+        RolloffMode: 0
+        MinDistance: 0
+        MaxDistance: 0
+      OtherSettings:
+        BypassEffects: 0
+        BypassListenerEffects: 0
+        BypassReverbZones: 0
+        Priority: 0
+        Pitch: 0
+        StereoPan: 0
+        ReverbZoneMix: 0
+    AudioClips:
+    - {fileID: 8300000, guid: e571e73613555ff41916225c3d759271, type: 3}
+  - Name: Liguria
+    Volume: 1
+    Preset:
+      AudioType: 2
+      Loop: 1
+      Fade: 1
+      ForceReplay: 0
+      AudioMixer: {fileID: 0}
+      SoundSettings3D:
+        Enable3D: 0
+        DopplerLevel: 0
+        Spread: 0
+        RolloffMode: 0
+        MinDistance: 0
+        MaxDistance: 0
+      OtherSettings:
+        BypassEffects: 0
+        BypassListenerEffects: 0
+        BypassReverbZones: 0
+        Priority: 0
+        Pitch: 0
+        StereoPan: 0
+        ReverbZoneMix: 0
+    AudioClips:
+    - {fileID: 8300000, guid: 1e857777cb92bb04aa06cfc2828c493d, type: 3}
+  - Name: Calabria
+    Volume: 1
+    Preset:
+      AudioType: 2
+      Loop: 1
+      Fade: 1
+      ForceReplay: 0
+      AudioMixer: {fileID: 0}
+      SoundSettings3D:
+        Enable3D: 0
+        DopplerLevel: 0
+        Spread: 0
+        RolloffMode: 0
+        MinDistance: 0
+        MaxDistance: 0
+      OtherSettings:
+        BypassEffects: 0
+        BypassListenerEffects: 0
+        BypassReverbZones: 0
+        Priority: 0
+        Pitch: 0
+        StereoPan: 0
+        ReverbZoneMix: 0
+    AudioClips:
+    - {fileID: 8300000, guid: 98ac6eb600e11904d839ea028516bb67, type: 3}
