@@ -21,7 +21,6 @@ public class PauseMenuManager : MonoBehaviour
         {
             var manager = playerController.GetComponent<InputManager>();
 
-            Debug.Log($"{manager.PauseWasPressedThisFrame}");
             if (manager.PauseWasPressedThisFrame)
             {
                 if (pauseMenu.activeSelf)
@@ -43,6 +42,7 @@ public class PauseMenuManager : MonoBehaviour
     void CloseMenu()
     {
         pauseMenu.SetActive(false);
+        optionsMenu.SetActive(false);
 
         if (!NetworkManager.IsOnline)
             Time.timeScale = 1;
@@ -50,13 +50,11 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnResumeButtonPressed()
     {
-        Debug.Log("Resume");
         CloseMenu();
     }
 
     public void OnExitButtonPressed()
     {
-        Debug.Log("Exit");
         CloseMenu();
         if (NetworkManager.IsOnline && !NetworkManager.instance.Runner.IsServer)
         {
@@ -71,8 +69,13 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnOptionsButtonPressed()
     {
-        Debug.Log("Options");
-        gameObject.SetActive(false);
+        pauseMenu.SetActive(false);
         optionsMenu.SetActive(true);
+    }
+
+    public void OnBackButtonPressed()
+    {
+        pauseMenu.SetActive(true);
+        optionsMenu.SetActive(false);
     }
 }
