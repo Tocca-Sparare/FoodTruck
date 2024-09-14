@@ -15,7 +15,7 @@ public class FixCannonOnline : MonoBehaviour
             enabled = false;
 
         //get refs
-        if (cannon == null && TryGetComponent(out cannon))
+        if (cannon == null && TryGetComponent(out cannon) == false)
             Debug.LogError($"Missing CannonInteractable on {name}", gameObject);
     }
 
