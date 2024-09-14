@@ -61,28 +61,12 @@ public class CannonFeedback : MonoBehaviour
 
     void OnShoot()
     {
-        //randomize
-        float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
-        float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
-        audioSource.panStereo = randomStereoPan;
-        audioSource.pitch = randomPitch;
-
-        //play sound
-        audioSource.clip = shootSound;
-        audioSource.Play();
+        RPC_OnShoot();
     }
 
     void OnShootButNoAmmo(Vector3 bulletDirection, Quaternion bulletRotation)
     {
-        //randomize
-        float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
-        float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
-        audioSource.panStereo = randomStereoPan;
-        audioSource.pitch = randomPitch;
-
-        //play sound
-        audioSource.clip = shootWhenNoAmmo;
-        audioSource.Play();
+        RPC_OnShootButNoAmmo();
     }
 
     private void OnInsertBullet(CannonBullet bullet)
@@ -111,6 +95,34 @@ public class CannonFeedback : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(AimDirection, Vector3.up);
             objectToRotate.rotation = Quaternion.AngleAxis(rotation.eulerAngles.y, Vector3.up);
         }
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnShoot(RpcInfo info = default)
+    {
+        //randomize
+        float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
+        float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
+        audioSource.panStereo = randomStereoPan;
+        audioSource.pitch = randomPitch;
+
+        //play sound
+        audioSource.clip = shootSound;
+        audioSource.Play();
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnShootButNoAmmo(RpcInfo info = default)
+    {
+        //randomize
+        float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
+        float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
+        audioSource.panStereo = randomStereoPan;
+        audioSource.pitch = randomPitch;
+
+        //play sound
+        audioSource.clip = shootWhenNoAmmo;
+        audioSource.Play();
     }
 
     #endregion

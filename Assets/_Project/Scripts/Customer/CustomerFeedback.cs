@@ -164,7 +164,7 @@ public class CustomerFeedback : MonoBehaviour
     #region online
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
-    public void RPC_OnSit()
+    public void RPC_OnSit(RpcInfo info = default)
     {
         //set sit animation and play sound
         animator.SetBool("IsSitting", true);
@@ -172,7 +172,7 @@ public class CustomerFeedback : MonoBehaviour
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
-    public void RPC_OnStandUp()
+    public void RPC_OnStandUp(RpcInfo info = default)
     {
         //set stand up animation
         animator.SetBool("IsSitting", false);
@@ -181,34 +181,34 @@ public class CustomerFeedback : MonoBehaviour
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
-    public void RPC_OnSatisfied()
+    public void RPC_OnSatisfied(RpcInfo info = default)
     {
         //play sound
         StartCoroutine(DoBurpSound());
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
-    public void RPC_OnUnsatisfied()
+    public void RPC_OnUnsatisfied(RpcInfo info = default)
     {
         //play sound
         StartCoroutine(DoAngrySound());
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_OnSatistyRequest()
+    public void RPC_OnSatistyRequest(RpcInfo info = default)
     {
         requestFoodHolder.SetActive(false);
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_OnOrderReady(string foodName)
+    public void RPC_OnOrderReady(string foodName, RpcInfo info = default)
     {
         requestFoodHolder.SetActive(true);
         requestFoodSpriteRenderer.sprite = foodManager.GetFoodByName(foodName).icon;
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
-    public void RPC_OnHungerLevelIncreased(int currentLevel)
+    public void RPC_OnHungerLevelIncreased(int currentLevel, RpcInfo info = default)
     {
         StartCoroutine(DoShowHungryIcon(currentLevel));
     }
