@@ -48,10 +48,7 @@ public class StateMachineOnline : MonoBehaviour, IFixedUpdateNetworkHandler
         {
             stateMachine.CurrentState.Update();
         }
-    }
 
-    private void FixedUpdate()
-    {
         //call FixedUpdate normally
         if (stateMachine && stateMachine.CurrentState != null)
         {
