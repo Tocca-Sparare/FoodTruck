@@ -210,7 +210,7 @@ MonoBehaviour:
   SyncScale: 0
   SyncParent: 1
   _interpolationTarget: {fileID: 3360365401547158668}
-  UsePreciseRotation: 0
+  UsePreciseRotation: 1
   UseRenderSleepThresholds: 1
   RenderThresholds:
     UseEnergy: 1
