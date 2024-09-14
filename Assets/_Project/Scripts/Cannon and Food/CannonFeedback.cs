@@ -1,4 +1,5 @@
 using Fusion;
+using redd096;
 using UnityEngine;
 
 /// <summary>
@@ -8,8 +9,8 @@ public class CannonFeedback : NetworkBehaviour
 {
     [SerializeField] Transform objectToRotate;
     [Space]
-    [SerializeField] AudioClip shootSound;
-    [SerializeField] AudioClip shootWhenNoAmmo;
+    [SerializeField] AudioClass shootSound;
+    [SerializeField] AudioClass shootWhenNoAmmo;
 
     FoodManager foodManager;
     CannonInteractable cannon;
@@ -76,12 +77,11 @@ public class CannonFeedback : NetworkBehaviour
         //randomize
         float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
         float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
-        audioSource.panStereo = randomStereoPan;
-        audioSource.pitch = randomPitch;
 
-        //play sound
-        audioSource.clip = shootSound;
-        audioSource.Play();
+        shootSound.Element.Preset.OtherSettings.Pitch = randomPitch;
+        shootSound.Element.Preset.OtherSettings.StereoPan = randomStereoPan;
+
+        SoundManager.instance.Play(shootSound);
     }
 
     void OnShootButNoAmmo(Vector3 bulletDirection, Quaternion bulletRotation)
@@ -96,12 +96,11 @@ public class CannonFeedback : NetworkBehaviour
         //randomize
         float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
         float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
-        audioSource.panStereo = randomStereoPan;
-        audioSource.pitch = randomPitch;
 
-        //play sound
-        audioSource.clip = shootWhenNoAmmo;
-        audioSource.Play();
+        shootWhenNoAmmo.Element.Preset.OtherSettings.Pitch = randomPitch;
+        shootWhenNoAmmo.Element.Preset.OtherSettings.StereoPan = randomStereoPan;
+
+        SoundManager.instance.Play(shootWhenNoAmmo);
     }
 
     private void OnInsertBullet(CannonBullet bullet)
@@ -131,12 +130,11 @@ public class CannonFeedback : NetworkBehaviour
         //randomize
         float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
         float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
-        audioSource.panStereo = randomStereoPan;
-        audioSource.pitch = randomPitch;
 
-        //play sound
-        audioSource.clip = shootSound;
-        audioSource.Play();
+        shootSound.Element.Preset.OtherSettings.Pitch = randomPitch;
+        shootSound.Element.Preset.OtherSettings.StereoPan = randomStereoPan;
+
+        SoundManager.instance.Play(shootSound);
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
@@ -145,12 +143,11 @@ public class CannonFeedback : NetworkBehaviour
         //randomize
         float randomPitch = Random.Range(0.8f, 1.2f);   //default is 1
         float randomStereoPan = Random.Range(-1f, 1f);  //default is 0
-        audioSource.panStereo = randomStereoPan;
-        audioSource.pitch = randomPitch;
 
-        //play sound
-        audioSource.clip = shootWhenNoAmmo;
-        audioSource.Play();
+        shootWhenNoAmmo.Element.Preset.OtherSettings.Pitch = randomPitch;
+        shootWhenNoAmmo.Element.Preset.OtherSettings.StereoPan = randomStereoPan;
+
+        SoundManager.instance.Play(shootWhenNoAmmo);
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, InvokeLocal = false)]

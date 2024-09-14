@@ -739,7 +739,9 @@ MonoBehaviour:
   - {fileID: 5976254575854216756}
   hungrySound: {fileID: 0}
   burpSound: {fileID: 0}
-  angrySound: {fileID: 8300000, guid: 488e5ba7ae6f8374a9dc6f352d2f516b, type: 3}
+  angrySound:
+    data: {fileID: 11400000, guid: c1df68cc4ee76d644b608067aa9b2052, type: 2}
+    elementName: Angry
   prefabHats:
   - {fileID: 1579610314815940931, guid: b35e1ea45b4704b42a14f1ac05fbbdc1, type: 3}
   - {fileID: 1784063807015901215, guid: 20dbcb7e9fb98864cb705bd7a4ba6d21, type: 3}

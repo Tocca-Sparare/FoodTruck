@@ -83,8 +83,7 @@ public class LobbyOnlineUI : MonoBehaviour
     public void OnClickBack()
     {
         //leave online
-        NetworkManager.instance.LeaveGame();
-        SceneLoader.LoadScene(backButtonScene);
+        NetworkManager.instance.LeaveGame(() => SceneLoader.LoadScene(backButtonScene));
     }
 
     #region events

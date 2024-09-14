@@ -1,3 +1,5 @@
+using Fusion;
+using redd096;
 using UnityEngine;
 
 /// <summary>
@@ -9,9 +11,12 @@ public class TableFeedback : MonoBehaviour
     [SerializeField] SpriteRenderer[] dirtyStainSprites;
     [SerializeField] Material defaultDirtMaterial;
     [SerializeField] LoadingBar loadingBar;
+    [SerializeField] AudioClass cleaningAudio;
+    [SerializeField] AudioClass completeCleanAudio;
 
     Table table;
     TableInteractable tableInteractable;
+    float timerCleaningAudio;
 
     private void Awake()
     {
@@ -53,10 +58,54 @@ public class TableFeedback : MonoBehaviour
     void OnUpdateClean(float percentage)
     {
         loadingBar.Updatebar(percentage);
+
+        //play sound
+        if (NetworkManager.IsOnline)
+            RPC_OnUpdateClean();
+        else
+            CleaningAudio();
     }
 
     private void OnTableClean()
     {
         dirtyStainsContainer.SetActive(false);
+
+        //play sound
+        if (NetworkManager.IsOnline)
+            RPC_OnTableClean();
+        else
+            SoundManager.instance.Play(completeCleanAudio);
     }
+
+    void CleaningAudio()
+    {
+        if (Time.time > timerCleaningAudio)
+        {
+            //update timer
+            AudioSource source = SoundManager.instance.Play(cleaningAudio);
+            if (source && source.clip)
+            {
+                timerCleaningAudio = Time.time + source.clip.length;
+            }
+
+            //play sound
+            SoundManager.instance.Play(cleaningAudio);
+        }
+    }
+
+    #region online
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnUpdateClean(RpcInfo info = default)
+    {
+        CleaningAudio();
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    public void RPC_OnTableClean(RpcInfo info = default)
+    {
+        SoundManager.instance.Play(completeCleanAudio);
+    }
+
+    #endregion
 }
