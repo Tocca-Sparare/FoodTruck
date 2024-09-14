@@ -45,11 +45,19 @@ public class MovementComponent : MonoBehaviour
     protected Vector3 newPushForce;             //new push force when Drag
     protected float gravity;                    //applied gravity to characterController
 
+    protected Collider previousFloor;
+    protected Vector3 previousFloorPosition;
+
     protected virtual void Awake()
     {
         //be sure to have components
         if (wrap.IsValid() == false && wrap.TryGetComponent(transform) == false)
             Debug.LogError("Miss CharacterController or Rigidbody on " + GetType().Name, gameObject);
+    }
+
+    private void LateUpdate()
+    {
+        CalculateFloorMovement();
     }
 
     /// <summary>
@@ -73,6 +81,27 @@ public class MovementComponent : MonoBehaviour
     }
 
     #region protected API
+
+    protected virtual void CalculateFloorMovement()
+    {
+        //if hit floor
+        if (PhysicsHelper.Raycast(transform.position, Vector3.down, out RaycastHit hit, 5))
+        {
+            //if hit new floor, update it
+            if (hit.collider != previousFloor)
+            {
+                previousFloor = hit.collider;
+                previousFloorPosition = previousFloor.transform.position;
+            }
+            //if hit same floor, but the floor moved, move also player
+            else if (hit.collider.transform.position != previousFloorPosition)
+            {
+                Vector3 movement = hit.collider.transform.position - previousFloorPosition;
+                previousFloorPosition = hit.collider.transform.position;
+                wrap.SetPosition(wrap.position + movement);
+            }
+        }
+    }
 
     protected virtual void CalculateVelocity()
     {
@@ -385,6 +414,20 @@ public struct FComponentWrapper
             rb3d.velocity = velocity;
         else
             rb2d.velocity = velocity;
+    }
+
+    /// <summary>
+    /// Set transform position for CharacterController or set Rigidbody.MovePosition
+    /// </summary>
+    /// <param name="position"></param>
+    public void SetPosition(Vector3 position)
+    {
+        if (componentToWrap == EComponentToWrap.CharacterController)
+            ch.transform.position = position;
+        else if (componentToWrap == EComponentToWrap.Rigidbody3D)
+            rb3d.MovePosition(position);
+        else
+            rb2d.MovePosition(position);
     }
 
     /// <summary>
