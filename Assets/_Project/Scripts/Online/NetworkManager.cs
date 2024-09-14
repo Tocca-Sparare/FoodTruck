@@ -83,7 +83,7 @@ public class NetworkManager : Singleton<NetworkManager>, INetworkRunnerCallbacks
 
     public void LeaveGame()
     {
-        Runner.Disconnect(Runner.LocalPlayer);
+        //Runner.Disconnect(Runner.LocalPlayer);
 
         //destroy instantiated scripts
         foreach (MonoBehaviour script in GetComponents<MonoBehaviour>())
