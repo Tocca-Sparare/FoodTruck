@@ -28,7 +28,7 @@ public static class InstantiateHelper
     }
 
     /// <summary>
-    /// Instantiate and set parent
+    /// Instantiate and set parent (NB Online doesn't works! Just spawn at parent.position and parent.rotation)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="prefab"></param>
@@ -42,8 +42,7 @@ public static class InstantiateHelper
         {
             if (NetworkManager.instance.Runner.IsServer && GetGameObject(prefab).TryGetComponent(out NetworkObject networkObj))
             {
-                NetworkObject spawned = NetworkManager.instance.Runner.Spawn(networkObj, parent.position, parent.rotation, onBeforeSpawned: (networkRunner, obj) =>
-                { GetGameObject(obj).transform.SetParent(parent); });
+                NetworkObject spawned = NetworkManager.instance.Runner.Spawn(networkObj, parent.position, parent.rotation);
                 return GetElement<T>(spawned);
             }
             else
@@ -57,10 +56,15 @@ public static class InstantiateHelper
         return Object.Instantiate(prefab, parent);
     }
 
-    public static void Destroy(GameObject objectInScene)
+    /// <summary>
+    /// Destroy object
+    /// </summary>
+    /// <param name="objectInScene"></param>
+    /// <param name="onlyLocal">Also if we are online, instantiate only in local</param>
+    public static void Destroy(GameObject objectInScene, bool onlyLocal = false)
     {
         //online
-        if (NetworkManager.IsOnline)
+        if (onlyLocal == false && NetworkManager.IsOnline)
         {
             if (NetworkManager.instance.Runner.IsServer && objectInScene.TryGetComponent(out NetworkObject networkObj))
                 NetworkManager.instance.Runner.Despawn(networkObj);

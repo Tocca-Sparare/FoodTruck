@@ -22,12 +22,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2166551290999426805, guid: 8966048d8b61a884cbeb9e9e8299c131, type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2166551290999426805, guid: 8966048d8b61a884cbeb9e9e8299c131, type: 3}
-      propertyPath: NetworkedBehaviours.Array.data[0]
-      value: 
-      objectReference: {fileID: 1868023024049751029}
     - target: {fileID: 7943690935492548638, guid: 8966048d8b61a884cbeb9e9e8299c131, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -77,17 +73,6 @@ PrefabInstance:
       addedObject: {fileID: 6781029982830670478}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8966048d8b61a884cbeb9e9e8299c131, type: 3}
---- !u!114 &1868023024049751029 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4465868604160669819, guid: 8966048d8b61a884cbeb9e9e8299c131, type: 3}
-  m_PrefabInstance: {fileID: 2600123854377221006}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5343756321674650512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7943690935492548638, guid: 8966048d8b61a884cbeb9e9e8299c131, type: 3}

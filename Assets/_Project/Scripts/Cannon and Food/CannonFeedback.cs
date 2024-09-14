@@ -11,14 +11,18 @@ public class CannonFeedback : NetworkBehaviour
     [SerializeField] AudioClip shootSound;
     [SerializeField] AudioClip shootWhenNoAmmo;
 
+    FoodManager foodManager;
     CannonInteractable cannon;
     AudioSource audioSource;
     GameObject bulletToShow;
 
     private void Awake()
     {
+        foodManager = FindObjectOfType<FoodManager>();
         cannon = GetComponent<CannonInteractable>();
         audioSource = GetComponentInChildren<AudioSource>();
+        if (foodManager == null)
+            Debug.LogError($"Missing foodManager on {name}", gameObject);
         if (cannon == null)
             Debug.LogError($"Missing cannon on {name}", gameObject);
         if (objectToRotate == null)
@@ -103,14 +107,20 @@ public class CannonFeedback : NetworkBehaviour
     private void OnInsertBullet(CannonBullet bullet)
     {
         //show bullet to understand what is going to shoot
-        bulletToShow = InstantiateHelper.Instantiate(bullet.bulletPrefabToShowInCannon, cannon.BulletContainer.position, cannon.BulletContainer.rotation);
+        bulletToShow = InstantiateHelper.Instantiate(bullet.bulletPrefabToShowInCannon, cannon.BulletContainer, onlyLocal: true);
+
+        if (NetworkManager.IsOnline)
+            RPC_OnInsertBullet((bullet as Food).FoodName);
     }
 
     private void OnRemoveBullet()
     {
         //remove bullet
         if (bulletToShow)
-            InstantiateHelper.Destroy(bulletToShow.gameObject);
+            InstantiateHelper.Destroy(bulletToShow, onlyLocal: true);
+
+        if (NetworkManager.IsOnline)
+            RPC_OnRemoveBullet();
     }
 
     #region online
@@ -141,6 +151,21 @@ public class CannonFeedback : NetworkBehaviour
         //play sound
         audioSource.clip = shootWhenNoAmmo;
         audioSource.Play();
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, InvokeLocal = false)]
+    public void RPC_OnInsertBullet(string foodName, RpcInfo info = default)
+    {
+        //show bullet to understand what is going to shoot
+        InstantiateHelper.Instantiate(foodManager.GetFoodByName(foodName).bulletPrefabToShowInCannon, cannon.BulletContainer, onlyLocal: true);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, InvokeLocal = false)]
+    public void RPC_OnRemoveBullet(RpcInfo info = default)
+    {
+        //remove bullet
+        if (bulletToShow)
+            InstantiateHelper.Destroy(bulletToShow, onlyLocal: true);
     }
 
     #endregion
