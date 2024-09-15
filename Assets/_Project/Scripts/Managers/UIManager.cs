@@ -17,9 +17,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Text gameTimerText;
     [SerializeField] Slider gameTimerSlider;
     [SerializeField] float remainingTimeForBlink = 5;
+    [SerializeField] float durationBlink = 8;
 
     [Header("Points")]
     [SerializeField] TMP_Text pointsText;
+
+    [Header("Storm Hint")]
+    [SerializeField] GameObject stormContainer;
+    [SerializeField] RectTransform transformToAnimate;
+    [SerializeField] float animationDuration = 5;
+    [SerializeField] float animationSpeed = 1;
 
     [Header("End Menu")]
     [SerializeField] GameObject endMenu;
@@ -30,6 +37,8 @@ public class UIManager : MonoBehaviour
 
     LevelManager levelManager;
     PointsManager pointsManager;
+    CustomerSpawner customerSpawner;
+
     Coroutine blinkCoroutine;
 
     private void Awake()
@@ -38,6 +47,8 @@ public class UIManager : MonoBehaviour
         if (levelManager == null) Debug.LogError($"Missing LevelManager on {name}", gameObject);
         pointsManager = FindObjectOfType<PointsManager>();
         if (pointsManager == null) Debug.LogError($"Missing PointsManager on {name}", gameObject);
+        customerSpawner = FindObjectOfType<CustomerSpawner>();
+        if (customerSpawner == null) Debug.LogError($"Missing customerSpawner on {name}", gameObject);
 
         //add events
         if (levelManager)
@@ -52,6 +63,10 @@ public class UIManager : MonoBehaviour
             pointsManager.OnAddPoints += OnAddPoints;
             pointsManager.OnRemovePoints += OnRemovePoints;
             pointsManager.OnSetPoints += OnSetPoints;
+        }
+        if (customerSpawner)
+        {
+            customerSpawner.OnSlowPhaseEndedCallback += OnSlowPhaseEnded;
         }
     }
 
@@ -70,6 +85,10 @@ public class UIManager : MonoBehaviour
             pointsManager.OnAddPoints -= OnAddPoints;
             pointsManager.OnRemovePoints -= OnRemovePoints;
             pointsManager.OnSetPoints -= OnSetPoints;
+        }
+        if (customerSpawner)
+        {
+            customerSpawner.OnSlowPhaseEndedCallback -= OnSlowPhaseEnded;
         }
     }
 
@@ -129,6 +148,15 @@ public class UIManager : MonoBehaviour
     private void OnSetPoints(int currentPoints)
     {
         SetPointsText(currentPoints);
+    }
+
+    #endregion
+
+    #region customer spawner events
+
+    private void OnSlowPhaseEnded()
+    {
+        StartStormHintAnimation();
     }
 
     #endregion
@@ -205,13 +233,46 @@ public class UIManager : MonoBehaviour
 
     IEnumerator BlinkGameTimer()
     {
-        while (true)
+        float duration = Time.time + durationBlink;
+        while (duration > Time.time)
         {
             gameTimerText.gameObject.SetActive(false);
             yield return new WaitForSeconds(0.5f);
             gameTimerText.gameObject.SetActive(true);
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    /// <summary>
+    /// Show text and animate
+    /// </summary>
+    public void StartStormHintAnimation()
+    {
+        StartCoroutine(StormHintCoroutine());
+    }
+
+    IEnumerator StormHintCoroutine()
+    {
+        stormContainer.SetActive(true);
+
+        float duration = Time.time + animationDuration;
+        bool big = true;
+        float currentSize = 1f;
+        while (duration > Time.time)
+        {
+            if (big)
+                currentSize += Time.deltaTime * animationSpeed;
+            else
+                currentSize -= Time.deltaTime * animationSpeed;
+
+            if ((big && currentSize > 1.3f) || (big == false && currentSize < 0.7f))
+                big = !big;
+
+            transformToAnimate.localScale = Vector3.one * currentSize;
+            yield return null;
+        }
+
+        stormContainer.SetActive(false);
     }
 
     #endregion
