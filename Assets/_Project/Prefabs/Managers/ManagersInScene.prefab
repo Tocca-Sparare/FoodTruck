@@ -1183,16 +1183,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSettings:
-  - CustomerWaitingTime: 15
+  - CustomerWaitingTime: 40
     CustomerWarningDelays: 1e0000003c0000005a000000
     minSlowDelay: 5
-    maxSlowDelay: 10
+    maxSlowDelay: 14
     minSlowCustomers: 1
     maxSlowCustomers: 2
     minFastDelay: 5
-    maxFastDelay: 7
+    maxFastDelay: 10
     minFastCustomers: 1
-    maxFastCustomers: 4
+    maxFastCustomers: 3
     durationSlowPhase: 25
     totalDurationSpawn: 80
     levelDuration: 90

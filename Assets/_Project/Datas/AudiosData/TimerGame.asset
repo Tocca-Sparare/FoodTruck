@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Elements:
   - Name: Alarm
-    Volume: 0.2
+    Volume: 0.8
     Preset:
       AudioType: 0
       Loop: 0
