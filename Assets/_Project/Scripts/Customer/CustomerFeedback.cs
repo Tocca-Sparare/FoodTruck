@@ -1,4 +1,5 @@
 using Fusion;
+using redd096;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class CustomerFeedback : NetworkBehaviour
     [Space]
     [SerializeField] AudioClip hungrySound;
     [SerializeField] AudioClip burpSound;
-    [SerializeField] AudioClip angrySound;
+    [SerializeField] AudioClass angrySound;
     [SerializeField] List<GameObject> prefabHats;
     [SerializeField] Transform hatTransform;
 
@@ -199,10 +200,10 @@ public class CustomerFeedback : NetworkBehaviour
         float randomPitch = Random.Range(0.8f, 1.2f);
         float randomStereoPan = Random.Range(-1f, 1f);
 
-        audioSource.panStereo = randomStereoPan;
-        audioSource.pitch = randomPitch;
-        audioSource.clip = angrySound;
-        audioSource.Play();
+        angrySound.Element.Preset.OtherSettings.Pitch = randomPitch;
+        angrySound.Element.Preset.OtherSettings.StereoPan = randomStereoPan;
+
+        SoundManager.instance.Play(angrySound);
     }
 
     IEnumerator DoBurpSound()

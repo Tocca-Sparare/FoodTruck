@@ -598,6 +598,10 @@ PrefabInstance:
       propertyPath: SortKey
       value: 4273358783
       objectReference: {fileID: 0}
+    - target: {fileID: 5250487237093560867, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: audios.Array.data[0].elementName
+      value: Liguria
+      objectReference: {fileID: 0}
     - target: {fileID: 5340278784115100182, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1

@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bdb8bea7f83bf541b33180fa89b78e1, type: 3}
+  m_Name: CustomerFeedback
+  m_EditorClassIdentifier: 
+  Elements:
+  - Name: Angry
+    Volume: 1
+    Preset:
+      AudioType: 0
+      Loop: 0
+      Fade: 0
+      ForceReplay: 0
+      AudioMixer: {fileID: 0}
+      SoundSettings3D:
+        Enable3D: 0
+        DopplerLevel: 0
+        Spread: 0
+        RolloffMode: 0
+        MinDistance: 0
+        MaxDistance: 0
+      OtherSettings:
+        BypassEffects: 0
+        BypassListenerEffects: 0
+        BypassReverbZones: 0
+        Priority: 0
+        Pitch: 0
+        StereoPan: 0
+        ReverbZoneMix: 0
+    AudioClips:
+    - {fileID: 8300000, guid: 488e5ba7ae6f8374a9dc6f352d2f516b, type: 3}
+  - Name: Shoot without ammo
+    Volume: 1
+    Preset:
+      AudioType: 0
+      Loop: 0
+      Fade: 0
+      ForceReplay: 0
+      AudioMixer: {fileID: 0}
+      SoundSettings3D:
+        Enable3D: 0
+        DopplerLevel: 0
+        Spread: 0
+        RolloffMode: 0
+        MinDistance: 0
+        MaxDistance: 0
+      OtherSettings:
+        BypassEffects: 0
+        BypassListenerEffects: 0
+        BypassReverbZones: 0
+        Priority: 0
+        Pitch: 0
+        StereoPan: 0
+        ReverbZoneMix: 0
+    AudioClips:
+    - {fileID: 8300000, guid: 6a94d0a59d9c9de4880436315635a9e6, type: 3}
