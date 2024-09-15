@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Elements:
   - Name: Cleaning
-    Volume: 0.1
+    Volume: 0.05
     Preset:
       AudioType: 0
       Loop: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
     AudioClips:
     - {fileID: 8300000, guid: 86cf8996a0db2fd49afd83ff9e30723a, type: 3}
   - Name: CompleteClean
-    Volume: 0.1
+    Volume: 0.15
     Preset:
       AudioType: 0
       Loop: 0
