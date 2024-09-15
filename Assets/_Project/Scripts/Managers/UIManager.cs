@@ -20,7 +20,8 @@ public class UIManager : MonoBehaviour
 
     [Header("End Menu")]
     [SerializeField] GameObject endMenu;
-    [SerializeField] TMP_Text endScore;
+    [SerializeField] GameObject[] blackStarsInOrder;
+    [SerializeField] GameObject[] yellowStarsInOrder;
     [SerializeField] Button endButton;
     [SceneInstance][SerializeField] string sceneOnEnd;
 
@@ -40,6 +41,7 @@ public class UIManager : MonoBehaviour
             levelManager.OnChangeLevelState += OnChangeLevelState;
             levelManager.OnUpdateInitialCountdown += OnUpdateInitialCountdown;
             levelManager.OnUpdateGameTimer += OnUpdateGameTimer;
+            levelManager.OnUpdateStars += ShowEndMenu;
         }
         if (pointsManager)
         {
@@ -57,6 +59,7 @@ public class UIManager : MonoBehaviour
             levelManager.OnChangeLevelState -= OnChangeLevelState;
             levelManager.OnUpdateInitialCountdown -= OnUpdateInitialCountdown;
             levelManager.OnUpdateGameTimer -= OnUpdateGameTimer;
+            levelManager.OnUpdateStars -= ShowEndMenu;
         }
         if (pointsManager)
         {
@@ -159,8 +162,14 @@ public class UIManager : MonoBehaviour
         //enable end button only local or server
         endButton.enabled = NetworkManager.IsOnline == false || NetworkManager.instance.Runner.IsServer;
 
-        //show points and end menu
-        endScore.text = "Your score: " + pointsManager.CurrentPoints.ToString();
+        //show stars
+        for (int i = 0; i < blackStarsInOrder.Length; i++)
+        {
+            blackStarsInOrder[i].SetActive(i >= levelManager.StarsUnlocked);
+            yellowStarsInOrder[i].SetActive(i < levelManager.StarsUnlocked);
+        }
+
+        //show end menu
         endMenu.SetActive(true);
     }
 

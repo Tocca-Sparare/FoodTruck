@@ -15,5 +15,7 @@ public class ReadMe
      * UIManager has IsOnline and IsServer checks to disable EndMenu button
      * PlayerPawn is NetworkBehaviour but probably for no reason
      * PlayerStateMachine has a check to teleport rigidbody on respawn
+     * 
+     * LevelManager and LevelSelectionManager have RPCs to show only server points
      * */
 }

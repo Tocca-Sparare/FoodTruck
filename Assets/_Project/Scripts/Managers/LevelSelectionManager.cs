@@ -1,7 +1,10 @@
+using Fusion;
 using UnityEngine;
 
 public class LevelSelectionManager : MonoBehaviour
 {
+    [SerializeField] LevelPoint[] levels;
+
     void Start()
     {
         EnableStateMachines();
@@ -18,8 +21,26 @@ public class LevelSelectionManager : MonoBehaviour
 
     void EnableUnlockedLevels()
     {
-        //check saved points and unlock levels
-        Debug.Log("DOBBIAMO SALVARE IL PUNTEGGIO QUANDO FINIAMO UN LIVELLO E VEDERE QUALE LIVELLI SONO SBLOCCATI");
+        //only local or server
+        if (NetworkManager.IsOnline == false || NetworkManager.instance.Runner.IsServer)
+        {
+            int[] unlockedStars = new int[levels.Length];
+
+            //show stars for every level
+            for (int i = 0; i < levels.Length; i++)
+            {
+                //get how many stars player unlocked for this level
+                string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+                unlockedStars[i] = PlayerPrefs.GetInt(sceneName, 0);
+
+                levels[i].SetFullStars(unlockedStars[i]);
+            }
+
+            if (NetworkManager.IsOnline && NetworkManager.instance.Runner.IsServer)
+            {
+                RPC_SetStars(unlockedStars);
+            }
+        }
     }
 
     /// <summary>
@@ -35,4 +56,18 @@ public class LevelSelectionManager : MonoBehaviour
                 playerSM.SetState(playerSM.NormalState);
         }
     }
+
+    #region online
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_SetStars(int[] unlockedStars, RpcInfo info = default)
+    {
+        //show stars for every level
+        for (int i = 0; i < levels.Length; i++)
+        {
+            levels[i].SetFullStars(unlockedStars[i]);
+        }
+    }
+
+    #endregion
 }
