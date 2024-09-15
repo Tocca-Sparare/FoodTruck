@@ -154,7 +154,7 @@ public class CannonFeedback : NetworkBehaviour
     public void RPC_OnInsertBullet(string foodName, RpcInfo info = default)
     {
         //show bullet to understand what is going to shoot
-        InstantiateHelper.Instantiate(foodManager.GetFoodByName(foodName).bulletPrefabToShowInCannon, cannon.BulletContainer, onlyLocal: true);
+        bulletToShow = InstantiateHelper.Instantiate(foodManager.GetFoodByName(foodName).bulletPrefabToShowInCannon, cannon.BulletContainer, onlyLocal: true);
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All, InvokeLocal = false)]
