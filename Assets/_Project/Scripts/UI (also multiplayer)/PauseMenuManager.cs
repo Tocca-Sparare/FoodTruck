@@ -24,6 +24,8 @@ public class PauseMenuManager : MonoBehaviour
 
             var manager = playerController.GetComponent<InputManager>();
 
+            Debug.Log(manager.PauseWasPressedThisFrame);
+
             if (manager.PauseWasPressedThisFrame)
             {
                 if (pauseMenu.activeSelf)
