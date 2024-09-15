@@ -1239,35 +1239,35 @@ MonoBehaviour:
     totalDurationSpawn: 80
     levelDuration: 90
     pointsForStars: 64000000c80000002c010000
-  - CustomerWaitingTime: 30
+  - CustomerWaitingTime: 40
     CustomerWarningDelays: 1e0000003c0000005a000000
-    minSlowDelay: 2
-    maxSlowDelay: 5
+    minSlowDelay: 5
+    maxSlowDelay: 7
     minSlowCustomers: 1
     maxSlowCustomers: 2
     minFastDelay: 2
-    maxFastDelay: 3
+    maxFastDelay: 5
+    minFastCustomers: 3
+    maxFastCustomers: 4
+    durationSlowPhase: 25
+    totalDurationSpawn: 80
+    levelDuration: 90
+    pointsForStars: 64000000c80000002c010000
+  - CustomerWaitingTime: 35
+    CustomerWarningDelays: 1e0000003c0000005a000000
+    minSlowDelay: 5
+    maxSlowDelay: 6
+    minSlowCustomers: 1
+    maxSlowCustomers: 2
+    minFastDelay: 2
+    maxFastDelay: 4
     minFastCustomers: 2
     maxFastCustomers: 4
     durationSlowPhase: 25
     totalDurationSpawn: 80
     levelDuration: 90
     pointsForStars: 64000000c80000002c010000
-  - CustomerWaitingTime: 15
-    CustomerWarningDelays: 1e0000003c0000005a000000
-    minSlowDelay: 2
-    maxSlowDelay: 5
-    minSlowCustomers: 1
-    maxSlowCustomers: 2
-    minFastDelay: 2
-    maxFastDelay: 3
-    minFastCustomers: 2
-    maxFastCustomers: 4
-    durationSlowPhase: 25
-    totalDurationSpawn: 80
-    levelDuration: 90
-    pointsForStars: 64000000c80000002c010000
-  - CustomerWaitingTime: 15
+  - CustomerWaitingTime: 25
     CustomerWarningDelays: 1e0000003c0000005a000000
     minSlowDelay: 2
     maxSlowDelay: 5

@@ -39,7 +39,7 @@ MonoBehaviour:
     AudioClips:
     - {fileID: 8300000, guid: e571e73613555ff41916225c3d759271, type: 3}
   - Name: Liguria
-    Volume: 0.2
+    Volume: 0.3
     Preset:
       AudioType: 2
       Loop: 1
@@ -64,7 +64,7 @@ MonoBehaviour:
     AudioClips:
     - {fileID: 8300000, guid: 1e857777cb92bb04aa06cfc2828c493d, type: 3}
   - Name: Calabria
-    Volume: 0.1
+    Volume: 0.05
     Preset:
       AudioType: 2
       Loop: 1
