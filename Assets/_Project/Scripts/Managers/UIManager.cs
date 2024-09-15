@@ -1,5 +1,7 @@
+using redd096.Attributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manager UI in game
@@ -18,6 +20,9 @@ public class UIManager : MonoBehaviour
 
     [Header("End Menu")]
     [SerializeField] GameObject endMenu;
+    [SerializeField] TMP_Text endScore;
+    [SerializeField] Button endButton;
+    [SceneInstance][SerializeField] string sceneOnEnd;
 
     LevelManager levelManager;
     PointsManager pointsManager;
@@ -151,7 +156,20 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void ShowEndMenu()
     {
+        //enable end button only local or server
+        endButton.enabled = NetworkManager.IsOnline == false || NetworkManager.instance.Runner.IsServer;
+
+        //show points and end menu
+        endScore.text = "Your score: " + pointsManager.CurrentPoints.ToString();
         endMenu.SetActive(true);
+    }
+
+    /// <summary>
+    /// This is setted in inspector, to change scene when click end button
+    /// </summary>
+    public void OnClickEndButton()
+    {
+        SceneLoader.LoadScene(sceneOnEnd);
     }
 
     /// <summary>

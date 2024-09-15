@@ -64,12 +64,12 @@ PrefabInstance:
       propertyPath: SortKey
       value: 2603576117
       objectReference: {fileID: 0}
-    - target: {fileID: 5785212130614047666, guid: 4ea4e39163785d9459ba0a11b761d5c1, type: 3}
-      propertyPath: DeadState.playerMat
-      value: 
-      objectReference: {fileID: 2100000, guid: 85ab0678eb28ad2458ebf5ba4bb1442b, type: 2}
     - target: {fileID: 6011152629157788431, guid: 4ea4e39163785d9459ba0a11b761d5c1, type: 3}
       propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 85ab0678eb28ad2458ebf5ba4bb1442b, type: 2}
+    - target: {fileID: 8919150161289233964, guid: 4ea4e39163785d9459ba0a11b761d5c1, type: 3}
+      propertyPath: playerMat
       value: 
       objectReference: {fileID: 2100000, guid: 85ab0678eb28ad2458ebf5ba4bb1442b, type: 2}
     m_RemovedComponents: []

@@ -83,11 +83,6 @@ MonoBehaviour:
     verticalThrow: 0.5
   DeadState:
     deadDuration: 5
-    playerMat: {fileID: 2100000, guid: 34347aeb836e34145a08f7ec34e78e8d, type: 2}
-    playerModel: {fileID: 1072876615007765503}
-    deadModel: {fileID: 5584662507620214915}
-    deadGraphics: {fileID: 1512812697204408286}
-    countdownText: {fileID: 7471096426905891085}
 --- !u!114 &3939595043599167271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +171,7 @@ MonoBehaviour:
   - {fileID: 105724878731301218}
   - {fileID: 647853916338138936}
   - {fileID: 8407750899905861444}
+  - {fileID: 8919150161289233964}
 --- !u!114 &3402377392899231905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,6 +698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 916227116172757033}
   - component: {fileID: 5463561839933935460}
+  - component: {fileID: 8919150161289233964}
   m_Layer: 0
   m_Name: Feedbacks
   m_TagString: Untagged
@@ -738,6 +735,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementComponent: {fileID: 3939595043599167271}
   objectToRotate: {fileID: 3007186484662410686}
+--- !u!114 &8919150161289233964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5210436201779009798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 118e09619e91d3d4392e5ee6feada849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerModel: {fileID: 1072876615007765503}
+  deadGraphics: {fileID: 1512812697204408286}
+  playerMat: {fileID: 2100000, guid: 34347aeb836e34145a08f7ec34e78e8d, type: 2}
+  countdownText: {fileID: 7471096426905891085}
+  deadModel: {fileID: 5584662507620214915}
 --- !u!1 &6460492840295127673
 GameObject:
   m_ObjectHideFlags: 0

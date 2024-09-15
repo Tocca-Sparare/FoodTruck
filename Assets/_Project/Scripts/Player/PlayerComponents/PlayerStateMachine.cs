@@ -20,6 +20,10 @@ public class PlayerStateMachine : BasicStateMachine
 
     public Transform TransportedObjectContainer => transportedObjectContainer;
 
+    public System.Action<float> OnDead;
+    public System.Action<float> OnUpdateDeadState;
+    public System.Action OnRespawn;
+
     private void Awake()
     {
         SpawnPosition = transform.position;
@@ -44,5 +48,27 @@ public class PlayerStateMachine : BasicStateMachine
     {
         if (TransportedObject)
             TransportedObject.Drop();
+    }
+
+    public void KillPlayer()
+    {
+        //if transporting an object, drop it
+        if (CurrentState == TransportingObjectsState)
+            Drop();
+
+        //set in dead state
+        SetState(DeadState);
+    }
+
+    public void RespawnPlayer()
+    {
+        //if (NetworkManager.IsOnline && NetworkManager.instance.Runner.IsServer)
+        //    transform.GetComponent<Fusion.Addons.Physics.NetworkRigidbody3D>().Teleport(SpawnPosition);
+
+        //reset position and set normal state
+        transform.position = SpawnPosition;
+        SetState(NormalState);
+
+        OnRespawn?.Invoke();
     }
 }

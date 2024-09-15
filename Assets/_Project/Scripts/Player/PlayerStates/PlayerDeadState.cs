@@ -1,23 +1,15 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 [System.Serializable]
 public class PlayerDeadState : State
 {
     [SerializeField] int deadDuration;
-    [SerializeField] Material playerMat;
-    [SerializeField] GameObject playerModel;
-    [SerializeField] MeshRenderer deadModel;
-    [SerializeField] GameObject deadGraphics;
-    [SerializeField] TMP_Text countdownText;
 
     PlayerStateMachine player;
-    float timer;
     Rigidbody rb;
     Collider[] colliders;
-
-    Vector3 moveDirection;
+    float timer;
 
     protected override void OnInit()
     {
@@ -31,51 +23,47 @@ public class PlayerDeadState : State
             Debug.LogError($"Missing RigidBody on {GetType().Name}", StateMachine);
 
         colliders = transformState.GetComponentsInChildren<Collider>();
-        deadModel.sharedMaterial = playerMat;
     }
 
     protected override void OnEnter()
     {
         base.OnEnter();
 
-        playerModel.SetActive(false); 
-        deadGraphics.SetActive(true);
-        countdownText.text = deadDuration.ToString();
-        countdownText.gameObject.SetActive(true);
+        player.OnDead?.Invoke(deadDuration);
+
+        //disable rigidbody and colliders
         rb.useGravity = false;
-
+        rb.velocity = Vector3.zero;
         foreach (var collider in colliders)
-        {
             collider.enabled = false;
-        }
 
+        //start timer
         timer = Time.time + deadDuration;
-
         StateMachine.StartCoroutine(RespawnPlayer());
+    }
+
+    protected override void OnExit()
+    {
+        base.OnExit();
+
+        //re-enable rigidbody and colliders
+        rb.useGravity = true;
+        foreach (var collider in colliders)
+            collider.enabled = true;
     }
 
     IEnumerator RespawnPlayer()
     {
         while (timer > Time.time)
         {
-            rb.velocity = Vector3.zero;
             yield return null;
-            countdownText.text = Mathf.CeilToInt(timer - Time.time).ToString();
+
+            //continue reset rigidbody velocity to be sure player is still
+            rb.velocity = Vector3.zero;
+            player.OnUpdateDeadState?.Invoke(timer - Time.time);
         }
 
-        foreach (var collider in colliders)
-        {
-            collider.enabled = true;
-        }
-
-        rb.useGravity = true;
-
-        transformState.position = player.SpawnPosition;
-
-        playerModel.SetActive(true);
-        deadGraphics.SetActive(false);
-        countdownText.gameObject.SetActive(false);
-        StateMachine.SetState(player.NormalState);
+        //respawn
+        player.RespawnPlayer();
     }
-
 }

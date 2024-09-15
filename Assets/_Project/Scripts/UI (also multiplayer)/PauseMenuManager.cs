@@ -71,6 +71,21 @@ public class PauseMenuManager : MonoBehaviour
         optionsMenu.SetActive(false);
     }
 
+    /// <summary>
+    /// Close both pause and options menu immediatly
+    /// </summary>
+    public void ForceCloseMenu()
+    {
+        isPaused = false;
+
+        //in local reset timescale
+        if (!NetworkManager.IsOnline)
+            Time.timeScale = 1;
+
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+    }
+
     #region ui button events
 
     public void OnResumeButtonPressed()

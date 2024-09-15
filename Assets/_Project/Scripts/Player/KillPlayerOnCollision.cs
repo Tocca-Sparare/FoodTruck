@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class KillPlayerOnCollision : MonoBehaviour
 {
+    KillPlayerManager manager;
+
     private void OnCollisionEnter(Collision collision)
     {
-        var player = collision.gameObject.GetComponentInParent<PlayerStateMachine>();
+        //be sure to have manager
+        if (manager == null)
+            manager = FindObjectOfType<KillPlayerManager>();
 
-        if (player != null)
-        {
-            if (player.CurrentState == player.TransportingObjectsState)
-                player.Drop();
-
-            player.SetState(player.DeadState);
-        }
+        //call KillPlayer
+        if (manager)
+            manager.OnKillPlayer(collision.gameObject);
     }
 }

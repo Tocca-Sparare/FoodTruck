@@ -83,7 +83,13 @@ public class LevelManager : MonoBehaviour
         //set state
         levelState = ELevelState.Finish;
 
-        OnChangeLevelState(levelState);
+        //disable pause menu - will be showed the End menu
+        PauseMenuManager pauseMenu = FindObjectOfType<PauseMenuManager>();
+        if (pauseMenu)
+        {
+            pauseMenu.ForceCloseMenu();
+            pauseMenu.enabled = false;
+        }
 
         //stop every player
         PlayerStateMachine[] playerStateMachines = FindObjectsOfType<PlayerStateMachine>();
@@ -94,6 +100,8 @@ public class LevelManager : MonoBehaviour
             if (rb)
                 rb.velocity = Vector3.zero;
         }
+
+        OnChangeLevelState(levelState);
     }
 
     /// <summary>
