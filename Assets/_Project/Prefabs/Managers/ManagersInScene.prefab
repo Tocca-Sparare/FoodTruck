@@ -466,6 +466,53 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &1511098534188873829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6258025420547602837}
+  - component: {fileID: 1282606409867533076}
+  m_Layer: 0
+  m_Name: ButtonsFeedbackManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6258025420547602837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511098534188873829}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 329141115446789912}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1282606409867533076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511098534188873829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eafc862080941941ab3feb424892fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonClickAudio:
+    data: {fileID: 11400000, guid: 84219e38c3fe45f4794ac9b0577e0bd8, type: 2}
+    elementName: Click Button
 --- !u!1 &1818072545263616541
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,6 +609,7 @@ Transform:
   - {fileID: 4629377313968167758}
   - {fileID: 42938147825145678}
   - {fileID: 6482318704218091802}
+  - {fileID: 6258025420547602837}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2026813759120511242
@@ -1834,13 +1882,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58f6bac84307124bba598d992b2a7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerPrefab: {fileID: 6876753568125975953, guid: 19013837ec77f435a84f7bbd1c1e5856, type: 3}
   minSlowDelay: 2
   maxSlowDelay: 5
   minFastDelay: 2
   maxFastDelay: 3
   durationSlowPhase: 25
   totalLevelDuration: 80
+  customerPrefab: {fileID: 6876753568125975953, guid: 19013837ec77f435a84f7bbd1c1e5856, type: 3}
   spawnPointTransforms:
   - {fileID: 4846101428292683381}
   - {fileID: 749568750471825832}

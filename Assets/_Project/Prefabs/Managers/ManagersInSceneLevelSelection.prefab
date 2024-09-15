@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1874161970720217255, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: m_Name
-      value: ManagersInSceneLevelSelection Variant
+      value: ManagersInSceneLevelSelection
       objectReference: {fileID: 0}
     - target: {fileID: 2240378571833808693, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: SortKey
@@ -329,6 +329,14 @@ PrefabInstance:
       propertyPath: pawnsInOrderByPlayerIndex.Array.data[3]
       value: 
       objectReference: {fileID: 9168194367840777048}
+    - target: {fileID: 5250487237093560867, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: audios.Array.data[0].data
+      value: 
+      objectReference: {fileID: 11400000, guid: 066568da88159594eaf932534d5deb21, type: 2}
+    - target: {fileID: 5250487237093560867, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: audios.Array.data[0].elementName
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 7804105779644077394, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: m_audioClip
       value: 

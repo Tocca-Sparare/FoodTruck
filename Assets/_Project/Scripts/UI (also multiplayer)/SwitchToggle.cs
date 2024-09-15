@@ -10,6 +10,7 @@ public class SwitchToggle : MonoBehaviour
     [SerializeField] string onToggleAnimation;
     [SerializeField] string onUntoggleAnimation;
     [Space]
+    [Tooltip("Play animation on awake")][SerializeField] bool updateOnAwake;
     [Tooltip("Set in inspector to set default value")][SerializeField] bool isToggled;
     [Space]
     public UnityEvent<bool> onValueChanged;
@@ -19,7 +20,8 @@ public class SwitchToggle : MonoBehaviour
     private void Awake()
     {
         //set animation
-        SetToggle(isToggled, false);
+        if (updateOnAwake)
+            SetToggle(isToggled, false);
     }
 
     /// <summary>
