@@ -8,6 +8,14 @@ public class MapPlayer : NetworkBehaviour
     [SerializeField] GameObject truck;
 
     List<Collider> colliders = new List<Collider>();
+    bool canCallRpc;
+
+    public override void Spawned()
+    {
+        base.Spawned();
+
+        canCallRpc = true;
+    }
 
     void SwitchVehicle()
     {
@@ -15,7 +23,7 @@ public class MapPlayer : NetworkBehaviour
 
         if (NetworkManager.IsOnline)
         {
-            if (NetworkManager.instance.Runner.IsServer) 
+            if (NetworkManager.instance.Runner.IsServer && canCallRpc) 
                 RPC_OnChangeVehicle(showBoat);
         }
         else
