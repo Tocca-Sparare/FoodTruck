@@ -60,7 +60,7 @@ public class ManageMultiplayerDifficulty : NetworkBehaviour
 public struct FLevelSettings
 {
     public int CustomerWaitingTime;
-    public int[] CustomerWarningDelays;
+    [Range(0, 100)] public int[] CustomerWarningDelays;
     [Space]
     public float minSlowDelay;
     public float maxSlowDelay;
