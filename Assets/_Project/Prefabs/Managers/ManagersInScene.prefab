@@ -1159,6 +1159,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2982034796726916266}
   - component: {fileID: 7828496747893610702}
+  - component: {fileID: 5474138313788737202}
+  - component: {fileID: 8942596305532047827}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1195,6 +1197,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialCountdown: 3
   levelDuration: 90
+--- !u!114 &5474138313788737202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5424350765583799719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12fd6e31c66130649b8b4a8d5ede50b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  remainingTimeForAlarm: 5
+  almostFinishLevelAudio:
+    data: {fileID: 11400000, guid: 061ebf465c33d6a458c53680d9d6c2f3, type: 2}
+    elementName: Timer almost finished
+--- !u!114 &8942596305532047827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5424350765583799719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 0
+  ObjectInterest: 1
+  Flags: 262144
+  NestedObjects: []
+  NetworkedBehaviours: []
 --- !u!1 &5444351013187800004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,6 +1794,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8019416964876005379}
   - component: {fileID: 6190442381307063913}
+  - component: {fileID: 3019671674293869564}
+  - component: {fileID: 4902245562765093714}
   m_Layer: 0
   m_Name: Customer Spawner
   m_TagString: Untagged
@@ -1800,15 +1837,47 @@ MonoBehaviour:
   customerPrefab: {fileID: 6876753568125975953, guid: 19013837ec77f435a84f7bbd1c1e5856, type: 3}
   minSlowDelay: 2
   maxSlowDelay: 5
-  spawnFastVelocityFactor: 5
-  currentVelocityFactor: 1
-  slowPhaseTimeLimit: 25
-  totalLevelTime: 80
+  minFastDelay: 2
+  maxFastDelay: 3
+  durationSlowPhase: 25
+  totalLevelDuration: 80
   spawnPointTransforms:
   - {fileID: 4846101428292683381}
   - {fileID: 749568750471825832}
   - {fileID: 2257290148205961770}
   - {fileID: 25205250345383920}
+--- !u!114 &3019671674293869564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8278120968240947071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8d9ddcb7ccade4a92c3b5438bde4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alarmAudio:
+    data: {fileID: 11400000, guid: 061ebf465c33d6a458c53680d9d6c2f3, type: 2}
+    elementName: Alarm
+--- !u!114 &4902245562765093714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8278120968240947071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 0
+  ObjectInterest: 1
+  Flags: 262144
+  NestedObjects: []
+  NetworkedBehaviours: []
 --- !u!1 &8419985885176633278
 GameObject:
   m_ObjectHideFlags: 0

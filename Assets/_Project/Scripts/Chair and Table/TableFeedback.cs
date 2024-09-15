@@ -104,7 +104,7 @@ public class TableFeedback : NetworkBehaviour
 
     #region online
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_OnDirtyTable(string foodName, RpcInfo info = default)
     {
         Food food = foodManager.GetFoodByName(foodName);
@@ -136,7 +136,7 @@ public class TableFeedback : NetworkBehaviour
         }
     }
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All, Channel = RpcChannel.Unreliable)]
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_OnTableClean(RpcInfo info = default)
     {
         SoundManager.instance.Play(completeCleanAudio);

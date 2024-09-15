@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Elements:
   - Name: Angry
-    Volume: 1
+    Volume: 0.1
     Preset:
       AudioType: 0
       Loop: 0
@@ -33,33 +33,8 @@ MonoBehaviour:
         BypassListenerEffects: 0
         BypassReverbZones: 0
         Priority: 128
-        Pitch: 1
-        StereoPan: 0
+        Pitch: 1.0875814
+        StereoPan: 0.016547322
         ReverbZoneMix: 1
     AudioClips:
     - {fileID: 8300000, guid: 488e5ba7ae6f8374a9dc6f352d2f516b, type: 3}
-  - Name: Shoot without ammo
-    Volume: 1
-    Preset:
-      AudioType: 0
-      Loop: 0
-      Fade: 0
-      ForceReplay: 0
-      AudioMixer: {fileID: 0}
-      SoundSettings3D:
-        Enable3D: 0
-        DopplerLevel: 0
-        Spread: 0
-        RolloffMode: 0
-        MinDistance: 0
-        MaxDistance: 0
-      OtherSettings:
-        BypassEffects: 0
-        BypassListenerEffects: 0
-        BypassReverbZones: 0
-        Priority: 128
-        Pitch: 1
-        StereoPan: 0
-        ReverbZoneMix: 1
-    AudioClips:
-    - {fileID: 8300000, guid: 6a94d0a59d9c9de4880436315635a9e6, type: 3}

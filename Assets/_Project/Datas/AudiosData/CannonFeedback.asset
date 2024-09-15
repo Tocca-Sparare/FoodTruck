@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Elements:
   - Name: Shoot
-    Volume: 1
+    Volume: 0.5
     Preset:
       AudioType: 0
       Loop: 0
@@ -33,13 +33,13 @@ MonoBehaviour:
         BypassListenerEffects: 0
         BypassReverbZones: 0
         Priority: 128
-        Pitch: 1
-        StereoPan: 0
+        Pitch: 1.0036561
+        StereoPan: -0.33867943
         ReverbZoneMix: 1
     AudioClips:
     - {fileID: 8300000, guid: 572e8c1fa4e54cf4d92e5da197655495, type: 3}
   - Name: Shoot without ammo
-    Volume: 1
+    Volume: 0.5
     Preset:
       AudioType: 0
       Loop: 0
@@ -58,8 +58,8 @@ MonoBehaviour:
         BypassListenerEffects: 0
         BypassReverbZones: 0
         Priority: 128
-        Pitch: 1
-        StereoPan: 0
+        Pitch: 0.9742993
+        StereoPan: -0.77334046
         ReverbZoneMix: 1
     AudioClips:
     - {fileID: 8300000, guid: 6a94d0a59d9c9de4880436315635a9e6, type: 3}

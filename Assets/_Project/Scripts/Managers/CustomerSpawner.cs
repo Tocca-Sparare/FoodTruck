@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Timers;
 using UnityEngine;
 
 /// <summary>
@@ -8,24 +7,26 @@ using UnityEngine;
 /// </summary>
 public class CustomerSpawner : MonoBehaviour
 {
-    [SerializeField] private Customer customerPrefab;
-
     //Time delay range between two consecutive spawn
-    [SerializeField] private float minSlowDelay = 5f;
-    [SerializeField] private float maxSlowDelay = 10f;
-
-    [SerializeField] private float spawnFastVelocityFactor = 10f;
-    [SerializeField] private float currentVelocityFactor = 1f;
-
-    [SerializeField] private float slowPhaseTimeLimit = 10f;
-    [SerializeField] private float totalLevelTime = 100f;
-
+    [SerializeField] private float minSlowDelay = 2f;
+    [SerializeField] private float maxSlowDelay = 5f;
+    [Space]
+    [SerializeField] float minFastDelay = 2f;
+    [SerializeField] float maxFastDelay = 3f;
+    [Space]
+    [SerializeField] float durationSlowPhase = 25f;
+    [SerializeField] float totalLevelDuration = 80;
+    [Space]
+    [SerializeField] private Customer customerPrefab;
     [SerializeField] List<Transform> spawnPointTransforms;
+
+    enum EState { None, SlowPhase, FastPhase, Finished }
 
     TablesManager tablesManager;
     FoodManager ingredientsManager;
+    EState currentState;
 
-    private System.Timers.Timer levelTimer;
+    public System.Action OnSlowPhaseEndedCallback;
 
     void Awake()
     {
@@ -35,64 +36,75 @@ public class CustomerSpawner : MonoBehaviour
 
     public void Init()
     {
-        currentVelocityFactor = 1.0f;
-
-        // Create a timer with a totalLevelTime second .
-        levelTimer = new System.Timers.Timer(slowPhaseTimeLimit * 1000f);
-        // Hook up the Elapsed event for the timer. 
-        levelTimer.Elapsed += OnSlowPhaseEnded;
-        levelTimer.Enabled = true;
-        levelTimer.Start();
-
+        //start in slow phase
+        currentState = EState.SlowPhase;
+        StartCoroutine(TimerSlowPhaseCoroutine());
         StartCoroutine(SpawnCustomer());
     }
 
-    private void OnSlowPhaseEnded(object sender, ElapsedEventArgs e)
+    private IEnumerator TimerSlowPhaseCoroutine()
     {
-        currentVelocityFactor = 1.0f / spawnFastVelocityFactor;
-        levelTimer.Stop();
+        yield return new WaitForSeconds(durationSlowPhase);
 
-        levelTimer = new System.Timers.Timer(totalLevelTime * 1000f);
-        levelTimer.Elapsed -= OnSlowPhaseEnded;
-        levelTimer.Elapsed += OnLevelEnded;
-        levelTimer.Enabled = true;
-    }
-
-    private void OnLevelEnded(object sender, ElapsedEventArgs e)
-    {
-        levelTimer.Stop();
+        //set fast phase
+        currentState = EState.FastPhase;
+        OnSlowPhaseEndedCallback?.Invoke();
     }
 
     private IEnumerator SpawnCustomer()
     {
-        while (true)
+        //continue spawn
+        float timer = Time.time + totalLevelDuration;
+        while (Time.time > timer)
         {
             foreach (var spawnPointTransform in spawnPointTransforms)
             {
-                Table table = tablesManager.GetRandomEmptyTable();
-                if (table != null)
-                {
-                    int randomCustomerCount = Random.Range(1, 5);
-                    table.SetApproachingCustomersCount(randomCustomerCount);
-
-                    for (int i = 0; i < randomCustomerCount; i++)
-                    {
-                        if (NetworkManager.IsOnline && NetworkManager.instance.Runner.IsServer == false)
-                        {
-                            Debug.LogError("Non deve spawnare niente sui client!", gameObject);
-                            yield break;
-                        }
-
-                        var newCustomer = InstantiateHelper.Instantiate(customerPrefab, spawnPointTransform.position, spawnPointTransform.rotation);
-                        newCustomer.Init(ingredientsManager.GetRandomIngredient(), table, spawnPointTransform.position);
-                        yield return new WaitForSeconds(.5f);
-                    }
-
-                    float randomDelay = currentVelocityFactor * Random.Range(minSlowDelay, maxSlowDelay);
-                    yield return new WaitForSeconds(randomDelay);
-                }
+                //spawn customers
+                yield return SpawnAtPoint(spawnPointTransform);
                 yield return new WaitForEndOfFrame();
             }
         }
+
+        //finish spawn
+        OnFinishSpawn();
+    }
+
+    IEnumerator SpawnAtPoint(Transform spawnPointTransform)
+    {
+        //find random table
+        Table table = tablesManager.GetRandomEmptyTable();
+        if (table != null)
+        {
+            //from 1 to 4 customers
+            int randomCustomerCount = Random.Range(1, 5);
+            table.SetApproachingCustomersCount(randomCustomerCount);
+
+            for (int i = 0; i < randomCustomerCount; i++)
+            {
+                if (NetworkManager.IsOnline && NetworkManager.instance.Runner.IsServer == false)
+                {
+                    Debug.LogError("Non deve spawnare niente sui client!", gameObject);
+                    yield break;
+                }
+
+                //spawn customer
+                SpawnCustomer(spawnPointTransform, table);
+                yield return new WaitForSeconds(.5f);
+            }
+
+            float randomDelay = currentState == EState.SlowPhase ? Random.Range(minSlowDelay, maxSlowDelay) : Random.Range(minFastDelay, maxFastDelay);
+            yield return new WaitForSeconds(randomDelay);
+        }
+    }
+
+    void SpawnCustomer(Transform spawnPointTransform, Table table)
+    {
+        var newCustomer = InstantiateHelper.Instantiate(customerPrefab, spawnPointTransform.position, spawnPointTransform.rotation);
+        newCustomer.Init(ingredientsManager.GetRandomIngredient(), table, spawnPointTransform.position);
+    }
+
+    void OnFinishSpawn()
+    {
+        currentState = EState.Finished;
     }
 }

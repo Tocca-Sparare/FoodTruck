@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Elements:
   - Name: Piemonte
-    Volume: 1
+    Volume: 0.01
     Preset:
       AudioType: 2
       Loop: 1
@@ -39,7 +39,7 @@ MonoBehaviour:
     AudioClips:
     - {fileID: 8300000, guid: e571e73613555ff41916225c3d759271, type: 3}
   - Name: Liguria
-    Volume: 1
+    Volume: 0.01
     Preset:
       AudioType: 2
       Loop: 1
@@ -64,7 +64,7 @@ MonoBehaviour:
     AudioClips:
     - {fileID: 8300000, guid: 1e857777cb92bb04aa06cfc2828c493d, type: 3}
   - Name: Calabria
-    Volume: 1
+    Volume: 0.01
     Preset:
       AudioType: 2
       Loop: 1

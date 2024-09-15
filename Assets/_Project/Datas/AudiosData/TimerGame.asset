@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Elements:
   - Name: Alarm
-    Volume: 1
+    Volume: 0.2
     Preset:
       AudioType: 0
       Loop: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
     AudioClips:
     - {fileID: 8300000, guid: b407122aa325e9a4482f278deedebaa0, type: 3}
   - Name: Timer almost finished
-    Volume: 1
+    Volume: 0.1
     Preset:
       AudioType: 0
       Loop: 0
