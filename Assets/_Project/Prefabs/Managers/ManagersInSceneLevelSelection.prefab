@@ -345,6 +345,18 @@ PrefabInstance:
       propertyPath: SortKey
       value: 864596606
       objectReference: {fileID: 0}
+    - target: {fileID: 8775744245437163000, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: onExitScene
+      value: LobbyOnline
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775744245437163000, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: onLocalExitScene
+      value: LobbyLocal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775744245437163000, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: onServerExitScene
+      value: LobbyOnline
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5424350765583799719, guid: e21e1aee371734a458342dbebe1c998e, type: 3}

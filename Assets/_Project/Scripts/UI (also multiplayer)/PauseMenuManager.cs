@@ -1,57 +1,77 @@
 using redd096.Attributes;
+using redd096.UIControl;
 using UnityEngine;
 
 public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject optionsMenu;
-    [SceneInstance][SerializeField] string onExitScene;
+    [SceneInstance][SerializeField] string onLocalExitScene;
+    [SceneInstance][SerializeField] string onServerExitScene;
     [SceneInstance][SerializeField] string onClientExitScene;
 
     AutoPossess autoPosses;
+    OptimizeEventSystem optimizeEventSystem;
+    bool isPaused;
 
     private void Awake()
     {
         autoPosses = FindObjectOfType<AutoPossess>();
+        optimizeEventSystem = FindObjectOfType<OptimizeEventSystem>();
     }
 
     private void Update()
     {
+        //check every player controller
         foreach (var playerController in autoPosses.playerControllers)
         {
             if (playerController == null)
                 continue;
 
             var manager = playerController.GetComponent<InputManager>();
-
-            Debug.Log(manager.PauseWasPressedThisFrame);
-
-            if (manager.PauseWasPressedThisFrame)
+            if (manager)
             {
-                if (pauseMenu.activeSelf)
+                //check if press Resume or Pause
+                if (isPaused && manager.ResumeWasPressedThisFrame)
                     CloseMenu();
-                else
-                    OpenMenu(manager);
+                else if (isPaused == false && manager.PauseWasPressedThisFrame)
+                    OpenMenu();
             }
         }
     }
 
-    private void OpenMenu(InputManager manager)
+    private void OpenMenu()
     {
+        isPaused = true;
+
+        //in local set timescale 0
         if (!NetworkManager.IsOnline)
             Time.timeScale = 0;
 
         pauseMenu.SetActive(true);
+        optionsMenu.SetActive(false);
     }
 
     void CloseMenu()
     {
-        pauseMenu.SetActive(false);
-        optionsMenu.SetActive(false);
+        //if in options menu, just move back to pause menu
+        if (optionsMenu.activeInHierarchy)
+        {
+            OnBackButtonPressed();
+            return;
+        }
 
+        isPaused = false;
+
+        //in local reset timescale
         if (!NetworkManager.IsOnline)
             Time.timeScale = 1;
+
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(false);
     }
+
+    #region ui button events
 
     public void OnResumeButtonPressed()
     {
@@ -60,26 +80,33 @@ public class PauseMenuManager : MonoBehaviour
 
     public void OnExitButtonPressed()
     {
-        CloseMenu();
-        if (NetworkManager.IsOnline && !NetworkManager.instance.Runner.IsServer)
+        if (!NetworkManager.IsOnline)
+            Time.timeScale = 1;
+
+        if (NetworkManager.IsOnline)
         {
-            NetworkManager.instance.LeaveGame(() => SceneLoader.LoadScene(onClientExitScene));
+            //if server, back to lobby online or select level - if client, leave game and back to create room
+            if (NetworkManager.instance.Runner.IsServer)
+                SceneLoader.LoadScene(onServerExitScene);
+            else
+                NetworkManager.instance.LeaveGame(() => SceneLoader.LoadScene(onClientExitScene));
         }
         else
         {
-            SceneLoader.LoadScene(onExitScene);
+            //in local just move back to lobby local or select level
+            SceneLoader.LoadScene(onLocalExitScene);
         }
     }
 
     public void OnOptionsButtonPressed()
     {
-        pauseMenu.SetActive(false);
-        optionsMenu.SetActive(true);
+        optimizeEventSystem.ChangeMenu(optionsMenu);
     }
 
     public void OnBackButtonPressed()
     {
-        pauseMenu.SetActive(true);
-        optionsMenu.SetActive(false);
+        optimizeEventSystem.ChangeMenu(pauseMenu);
     }
+
+    #endregion
 }

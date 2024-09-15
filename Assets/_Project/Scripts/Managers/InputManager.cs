@@ -14,9 +14,10 @@ public class InputManager : MonoBehaviour
     public Vector2 Move { get; set; }
     public bool InteractWasPressedThisFrame {  get; set; }
     public bool ShootWasPressedThisFrame { get; set; }
-    public bool PauseWasPressedThisFrame { get; set; }
     public Vector2 Aim { get; set; }
     public bool IsUsingMouse { get; set; }
+    public bool PauseWasPressedThisFrame { get; set; }
+    public bool ResumeWasPressedThisFrame { get; set; }
 
     #region playerInput
 
@@ -41,8 +42,9 @@ public class InputManager : MonoBehaviour
         Move = FindAction("Move").ReadValue<Vector2>();
         InteractWasPressedThisFrame = FindAction("Interact").WasPressedThisFrame();
         ShootWasPressedThisFrame = FindAction("Shoot").WasPressedThisFrame();
-        PauseWasPressedThisFrame = FindAction("Pause").WasPressedThisFrame();
         Aim = FindAction("Aim").ReadValue<Vector2>();
         IsUsingMouse = PlayerInput.currentControlScheme == MouseSchemeName;
+        PauseWasPressedThisFrame = FindAction("Pause").WasPressedThisFrame();
+        ResumeWasPressedThisFrame = FindAction("Resume").WasPressedThisFrame();
     }
 }

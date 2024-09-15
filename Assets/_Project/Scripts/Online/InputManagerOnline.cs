@@ -69,6 +69,10 @@ public class InputManagerOnline : NetworkBehaviour
             myInputs.Aim = inputManager.FindAction("Aim").ReadValue<Vector2>();
             myInputs.IsUsingMouse = inputManager.PlayerInput.currentControlScheme == inputManager.MouseSchemeName;
         }
+
+        //calculate pause buttons just in local
+        inputManager.PauseWasPressedThisFrame = inputManager.FindAction("Pause").WasPressedThisFrame();
+        inputManager.ResumeWasPressedThisFrame = inputManager.FindAction("Resume").WasPressedThisFrame();
     }
 
     public override void FixedUpdateNetwork()
