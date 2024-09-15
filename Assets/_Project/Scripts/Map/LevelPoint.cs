@@ -93,14 +93,14 @@ public class LevelPoint : MonoBehaviour, IInteractable
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_OnActivateLevelPoint()
+    public void RPC_OnActivateLevelPoint(RpcInfo info = default)
     {
         virtualCamera.gameObject.SetActive(true);
         levelBanner.SetActive(true);
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_OnDeactivateLevelPoint()
+    public void RPC_OnDeactivateLevelPoint(RpcInfo info = default)
     {
         virtualCamera.gameObject.SetActive(false);
         levelBanner.SetActive(false);
