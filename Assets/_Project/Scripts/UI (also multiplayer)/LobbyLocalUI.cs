@@ -15,7 +15,6 @@ public class LobbyLocalUI : MonoBehaviour
     [Space]
     [SerializeField] GameObject joinedPlayerPrefab;
     [SerializeField] Transform joinedPlayersContainer;
-    [SerializeField] GameObject objectWhenNoPlayersInScene;
     [SerializeField] Button[] buttonsToDisableWhenNoPlayersInScene;
 
     [Header("Auto register to events")]
@@ -95,7 +94,6 @@ public class LobbyLocalUI : MonoBehaviour
             joinedPlayers.Add(input, go);
 
             //update buttons - with a little delay to avoid start game if player pressed Submit button to join
-            if (objectWhenNoPlayersInScene) objectWhenNoPlayersInScene.SetActive(false);        //but disable immediatly the "object when no players in scene"
             foreach (var b in buttonsToDisableWhenNoPlayersInScene) b.interactable = false;
             Invoke(nameof(UpdateButtonsStatus), 0.1f);
         }
@@ -122,10 +120,6 @@ public class LobbyLocalUI : MonoBehaviour
     void UpdateButtonsStatus()
     {
         bool thereArePlayersInScene = joinedPlayers.Count > 0;
-
-        //object to activate only when there are NO players in scene
-        if (objectWhenNoPlayersInScene) 
-            objectWhenNoPlayersInScene.SetActive(thereArePlayersInScene == false);
 
         //enable buttons only if there are players in scene
         foreach (var b in buttonsToDisableWhenNoPlayersInScene)

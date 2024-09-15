@@ -2,7 +2,6 @@ using Cinemachine;
 using redd096.Attributes;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelPoint : MonoBehaviour, IInteractable
 {
@@ -24,9 +23,17 @@ public class LevelPoint : MonoBehaviour, IInteractable
 
     public void Interact(InteractComponent interactor)
     {
+        if (locandinaSprite == null)
+        {
+            Debug.Log($"Livello non disponibile {gameObject.name}", gameObject);
+            return;
+        }
+
         //only offline or server can call this button
         if (NetworkManager.IsOnline == false || NetworkManager.instance.Runner.IsServer)
+        {
             SceneLoader.LoadScene(levelScene);
+        }
     }
 
     public void SetFullStars(int count)
