@@ -53,6 +53,8 @@ public class ManageMultiplayerDifficulty : NetworkBehaviour
         {
             tablesManager.SetTablesSettings(settings.CustomerWaitingTime, settings.CustomerWarningDelays);
         }
+
+        Debug.Log($"SET DIFFICULTY FOR {numberOfPlayers} PLAYERS");
     }
 
 
