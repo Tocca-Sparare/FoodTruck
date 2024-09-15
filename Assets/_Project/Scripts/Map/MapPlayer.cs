@@ -2,7 +2,7 @@ using Fusion;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapPlayer : BasicStateMachine
+public class MapPlayer : NetworkBehaviour
 {
     [SerializeField] GameObject boat;
     [SerializeField] GameObject truck;

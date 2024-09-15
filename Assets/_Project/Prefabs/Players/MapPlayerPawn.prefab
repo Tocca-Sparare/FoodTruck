@@ -85,11 +85,6 @@ MonoBehaviour:
     verticalThrow: 0.5
   DeadState:
     deadDuration: 0
-    playerMat: {fileID: 0}
-    playerModel: {fileID: 0}
-    deadModel: {fileID: 0}
-    deadGraphics: {fileID: 0}
-    countdownText: {fileID: 0}
 --- !u!114 &8707453065972265834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +185,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 1613134899885355870}
+  - {fileID: 8475008391266876826}
   - {fileID: 7956104318828806979}
   - {fileID: 1044526503594343904}
 --- !u!114 &3968475509625293863

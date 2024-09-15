@@ -93,13 +93,14 @@ public class TableFeedback : NetworkBehaviour
 
     private void OnTableClean()
     {
-        dirtyStainsContainer.SetActive(false);
-
         //play sound
         if (NetworkManager.IsOnline)
             RPC_OnTableClean();
         else
+        {
+            dirtyStainsContainer.SetActive(false);
             SoundManager.instance.Play(completeCleanAudio);
+        }
     }
 
     #region online
@@ -140,6 +141,7 @@ public class TableFeedback : NetworkBehaviour
     public void RPC_OnTableClean(RpcInfo info = default)
     {
         SoundManager.instance.Play(completeCleanAudio);
+        dirtyStainsContainer.SetActive(false);
     }
 
     #endregion
