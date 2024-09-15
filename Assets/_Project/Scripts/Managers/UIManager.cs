@@ -1,4 +1,5 @@
 using redd096.Attributes;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class UIManager : MonoBehaviour
     [Header("Game timer")]
     [SerializeField] TMP_Text gameTimerText;
     [SerializeField] Slider gameTimerSlider;
+    [SerializeField] float remainingTimeForBlink = 5;
 
     [Header("Points")]
     [SerializeField] TMP_Text pointsText;
@@ -28,6 +30,7 @@ public class UIManager : MonoBehaviour
 
     LevelManager levelManager;
     PointsManager pointsManager;
+    Coroutine blinkCoroutine;
 
     private void Awake()
     {
@@ -100,6 +103,13 @@ public class UIManager : MonoBehaviour
     private void OnUpdateGameTimer(float remainingTime)
     {
         SetGameTimerText(Mathf.CeilToInt(remainingTime), Mathf.CeilToInt(levelManager.LevelDuration));
+
+        //if almost finish timer, blink
+        if (remainingTime < remainingTimeForBlink)
+        {
+            if (blinkCoroutine == null)
+                blinkCoroutine = StartCoroutine(BlinkGameTimer());
+        }
     }
 
     #endregion
@@ -191,6 +201,17 @@ public class UIManager : MonoBehaviour
     public void SetPointsText(int currentPoints)
     {
         pointsText.text = currentPoints.ToString();
+    }
+
+    IEnumerator BlinkGameTimer()
+    {
+        while (true)
+        {
+            gameTimerText.gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+            gameTimerText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     #endregion

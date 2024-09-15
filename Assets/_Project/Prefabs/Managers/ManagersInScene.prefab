@@ -855,6 +855,7 @@ MonoBehaviour:
   initialCountdownText: {fileID: 6184047892724626330}
   gameTimerText: {fileID: 2198874612677346077}
   gameTimerSlider: {fileID: 1290454859817999676}
+  remainingTimeForBlink: 5
   pointsText: {fileID: 2076837654602395599}
   endMenu: {fileID: 5881912896466483178}
   blackStarsInOrder:
