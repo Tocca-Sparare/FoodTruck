@@ -78,6 +78,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table Square
       objectReference: {fileID: 0}
+    - target: {fileID: 1228018679018703096, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
+      propertyPath: SortKey
+      value: 3330197894
+      objectReference: {fileID: 0}
     - target: {fileID: 3870954119313641295, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.9

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// This is for every graphic and audio feedback for the table
 /// </summary>
-public class TableFeedback : MonoBehaviour
+public class TableFeedback : NetworkBehaviour
 {
     [SerializeField] GameObject dirtyStainsContainer;
     [SerializeField] SpriteRenderer[] dirtyStainSprites;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5779733995559557743}
   - component: {fileID: 357739838664324781}
   - component: {fileID: 4622191976937421733}
-  - component: {fileID: 9055825591978159283}
+  - component: {fileID: 1228018679018703096}
   m_Layer: 6
   m_Name: BaseTable
   m_TagString: Untagged
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1625596f791db459c69295b6e7bb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9055825591978159283
+--- !u!114 &1228018679018703096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,11 +122,12 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 806453177
+  SortKey: 625280405
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
-  NetworkedBehaviours: []
+  NetworkedBehaviours:
+  - {fileID: 5779733995559557743}
 --- !u!1 &2695811115583068522
 GameObject:
   m_ObjectHideFlags: 0
