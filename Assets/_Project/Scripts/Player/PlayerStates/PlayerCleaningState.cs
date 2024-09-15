@@ -12,6 +12,7 @@ public class PlayerCleaningState : State
     MovementComponent movementComponent;
     PlayerStateMachine playerStateMachine;
     TableInteractable tableInteractable;
+    float lastCleaningTime;
 
     Vector3 movementDirection;
 
@@ -36,6 +37,7 @@ public class PlayerCleaningState : State
         base.OnEnter();
 
         tableInteractable = playerStateMachine.Table;
+        lastCleaningTime = Time.time;
     }
 
     protected override void OnUpdate()
@@ -53,7 +55,8 @@ public class PlayerCleaningState : State
         }
 
         //continue to clean table
-        tableInteractable.Clean(Time.deltaTime);
+        tableInteractable.Clean(Time.time - lastCleaningTime);
+        lastCleaningTime = Time.time;
     }
 
     protected override void OnFixedUpdate()
