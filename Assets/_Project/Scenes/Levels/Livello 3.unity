@@ -1850,8 +1850,8 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -1.0517511, y: 0, z: -54.230164}
-      - {x: -0.051751137, y: 0, z: -53.730164}
+      - {x: -2.953022, y: 0, z: -88.39255}
+      - {x: -1.953022, y: 0, z: -87.89255}
       - {x: -1, y: 0, z: 199.5}
       - {x: 0, y: 0, z: 200}
       isClosed: 0
@@ -1867,7 +1867,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0
     showTransformTool: 1
@@ -4421,10 +4421,6 @@ PrefabInstance:
       propertyPath: stoppingPoint
       value: 
       objectReference: {fileID: 1725609716}
-    - target: {fileID: 853808741400165164, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
-      propertyPath: distanceToPlayStopSound
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 1770406987314895428, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
       propertyPath: SortKey
       value: 2978690502
