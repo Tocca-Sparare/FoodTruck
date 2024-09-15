@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: warningDelays.Array.data[2]
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 9055825591978159283, guid: ef5bba3a232b5614698eac7af3c350d1, type: 3}
+      propertyPath: SortKey
+      value: 3511370666
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
