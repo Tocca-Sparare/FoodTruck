@@ -32,10 +32,10 @@ MonoBehaviour:
         BypassEffects: 0
         BypassListenerEffects: 0
         BypassReverbZones: 0
-        Priority: 0
-        Pitch: 0
+        Priority: 128
+        Pitch: 1
         StereoPan: 0
-        ReverbZoneMix: 0
+        ReverbZoneMix: 1
     AudioClips:
     - {fileID: 8300000, guid: 572e8c1fa4e54cf4d92e5da197655495, type: 3}
   - Name: Shoot without ammo
@@ -57,9 +57,9 @@ MonoBehaviour:
         BypassEffects: 0
         BypassListenerEffects: 0
         BypassReverbZones: 0
-        Priority: 0
-        Pitch: 0
+        Priority: 128
+        Pitch: 1
         StereoPan: 0
-        ReverbZoneMix: 0
+        ReverbZoneMix: 1
     AudioClips:
     - {fileID: 8300000, guid: 6a94d0a59d9c9de4880436315635a9e6, type: 3}

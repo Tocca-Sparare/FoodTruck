@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TimerGame
   m_EditorClassIdentifier: 
   Elements:
-  - Name: Cleaning
+  - Name: Alarm
     Volume: 1
     Preset:
       AudioType: 0
@@ -32,13 +32,13 @@ MonoBehaviour:
         BypassEffects: 0
         BypassListenerEffects: 0
         BypassReverbZones: 0
-        Priority: 0
-        Pitch: 0
+        Priority: 128
+        Pitch: 1
         StereoPan: 0
-        ReverbZoneMix: 0
+        ReverbZoneMix: 1
     AudioClips:
-    - {fileID: 8300000, guid: 86cf8996a0db2fd49afd83ff9e30723a, type: 3}
-  - Name: CompleteClean
+    - {fileID: 8300000, guid: b407122aa325e9a4482f278deedebaa0, type: 3}
+  - Name: Timer almost finished
     Volume: 1
     Preset:
       AudioType: 0
@@ -57,9 +57,9 @@ MonoBehaviour:
         BypassEffects: 0
         BypassListenerEffects: 0
         BypassReverbZones: 0
-        Priority: 0
-        Pitch: 0
+        Priority: 128
+        Pitch: 1
         StereoPan: 0
-        ReverbZoneMix: 0
+        ReverbZoneMix: 1
     AudioClips:
-    - {fileID: 8300000, guid: 6997bf6150905cd4c88da245f54b74e4, type: 3}
+    - {fileID: 8300000, guid: aa403c70e2570cd489011177b3de268d, type: 3}

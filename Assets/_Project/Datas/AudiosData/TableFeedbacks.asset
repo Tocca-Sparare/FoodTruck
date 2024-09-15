@@ -32,10 +32,10 @@ MonoBehaviour:
         BypassEffects: 0
         BypassListenerEffects: 0
         BypassReverbZones: 0
-        Priority: 0
-        Pitch: 0
+        Priority: 128
+        Pitch: 1
         StereoPan: 0
-        ReverbZoneMix: 0
+        ReverbZoneMix: 1
     AudioClips:
     - {fileID: 8300000, guid: 86cf8996a0db2fd49afd83ff9e30723a, type: 3}
   - Name: CompleteClean
@@ -57,9 +57,9 @@ MonoBehaviour:
         BypassEffects: 0
         BypassListenerEffects: 0
         BypassReverbZones: 0
-        Priority: 0
-        Pitch: 0
+        Priority: 128
+        Pitch: 1
         StereoPan: 0
-        ReverbZoneMix: 0
+        ReverbZoneMix: 1
     AudioClips:
     - {fileID: 8300000, guid: 6997bf6150905cd4c88da245f54b74e4, type: 3}

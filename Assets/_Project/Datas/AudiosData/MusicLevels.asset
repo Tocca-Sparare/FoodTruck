@@ -32,10 +32,10 @@ MonoBehaviour:
         BypassEffects: 0
         BypassListenerEffects: 0
         BypassReverbZones: 0
-        Priority: 0
-        Pitch: 0
+        Priority: 128
+        Pitch: 1
         StereoPan: 0
-        ReverbZoneMix: 0
+        ReverbZoneMix: 1
     AudioClips:
     - {fileID: 8300000, guid: e571e73613555ff41916225c3d759271, type: 3}
   - Name: Liguria
@@ -57,10 +57,10 @@ MonoBehaviour:
         BypassEffects: 0
         BypassListenerEffects: 0
         BypassReverbZones: 0
-        Priority: 0
-        Pitch: 0
+        Priority: 128
+        Pitch: 1
         StereoPan: 0
-        ReverbZoneMix: 0
+        ReverbZoneMix: 1
     AudioClips:
     - {fileID: 8300000, guid: 1e857777cb92bb04aa06cfc2828c493d, type: 3}
   - Name: Calabria
@@ -82,9 +82,9 @@ MonoBehaviour:
         BypassEffects: 0
         BypassListenerEffects: 0
         BypassReverbZones: 0
-        Priority: 0
-        Pitch: 0
+        Priority: 128
+        Pitch: 1
         StereoPan: 0
-        ReverbZoneMix: 0
+        ReverbZoneMix: 1
     AudioClips:
     - {fileID: 8300000, guid: 98ac6eb600e11904d839ea028516bb67, type: 3}
