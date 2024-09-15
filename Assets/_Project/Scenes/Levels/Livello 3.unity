@@ -4919,6 +4919,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 8.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2321465553927299433, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: Flags
+      value: 262145
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321465553927299433, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: SortKey
+      value: 1032684990
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321465553927299433, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: NetworkedBehaviours.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321465553927299433, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[0]
+      value: 
+      objectReference: {fileID: 1850226439}
     - target: {fileID: 2695071286905826379, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: SortKey
       value: 793247723
@@ -5652,6 +5668,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829644296}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1850226439 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7392744098121265917, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+  m_PrefabInstance: {fileID: 1615307787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a0d38ca13abe643a305296ebf3010e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1858155721
 PrefabInstance:
   m_ObjectHideFlags: 0

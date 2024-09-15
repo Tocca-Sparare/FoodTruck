@@ -134,6 +134,17 @@ public class LevelManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Update settings by code
+    /// </summary>
+    /// <param name="levelDuration"></param>
+    /// <param name="pointsForStars"></param>
+    public void SetLevelSettings(int levelDuration, int[] pointsForStars)
+    {
+        this.levelDuration = levelDuration;
+        this.pointsForStars = pointsForStars;
+    }
+
+    /// <summary>
     /// This is called by UsePlayerInputManagerInEditor, to test rapidly the scene with more players
     /// </summary>
     public void AddPlayerInEditorForTestLocalMultiplayer()

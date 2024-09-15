@@ -10,12 +10,16 @@ public class CustomerSpawner : MonoBehaviour
     //Time delay range between two consecutive spawn
     [SerializeField] private float minSlowDelay = 2f;
     [SerializeField] private float maxSlowDelay = 5f;
+    [SerializeField] private int minSlowCustomers = 1;
+    [SerializeField] private int maxSlowCustomers = 2;
     [Space]
     [SerializeField] float minFastDelay = 2f;
     [SerializeField] float maxFastDelay = 3f;
+    [SerializeField] private int minFastCustomers = 2;
+    [SerializeField] private int maxFastCustomers = 4;
     [Space]
     [SerializeField] float durationSlowPhase = 25f;
-    [SerializeField] float totalLevelDuration = 80;
+    [SerializeField] float totalDurationSpawn = 80;
     [Space]
     [SerializeField] private Customer customerPrefab;
     [SerializeField] List<Transform> spawnPointTransforms;
@@ -42,6 +46,27 @@ public class CustomerSpawner : MonoBehaviour
         StartCoroutine(SpawnCustomer());
     }
 
+    /// <summary>
+    /// Update settings by code
+    /// </summary>
+    public void SetSpawnSettings(float minSlowDelay, float maxSlowDelay, int minSlowCustomers, int maxSlowCustomers,
+        float minFastDelay, float maxFastDelay, int minFastCustomers, int maxFastCustomers, 
+        float durationSlowPhase, float totalDurationSpawn)
+    {
+        this.minSlowDelay = minSlowDelay;
+        this.maxSlowDelay = maxSlowDelay;
+        this.minSlowCustomers = minSlowCustomers;
+        this.maxSlowCustomers = maxSlowCustomers;
+
+        this.minFastDelay = minFastDelay;
+        this.maxFastDelay = maxFastDelay;
+        this.minFastCustomers = minFastCustomers;
+        this.maxFastCustomers = maxFastCustomers;
+
+        this.durationSlowPhase = durationSlowPhase;
+        this.totalDurationSpawn = totalDurationSpawn;
+    }
+
     private IEnumerator TimerSlowPhaseCoroutine()
     {
         yield return new WaitForSeconds(durationSlowPhase);
@@ -54,7 +79,7 @@ public class CustomerSpawner : MonoBehaviour
     private IEnumerator SpawnCustomer()
     {
         //continue spawn
-        float timer = Time.time + totalLevelDuration;
+        float timer = Time.time + totalDurationSpawn;
         while (timer > Time.time)
         {
             foreach (var spawnPointTransform in spawnPointTransforms)
@@ -76,7 +101,7 @@ public class CustomerSpawner : MonoBehaviour
         if (table != null)
         {
             //from 1 to 4 customers
-            int randomCustomerCount = Random.Range(1, 5);
+            int randomCustomerCount = currentState == EState.SlowPhase ? Random.Range(minSlowCustomers, maxSlowCustomers + 1) : Random.Range(minFastCustomers, maxFastCustomers + 1);
             table.SetApproachingCustomersCount(randomCustomerCount);
 
             for (int i = 0; i < randomCustomerCount; i++)

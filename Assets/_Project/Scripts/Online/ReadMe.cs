@@ -9,6 +9,7 @@ public class ReadMe
      * CustomerSpawnerFeedbacks too
      * DeadStatePlayerFeedback too
      * LevelPoint too
+     * ManageMultiplayerDifficulty too
      * LevelManager has IsOnline and IsServer checks to avoid stamp error when can't find CustomerSpawner
      * CustomerSpawner has IsOnline and IsServer checks to be sure coroutine isn't spawning on clients (teorically not necessary because it's disabled by GameSceneControllerOnline)
      * PauseMenuManager has IsOnline and IsServer checks to know which scene load when press Back and to set TimeScale in local
