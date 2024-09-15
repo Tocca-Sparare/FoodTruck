@@ -346,7 +346,7 @@ public class MovementComponent : MonoBehaviour
 [System.Serializable]
 public struct FComponentWrapper
 {
-    public enum EComponentToWrap { CharacterController, Rigidbody3D, Rigidbody2D }
+    public enum EComponentToWrap { Automatic, CharacterController, Rigidbody3D, Rigidbody2D }
 
     [Tooltip("Use CharacterController, Rigidbody 3d or Rigidbody 2d")] public EComponentToWrap componentToWrap;
     public CharacterController ch;
@@ -363,8 +363,10 @@ public struct FComponentWrapper
             return ch != null;
         else if (componentToWrap == EComponentToWrap.Rigidbody3D)
             return rb3d != null;
-        else
+        else if (componentToWrap == EComponentToWrap.Rigidbody2D)
             return rb2d != null;
+        else
+            return false;
     }
 
     /// <summary>
@@ -374,6 +376,25 @@ public struct FComponentWrapper
     /// <returns></returns>
     public bool TryGetComponent(Transform transform)
     {
+        //if automatic, check if there is already a component setted in inspector and use it
+        if (componentToWrap == EComponentToWrap.Automatic)
+        {
+            if (ch) componentToWrap = EComponentToWrap.CharacterController;
+            else if (rb3d) componentToWrap = EComponentToWrap.Rigidbody3D;
+            else if (rb2d) componentToWrap = EComponentToWrap.Rigidbody2D;
+
+            if (componentToWrap != EComponentToWrap.Automatic)
+                return true;
+
+            //if there isn't, check if there is a component on this transform
+            if (transform.TryGetComponent(out ch))
+                componentToWrap = EComponentToWrap.CharacterController;
+            else if (transform.TryGetComponent(out rb3d))
+                componentToWrap = EComponentToWrap.Rigidbody3D;
+            else if (transform.TryGetComponent(out rb2d))
+                componentToWrap = EComponentToWrap.Rigidbody2D;
+        }
+
         if (componentToWrap == EComponentToWrap.CharacterController)
             return transform.TryGetComponent(out ch);
         else if (componentToWrap == EComponentToWrap.Rigidbody3D)
@@ -394,7 +415,7 @@ public struct FComponentWrapper
             return;
         else if (componentToWrap == EComponentToWrap.Rigidbody3D)
             rb3d.AddForce(force, mode3D);
-        else
+        else if (componentToWrap == EComponentToWrap.Rigidbody2D)
             rb2d.AddForce(force, mode2D);
     }
 
@@ -408,12 +429,12 @@ public struct FComponentWrapper
             ch.Move(velocity * Time.deltaTime);
         else if (componentToWrap == EComponentToWrap.Rigidbody3D)
             rb3d.velocity = velocity;
-        else
+        else if (componentToWrap == EComponentToWrap.Rigidbody2D)
             rb2d.velocity = velocity;
     }
 
     /// <summary>
-    /// Set transform position for CharacterController or set Rigidbody.MovePosition
+    /// Set transform position for CharacterController or call Rigidbody.MovePosition
     /// </summary>
     /// <param name="position"></param>
     public void SetPosition(Vector3 position)
@@ -422,7 +443,7 @@ public struct FComponentWrapper
             ch.transform.position = position;
         else if (componentToWrap == EComponentToWrap.Rigidbody3D)
             rb3d.MovePosition(position);
-        else
+        else if (componentToWrap == EComponentToWrap.Rigidbody2D)
             rb2d.MovePosition(position);
     }
 
@@ -437,8 +458,10 @@ public struct FComponentWrapper
                 return ch.velocity;
             else if (componentToWrap == EComponentToWrap.Rigidbody3D)
                 return rb3d.velocity;
-            else
+            else if (componentToWrap == EComponentToWrap.Rigidbody2D)
                 return rb2d.velocity;
+            else
+                return Vector3.zero;
         }
     }
 
@@ -453,8 +476,10 @@ public struct FComponentWrapper
                 return default;
             else if (componentToWrap == EComponentToWrap.Rigidbody3D)
                 return rb3d.position;
-            else
+            else if (componentToWrap == EComponentToWrap.Rigidbody2D)
                 return rb2d.position;
+            else
+                return Vector3.zero;
         }
     }
 
@@ -468,6 +493,8 @@ public struct FComponentWrapper
             if (componentToWrap == EComponentToWrap.CharacterController)
                 return ch.isGrounded;
             else if (componentToWrap == EComponentToWrap.Rigidbody3D)
+                return false;
+            else if (componentToWrap == EComponentToWrap.Rigidbody2D)
                 return false;
             else
                 return false;
@@ -485,8 +512,10 @@ public struct FComponentWrapper
                 return Time.deltaTime;
             else if (componentToWrap == EComponentToWrap.Rigidbody3D)
                 return Time.fixedDeltaTime;
-            else
+            else if (componentToWrap == EComponentToWrap.Rigidbody2D)
                 return Time.fixedDeltaTime;
+            else
+                return 0f;
         }
     }
 }

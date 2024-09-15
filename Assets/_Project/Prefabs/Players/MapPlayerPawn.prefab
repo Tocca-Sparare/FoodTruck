@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wrap:
-    componentToWrap: 1
+    componentToWrap: 0
     ch: {fileID: 0}
     rb3d: {fileID: 363295966232215273}
     rb2d: {fileID: 0}

@@ -133,6 +133,7 @@ MonoBehaviour:
   animator: {fileID: 3889642861712745496}
   onToggleAnimation: Switch On
   onUntoggleAnimation: Switch Off
+  updateOnAwake: 0
   isToggled: 0
   onValueChanged:
     m_PersistentCalls:
