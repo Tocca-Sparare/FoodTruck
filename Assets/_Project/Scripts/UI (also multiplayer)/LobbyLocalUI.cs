@@ -24,19 +24,22 @@ public class LobbyLocalUI : MonoBehaviour
 
     private Dictionary<PlayerInput, GameObject> joinedPlayers = new Dictionary<PlayerInput, GameObject>();
 
+    PlayerInputManager playerInputManager;
+
     private void Awake()
     {
-        if (PlayerInputManager.instance == null)
+        playerInputManager = FindObjectOfType<PlayerInputManager>();
+        if (playerInputManager == null)
         {
             Debug.LogError($"Missing PlayerInputManager on {name}", gameObject);
             return;
         }
 
         //register to events
-        if (PlayerInputManager.instance)
+        if (playerInputManager)
         {
-            PlayerInputManager.instance.onPlayerJoined += OnPlayerJoined;
-            PlayerInputManager.instance.onPlayerLeft += OnPlayerLeft;
+            playerInputManager.onPlayerJoined += OnPlayerJoined;
+            playerInputManager.onPlayerLeft += OnPlayerLeft;
         }
 
         //disable select level button by default
@@ -54,10 +57,10 @@ public class LobbyLocalUI : MonoBehaviour
     private void OnDestroy()
     {
         //unregister from events
-        if (PlayerInputManager.instance)
+        if (playerInputManager)
         {
-            PlayerInputManager.instance.onPlayerJoined -= OnPlayerJoined;
-            PlayerInputManager.instance.onPlayerLeft -= OnPlayerLeft;
+            playerInputManager.onPlayerJoined -= OnPlayerJoined;
+            playerInputManager.onPlayerLeft -= OnPlayerLeft;
         }
 
         //unregister events
@@ -139,7 +142,7 @@ public class LobbyLocalUI : MonoBehaviour
             Destroy(playersInScene[i].gameObject);
 
         //destroy player input manager
-        Destroy(PlayerInputManager.instance.gameObject);
+        Destroy(playerInputManager.gameObject);
     }
 
     void UpdatePlayerImages()
