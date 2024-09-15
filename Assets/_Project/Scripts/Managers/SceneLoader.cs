@@ -13,11 +13,18 @@ public static class SceneLoader
     {
         Time.timeScale = 1;
 
-        //change scene online or normally
-        if (NetworkManager.IsOnline)
-            SceneLoaderOnline.LoadScene(scene);
+        if (TransitionManager.instance)
+        {
+            TransitionManager.instance.LoadScene(scene);
+        }
         else
-            SceneManager.LoadScene(scene);
+        {
+            //change scene online or normally
+            if (NetworkManager.IsOnline)
+                SceneLoaderOnline.LoadScene(scene);
+            else
+                SceneManager.LoadScene(scene);
+        }
     }
 
     /// <summary>
