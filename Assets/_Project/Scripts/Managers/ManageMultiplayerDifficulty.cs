@@ -29,6 +29,7 @@ public class ManageMultiplayerDifficulty : NetworkBehaviour
         FLevelSettings settings = levelSettings[numberOfPlayers];
         LevelManager levelManager = FindObjectOfType<LevelManager>();
         CustomerSpawner customerSpawner = FindObjectOfType<CustomerSpawner>();
+        TablesManager tablesManager = FindObjectOfType<TablesManager>();
 
         //set everything
         if (levelManager)
@@ -40,6 +41,10 @@ public class ManageMultiplayerDifficulty : NetworkBehaviour
             customerSpawner.SetSpawnSettings(settings.minSlowDelay, settings.maxSlowDelay, settings.minSlowCustomers, settings.maxSlowCustomers,
                 settings.minFastDelay, settings.maxFastDelay, settings.minFastCustomers, settings.maxFastCustomers,
                 settings.durationSlowPhase, settings.totalDurationSpawn);
+        }
+        if (tablesManager)
+        {
+            tablesManager.SetTablesSettings(settings.CustomerWaitingTime, settings.CustomerWarningDelays);
         }
     }
 
@@ -54,6 +59,9 @@ public class ManageMultiplayerDifficulty : NetworkBehaviour
 [System.Serializable]
 public struct FLevelSettings
 {
+    public int CustomerWaitingTime;
+    public int[] CustomerWarningDelays;
+    [Space]
     public float minSlowDelay;
     public float maxSlowDelay;
     public int minSlowCustomers;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class TableOrderReadyState : State
 {
-    [SerializeField] int waitingTime;
-    [SerializeField]
-    [Range(0, 100)]
-    int[] warningDelays;
-
+    TablesManager tablesManager;
     Table table;
     Coroutine freeTableCoroutine;
     List<Coroutine> hungerIncreseCoroutines = new List<Coroutine>();
@@ -24,6 +19,8 @@ public class TableOrderReadyState : State
         table = GetStateMachine<Table>();
         if (table == null && TryGetStateMachineUnityComponent(out table) == false)
             Debug.LogError($"Missing Table on {GetType().Name}", StateMachine);
+        tablesManager = Object.FindObjectOfType<TablesManager>();
+        if (tablesManager == null) Debug.LogError($"Missing TableManager on {GetType().Name}", StateMachine);
     }
 
     protected override void OnEnter()
@@ -58,16 +55,16 @@ public class TableOrderReadyState : State
 
     private void StartHungerIncreaseCoroutines()
     {
-        foreach (var delay in warningDelays)
+        foreach (var delay in tablesManager.WarningDelays)
         {
-            var delayInSeconds = waitingTime * delay / 100;
+            var delayInSeconds = tablesManager.WaitingTime * delay / 100;
             hungerIncreseCoroutines.Add(StateMachine.StartCoroutine(IncreaseHungerAfter(delayInSeconds)));
         }
     }
 
     IEnumerator FreeTableAfterWaitingTime()
     {
-        yield return new WaitForSeconds(waitingTime);
+        yield return new WaitForSeconds(tablesManager.WaitingTime);
         Free(EOrderSatisfaction.Unsatisfied);
     }
 
