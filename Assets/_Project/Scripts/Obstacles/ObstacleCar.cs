@@ -1,7 +1,6 @@
 using UnityEngine;
 using PathCreation;
 using TMPro;
-using System.Collections.Generic;
 using System.Collections;
 
 public class ObstacleCar : MonoBehaviour
@@ -22,6 +21,10 @@ public class ObstacleCar : MonoBehaviour
     float distanceTravelled;
     float stoppingDistance;
     float currentSpeed;
+
+    public System.Action<float> OnMovingToStopPosition;
+    public System.Action<float> OnStop;
+    public System.Action OnFinish;
 
     void Start()
     {
@@ -48,6 +51,8 @@ public class ObstacleCar : MonoBehaviour
             transform.position = currentPath.path.GetPointAtDistance(distanceTravelled, EndOfPathInstruction.Loop) + verticalOffset * transform.up;
             transform.rotation = currentPath.path.GetRotationAtDistance(distanceTravelled, EndOfPathInstruction.Loop) * Quaternion.Euler(offsetAngle);
 
+            OnMovingToStopPosition?.Invoke(stoppingDistance - distanceTravelled);
+
             if (stoppingDistance != -1 && distanceTravelled >= stoppingDistance)
             {
                 OnStopping();
@@ -65,6 +70,8 @@ public class ObstacleCar : MonoBehaviour
         currentSpeed = 0;
         stoppingDistance = -1;
         StartCoroutine(StopCorotuine());
+
+        OnStop?.Invoke(stoppingDuration);
     }
 
     void OnFinishPath()
@@ -72,6 +79,8 @@ public class ObstacleCar : MonoBehaviour
         distanceTravelled = 0;
         if (stoppingPoint != null)
             stoppingDistance = currentPath.path.GetClosestDistanceAlongPath(stoppingPoint.position);
+
+        OnFinish?.Invoke();
     }
 
     IEnumerator StopCorotuine()

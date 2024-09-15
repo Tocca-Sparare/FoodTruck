@@ -1850,8 +1850,8 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: 0, y: 0, z: -40}
-      - {x: 1, y: 0, z: -39.5}
+      - {x: -1.0517511, y: 0, z: -54.230164}
+      - {x: -0.051751137, y: 0, z: -53.730164}
       - {x: -1, y: 0, z: 199.5}
       - {x: 0, y: 0, z: 200}
       isClosed: 0
@@ -1867,7 +1867,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0
     showTransformTool: 1
@@ -4421,13 +4421,25 @@ PrefabInstance:
       propertyPath: stoppingPoint
       value: 
       objectReference: {fileID: 1725609716}
-    - target: {fileID: 690667185360590510, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
-      propertyPath: stoppingDuration
-      value: 10
+    - target: {fileID: 853808741400165164, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
+      propertyPath: distanceToPlayStopSound
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1770406987314895428, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
       propertyPath: SortKey
       value: 2978690502
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937338380992143105, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
+      propertyPath: NestedObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937338380992143105, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
+      propertyPath: NestedObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937338380992143105, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
+      propertyPath: NestedObjects.Array.data[2]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3189649860842494272, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
       propertyPath: SortKey
@@ -4441,7 +4453,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Truck Support
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2937338380992143105, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8937276411368207143, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
     - {fileID: 5986416473221786745, guid: 7ae14e4fcf309e24993d7150fd4ae99b, type: 3}
