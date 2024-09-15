@@ -37,7 +37,7 @@ MonoBehaviour:
         StereoPan: 0
         ReverbZoneMix: 1
     AudioClips:
-    - {fileID: 8300000, guid: b407122aa325e9a4482f278deedebaa0, type: 3}
+    - {fileID: 8300000, guid: 7d15198ff1c4c0e40bca441e3ef947d0, type: 3}
   - Name: Timer almost finished
     Volume: 0.1
     Preset:
@@ -62,4 +62,4 @@ MonoBehaviour:
         StereoPan: 0
         ReverbZoneMix: 1
     AudioClips:
-    - {fileID: 8300000, guid: aa403c70e2570cd489011177b3de268d, type: 3}
+    - {fileID: 8300000, guid: d284217ef651757448a63746607f1caa, type: 3}
