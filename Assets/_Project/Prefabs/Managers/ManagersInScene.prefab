@@ -1197,7 +1197,7 @@ MonoBehaviour:
     totalDurationSpawn: 80
     levelDuration: 90
     pointsForStars: 64000000c80000002c010000
-  - CustomerWaitingTime: 15
+  - CustomerWaitingTime: 30
     CustomerWarningDelays: 1e0000003c0000005a000000
     minSlowDelay: 2
     maxSlowDelay: 5

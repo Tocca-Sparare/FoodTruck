@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Elements:
   - Name: MainMenu
-    Volume: 0.01
+    Volume: 0.1
     Preset:
       AudioType: 2
       Loop: 1
