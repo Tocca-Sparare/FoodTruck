@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Game timer")]
     [SerializeField] TMP_Text gameTimerText;
+    [SerializeField] Slider gameTimerSlider;
 
     [Header("Points")]
     [SerializeField] TMP_Text pointsText;
@@ -77,7 +78,7 @@ public class UIManager : MonoBehaviour
         if (state == LevelManager.ELevelState.InitialCountdown)
         {
             SetInitialCountdownText(Mathf.CeilToInt(levelManager.InitialCountdown));
-            SetGameTimerText(Mathf.CeilToInt(levelManager.LevelDuration));
+            SetGameTimerText(Mathf.CeilToInt(levelManager.LevelDuration), Mathf.CeilToInt(levelManager.LevelDuration));
         }
         //on start playing, hide countdown
         else if (state == LevelManager.ELevelState.Playing)
@@ -98,7 +99,7 @@ public class UIManager : MonoBehaviour
 
     private void OnUpdateGameTimer(float remainingTime)
     {
-        SetGameTimerText(Mathf.CeilToInt(remainingTime));
+        SetGameTimerText(Mathf.CeilToInt(remainingTime), Mathf.CeilToInt(levelManager.LevelDuration));
     }
 
     #endregion
@@ -146,12 +147,14 @@ public class UIManager : MonoBehaviour
     /// Update timer during playing game
     /// </summary>
     /// <param name="remainigTime"></param>
-    public void SetGameTimerText(int remainigTime)
+    public void SetGameTimerText(int remainigTime, float totalTime)
     {
         //set timer minutes:seconds
         int minutes = remainigTime / 60;
         int seconds = remainigTime % 60;
         gameTimerText.text = $"{minutes:00}:{seconds:00}";
+
+        gameTimerSlider.value = remainigTime / totalTime;
     }
 
     /// <summary>

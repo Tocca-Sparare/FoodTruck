@@ -55,7 +55,7 @@ public class CustomerSpawner : MonoBehaviour
     {
         //continue spawn
         float timer = Time.time + totalLevelDuration;
-        while (Time.time > timer)
+        while (timer > Time.time)
         {
             foreach (var spawnPointTransform in spawnPointTransforms)
             {

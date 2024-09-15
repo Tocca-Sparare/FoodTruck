@@ -4759,26 +4759,6 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[0]
       value: 
       objectReference: {fileID: 1615307789}
-    - target: {fileID: 79559943087533362, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 79559943087533362, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 79559943087533362, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 79559943087533362, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 79559943087533362, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 133321310843686184, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4812,22 +4792,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 161017883044961648, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 215905287367277930, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 215905287367277930, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 215905287367277930, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 215905287367277930, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -4935,25 +4899,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1838405981949826491, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1838405981949826491, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1838405981949826491, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1838405981949826491, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1874161970720217255, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: m_Name
       value: ManagersInScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892247943761498268, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2240378571833808693, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: SortKey
@@ -5018,6 +4970,14 @@ PrefabInstance:
     - target: {fileID: 3184899857955134632, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: m_LocalPosition.z
       value: -11.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383729978829511235, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383729978829511235, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4305803086661471432, guid: e21e1aee371734a458342dbebe1c998e, type: 3}
       propertyPath: SortKey
