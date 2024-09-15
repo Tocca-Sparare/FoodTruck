@@ -4,7 +4,7 @@ using redd096.Attributes;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelPoint : MonoBehaviour, IInteractable
+public class LevelPoint : NetworkBehaviour, IInteractable
 {
     [SceneInstance][SerializeField] string levelScene;
     [SerializeField] Sprite locandinaSprite;
