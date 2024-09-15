@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MapPlayer : BasicStateMachine
@@ -5,23 +6,27 @@ public class MapPlayer : BasicStateMachine
     [SerializeField] GameObject boat;
     [SerializeField] GameObject truck;
 
-    VehicleChanger collidingVeichle;
+    List<Collider> colliders = new List<Collider>();
 
-
-    public void SwitchVehicle()
+    void SwitchVehicle()
     {
-        truck.SetActive(!truck.activeSelf);
-        boat.SetActive(!boat.activeSelf);
+        //truck if collide with something, else boat
+        truck.SetActive(colliders.Count > 0);
+        boat.SetActive(colliders.Count <= 0);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         var vehicleChanger = other.GetComponentInParent<VehicleChanger>();
 
-        if (vehicleChanger != null && collidingVeichle == null)
+        if (vehicleChanger != null)
         {
+            //add to list
+            if (colliders.Contains(other) == false)
+                colliders.Add(other);
+
+            //check if switch
             SwitchVehicle();
-            collidingVeichle = vehicleChanger;
         }
     }
 
@@ -29,9 +34,14 @@ public class MapPlayer : BasicStateMachine
     {
         var vehicleChanger = other.GetComponentInParent<VehicleChanger>();
 
-        if (vehicleChanger ==  collidingVeichle)
+        if (vehicleChanger != null)
         {
-            collidingVeichle = null;
+            //remove from list
+            if (colliders.Contains(other))
+                colliders.Remove(other);
+
+            //check if switch
+            SwitchVehicle();
         }
     }
 }
