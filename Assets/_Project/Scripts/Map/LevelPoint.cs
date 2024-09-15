@@ -62,12 +62,14 @@ public class LevelPoint : MonoBehaviour, IInteractable
         {
             if (NetworkManager.IsOnline)
             {
-                RPC_OnActivateLevelPoint();
-                return;
+                if (NetworkManager.instance.Runner.IsServer)
+                    RPC_OnActivateLevelPoint();
             }
-
-            virtualCamera.gameObject.SetActive(true);
-            levelBanner.SetActive(true);
+            else
+            {
+                virtualCamera.gameObject.SetActive(true);
+                levelBanner.SetActive(true);
+            }
         }
     }
 
@@ -79,23 +81,25 @@ public class LevelPoint : MonoBehaviour, IInteractable
         {
             if (NetworkManager.IsOnline)
             {
-                RPC_OnDeactivateLevelPoint();
-                return;
+                if (NetworkManager.instance.Runner.IsServer)
+                    RPC_OnDeactivateLevelPoint();
             }
-            
-            virtualCamera.gameObject.SetActive(false);
-            levelBanner.SetActive(false);
+            else
+            {
+                virtualCamera.gameObject.SetActive(false);
+                levelBanner.SetActive(false);
+            }
         }
     }
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All, InvokeLocal = false)]
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_OnActivateLevelPoint()
     {
         virtualCamera.gameObject.SetActive(true);
         levelBanner.SetActive(true);
     }
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All, InvokeLocal = false)]
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_OnDeactivateLevelPoint()
     {
         virtualCamera.gameObject.SetActive(false);
