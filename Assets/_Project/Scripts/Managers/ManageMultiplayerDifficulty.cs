@@ -10,16 +10,23 @@ public class ManageMultiplayerDifficulty : NetworkBehaviour
 
     private void Awake()
     {
-        //only local or server
-        if (NetworkManager.IsOnline == false || NetworkManager.instance.Runner.IsServer)
+        int numberOfPlayers = FindObjectsOfType<PlayerController>().Length;
+
+        //local
+        if (NetworkManager.IsOnline == false)
+            SetDifficulty(numberOfPlayers);
+    }
+
+    public override void Spawned()
+    {
+        base.Spawned();
+
+        //server
+        if (NetworkManager.IsOnline && NetworkManager.instance.Runner.IsServer)
         {
             //find difficulty
             int numberOfPlayers = FindObjectsOfType<PlayerController>().Length;
-
-            if (NetworkManager.IsOnline && NetworkManager.instance.Runner.IsServer)
-                RPC_OnTableClean(numberOfPlayers);
-            else
-                SetDifficulty(numberOfPlayers);
+            RPC_OnTableClean(numberOfPlayers);
         }
     }
 
