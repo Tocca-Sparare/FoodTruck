@@ -95,7 +95,6 @@ public class LobbyOnlineUI : MonoBehaviour
         //instantiate object in UI
         if (joinedPlayers.ContainsKey(onlineID) == false)
         {
-            playerImages[joinedPlayers.Count].SetActive(true);
             GameObject go = Instantiate(joinedPlayerPrefab, joinedPlayersContainer);
             go.GetComponentInChildren<TMP_Text>(true).text = user.PlayerName;
             go.GetComponentInChildren<Image>(true).color = NetworkManager.instance.ColorsForPlayers[user.PlayerIndex];
@@ -103,6 +102,8 @@ public class LobbyOnlineUI : MonoBehaviour
 
             //and add to dictionary
             joinedPlayers.Add(onlineID, go);
+
+            UpdatePlayerImages();
         }
     }
 
@@ -116,7 +117,8 @@ public class LobbyOnlineUI : MonoBehaviour
             GameObject go = joinedPlayers[onlineID];
             joinedPlayers.Remove(onlineID);
             Destroy(go);
-            playerImages[joinedPlayers.Count].SetActive(false);
+
+            UpdatePlayerImages();
         }
     }
 
@@ -134,4 +136,15 @@ public class LobbyOnlineUI : MonoBehaviour
     }
 
     #endregion
+
+    void UpdatePlayerImages()
+    {
+        int count = joinedPlayers.Count + 1;
+
+        //show images for every player connected
+        for (int i = 0; i < playerImages.Length; i++)
+        {
+            playerImages[i].gameObject.SetActive(i < count);
+        }
+    }
 }

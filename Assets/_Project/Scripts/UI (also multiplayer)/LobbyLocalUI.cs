@@ -12,6 +12,7 @@ public class LobbyLocalUI : MonoBehaviour
 {
     [SceneInstance][SerializeField] string backButtonScene;
     [SceneInstance][SerializeField] string selectLevelScene;
+    [SerializeField] GameObject[] playerImages;
     [Space]
     [SerializeField] GameObject joinedPlayerPrefab;
     [SerializeField] Transform joinedPlayersContainer;
@@ -96,6 +97,8 @@ public class LobbyLocalUI : MonoBehaviour
             //update buttons - with a little delay to avoid start game if player pressed Submit button to join
             foreach (var b in buttonsToDisableWhenNoPlayersInScene) b.interactable = false;
             Invoke(nameof(UpdateButtonsStatus), 0.1f);
+
+            UpdatePlayerImages();
         }
     }
 
@@ -110,6 +113,8 @@ public class LobbyLocalUI : MonoBehaviour
 
             //update buttons
             UpdateButtonsStatus();
+
+            UpdatePlayerImages();
         }
     }
 
@@ -135,6 +140,17 @@ public class LobbyLocalUI : MonoBehaviour
 
         //destroy player input manager
         Destroy(PlayerInputManager.instance.gameObject);
+    }
+
+    void UpdatePlayerImages()
+    {
+        int count = joinedPlayers.Count + 1;
+
+        //show images for every player connected
+        for (int i = 0; i < playerImages.Length; i++)
+        {
+            playerImages[i].gameObject.SetActive(i < count);
+        }
     }
 
     #endregion
