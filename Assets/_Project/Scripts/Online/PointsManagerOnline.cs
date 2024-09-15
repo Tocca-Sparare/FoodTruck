@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class PointsManagerOnline : MonoBehaviour
+public class PointsManagerOnline : NetworkBehaviour
 {
     [Networked, OnChangedRender(nameof(CurrentPointsChanged))]
     public int CurrentPoints { get; set; }
