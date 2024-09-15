@@ -399,6 +399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487fef1e46759483391b05ed7c66cef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitingTime: 15
+  warningDelays: 1e0000003c0000005a000000
 --- !u!1 &842334154351995075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,7 +1183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSettings:
-  - minSlowDelay: 5
+  - CustomerWaitingTime: 15
+    CustomerWarningDelays: 1e0000003c0000005a000000
+    minSlowDelay: 5
     maxSlowDelay: 10
     minSlowCustomers: 1
     maxSlowCustomers: 2
@@ -1193,7 +1197,9 @@ MonoBehaviour:
     totalDurationSpawn: 80
     levelDuration: 90
     pointsForStars: 64000000c80000002c010000
-  - minSlowDelay: 2
+  - CustomerWaitingTime: 15
+    CustomerWarningDelays: 1e0000003c0000005a000000
+    minSlowDelay: 2
     maxSlowDelay: 5
     minSlowCustomers: 1
     maxSlowCustomers: 2
@@ -1205,7 +1211,9 @@ MonoBehaviour:
     totalDurationSpawn: 80
     levelDuration: 90
     pointsForStars: 64000000c80000002c010000
-  - minSlowDelay: 2
+  - CustomerWaitingTime: 15
+    CustomerWarningDelays: 1e0000003c0000005a000000
+    minSlowDelay: 2
     maxSlowDelay: 5
     minSlowCustomers: 1
     maxSlowCustomers: 2
@@ -1217,7 +1225,9 @@ MonoBehaviour:
     totalDurationSpawn: 80
     levelDuration: 90
     pointsForStars: 64000000c80000002c010000
-  - minSlowDelay: 2
+  - CustomerWaitingTime: 15
+    CustomerWarningDelays: 1e0000003c0000005a000000
+    minSlowDelay: 2
     maxSlowDelay: 5
     minSlowCustomers: 1
     maxSlowCustomers: 2
