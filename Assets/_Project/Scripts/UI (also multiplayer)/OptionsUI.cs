@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Manage options ui
+/// Manage options ui - For FullScreen probably you want to enable ResizableWindow in PlayerSettings
 /// </summary>
 public class OptionsUI : MonoBehaviour
 {
@@ -25,6 +25,14 @@ public class OptionsUI : MonoBehaviour
 
     const string fullScreenOn = "On";
     const string fullScreenOff = "Off";
+
+#if UNITY_EDITOR
+    [redd096.Attributes.Button]
+    void SetResizableWindow()
+    {
+        UnityEditor.PlayerSettings.resizableWindow = true;
+    }
+#endif
 
     //update ui in Start, so if we want to load values in GameManager Awake we have time
     private void Start()
