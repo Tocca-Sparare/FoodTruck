@@ -2,6 +2,7 @@ using redd096.Attributes;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
@@ -27,6 +28,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] RectTransform transformToAnimate;
     [SerializeField] float animationDuration = 5;
     [SerializeField] float animationSpeed = 1;
+
+    [Header("EndGame (before end menu)")]
+    [SerializeField] RectTransform bombRect;
+    [SerializeField] Transform bombContainerDuringAnimation;
+    [SerializeField] float bombAnimationDuration = 1.5f;
+    [SerializeField] float bombScale = 2;
+    [SerializeField] GameObject endGameAnimationObject;
+    [SerializeField] float delayBeforeOpenEndMenu = 2f;
+    [SerializeField] float delayBeforeActiveEndMenuInteractable = 5f;
 
     [Header("End Menu")]
     [SerializeField] GameObject endMenu;
@@ -56,7 +66,7 @@ public class UIManager : MonoBehaviour
             levelManager.OnChangeLevelState += OnChangeLevelState;
             levelManager.OnUpdateInitialCountdown += OnUpdateInitialCountdown;
             levelManager.OnUpdateGameTimer += OnUpdateGameTimer;
-            levelManager.OnUpdateStars += ShowEndMenu;
+            levelManager.OnUpdateStars += OnUpdateStars;
         }
         if (pointsManager)
         {
@@ -78,7 +88,7 @@ public class UIManager : MonoBehaviour
             levelManager.OnChangeLevelState -= OnChangeLevelState;
             levelManager.OnUpdateInitialCountdown -= OnUpdateInitialCountdown;
             levelManager.OnUpdateGameTimer -= OnUpdateGameTimer;
-            levelManager.OnUpdateStars -= ShowEndMenu;
+            levelManager.OnUpdateStars -= OnUpdateStars;
         }
         if (pointsManager)
         {
@@ -110,7 +120,7 @@ public class UIManager : MonoBehaviour
         //on end game, show end menu
         else
         {
-            ShowEndMenu();
+            StartCoroutine(EndGameAnimationCoroutine());
         }
     }
 
@@ -126,6 +136,7 @@ public class UIManager : MonoBehaviour
         //if almost finish timer, blink
         if (remainingTime < remainingTimeForBlink)
         {
+            //check coroutine to start it only once
             if (blinkCoroutine == null)
                 blinkCoroutine = StartCoroutine(BlinkGameTimer());
         }
@@ -156,7 +167,7 @@ public class UIManager : MonoBehaviour
 
     private void OnSlowPhaseEnded()
     {
-        StartStormHintAnimation();
+        StartCoroutine(StormHintCoroutine());
     }
 
     #endregion
@@ -196,6 +207,15 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Update points text
+    /// </summary>
+    /// <param name="currentPoints"></param>
+    public void SetPointsText(int currentPoints)
+    {
+        pointsText.text = currentPoints.ToString();
+    }
+
+    /// <summary>
     /// Active end menu
     /// </summary>
     public void ShowEndMenu()
@@ -203,15 +223,24 @@ public class UIManager : MonoBehaviour
         //enable end button only local or server
         endButton.enabled = NetworkManager.IsOnline == false || NetworkManager.instance.Runner.IsServer;
 
+        //show stars (on clients, this function will be call again by a level manager event)
+        OnUpdateStars();
+
+        //show end menu
+        endMenu.SetActive(true);
+    }
+
+    /// <summary>
+    /// Update stars in end menu
+    /// </summary>
+    public void OnUpdateStars()
+    {
         //show stars
         for (int i = 0; i < blackStarsInOrder.Length; i++)
         {
             blackStarsInOrder[i].SetActive(i >= levelManager.StarsUnlocked);
             yellowStarsInOrder[i].SetActive(i < levelManager.StarsUnlocked);
         }
-
-        //show end menu
-        endMenu.SetActive(true);
     }
 
     /// <summary>
@@ -222,35 +251,14 @@ public class UIManager : MonoBehaviour
         SceneLoader.LoadScene(sceneOnEnd);
     }
 
-    /// <summary>
-    /// Update points text
-    /// </summary>
-    /// <param name="currentPoints"></param>
-    public void SetPointsText(int currentPoints)
-    {
-        pointsText.text = currentPoints.ToString();
-    }
+    #endregion
 
-    IEnumerator BlinkGameTimer()
-    {
-        float duration = Time.time + durationBlink;
-        while (duration > Time.time)
-        {
-            gameTimerText.gameObject.SetActive(false);
-            yield return new WaitForSeconds(0.5f);
-            gameTimerText.gameObject.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
+    #region private coroutines
 
     /// <summary>
-    /// Show text and animate
+    /// Show text and animate hint
     /// </summary>
-    public void StartStormHintAnimation()
-    {
-        StartCoroutine(StormHintCoroutine());
-    }
-
+    /// <returns></returns>
     IEnumerator StormHintCoroutine()
     {
         stormContainer.SetActive(true);
@@ -273,6 +281,65 @@ public class UIManager : MonoBehaviour
         }
 
         stormContainer.SetActive(false);
+    }
+
+    /// <summary>
+    /// Blink animation for game timer
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator BlinkGameTimer()
+    {
+        float duration = Time.time + durationBlink;
+        while (duration > Time.time)
+        {
+            gameTimerText.gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+            gameTimerText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    /// <summary>
+    /// Play end game animation, then open end menu
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator EndGameAnimationCoroutine()
+    {
+        //disable event system during animation
+        EventSystem eventSystem = EventSystem.current;
+        if (eventSystem)
+            eventSystem.enabled = false;
+
+        //change bomb parent for animation
+        bombRect.SetParent(bombContainerDuringAnimation);
+
+        float delta = 0;
+        Vector3 startPosition = bombRect.localPosition;
+        Vector3 endPosition = bombRect.sizeDelta;
+        Vector3 startScale = bombRect.localScale;
+        Vector3 endScale = startScale * bombScale;
+
+        //play bomb animation
+        while (delta < 1)
+        {
+            delta += Time.deltaTime / bombAnimationDuration;
+            bombRect.localPosition = Vector3.Lerp(startPosition, endPosition, delta);
+            bombRect.localScale = Vector3.Lerp(startScale, endScale, delta);
+
+            yield return null;
+        }
+
+        //then start end animation
+        endGameAnimationObject.SetActive(true);
+
+        //wait before show end menu
+        yield return new WaitForSeconds(delayBeforeOpenEndMenu);
+        ShowEndMenu();
+
+        //and re-enable event system
+        yield return new WaitForSeconds(delayBeforeActiveEndMenuInteractable - delayBeforeOpenEndMenu);
+        if (eventSystem)
+            eventSystem.enabled = true;
     }
 
     #endregion
